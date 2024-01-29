@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <League />,
   },
   {
-    path: "/EloOverlay*",
+    path: "/DedosOverlays/EloOverlay*",
     element: <EloOverlay />,
   },
   {

@@ -67,7 +67,10 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
   return (
     <div id="playerInfo">
       <div className="ELO">
-        <img src={`../../../${eloDivision}.png`} className="eloimg" />
+        <img
+          src={`../../DedosOverlays/${eloDivision}.png`}
+          className="eloimg"
+        />
         <p>
           {eloDivision === "MASTER" ||
           eloDivision === "GRANDMASTER" ||
@@ -99,7 +102,7 @@ function Champion({ height, right, championName, win }: ChampionMatchHistory) {
         style={{ height: `${height}px` }}
       />
       <img
-        src={`../../../${win}.png`}
+        src={`../../DedosOverlays/${win}.png`}
         alt="Overlay Image"
         className="overlayIMG"
         style={{ height: `${height}px`, right: `${right}px` }}
