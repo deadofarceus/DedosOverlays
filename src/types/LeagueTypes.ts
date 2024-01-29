@@ -45,6 +45,7 @@ export class Match {
 
 export interface ChampionMatchHistory {
     height: number;
+    right: number;
     championName: string;
     win: boolean;
 }
