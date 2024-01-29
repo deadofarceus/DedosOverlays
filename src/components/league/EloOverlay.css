@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+
+.eloimg {
+    height: 100px;
+    width: 100px;
+    margin-bottom: -18px;
+}
+
+img {
+    -webkit-filter: drop-shadow(3px 3px 3px #222);
+    filter: drop-shadow(3px 3px 3px #222);
+}
+
+body {
+    color: azure;
+    margin: 0;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+}
+
+#display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    margin-top: 0px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgdiv {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(3px 3px 3px #222);
+    justify-content: center;
+    align-items: center;
+}
+
+#V9Player {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+
+#V9Player div {
+    width: 80px;
+}
+
+.profileImg {
+    max-width: 100%;
+    border-radius: 50%;
+    clip-path: circle(46% at 50% 50%);
+}
+
+.ELO {
+    margin-top: -9px;
+}
+
+p {
+    margin: 2px;
+    text-shadow: 0 3px 4px rgba(0, 0, 0, 1.8);
+    font-size: 32px;
+}
+
+#hihi {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#playerInfo {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.lpDiff {
+    font-size: 18px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 1);
+}
+
+.overlayIMG {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
