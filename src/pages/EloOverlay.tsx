@@ -3,10 +3,10 @@ import {
   Account,
   AccountElo,
   ChampionMatchHistory,
-} from "../../types/LeagueTypes";
-import { ModEvent } from "../../types/BackendEvents";
+} from "../types/LeagueTypes";
+import { ModEvent } from "../types/BackendEvents";
 import { useNavigate } from "react-router-dom";
-import "./EloOverlay.css";
+import "../styles/EloOverlay.css";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
@@ -67,10 +67,7 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
   return (
     <div id="playerInfo">
       <div className="ELO">
-        <img
-          src={`../../DedosOverlays/${eloDivision}.png`}
-          className="eloimg"
-        />
+        <img src={`../../${eloDivision}.png`} className="eloimg" />
         <p>
           {eloDivision === "MASTER" ||
           eloDivision === "GRANDMASTER" ||
@@ -102,7 +99,7 @@ function Champion({ height, right, championName, win }: ChampionMatchHistory) {
         style={{ height: `${height}px` }}
       />
       <img
-        src={`../../DedosOverlays/${win}.png`}
+        src={`../../${win}.png`}
         alt="Overlay Image"
         className="overlayIMG"
         style={{ height: `${height}px`, right: `${right}px` }}

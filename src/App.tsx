@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import League from "./components/league/League";
 import "./App.css";
 import ErrorPage from "./ErrorPage";
-import EloOverlay from "./components/league/EloOverlay";
+import EloOverlay from "./pages/EloOverlay";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <League />,
   },
   {
-    path: "/DedosOverlays/EloOverlay*",
+    path: "/EloOverlay*",
     element: <EloOverlay />,
   },
   {
