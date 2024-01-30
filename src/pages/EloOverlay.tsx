@@ -18,7 +18,7 @@ let socket: WebSocket;
 let pingInterval: number;
 
 function EloOverlay() {
-  const [playerInfo, setPlayerInfo] = useState<Account>({
+  const oldAccount: object = {
     summonerId: "",
     name: "",
     hashtag: "",
@@ -64,7 +64,8 @@ function EloOverlay() {
     ],
     startTime: 1706645277,
     lpStart: 1295,
-  });
+  };
+  const [playerInfo, setPlayerInfo] = useState<Account>(oldAccount as Account);
 
   const nav = useNavigate();
 
