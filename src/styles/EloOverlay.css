@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
 
 .eloimg {
-    height: 100px;
-    width: 100px;
-    margin-bottom: -18px;
+    margin-bottom: -18%;
+    width: 120%;
 }
 
 img {
-    -webkit-filter: drop-shadow(3px 3px 3px #222);
     filter: drop-shadow(3px 3px 3px #222);
 }
 
@@ -18,56 +16,43 @@ body {
     font-family: 'Signika', sans-serif;
 }
 
-#display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px;
-    margin-top: 0px;
-}
-
 .row {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 50%;
 }
 
 .imgdiv {
     display: flex;
-    width: 40px;
-    height: 40px;
-    filter: drop-shadow(3px 3px 3px #222);
+    filter: drop-shadow(3px 3px 12px #222);
     justify-content: center;
     align-items: center;
-}
-
-#V9Player {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 5px;
-}
-
-#V9Player div {
-    width: 80px;
+    margin-right: 20px;
 }
 
 .profileImg {
-    max-width: 100%;
+    width: 120px;
     border-radius: 50%;
     clip-path: circle(46% at 50% 50%);
 }
 
 .ELO {
     margin-top: -9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
 }
 
 p {
     margin: 2px;
     text-shadow: 0 3px 4px rgba(0, 0, 0, 1.8);
-    font-size: 32px;
+    font-size: 5em;
 }
 
-#hihi {
+#Player {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -78,18 +63,22 @@ p {
 #playerInfo {
     display: flex;
     text-align: center;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
+    width: 45%;
 }
 
 .lpDiff {
-    font-size: 18px;
+    font-size: 3.5em;
     text-shadow: 0 2px 3px rgba(0, 0, 0, 1);
 }
 
 .overlayIMG {
     position: absolute;
     top: 0;
-    right: 0;
+}
+
+.spacer {
+    height: 3em;
 }

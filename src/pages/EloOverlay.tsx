@@ -18,15 +18,57 @@ let socket: WebSocket;
 let pingInterval: number;
 
 function EloOverlay() {
-  const [playerInfo, setPlayerInfo] = useState<Account>(
-    new Account("", "", "", "", 0)
-  );
+  const [playerInfo, setPlayerInfo] = useState<Account>({
+    summonerId: "",
+    name: "",
+    hashtag: "",
+    puuid: "",
+    tier: "CHALLENGER",
+    rank: "I",
+    leaguePoints: 1337,
+    combinedLP: 1337,
+    wins: 205,
+    loses: 173,
+    hotstreak: false,
+    lastThree: [
+      {
+        championName: "Veigar",
+        championID: 497,
+        win: false,
+        id: "EUW1_6792213944",
+      },
+      {
+        championName: "Bard",
+        championID: 432,
+        win: true,
+        id: "EUW1_6792270986",
+      },
+      {
+        championName: "Rakan",
+        championID: 497,
+        win: false,
+        id: "EUW1_6792346795",
+      },
+      {
+        championName: "Pyke",
+        championID: 497,
+        win: true,
+        id: "EUW1_6792427799",
+      },
+      {
+        championName: "Gragas",
+        championID: 432,
+        win: true,
+        id: "EUW1_6792492999",
+      },
+    ],
+    startTime: 1706645277,
+    lpStart: 1295,
+  });
 
   const nav = useNavigate();
 
   useEffect(() => {
-    console.log(summonerName, tag, key);
-
     if (summonerName === null || tag === null || key === null) {
       // Redirect to error page if any of the parameters is missing
       nav("/errorpage");
@@ -40,24 +82,21 @@ function EloOverlay() {
   }, [nav]);
 
   return (
-    <div id="display">
-      <div id="Player">
-        <EloInfo
-          eloLP={playerInfo.leaguePoints}
-          eloDivision={playerInfo.tier}
-          eloRank={playerInfo.rank}
-          lpDiff={playerInfo.combinedLP - playerInfo.lpStart}
-        />
-        <div className="row">
-          {playerInfo.lastThree.map((match, index) => (
-            <Champion
-              height={40 - (playerInfo.lastThree.length - 1 - index) * 2}
-              right={playerInfo.lastThree.length - 1 - index}
-              championName={match.championName}
-              win={match.win}
-            />
-          ))}
-        </div>
+    <div id="Player">
+      <EloInfo
+        eloLP={playerInfo.leaguePoints}
+        eloDivision={playerInfo.tier}
+        eloRank={playerInfo.rank}
+        lpDiff={playerInfo.combinedLP - playerInfo.lpStart}
+      />
+      <div className="row">
+        {playerInfo.lastThree.map((match, index) => (
+          <Champion
+            index={index * 4.5}
+            championName={match.championName}
+            win={match.win}
+          />
+        ))}
       </div>
     </div>
   );
@@ -77,6 +116,7 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
         </p>
       </div>
       <div className="ELO">
+        <div className="spacer"></div>
         <p className="lpDiff">Heute:</p>
         <p
           className="lpDiff"
@@ -89,20 +129,22 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
   );
 }
 
-function Champion({ height, right, championName, win }: ChampionMatchHistory) {
+function Champion({ index, championName, win }: ChampionMatchHistory) {
   return (
     <div className="imgdiv">
       <img
         src={`https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png`}
         alt=""
         className="profileImg"
-        style={{ height: `${height}px` }}
+        style={{
+          width: `${120 - index}px`,
+        }}
       />
       <img
         src={`../../${win}.png`}
         alt="Overlay Image"
         className="overlayIMG"
-        style={{ height: `${height}px`, right: `${right}px` }}
+        style={{ width: `${120 - index}px` }}
       />
     </div>
   );

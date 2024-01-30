@@ -35,7 +35,7 @@ export class Match {
     championID: number;
     win: boolean;
     id: string;
-    constructor(id:string, championName: string, championID: number, win: boolean) {
+    constructor(id: string, championName: string, championID: number, win: boolean) {
         this.id = id;
         this.championName = championName;
         this.championID = championID;
@@ -44,15 +44,14 @@ export class Match {
 }
 
 export interface ChampionMatchHistory {
-    height: number;
-    right: number;
+    index: number;
     championName: string;
     win: boolean;
 }
 
 export interface AccountElo {
-    eloLP: number; 
+    eloLP: number;
     eloDivision: string;
-    eloRank: string; 
-    lpDiff: number; 
+    eloRank: string;
+    lpDiff: number;
 }
