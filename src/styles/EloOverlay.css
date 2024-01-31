@@ -42,6 +42,10 @@ p {
     font-size: 5em;
 }
 
+.eloAndLP {
+    margin-right: -50px;
+}
+
 .eloInfo {
     width: 55%;
 }
@@ -53,6 +57,7 @@ p {
 .lpDiff {
     font-size: 3.5em;
     margin: -27px;
+    margin-left: -75px;
 }
 
 .overlayIMG {

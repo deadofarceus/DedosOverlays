@@ -81,14 +81,6 @@ function EloOverlay() {
     }
   }, [nav]);
 
-  playerInfo.lastThree = Array.from(
-    new Set(playerInfo.lastThree.map((obj) => JSON.stringify(obj)))
-  ).map((str) => JSON.parse(str));
-
-  while (playerInfo.lastThree.length > 5) {
-    playerInfo.lastThree.shift();
-  }
-
   return (
     <Container className="d-flex flex-column justify-content-center align-items-center">
       <EloInfo
@@ -122,8 +114,8 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
   return (
     <Row className="eloInfo">
       <Col className="ELO d-flex flex-column justify-content-center align-items-center">
-        <img src={`../../${eloDivision}.png`} className="eloimg" />
-        <p>{lpDisplay}</p>
+        <img src={`../../${eloDivision}.png`} className="eloimg eloAndLP" />
+        <p className="eloAndLP">{lpDisplay}</p>
       </Col>
       <Col className="ELO text-center">
         <div className="spacer"></div>
