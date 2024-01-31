@@ -70,7 +70,7 @@ export class EloWebsocket {
             account.lastThree.shift();
         }
 
-        account.lastThree.reverse();
+        // account.lastThree.reverse();
 
         this.callback(account);
     };

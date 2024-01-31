@@ -93,9 +93,10 @@ function EloOverlay() {
         {playerInfo.lastThree.map((match, index) => (
           <Champion
             key={match.id}
-            index={index * 4.5}
+            index={index}
             championName={match.championName}
             win={match.win}
+            length={playerInfo.lastThree.length}
           />
         ))}
       </Row>
@@ -131,7 +132,7 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
   );
 }
 
-function Champion({ index, championName, win }: ChampionMatchHistory) {
+function Champion({ index, championName, win, length }: ChampionMatchHistory) {
   return (
     <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
       <img
@@ -139,14 +140,14 @@ function Champion({ index, championName, win }: ChampionMatchHistory) {
         alt=""
         className="profileImg"
         style={{
-          width: `${120 - index}px`,
+          width: `${120 - (length - 1 - index) * 4.5}px`,
         }}
       />
       <img
         src={`../../${win}.png`}
         alt="Overlay Image"
         className="overlayIMG"
-        style={{ width: `${120 - index}px` }}
+        style={{ width: `${120 - (length - 1 - index) * 4.5}px` }}
       />
     </div>
   );

@@ -47,6 +47,7 @@ export interface ChampionMatchHistory {
     index: number;
     championName: string;
     win: boolean;
+    length: number
 }
 
 export interface AccountElo {
