@@ -75,12 +75,22 @@ function EloOverlay() {
       nav("/errorpage");
     }
 
-    connectWebSocket(setPlayerInfo);
+    if (!socket) {
+      connectWebSocket(setPlayerInfo);
+    }
     // Cleanup WebSocket on component unmount
     return () => {
       //   socket.close();
     };
   }, [nav]);
+
+  playerInfo.lastThree = Array.from(
+    new Set(playerInfo.lastThree.map((obj) => JSON.stringify(obj)))
+  ).map((str) => JSON.parse(str));
+
+  while (playerInfo.lastThree.length > 5) {
+    playerInfo.lastThree.shift();
+  }
 
   return (
     <div id="Player">
@@ -194,6 +204,7 @@ function connectWebSocket(
     const account = data.accounts[0];
     console.log(account);
 
+    account.lastThree.reverse();
     callback(account);
   };
 }
