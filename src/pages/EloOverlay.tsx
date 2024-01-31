@@ -200,6 +200,11 @@ function connectWebSocket(
       return;
     }
 
+    if (message === "refresh") {
+      window.location.reload();
+      return;
+    }
+
     const data = JSON.parse(message);
     const account = data.accounts[0];
     console.log(account);
