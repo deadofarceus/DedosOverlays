@@ -3,17 +3,14 @@
 .eloimg {
     margin-bottom: -18%;
     width: 120%;
-}
-
-img {
-    filter: drop-shadow(3px 3px 3px #222);
+    filter: drop-shadow(7px 9px 3px #222);
 }
 
 body {
     color: azure;
-    margin: 0;
     font-weight: bold;
     font-family: 'Signika', sans-serif;
+    text-align: center;
 }
 
 .row {
@@ -25,9 +22,7 @@ body {
 
 .imgdiv {
     display: flex;
-    filter: drop-shadow(3px 3px 12px #222);
-    justify-content: center;
-    align-items: center;
+    filter: drop-shadow(7px 9px 3px #222);
     margin-right: 20px;
 }
 
@@ -38,40 +33,26 @@ body {
 }
 
 .ELO {
-    margin-top: -9px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+    width: 65%;
 }
 
 p {
-    margin: 2px;
-    text-shadow: 0 3px 4px rgba(0, 0, 0, 1.8);
+    margin: -12px;
+    filter: drop-shadow(4px 4px 3px #222);
     font-size: 5em;
 }
 
-#Player {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.eloInfo {
+    width: 55%;
 }
 
-#playerInfo {
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    width: 45%;
+.matchhistory {
+    width: 75%;
 }
 
 .lpDiff {
     font-size: 3.5em;
-    text-shadow: 0 2px 3px rgba(0, 0, 0, 1);
+    margin: -27px;
 }
 
 .overlayIMG {
@@ -80,5 +61,5 @@ p {
 }
 
 .spacer {
-    height: 3em;
+    height: 5em;
 }

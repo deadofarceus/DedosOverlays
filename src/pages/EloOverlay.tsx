@@ -4,18 +4,19 @@ import {
   AccountElo,
   ChampionMatchHistory,
 } from "../types/LeagueTypes";
-import { ModEvent } from "../types/BackendEvents";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap-grid.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
+import { EloWebsocket } from "../types/WebsocketTypes";
+import { Col, Container, Row } from "react-bootstrap";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
 const summonerName = params.get("name");
 const tag = params.get("tag");
 const key = params.get("key");
-
-let socket: WebSocket;
-let pingInterval: number;
+let ws: EloWebsocket;
 
 function EloOverlay() {
   const oldAccount: object = {
@@ -73,15 +74,11 @@ function EloOverlay() {
     if (summonerName === null || tag === null || key === null) {
       // Redirect to error page if any of the parameters is missing
       nav("/errorpage");
+    } else {
+      if (!ws) {
+        ws = new EloWebsocket(summonerName, tag, key, setPlayerInfo);
+      }
     }
-
-    if (!socket) {
-      connectWebSocket(setPlayerInfo);
-    }
-    // Cleanup WebSocket on component unmount
-    return () => {
-      //   socket.close();
-    };
   }, [nav]);
 
   playerInfo.lastThree = Array.from(
@@ -93,56 +90,58 @@ function EloOverlay() {
   }
 
   return (
-    <div id="Player">
+    <Container className="d-flex flex-column justify-content-center align-items-center">
       <EloInfo
         eloLP={playerInfo.leaguePoints}
         eloDivision={playerInfo.tier}
         eloRank={playerInfo.rank}
         lpDiff={playerInfo.combinedLP - playerInfo.lpStart}
       />
-      <div className="row">
+      <Row className="matchhistory" md="auto">
         {playerInfo.lastThree.map((match, index) => (
           <Champion
+            key={match.id}
             index={index * 4.5}
             championName={match.championName}
             win={match.win}
           />
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
 function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
+  const lpDisplay =
+    eloDivision === "MASTER" ||
+    eloDivision === "GRANDMASTER" ||
+    eloDivision === "CHALLENGER"
+      ? eloLP + " LP"
+      : eloRank + " " + eloLP + " LP";
+  const lpToday = lpDiff >= 0 ? `+${lpDiff} LP ↑` : `${lpDiff} LP ↓`;
   return (
-    <div id="playerInfo">
-      <div className="ELO">
+    <Row className="eloInfo">
+      <Col className="ELO d-flex flex-column justify-content-center align-items-center">
         <img src={`../../${eloDivision}.png`} className="eloimg" />
-        <p>
-          {eloDivision === "MASTER" ||
-          eloDivision === "GRANDMASTER" ||
-          eloDivision === "CHALLENGER"
-            ? eloLP + " LP"
-            : eloRank + " " + eloLP + " LP"}
-        </p>
-      </div>
-      <div className="ELO">
+        <p>{lpDisplay}</p>
+      </Col>
+      <Col className="ELO text-center">
         <div className="spacer"></div>
         <p className="lpDiff">Heute:</p>
         <p
           className="lpDiff"
           style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}
         >
-          {lpDiff >= 0 ? `+${lpDiff} LP ↑` : `${lpDiff} LP ↓`}
+          {lpToday}
         </p>
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 }
 
 function Champion({ index, championName, win }: ChampionMatchHistory) {
   return (
-    <div className="imgdiv">
+    <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
       <img
         src={`https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png`}
         alt=""
@@ -159,59 +158,6 @@ function Champion({ index, championName, win }: ChampionMatchHistory) {
       />
     </div>
   );
-}
-
-function connectWebSocket(
-  callback: React.Dispatch<React.SetStateAction<Account>>
-) {
-  socket = new WebSocket(
-    `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`
-  );
-  // socket = new WebSocket(`ws://localhost:8080?name=${summonerName}&tag=${tag}`);
-
-  pingInterval = setInterval(() => socket.send("ping"), 60000);
-
-  socket.onopen = function () {
-    console.log("WebSocket-Verbindung hergestellt.");
-    const modEvent = new ModEvent("league/listenAccount", {
-      summonerName: summonerName,
-      tag: tag,
-      key: key,
-    });
-    socket.send(JSON.stringify(modEvent));
-  };
-
-  socket.onclose = function () {
-    console.log(
-      "WebSocket-Verbindung geschlossen. Versuche erneut zu verbinden..."
-    );
-    clearInterval(pingInterval);
-    connectWebSocket(callback); // Verbindung nach 2 Sekunden erneut aufbauen
-  };
-
-  socket.onerror = function (error) {
-    console.error("WebSocket-Fehler aufgetreten: ", error);
-  };
-
-  socket.onmessage = function (event) {
-    const message = event.data;
-
-    if (message === "pong") {
-      return;
-    }
-
-    if (message === "refresh") {
-      window.location.reload();
-      return;
-    }
-
-    const data = JSON.parse(message);
-    const account = data.accounts[0];
-    console.log(account);
-
-    account.lastThree.reverse();
-    callback(account);
-  };
 }
 
 export default EloOverlay;

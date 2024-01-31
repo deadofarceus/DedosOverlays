@@ -15,16 +15,12 @@ const router = createBrowserRouter([
     element: <League />,
   },
   {
-    path: "/EloOverlay*",
+    path: "/EloOverlay/*",
     element: <EloOverlay />,
   },
   {
     path: "/errorpage",
     element: <ErrorPage />,
-  },
-  {
-    path: "/league*",
-    element: <League />,
   },
 ]);
 
