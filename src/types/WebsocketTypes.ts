@@ -10,14 +10,16 @@ export class EloWebsocket {
     callback: React.Dispatch<React.SetStateAction<Account>>;
     ws: WebSocket;
     wsAddress: string;
+    queueType: string;
 
-    constructor(summonerName: string, tag: string, key: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
+    constructor(summonerName: string, tag: string, key: string, queuetype: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
         this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
         // this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
         this.ws = new WebSocket(this.wsAddress);
         this.summonerName = summonerName;
         this.tag = tag;
         this.key = key;
+        this.queueType = queuetype;
         this.callback = callback;
 
         this.setupWebSocket();

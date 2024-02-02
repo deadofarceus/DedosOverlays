@@ -4,18 +4,19 @@ import {
   AccountElo,
   ChampionMatchHistory,
 } from "../types/LeagueTypes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
 import { Col, Container, Row } from "react-bootstrap";
+import { useQuery } from "../types/UsefulFunctions";
 
-const url = new URL(window.location.href);
-const params = new URLSearchParams(url.search);
-const summonerName = params.get("name");
-const tag = params.get("tag");
-const key = params.get("key");
+// const url = new URL(window.location.href);
+// const params = new URLSearchParams(url.search);
+// const summonerName = params.get("name");
+// const tag = params.get("tag");
+// const key = params.get("key");
 let ws: EloWebsocket;
 
 function EloOverlay() {
@@ -70,16 +71,27 @@ function EloOverlay() {
 
   const nav = useNavigate();
 
+  const { queueType } = useParams();
+  const query = useQuery();
+  const summonerName = query.get("name");
+  const tag = query.get("tag");
+  const key = query.get("key");
+
   useEffect(() => {
-    if (summonerName === null || tag === null || key === null) {
+    if (
+      summonerName === null ||
+      tag === null ||
+      key === null ||
+      (queueType !== "soloduo" && queueType !== "flex")
+    ) {
       // Redirect to error page if any of the parameters is missing
-      nav("/errorpage");
+      nav("/EloOverlay");
     } else {
       if (!ws) {
-        ws = new EloWebsocket(summonerName, tag, key, setPlayerInfo);
+        ws = new EloWebsocket(summonerName, tag, key, queueType, setPlayerInfo);
       }
     }
-  }, [nav]);
+  }, [key, nav, query, queueType, summonerName, tag]);
 
   return (
     <Container className="d-flex flex-column justify-content-center align-items-center">

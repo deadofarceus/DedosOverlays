@@ -1,31 +1,27 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import League from "./components/league/League";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import ErrorPage from "./ErrorPage";
+// import ErrorPage from "./ErrorPage";
 import EloOverlay from "./pages/EloOverlay";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!TEST</div>,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/league",
-    element: <League />,
-  },
-  {
-    path: "/EloOverlay/*",
-    element: <EloOverlay />,
-  },
-  {
-    path: "/errorpage",
-    element: <ErrorPage />,
-  },
-]);
+import EloOverlayTutorial from "./pages/EloOverlayTutorial";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import ErrorPage from "./ErrorPage";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Routes>
+      <Route path="/">
+        <Route index element={<Home />} />
+        <Route path="errorpage" element={<ErrorPage />} />
+        <Route path="about" element={<About />} />
+      </Route>
+      <Route path="/EloOverlay">
+        <Route index element={<EloOverlayTutorial />} />
+        <Route path=":queueType" element={<EloOverlay />} />
+      </Route>
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+  );
 }
 
 export default App;
