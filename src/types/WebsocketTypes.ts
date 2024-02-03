@@ -17,8 +17,8 @@ export class EloWebsocket {
     listenMode: boolean = false;
 
     constructor(summonerName: string, tag: string, key: string, queuetype: string, listenMode: string | null, callback: React.Dispatch<React.SetStateAction<Account>>) {
-        this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
-        // this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
+        // this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
+        this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
         this.ws = new WebSocket(this.wsAddress);
         this.summonerName = summonerName;
         this.tag = tag;
@@ -70,6 +70,8 @@ export class EloWebsocket {
         while (this.ws.readyState !== this.ws.OPEN) { /* empty */ }
         if (this.listenMode) {
             this.sendModEvent();
+        } else {
+            this.sendAPIRequest();
         }
     };
 
