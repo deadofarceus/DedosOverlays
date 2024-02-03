@@ -14,19 +14,22 @@ export class Account {
     lastThree: Match[] = [];
     startTime: number;
     lpStart!: number;
+    listenMode: boolean;
 
     constructor(
         puuid: string,
         summonerId: string,
         name: string,
         hashtag: string,
-        startTime: number
+        startTime: number,
+        listenMode: boolean
     ) {
         this.puuid = puuid;
         this.summonerId = summonerId;
         this.name = name;
         this.hashtag = hashtag;
         this.startTime = startTime;
+        this.listenMode = listenMode;
     }
 }
 

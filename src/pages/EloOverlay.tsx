@@ -12,11 +12,6 @@ import { EloWebsocket } from "../types/WebsocketTypes";
 import { Col, Container, Row } from "react-bootstrap";
 import { useQuery } from "../types/UsefulFunctions";
 
-// const url = new URL(window.location.href);
-// const params = new URLSearchParams(url.search);
-// const summonerName = params.get("name");
-// const tag = params.get("tag");
-// const key = params.get("key");
 let ws: EloWebsocket;
 
 function EloOverlay() {
@@ -70,14 +65,14 @@ function EloOverlay() {
   const [playerInfo, setPlayerInfo] = useState<Account>(oldAccount as Account);
 
   const nav = useNavigate();
-
   const { queueType } = useParams();
   const query = useQuery();
-  const summonerName = query.get("name");
-  const tag = query.get("tag");
-  const key = query.get("key");
 
   useEffect(() => {
+    const summonerName = query.get("name");
+    const tag = query.get("tag");
+    const key = query.get("key");
+    const listenMode = query.get("listen");
     if (
       summonerName === null ||
       tag === null ||
@@ -88,10 +83,17 @@ function EloOverlay() {
       nav("/EloOverlay");
     } else {
       if (!ws) {
-        ws = new EloWebsocket(summonerName, tag, key, queueType, setPlayerInfo);
+        ws = new EloWebsocket(
+          summonerName,
+          tag,
+          key,
+          queueType,
+          listenMode,
+          setPlayerInfo
+        );
       }
     }
-  }, [key, nav, query, queueType, summonerName, tag]);
+  }, [nav, query, queueType]);
 
   return (
     <Container className="d-flex flex-column justify-content-center align-items-center">
