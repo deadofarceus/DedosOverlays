@@ -14,9 +14,8 @@ export class EloWebsocket {
     gamefetchInterval!: NodeJS.Timeout;
     interval: number = 10000;
     ingame: boolean = false;
-    listenMode: boolean = false;
 
-    constructor(summonerName: string, tag: string, key: string, queuetype: string, listenMode: string | null, callback: React.Dispatch<React.SetStateAction<Account>>) {
+    constructor(summonerName: string, tag: string, key: string, queuetype: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
         this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
         // this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
         this.ws = new WebSocket(this.wsAddress);
@@ -25,9 +24,6 @@ export class EloWebsocket {
         this.key = key;
         this.queueType = queuetype;
         this.callback = callback;
-        if (listenMode) {
-            this.listenMode = true;
-        }
 
         this.setupWebSocket();
     }
@@ -40,197 +36,32 @@ export class EloWebsocket {
         this.ws.onclose = this.handleClose;
         this.ws.onerror = this.handleError;
         this.ws.onmessage = this.handleMessage;
-        if (!this.listenMode) {
-            this.gamefetchInterval = setInterval(() => this.fetchIngameData(), this.interval);
-        }
     }
 
     async fetchIngameData() {
-        fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
-            mode: "no-cors",
-            method: 'HEAD'
+        await fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
+            mode: "no-cors"
         })
-            .then(res => {
-                console.log(res);
-                const oldAccount: object = {
-                    summonerId: "",
-                    name: "",
-                    hashtag: "",
-                    puuid: "",
-                    tier: "CHALLENGER",
-                    rank: "I",
-                    leaguePoints: 1337,
-                    combinedLP: 1337,
-                    wins: 205,
-                    loses: 173,
-                    hotstreak: false,
-                    lastThree: [
-                        {
-                            championName: "Veigar",
-                            championID: 497,
-                            win: false,
-                            id: "EUW1_6792213944",
-                        },
-                        {
-                            championName: "Veigar",
-                            championID: 432,
-                            win: true,
-                            id: "EUW1_6792270986",
-                        },
-                        {
-                            championName: "Veigar",
-                            championID: 497,
-                            win: false,
-                            id: "EUW1_6792346795",
-                        },
-                        {
-                            championName: "Veigar",
-                            championID: 497,
-                            win: true,
-                            id: "EUW1_6792427799",
-                        },
-                        {
-                            championName: "Veigar",
-                            championID: 432,
-                            win: true,
-                            id: "EUW1_6792492999",
-                        },
-                    ],
-                    startTime: 1706645277,
-                    lpStart: 1295,
-                };
-                this.callback(oldAccount as Account);
+            .then(response => {
+                // ingame
+                if (response) this.ingame = true;
             })
-            .catch(err => {
-                console.log(err);
-                const oldAccount: object = {
-                    summonerId: "",
-                    name: "",
-                    hashtag: "",
-                    puuid: "",
-                    tier: "CHALLENGER",
-                    rank: "I",
-                    leaguePoints: 1337,
-                    combinedLP: 1337,
-                    wins: 205,
-                    loses: 173,
-                    hotstreak: false,
-                    lastThree: [
-                        {
-                            championName: "Bard",
-                            championID: 497,
-                            win: false,
-                            id: "EUW1_6792213944",
-                        },
-                        {
-                            championName: "Bard",
-                            championID: 432,
-                            win: true,
-                            id: "EUW1_6792270986",
-                        },
-                        {
-                            championName: "Bard",
-                            championID: 497,
-                            win: false,
-                            id: "EUW1_6792346795",
-                        },
-                        {
-                            championName: "Bard",
-                            championID: 497,
-                            win: true,
-                            id: "EUW1_6792427799",
-                        },
-                        {
-                            championName: "Bard",
-                            championID: 432,
-                            win: true,
-                            id: "EUW1_6792492999",
-                        },
-                    ],
-                    startTime: 1706645277,
-                    lpStart: 1295,
-                };
-                this.callback(oldAccount as Account);
-            })
-        // await fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
-        //     mode: "no-cors"
-        // })
-        //     .then(response => {
-        //         // ingame
-        //         console.log(response);
-        //         const oldAccount: any = {
-        //             summonerId: "",
-        //             name: "",
-        //             hashtag: "",
-        //             puuid: "",
-        //             tier: "CHALLENGER",
-        //             rank: "I",
-        //             leaguePoints: 1337,
-        //             combinedLP: 1337,
-        //             wins: 205,
-        //             loses: 173,
-        //             hotstreak: false,
-        //             lastThree: [
-        //                 {
-        //                     championName: "Bard",
-        //                     championID: 497,
-        //                     win: false,
-        //                     id: "EUW1_6792213944",
-        //                 },
-        //                 {
-        //                     championName: "Bard",
-        //                     championID: 432,
-        //                     win: true,
-        //                     id: "EUW1_6792270986",
-        //                 },
-        //                 {
-        //                     championName: "Bard",
-        //                     championID: 497,
-        //                     win: false,
-        //                     id: "EUW1_6792346795",
-        //                 },
-        //                 {
-        //                     championName: "Bard",
-        //                     championID: 497,
-        //                     win: true,
-        //                     id: "EUW1_6792427799",
-        //                 },
-        //                 {
-        //                     championName: "Bard",
-        //                     championID: 432,
-        //                     win: true,
-        //                     id: "EUW1_6792492999",
-        //                 },
-        //             ],
-        //             startTime: 1706645277,
-        //             lpStart: 1295,
-        //         };
-        //         this.callback(oldAccount);
-
-        //         if (response) this.ingame = true;
-        //     })
-        //     .catch((error) => {
-        //         // outgame
-        //         console.log(error);
-
-        //         if (this.ingame) {
-        //             //wechsel von ingame nach outgame make RIOTAPI Call
-        //             console.log("GAME FINISHED");
-        //             this.sendAPIRequest();
-        //         }
-        //         this.ingame = false;
-        //     });
+            .catch(() => {
+                // outgame
+                if (this.ingame) {
+                    //wechsel von ingame nach outgame make RIOTAPI Call
+                    console.log("GAME FINISHED");
+                    // this.sendAPIRequest();
+                }
+                this.ingame = false;
+            });
     }
 
     handleOpen = () => {
         console.log("WebSocket connection established.");
         this.setupPing();
         while (this.ws.readyState !== this.ws.OPEN) { /* empty */ }
-        if (this.listenMode) {
-            this.sendModEvent();
-        } else {
-            this.sendAPIRequest();
-        }
+        this.sendListenEvent();
     };
 
     handleClose = (ev: CloseEvent) => {
@@ -254,9 +85,8 @@ export class EloWebsocket {
             return;
         }
         const data = JSON.parse(message);
-        const account = data.accounts[0];
-        console.log(account);
-        console.log(Date.now());
+        const account = data.accounts[0] as Account;
+        console.log(account, Date.now());
 
         account.lastThree = Array.from(
             new Set(account.lastThree.map((obj: Match) => JSON.stringify(obj)))
@@ -268,6 +98,19 @@ export class EloWebsocket {
 
         // account.lastThree.reverse();
 
+        if (!account.tier) {
+            Object.assign(account, {
+                hotstreak: false,
+                leaguePoints: 0,
+                tier: "UNRANKED",
+                loses: 0,
+                wins: 0,
+                rank: "IV",
+                combinedLP: 0,
+                lpStart: 0
+            });
+        }
+
         this.callback(account);
     };
 
@@ -275,23 +118,12 @@ export class EloWebsocket {
         this.pingInterval = setInterval(() => this.ws.send("ping"), 60000);
     }
 
-    sendModEvent() {
+    sendListenEvent() {
         const modEvent = new ModEvent("league/listenAccount", {
             summonerName: this.summonerName,
             tag: this.tag,
             key: this.key,
         });
         this.ws.send(JSON.stringify(modEvent));
-    }
-
-    sendAPIRequest() {
-        const modEvent = new ModEvent("league/requestElo", {
-            summonerName: this.summonerName,
-            tag: this.tag,
-            key: this.key,
-        });
-        console.log(modEvent);
-
-        // this.ws.send(JSON.stringify(modEvent));
     }
 }

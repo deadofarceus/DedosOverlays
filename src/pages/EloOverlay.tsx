@@ -20,47 +20,47 @@ function EloOverlay() {
     name: "",
     hashtag: "",
     puuid: "",
-    tier: "CHALLENGER",
-    rank: "I",
-    leaguePoints: 1337,
-    combinedLP: 1337,
+    tier: "UNRANKED",
+    rank: "IV",
+    leaguePoints: 0,
+    combinedLP: 0,
     wins: 205,
     loses: 173,
     hotstreak: false,
     lastThree: [
       {
-        championName: "Veigar",
+        championName: "null",
         championID: 497,
         win: false,
         id: "EUW1_6792213944",
       },
       {
-        championName: "Bard",
+        championName: "null",
         championID: 432,
         win: true,
         id: "EUW1_6792270986",
       },
       {
-        championName: "Rakan",
+        championName: "null",
         championID: 497,
         win: false,
         id: "EUW1_6792346795",
       },
       {
-        championName: "Pyke",
+        championName: "null",
         championID: 497,
         win: true,
         id: "EUW1_6792427799",
       },
       {
-        championName: "Gragas",
+        championName: "null",
         championID: 432,
-        win: true,
+        win: false,
         id: "EUW1_6792492999",
       },
     ],
-    startTime: 1706645277,
-    lpStart: 1295,
+    startTime: 0,
+    lpStart: 0,
   };
   const [playerInfo, setPlayerInfo] = useState<Account>(oldAccount as Account);
 
@@ -72,7 +72,6 @@ function EloOverlay() {
     const summonerName = query.get("name");
     const tag = query.get("tag");
     const key = query.get("key");
-    const listenMode = query.get("listen");
     if (
       summonerName === null ||
       tag === null ||
@@ -83,20 +82,16 @@ function EloOverlay() {
       nav("/EloOverlay");
     } else {
       if (!ws) {
-        ws = new EloWebsocket(
-          summonerName,
-          tag,
-          key,
-          queueType,
-          listenMode,
-          setPlayerInfo
-        );
+        ws = new EloWebsocket(summonerName, tag, key, queueType, setPlayerInfo);
       }
     }
   }, [nav, query, queueType]);
 
   return (
-    <Container className="d-flex flex-column justify-content-center align-items-center">
+    <Container
+      className="d-flex flex-column justify-content-center align-items-center"
+      style={{ width: "1140px" }}
+    >
       <EloInfo
         eloLP={playerInfo.leaguePoints}
         eloDivision={playerInfo.tier}
@@ -119,12 +114,13 @@ function EloOverlay() {
 }
 
 function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
-  const lpDisplay =
+  let lpDisplay =
     eloDivision === "MASTER" ||
     eloDivision === "GRANDMASTER" ||
     eloDivision === "CHALLENGER"
       ? eloLP + " LP"
       : eloRank + " " + eloLP + " LP";
+  lpDisplay = eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
   const lpToday = lpDiff >= 0 ? `+${lpDiff} LP ↑` : `${lpDiff} LP ↓`;
   return (
     <Row className="eloInfo">
@@ -147,10 +143,14 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
 }
 
 function Champion({ index, championName, win, length }: ChampionMatchHistory) {
+  const imgsrc =
+    championName === "null"
+      ? "../../null.png"
+      : `https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png`;
   return (
     <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
       <img
-        src={`https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png`}
+        src={imgsrc}
         alt=""
         className="profileImg"
         style={{

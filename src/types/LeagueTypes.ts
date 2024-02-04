@@ -12,7 +12,6 @@ export class Account {
     loses!: number;
     hotstreak!: boolean;
     lastThree: Match[] = [];
-    startTime: number;
     lpStart!: number;
     listenMode: boolean;
 
@@ -21,14 +20,12 @@ export class Account {
         summonerId: string,
         name: string,
         hashtag: string,
-        startTime: number,
         listenMode: boolean
     ) {
         this.puuid = puuid;
         this.summonerId = summonerId;
         this.name = name;
         this.hashtag = hashtag;
-        this.startTime = startTime;
         this.listenMode = listenMode;
     }
 }
