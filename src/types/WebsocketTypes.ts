@@ -98,6 +98,7 @@ export class EloWebsocket {
         const data = JSON.parse(message);
         const account = data.accounts[0];
         console.log(account);
+        console.log(Date.now());
 
         account.lastThree = Array.from(
             new Set(account.lastThree.map((obj: Match) => JSON.stringify(obj)))
