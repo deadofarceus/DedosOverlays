@@ -46,24 +46,177 @@ export class EloWebsocket {
     }
 
     async fetchIngameData() {
-        await fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
-            mode: "no-cors"
-        })
-            .then(response => {
-                // ingame
-                console.log(response);
-
-                if (response) this.ingame = true;
+        fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", { method: 'HEAD' })
+            .then(res => {
+                console.log(res);
+                const oldAccount: any = {
+                    summonerId: "",
+                    name: "",
+                    hashtag: "",
+                    puuid: "",
+                    tier: "CHALLENGER",
+                    rank: "I",
+                    leaguePoints: 1337,
+                    combinedLP: 1337,
+                    wins: 205,
+                    loses: 173,
+                    hotstreak: false,
+                    lastThree: [
+                        {
+                            championName: "Veigar",
+                            championID: 497,
+                            win: false,
+                            id: "EUW1_6792213944",
+                        },
+                        {
+                            championName: "Veigar",
+                            championID: 432,
+                            win: true,
+                            id: "EUW1_6792270986",
+                        },
+                        {
+                            championName: "Veigar",
+                            championID: 497,
+                            win: false,
+                            id: "EUW1_6792346795",
+                        },
+                        {
+                            championName: "Veigar",
+                            championID: 497,
+                            win: true,
+                            id: "EUW1_6792427799",
+                        },
+                        {
+                            championName: "Veigar",
+                            championID: 432,
+                            win: true,
+                            id: "EUW1_6792492999",
+                        },
+                    ],
+                    startTime: 1706645277,
+                    lpStart: 1295,
+                };
+                this.callback(oldAccount);
             })
-            .catch(() => {
-                // outgame
-                if (this.ingame) {
-                    //wechsel von ingame nach outgame make RIOTAPI Call
-                    console.log("GAME FINISHED");
-                    this.sendAPIRequest();
-                }
-                this.ingame = false;
-            });
+            .catch(err => {
+                console.log(err);
+                const oldAccount: any = {
+                    summonerId: "",
+                    name: "",
+                    hashtag: "",
+                    puuid: "",
+                    tier: "CHALLENGER",
+                    rank: "I",
+                    leaguePoints: 1337,
+                    combinedLP: 1337,
+                    wins: 205,
+                    loses: 173,
+                    hotstreak: false,
+                    lastThree: [
+                        {
+                            championName: "Bard",
+                            championID: 497,
+                            win: false,
+                            id: "EUW1_6792213944",
+                        },
+                        {
+                            championName: "Bard",
+                            championID: 432,
+                            win: true,
+                            id: "EUW1_6792270986",
+                        },
+                        {
+                            championName: "Bard",
+                            championID: 497,
+                            win: false,
+                            id: "EUW1_6792346795",
+                        },
+                        {
+                            championName: "Bard",
+                            championID: 497,
+                            win: true,
+                            id: "EUW1_6792427799",
+                        },
+                        {
+                            championName: "Bard",
+                            championID: 432,
+                            win: true,
+                            id: "EUW1_6792492999",
+                        },
+                    ],
+                    startTime: 1706645277,
+                    lpStart: 1295,
+                };
+                this.callback(oldAccount);
+            })
+        // await fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
+        //     mode: "no-cors"
+        // })
+        //     .then(response => {
+        //         // ingame
+        //         console.log(response);
+        //         const oldAccount: any = {
+        //             summonerId: "",
+        //             name: "",
+        //             hashtag: "",
+        //             puuid: "",
+        //             tier: "CHALLENGER",
+        //             rank: "I",
+        //             leaguePoints: 1337,
+        //             combinedLP: 1337,
+        //             wins: 205,
+        //             loses: 173,
+        //             hotstreak: false,
+        //             lastThree: [
+        //                 {
+        //                     championName: "Bard",
+        //                     championID: 497,
+        //                     win: false,
+        //                     id: "EUW1_6792213944",
+        //                 },
+        //                 {
+        //                     championName: "Bard",
+        //                     championID: 432,
+        //                     win: true,
+        //                     id: "EUW1_6792270986",
+        //                 },
+        //                 {
+        //                     championName: "Bard",
+        //                     championID: 497,
+        //                     win: false,
+        //                     id: "EUW1_6792346795",
+        //                 },
+        //                 {
+        //                     championName: "Bard",
+        //                     championID: 497,
+        //                     win: true,
+        //                     id: "EUW1_6792427799",
+        //                 },
+        //                 {
+        //                     championName: "Bard",
+        //                     championID: 432,
+        //                     win: true,
+        //                     id: "EUW1_6792492999",
+        //                 },
+        //             ],
+        //             startTime: 1706645277,
+        //             lpStart: 1295,
+        //         };
+        //         this.callback(oldAccount);
+
+        //         if (response) this.ingame = true;
+        //     })
+        //     .catch((error) => {
+        //         // outgame
+        //         console.log(error);
+
+        //         if (this.ingame) {
+        //             //wechsel von ingame nach outgame make RIOTAPI Call
+        //             console.log("GAME FINISHED");
+        //             this.sendAPIRequest();
+        //         }
+        //         this.ingame = false;
+        //     });
     }
 
     handleOpen = () => {
@@ -134,6 +287,6 @@ export class EloWebsocket {
             tag: this.tag,
             key: this.key,
         });
-        this.ws.send(JSON.stringify(modEvent));
+        // this.ws.send(JSON.stringify(modEvent));
     }
 }
