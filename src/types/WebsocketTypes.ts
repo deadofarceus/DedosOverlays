@@ -51,6 +51,8 @@ export class EloWebsocket {
         })
             .then(response => {
                 // ingame
+                console.log(response);
+
                 if (response) this.ingame = true;
             })
             .catch(() => {
