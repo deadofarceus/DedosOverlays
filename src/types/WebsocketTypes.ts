@@ -46,7 +46,10 @@ export class EloWebsocket {
     }
 
     async fetchIngameData() {
-        fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", { method: 'HEAD' })
+        fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
+            mode: "no-cors",
+            method: 'HEAD'
+        })
             .then(res => {
                 console.log(res);
                 const oldAccount: object = {
