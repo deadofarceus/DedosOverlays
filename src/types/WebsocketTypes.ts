@@ -49,7 +49,7 @@ export class EloWebsocket {
         fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", { method: 'HEAD' })
             .then(res => {
                 console.log(res);
-                const oldAccount: any = {
+                const oldAccount: object = {
                     summonerId: "",
                     name: "",
                     hashtag: "",
@@ -96,11 +96,11 @@ export class EloWebsocket {
                     startTime: 1706645277,
                     lpStart: 1295,
                 };
-                this.callback(oldAccount);
+                this.callback(oldAccount as Account);
             })
             .catch(err => {
                 console.log(err);
-                const oldAccount: any = {
+                const oldAccount: object = {
                     summonerId: "",
                     name: "",
                     hashtag: "",
@@ -147,7 +147,7 @@ export class EloWebsocket {
                     startTime: 1706645277,
                     lpStart: 1295,
                 };
-                this.callback(oldAccount);
+                this.callback(oldAccount as Account);
             })
         // await fetch("https://127.0.0.1:2999/liveclientdata/activeplayer", {
         //     mode: "no-cors"
@@ -287,6 +287,8 @@ export class EloWebsocket {
             tag: this.tag,
             key: this.key,
         });
+        console.log(modEvent);
+
         // this.ws.send(JSON.stringify(modEvent));
     }
 }
