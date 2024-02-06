@@ -8,15 +8,20 @@ import {
   InputGroup,
   Button,
   ListGroup,
+  DropdownButton,
+  Dropdown,
 } from "react-bootstrap";
 import "../styles/EloOverlayTutorial.css";
 
 function EloOverlayTutorial() {
+  document.body.style.background =
+    "radial-gradient(circle, rgba(42,42,46,1) 15%, rgba(36,30,30,1) 100%)";
   const nav = useNavigate();
   const query = useQuery();
   const [summonerName, setSummonerName] = useState<string>("");
   const [tag, setTag] = useState<string>("");
   const [link, setLink] = useState<string>("");
+  const [queuetype, setQueuetype] = useState<string>("soloduo");
 
   useEffect(() => {
     const summonerNameQ = query.get("name");
@@ -27,10 +32,10 @@ function EloOverlayTutorial() {
       nav(`/EloOverlay/soloduo?name=${summonerNameQ}&tag=${tagQ}&key=${keyQ}`);
     } else {
       setLink(
-        `https://arceus-overlays.netlify.app/EloOverlay/soloduo?name=${summonerName}&tag=${tag}&key=8Xag5o6x1Y7zLi0C`
+        `https://arceus-overlays.netlify.app/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&key=8Xag5o6x1Y7zLi0C`
       );
     }
-  }, [nav, query, summonerName, tag]);
+  }, [nav, query, queuetype, summonerName, tag]);
   return (
     <Container className="layout">
       <h1>Elo Overlay Creator</h1>
@@ -56,6 +61,18 @@ function EloOverlayTutorial() {
               setTag(e.target.value)
             }
           />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Queue Type</Form.Label>
+          <DropdownButton
+            drop={"down"}
+            variant="primary"
+            title={queuetype === "soloduo" ? "Solo/Duo" : "FlexQ"}
+            onSelect={(evt) => setQueuetype(evt!)}
+          >
+            <Dropdown.Item eventKey="soloduo">Solo/Duo</Dropdown.Item>
+            <Dropdown.Item eventKey="flex">FlexQ</Dropdown.Item>
+          </DropdownButton>
         </Form.Group>
       </Form>
       <Col>

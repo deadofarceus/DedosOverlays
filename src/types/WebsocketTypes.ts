@@ -1,8 +1,6 @@
 import { LeagueLPEvent, ModEvent } from "./BackendEvents";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
-
-
 export class EloWebsocket {
 
     summonerName: string;
@@ -73,7 +71,7 @@ export class EloWebsocket {
             console.log("WebSocket connection closed. Attempting to reconnect...");
             clearInterval(this.pingInterval);
             clearInterval(this.gamefetchInterval);
-            this.setupWebSocket();
+            setTimeout(() => this.setupWebSocket(), 5000);
         }
     };
 
