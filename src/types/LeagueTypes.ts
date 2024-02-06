@@ -13,20 +13,20 @@ export class Account {
     hotstreak!: boolean;
     lastThree: Match[] = [];
     lpStart!: number;
-    listenMode: boolean;
+    queueListenID: number;
 
     constructor(
         puuid: string,
         summonerId: string,
         name: string,
         hashtag: string,
-        listenMode: boolean
+        queueListenID: number
     ) {
         this.puuid = puuid;
         this.summonerId = summonerId;
         this.name = name;
         this.hashtag = hashtag;
-        this.listenMode = listenMode;
+        this.queueListenID = queueListenID;
     }
 }
 
@@ -56,3 +56,26 @@ export interface AccountElo {
     eloRank: string;
     lpDiff: number;
 }
+
+export interface QueueType {
+    queueId: number;
+    map: string;
+    description: string;
+    notes: string | null;
+}
+
+export const QUEUETYPES: Map<string, QueueType> = new Map();
+
+QUEUETYPES.set("flex", {
+    "queueId": 440,
+    "map": "Summoner's Rift",
+    "description": "5v5 Ranked Flex games",
+    "notes": null
+});
+
+QUEUETYPES.set("soloduo", {
+    "queueId": 420,
+    "map": "Summoner's Rift",
+    "description": "5v5 Ranked Solo games",
+    "notes": null
+});

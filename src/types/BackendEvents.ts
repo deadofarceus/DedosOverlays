@@ -86,9 +86,11 @@ class WatchEvent {
 
 export class LeagueLPEvent {
     accounts: Account[];
+    key: string;
 
-    constructor(accounts: Account[]) {
+    constructor(accounts: Account[], key: string) {
         this.accounts = accounts;
+        this.key = key;
     }
 }
 

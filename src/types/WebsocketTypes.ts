@@ -1,5 +1,7 @@
-import { ModEvent } from "./BackendEvents";
-import { Account, Match } from "./LeagueTypes";
+import { LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { Account, Match, QUEUETYPES } from "./LeagueTypes";
+
+
 
 export class EloWebsocket {
 
@@ -9,20 +11,22 @@ export class EloWebsocket {
     callback: React.Dispatch<React.SetStateAction<Account>>;
     ws: WebSocket;
     wsAddress: string;
-    queueType: string;
+    queueID: number;
     pingInterval!: NodeJS.Timeout;
     gamefetchInterval!: NodeJS.Timeout;
     interval: number = 10000;
     ingame: boolean = false;
 
     constructor(summonerName: string, tag: string, key: string, queuetype: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
-        this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
-        // this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
+        // this.wsAddress = `wss://modserver-dedo.glitch.me?name=${summonerName}&tag=${tag}`;
+        this.wsAddress = `ws://localhost:8080?name=${summonerName}&tag=${tag}`;
         this.ws = new WebSocket(this.wsAddress);
         this.summonerName = summonerName;
         this.tag = tag;
         this.key = key;
-        this.queueType = queuetype;
+        this.queueID = QUEUETYPES.get(queuetype)!.queueId;
+        console.log(this.queueID);
+
         this.callback = callback;
 
         this.setupWebSocket();
@@ -119,11 +123,8 @@ export class EloWebsocket {
     }
 
     sendListenEvent() {
-        const modEvent = new ModEvent("league/listenAccount", {
-            summonerName: this.summonerName,
-            tag: this.tag,
-            key: this.key,
-        });
+        const leagueLPEvent = new LeagueLPEvent([new Account("", "", this.summonerName, this.tag, this.queueID)], this.key);
+        const modEvent = new ModEvent("league/listenAccount", leagueLPEvent);
         this.ws.send(JSON.stringify(modEvent));
     }
 }
