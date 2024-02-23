@@ -92,3 +92,8 @@ p {
 .spacer {
     height: 5em;
 }
+
+.leagueborder {
+    font-size: 30px;
+    padding-bottom: 1em;
+}

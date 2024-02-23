@@ -61,6 +61,8 @@ function EloOverlay() {
     ],
     startTime: 0,
     lpStart: 0,
+    gmBorder: 200,
+    challBorder: 700,
   };
   const [playerInfo, setPlayerInfo] = useState<Account>(oldAccount as Account);
 
@@ -97,6 +99,8 @@ function EloOverlay() {
         eloDivision={playerInfo.tier}
         eloRank={playerInfo.rank}
         lpDiff={playerInfo.combinedLP - playerInfo.lpStart}
+        gmBorder={playerInfo.gmBorder}
+        challBorder={playerInfo.challBorder}
       />
       <Row className="matchhistory" md="auto">
         {playerInfo.lastThree.map((match, index) => (
@@ -113,7 +117,14 @@ function EloOverlay() {
   );
 }
 
-function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
+function EloInfo({
+  eloLP,
+  eloDivision,
+  eloRank,
+  lpDiff,
+  gmBorder,
+  challBorder,
+}: AccountElo) {
   let lpDisplay =
     eloDivision === "MASTER" ||
     eloDivision === "GRANDMASTER" ||
@@ -122,6 +133,13 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
       : eloRank + " " + eloLP + " LP";
   lpDisplay = eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
   const lpToday = lpDiff >= 0 ? `+${lpDiff} LP ↑` : `${lpDiff} LP ↓`;
+  let border = undefined;
+  if (eloDivision === "MASTER") {
+    border = "GM Border: " + gmBorder;
+  } else if (eloDivision === "GRANDMASTER") {
+    border = "Challenger <br> Border: " + challBorder;
+  }
+
   return (
     <Row className="eloInfo">
       <Col className="ELO d-flex flex-column justify-content-center align-items-center">
@@ -129,7 +147,14 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff }: AccountElo) {
         <p className="eloAndLP">{lpDisplay}</p>
       </Col>
       <Col className="ELO text-center">
-        <div className="spacer"></div>
+        {border ? (
+          <p
+            className="leagueborder"
+            dangerouslySetInnerHTML={{ __html: border }}
+          />
+        ) : (
+          <div className="spacer"></div>
+        )}
         <p className="lpDiff">Heute:</p>
         <p
           className="lpDiff"

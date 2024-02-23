@@ -14,6 +14,8 @@ export class Account {
     lastThree: Match[] = [];
     lpStart!: number;
     queueListenID: number;
+    gmBorder!: number;
+    challBorder!: number;
 
     constructor(
         puuid: string,
@@ -55,6 +57,8 @@ export interface AccountElo {
     eloDivision: string;
     eloRank: string;
     lpDiff: number;
+    gmBorder: number;
+    challBorder: number;
 }
 
 export interface QueueType {
