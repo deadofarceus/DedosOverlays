@@ -6,6 +6,10 @@
     align-items: center;
     color: azure;
     font-size: x-large;
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
 }
 
 #userInputs {

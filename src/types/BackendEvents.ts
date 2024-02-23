@@ -1,3 +1,4 @@
+import { DeathData } from "./DeathTypes";
 import { Account } from "./LeagueTypes";
 
 
@@ -91,6 +92,15 @@ export class LeagueLPEvent {
     constructor(accounts: Account[], key: string) {
         this.accounts = accounts;
         this.key = key;
+    }
+}
+
+export class DeathEvent {
+    id: string;
+    deathData: DeathData;
+    constructor(id: string, deathData: DeathData) {
+        this.deathData = deathData;
+        this.id = id;
     }
 }
 

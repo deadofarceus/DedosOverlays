@@ -1,0 +1,25 @@
+@import url('https://fonts.cdnfonts.com/css/optimus-princeps?styles=11165');
+
+.eldenringdeath {
+    color: azure;
+    font-weight: bold;
+    font-family: 'OptimusPrincepsSemiBold', sans-serif;
+    text-align: center;
+}
+
+.deathdisplay {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 50px;
+}
+
+.nameDisplay {
+    padding: 5px;
+    margin-bottom: -4px;
+}

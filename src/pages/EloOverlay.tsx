@@ -91,7 +91,7 @@ function EloOverlay() {
 
   return (
     <Container
-      className="d-flex flex-column justify-content-center align-items-center"
+      className="d-flex flex-column justify-content-center align-items-center eloOverlayContainer"
       style={{ width: "1140px" }}
     >
       <EloInfo

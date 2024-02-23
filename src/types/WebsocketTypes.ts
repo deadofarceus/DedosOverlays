@@ -1,4 +1,5 @@
-import { LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { DeathEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { DeathData } from "./DeathTypes";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
 export class EloWebsocket {
@@ -23,7 +24,6 @@ export class EloWebsocket {
         this.tag = tag;
         this.key = key;
         this.queueID = QUEUETYPES.get(queuetype)!.queueId;
-        console.log(this.queueID);
 
         this.callback = callback;
 
@@ -124,5 +124,99 @@ export class EloWebsocket {
         const leagueLPEvent = new LeagueLPEvent([new Account("", "", this.summonerName, this.tag, this.queueID)], this.key);
         const modEvent = new ModEvent("league/listenAccount", leagueLPEvent);
         this.ws.send(JSON.stringify(modEvent));
+    }
+}
+
+export class DeathCounterWebsocket {
+    id: string;
+    callback: React.Dispatch<React.SetStateAction<DeathData>>;
+    ws: WebSocket;
+    pingInterval!: NodeJS.Timeout;
+    wsAddress: string;
+    currentStats: DeathData;
+
+    constructor(id: string, deathData: DeathData, callback: React.Dispatch<React.SetStateAction<DeathData>>) {
+        this.id = id;
+        this.callback = callback;
+        this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
+        // this.wsAddress = `ws://localhost:8080?id=${id}`;
+
+        this.ws = new WebSocket(this.wsAddress);
+
+        this.currentStats = deathData;
+        this.setupWebSocket();
+    }
+
+    setupWebSocket() {
+        if (this.ws.readyState === this.ws.CLOSED) {
+            this.ws = new WebSocket(this.wsAddress);
+        }
+        this.ws.onopen = this.handleOpen;
+        this.ws.onclose = this.handleClose;
+        this.ws.onerror = this.handleError;
+        this.ws.onmessage = this.handleMessage;
+    }
+
+    handleOpen = () => {
+        console.log("WebSocket connection established.");
+        this.setupPing();
+        while (this.ws.readyState !== this.ws.OPEN) { /* empty */ }
+    };
+
+    handleClose = (ev: CloseEvent) => {
+        if (ev.code !== 3500) {
+            console.log("WebSocket connection closed. Attempting to reconnect...");
+            clearInterval(this.pingInterval);
+            setTimeout(() => this.setupWebSocket(), 5000);
+        }
+    };
+
+    handleError = (error: Event) => {
+        console.error("WebSocket error occurred:", error);
+    };
+
+    handleMessage = (event: MessageEvent) => {
+        const message = event.data;
+        if (message === "pong") return;
+        if (message === "refresh") {
+            window.location.reload();
+            return;
+        }
+        const data = JSON.parse(message);
+
+        const deathData = data.deathData as DeathData;
+        console.log(deathData);
+
+        this.currentStats = deathData;
+
+        this.callback(deathData);
+    };
+
+    setupPing() {
+        this.pingInterval = setInterval(() => this.ws.send("ping"), 60000);
+    }
+
+    sendDeaths() {
+        const deathEvent = new DeathEvent(this.id, this.currentStats);
+        const modEvent = new ModEvent("death/new", deathEvent);
+        this.ws.send(modEvent.tostring());
+    }
+
+    changeDeaths(playerName: string, deathsNew: number) {
+        this.currentStats.players.forEach(p => {
+            if (p.playerName === playerName) {
+                p.deaths = deathsNew;
+            }
+        });
+        this.sendDeaths();
+    }
+
+    changeName(playerName: string, playerNameValue: string) {
+        this.currentStats.players.forEach(p => {
+            if (p.playerName === playerName) {
+                p.playerName = playerNameValue;
+            }
+        });
+        this.sendDeaths();
     }
 }
