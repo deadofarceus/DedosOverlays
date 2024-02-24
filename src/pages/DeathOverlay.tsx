@@ -33,6 +33,14 @@ function DeathOverlay() {
             deaths={p.deaths}
           />
         ))}
+        <div
+          className="timerdisplay"
+          style={{
+            backgroundImage: `url(../../deathbackground.png)`,
+          }}
+        >
+          <Timer />
+        </div>
       </Col>
     </Container>
   );
@@ -87,6 +95,36 @@ function PlayerDisplay({ playerName, deaths }: PlayerInfo) {
         {"💀 " + deaths}
       </h2>
     </div>
+  );
+}
+
+function Timer() {
+  const [seconds, setSeconds] = useState(
+    Math.round((Date.now() - 1708814100000) / 1000)
+  );
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSeconds(Math.round((Date.now() - 1708814100000) / 1000));
+    }, 100);
+
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  // Format numbers to have leading zero if less than 10
+  const formattedHours = String(hours).padStart(2, "0");
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+
+  return (
+    <h1 className="timerh1">
+      {formattedHours}:{formattedMinutes}:{formattedSeconds}
+    </h1>
   );
 }
 

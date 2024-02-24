@@ -19,6 +19,20 @@
     border-radius: 50px;
 }
 
+.timerdisplay {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 300px;
+    margin: 10px;
+    border-radius: 50px;
+    justify-content: center;
+}
+
+.timerh1 {
+    font-size: 3em;
+}
+
 .nameDisplay {
     padding: 5px;
     margin-bottom: -4px;
