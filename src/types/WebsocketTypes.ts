@@ -190,7 +190,9 @@ export class DeathCounterWebsocket {
 
         this.currentStats = deathData;
 
-        this.timerCallback!(data.timerStart);
+        if (data.timerStart) {
+            this.timerCallback!(data.timerStart);
+        }
         this.callback(deathData);
     };
 
