@@ -98,14 +98,16 @@ function PlayerDisplay({ playerName, deaths }: PlayerInfo) {
   );
 }
 
+let bosstimer = 1708893128936;
+
 function Timer() {
   const [seconds, setSeconds] = useState(
-    Math.round((Date.now() - 1708814100000) / 1000)
+    Math.round((Date.now() - bosstimer) / 1000)
   );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSeconds(Math.round((Date.now() - 1708814100000) / 1000));
+      setSeconds(Math.round((Date.now() - bosstimer) / 1000));
     }, 100);
 
     // Cleanup function to clear the interval when component unmounts
@@ -122,7 +124,13 @@ function Timer() {
   const formattedSeconds = String(remainingSeconds).padStart(2, "0");
 
   return (
-    <h1 className="timerh1">
+    <h1
+      className="timerh1"
+      onContextMenu={(event) => {
+        event.preventDefault();
+        bosstimer = Date.now();
+      }}
+    >
       {formattedHours}:{formattedMinutes}:{formattedSeconds}
     </h1>
   );
