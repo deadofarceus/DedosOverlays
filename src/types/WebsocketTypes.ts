@@ -134,10 +134,12 @@ export class DeathCounterWebsocket {
     pingInterval!: NodeJS.Timeout;
     wsAddress: string;
     currentStats: DeathData;
+    timerCallback: React.Dispatch<React.SetStateAction<number>>;
 
-    constructor(id: string, deathData: DeathData, callback: React.Dispatch<React.SetStateAction<DeathData>>) {
+    constructor(id: string, deathData: DeathData, callback: React.Dispatch<React.SetStateAction<DeathData>>, setBosstimer: React.Dispatch<React.SetStateAction<number>>) {
         this.id = id;
         this.callback = callback;
+        this.timerCallback = setBosstimer;
         this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
         // this.wsAddress = `ws://localhost:8080?id=${id}`;
 
@@ -187,7 +189,8 @@ export class DeathCounterWebsocket {
         const deathData = data.deathData as DeathData;
         console.log(deathData);
 
-        this.currentStats = deathData;
+        this.currentStats = data;
+        this.timerCallback!(data.timerStart);
 
         this.callback(deathData);
     };
@@ -196,8 +199,15 @@ export class DeathCounterWebsocket {
         this.pingInterval = setInterval(() => this.ws.send("ping"), 60000);
     }
 
-    sendDeaths() {
-        const deathEvent = new DeathEvent(this.id, this.currentStats);
+    sendDeaths(timerStart: number) {
+
+        const deathEvent = new DeathEvent(this.id, this.currentStats, timerStart!);
+        const modEvent = new ModEvent("death/new", deathEvent);
+        this.ws.send(modEvent.tostring());
+    }
+
+    sendData() {
+        const deathEvent = new DeathEvent(this.id, this.currentStats, undefined!);
         const modEvent = new ModEvent("death/new", deathEvent);
         this.ws.send(modEvent.tostring());
     }
@@ -208,7 +218,7 @@ export class DeathCounterWebsocket {
                 p.deaths = deathsNew;
             }
         });
-        this.sendDeaths();
+        this.sendData();
     }
 
     changeName(playerName: string, playerNameValue: string) {
@@ -217,6 +227,6 @@ export class DeathCounterWebsocket {
                 p.playerName = playerNameValue;
             }
         });
-        this.sendDeaths();
+        this.sendData();
     }
 }

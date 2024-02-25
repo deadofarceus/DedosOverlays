@@ -98,9 +98,11 @@ export class LeagueLPEvent {
 export class DeathEvent {
     id: string;
     deathData: DeathData;
-    constructor(id: string, deathData: DeathData) {
+    timerStart: number;
+    constructor(id: string, deathData: DeathData, timerStart: number) {
         this.deathData = deathData;
         this.id = id;
+        this.timerStart = timerStart;
     }
 }
 

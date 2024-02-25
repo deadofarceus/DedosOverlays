@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DeathData, Player, PlayerInfo } from "../types/DeathTypes";
+import { DeathData, Player, PlayerInfo, TimerInfo } from "../types/DeathTypes";
 import { useQuery } from "../types/UsefulFunctions";
 import { DeathCounterWebsocket } from "../types/WebsocketTypes";
 import { Col, Container } from "react-bootstrap";
@@ -13,13 +13,15 @@ function DeathOverlay() {
     new Player("player2", 0),
   ]);
   const [deaths, setDeaths] = useState<DeathData>(oldDeaths);
+  const [bosstimer, setBosstimer] = useState(1708893128936);
+
   const query = useQuery();
   //   const dev = query.get("dev") === "true" ? true : false;
 
   useEffect(() => {
     const id = query.get("id");
     if (!ws && id) {
-      ws = new DeathCounterWebsocket(id, deaths, setDeaths);
+      ws = new DeathCounterWebsocket(id, deaths, setDeaths, setBosstimer);
     }
   }, [deaths, query]);
 
@@ -39,7 +41,7 @@ function DeathOverlay() {
             backgroundImage: `url(../../deathbackground.png)`,
           }}
         >
-          <Timer />
+          <Timer timerstart={bosstimer} />
         </div>
       </Col>
     </Container>
@@ -98,21 +100,19 @@ function PlayerDisplay({ playerName, deaths }: PlayerInfo) {
   );
 }
 
-let bosstimer = 1708893128936;
-
-function Timer() {
+function Timer({ timerstart }: TimerInfo) {
   const [seconds, setSeconds] = useState(
-    Math.round((Date.now() - bosstimer) / 1000)
+    Math.round((Date.now() - timerstart) / 1000)
   );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSeconds(Math.round((Date.now() - bosstimer) / 1000));
+      setSeconds(Math.round((Date.now() - timerstart) / 1000));
     }, 100);
 
     // Cleanup function to clear the interval when component unmounts
     return () => clearInterval(intervalId);
-  }, []);
+  }, [timerstart]);
 
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -128,7 +128,8 @@ function Timer() {
       className="timerh1"
       onContextMenu={(event) => {
         event.preventDefault();
-        bosstimer = Date.now();
+        console.log("send");
+        ws.sendDeaths(Date.now());
       }}
     >
       {formattedHours}:{formattedMinutes}:{formattedSeconds}

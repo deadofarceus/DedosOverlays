@@ -19,3 +19,7 @@ export interface PlayerInfo {
     playerName: string;
     deaths: number
 }
+
+export interface TimerInfo {
+    timerstart: number
+}
