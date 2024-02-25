@@ -187,11 +187,10 @@ export class DeathCounterWebsocket {
         const data = JSON.parse(message);
 
         const deathData = data.deathData as DeathData;
-        console.log(deathData);
 
-        this.currentStats = data;
+        this.currentStats = deathData;
+
         this.timerCallback!(data.timerStart);
-
         this.callback(deathData);
     };
 

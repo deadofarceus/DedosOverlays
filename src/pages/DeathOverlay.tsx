@@ -16,7 +16,6 @@ function DeathOverlay() {
   const [bosstimer, setBosstimer] = useState(1708893128936);
 
   const query = useQuery();
-  //   const dev = query.get("dev") === "true" ? true : false;
 
   useEffect(() => {
     const id = query.get("id");
