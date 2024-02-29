@@ -1,4 +1,4 @@
-import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent, Team } from "./BackendEvents";
 import { DeathData } from "./DeathTypes";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
@@ -234,17 +234,19 @@ export class DeathCounterWebsocket {
 
 export class FiveVFiveWebsocket {
     id: string;
-    callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>>;
+    callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>> | undefined;
     ws: WebSocket;
     pingInterval!: NodeJS.Timeout;
     wsAddress: string;
+    data: FiveVFiveEvent;
 
-    constructor(id: string, callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>>) {
+    constructor(id: string, callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>> | undefined) {
         this.id = id;
         this.callback = callback;
         // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
         this.wsAddress = `ws://localhost:8080?id=${id}`;
 
+        this.data = new FiveVFiveEvent(id, new Team("Rot", []), new Team("Blau", []), "", "", "");
         this.ws = new WebSocket(this.wsAddress);
 
         this.setupWebSocket();
@@ -292,15 +294,62 @@ export class FiveVFiveWebsocket {
         console.log(FiveVFiveData);
 
 
-        this.callback(FiveVFiveData);
+        if (this.callback) {
+            this.callback(FiveVFiveData);
+        }
     };
 
     setupPing() {
         this.pingInterval = setInterval(() => this.ws.send("ping"), 60000);
     }
 
-    sendData(v5: FiveVFiveEvent) {
-        const modEvent = new ModEvent("fiveVfive", v5);
+    sendData() {
+        const modEvent = new ModEvent("fiveVfive", this.data);
         this.ws.send(modEvent.tostring());
+    }
+
+    gamePlayStatusChange(game: string, status: string) {
+        switch (status) {
+            case "Not played":
+            case "Current Game":
+                this.removeGame(this.data.teamB.wonGames, game);
+                this.removeGame(this.data.teamA.wonGames, game);
+                this.data.currentGame = status === "Current Game" ? game : "";
+                this.data.bestof = "";
+                this.data.standing = "";
+                break;
+            case "Team 1 Gewinnt":
+                this.removeGame(this.data.teamB.wonGames, game);
+                if (!this.data.teamA.wonGames.includes(game)) {
+                    this.data.teamA.wonGames.push(game);
+                }
+                break;
+            case "Team 2 Gewinnt":
+                this.removeGame(this.data.teamA.wonGames, game);
+                if (!this.data.teamB.wonGames.includes(game)) {
+                    this.data.teamB.wonGames.push(game);
+                }
+                break;
+        }
+        this.sendData();
+    }
+
+    gameFormatChange(format: string) {
+        this.data.bestof = format;
+        if (format === "BestOf3" || format === "BestOf5") {
+            this.data.standing = "0 : 0"
+        }
+        this.sendData();
+    }
+
+    removeGame(wonGames: string[], game: string) {
+        if (wonGames.includes(game)) {
+            wonGames = wonGames.splice(wonGames.indexOf(game), 1);
+        }
+    }
+
+    sendStanding(standing: string): void {
+        this.data.standing = standing;
+        this.sendData();
     }
 }

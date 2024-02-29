@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+
+.FiveVFiveContainer {
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+}
+
+.gameplayed {
+    border: 5px solid azure;
+    border-radius: 10px;
+    margin: 20px;
+    width: fit-content;
+}
+
+.gamename,
+.chooseGame {
+    padding: 10px;
+}
+
+.gamestanding {
+    text-align: center;
+    width: 75px;
+}
+
+.formstanding,
+.allGames {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
