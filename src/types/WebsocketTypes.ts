@@ -1,4 +1,4 @@
-import { DeathEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
 import { DeathData } from "./DeathTypes";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
@@ -229,5 +229,78 @@ export class DeathCounterWebsocket {
             }
         });
         this.sendData();
+    }
+}
+
+export class FiveVFiveWebsocket {
+    id: string;
+    callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>>;
+    ws: WebSocket;
+    pingInterval!: NodeJS.Timeout;
+    wsAddress: string;
+
+    constructor(id: string, callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>>) {
+        this.id = id;
+        this.callback = callback;
+        // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
+        this.wsAddress = `ws://localhost:8080?id=${id}`;
+
+        this.ws = new WebSocket(this.wsAddress);
+
+        this.setupWebSocket();
+    }
+
+    setupWebSocket() {
+        if (this.ws.readyState === this.ws.CLOSED) {
+            this.ws = new WebSocket(this.wsAddress);
+        }
+        this.ws.onopen = this.handleOpen;
+        this.ws.onclose = this.handleClose;
+        this.ws.onerror = this.handleError;
+        this.ws.onmessage = this.handleMessage;
+    }
+
+    handleOpen = () => {
+        console.log("WebSocket connection established.");
+        this.setupPing();
+        while (this.ws.readyState !== this.ws.OPEN) { /* empty */ }
+    };
+
+    handleClose = (ev: CloseEvent) => {
+        if (ev.code !== 3500) {
+            console.log("WebSocket connection closed. Attempting to reconnect...");
+            clearInterval(this.pingInterval);
+            setTimeout(() => this.setupWebSocket(), 5000);
+        }
+    };
+
+    handleError = (error: Event) => {
+        console.error("WebSocket error occurred:", error);
+    };
+
+    handleMessage = (event: MessageEvent) => {
+        const message = event.data;
+        if (message === "pong") return;
+        if (message === "refresh") {
+            window.location.reload();
+            return;
+        }
+        const data = JSON.parse(message);
+
+        const FiveVFiveData = data.deathData as FiveVFiveEvent;
+
+        console.log(FiveVFiveData);
+
+
+        this.callback(FiveVFiveData);
+    };
+
+    setupPing() {
+        this.pingInterval = setInterval(() => this.ws.send("ping"), 60000);
+    }
+
+    sendData(v5: FiveVFiveEvent) {
+        const modEvent = new ModEvent("fiveVfive", v5);
+        this.ws.send(modEvent.tostring());
     }
 }

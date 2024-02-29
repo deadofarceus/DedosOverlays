@@ -105,5 +105,30 @@ export class DeathEvent {
         this.timerStart = timerStart;
     }
 }
+export class FiveVFiveEvent {
+    teamA: Team;
+    teamB: Team;
+    currentGame: string;
+    bestof: string;
+    standing: string;
+    id: string;
+    constructor(id: string, teamA: Team, teamB: Team, currentGame: string, bestof: string, standing: string) {
+        this.id = id;
+        this.teamA = teamA;
+        this.teamB = teamB;
+        this.currentGame = currentGame;
+        this.bestof = bestof;
+        this.standing = standing;
+    }
+}
+
+export class Team {
+    teamName: string;
+    wonGames: string[];
+    constructor(teamName: string, wonGames: string[]) {
+        this.teamName = teamName;
+        this.wonGames = wonGames;
+    }
+}
 
 export { ModEvent, VoteEvent, BingoEvent, VotingControlEvent, LOLBingoEvent, ControlEvent, WatchEvent }
