@@ -247,7 +247,7 @@ export class FiveVFiveWebsocket {
         // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
         this.wsAddress = `ws://localhost:8080?id=${id}`;
 
-        this.data = new FiveVFiveEvent(id, new Team("Rot", []), new Team("Blau", []), "", "", "");
+        this.data = new FiveVFiveEvent(id, new Team("Rot", [], 0), new Team("Blau", [], 0), "", "", "");
         this.ws = new WebSocket(this.wsAddress);
 
         this.setupWebSocket();
@@ -294,7 +294,6 @@ export class FiveVFiveWebsocket {
 
         console.log(FiveVFiveData);
 
-
         if (this.callback) {
             this.callback(FiveVFiveData);
         }
@@ -306,7 +305,7 @@ export class FiveVFiveWebsocket {
 
     sendData() {
         const modEvent = new ModEvent("fiveVfive", this.data);
-        this.ws.send(modEvent.tostring());
+        // this.ws.send(modEvent.tostring());
     }
 
     gamePlayStatusChange(game: string, status: string) {
@@ -351,6 +350,15 @@ export class FiveVFiveWebsocket {
 
     sendStanding(standing: string): void {
         this.data.standing = standing;
+        this.sendData();
+    }
+
+    sendPoints(team: string, points: number) {
+        if (team === "Rot") {
+            this.data.teamA.points = points;
+        } else if (team === "Blau") {
+            this.data.teamB.points = points;
+        }
         this.sendData();
     }
 }

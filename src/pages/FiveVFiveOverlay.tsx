@@ -12,13 +12,12 @@ function FiveVFiveOverlay() {
   const [data, setData] = useState<FiveVFiveEvent>(
     new FiveVFiveEvent(
       "",
-      new Team("Rot", ["Dota2", "Smite", "Heroes of the Storm"]),
-      new Team("Blau", [
-        "Counter Strike 2",
-        "Valorant",
-        "Overwatch",
-        "Rainbow6",
-      ]),
+      new Team("Rot", ["Dota2", "Smite", "Heroes of the Storm"], 4),
+      new Team(
+        "Blau",
+        ["Counter Strike 2", "Valorant", "Overwatch", "Rainbow6"],
+        4
+      ),
       "League of Legends",
       "BestOf3",
       "0 : 0"
@@ -40,6 +39,7 @@ function FiveVFiveOverlay() {
         <TeamD
           teamName={data.teamA.teamName}
           wonGames={data.teamA.wonGames}
+          points={data.teamA.points}
         ></TeamD>
         <VSD
           currentGame={data.currentGame}
@@ -49,17 +49,18 @@ function FiveVFiveOverlay() {
         <TeamD
           teamName={data.teamB.teamName}
           wonGames={data.teamB.wonGames}
+          points={data.teamB.points}
         ></TeamD>
       </Row>
     </Container>
   );
 }
 
-function TeamD({ teamName, wonGames }: Team) {
+function TeamD({ teamName, wonGames, points }: Team) {
   const color = teamName === "Rot" ? "#FF2222" : "#4876FF";
   return (
     <Col className="team5v5">
-      <h1 style={{ color: color }}>{teamName}</h1>
+      <h1 style={{ color: color }}>{teamName + " " + points}</h1>
       <Col className="wongames">
         {wonGames.map((game: string) => (
           <WonGameD gameName={game}></WonGameD>
