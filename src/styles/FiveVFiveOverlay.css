@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+
+.FiveVFiveOverlayContainer {
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    text-shadow: 1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000,
+        0px 1px 0 #000,
+        0px -1px 0 #000,
+        -1px 0px 0 #000,
+        1px 0px 0 #000,
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000,
+        0px 2px 0 #000,
+        0px -2px 0 #000,
+        -2px 0px 0 #000,
+        2px 0px 0 #000,
+        1px 2px 0 #000,
+        -1px 2px 0 #000,
+        1px -2px 0 #000,
+        -1px -2px 0 #000,
+        2px 1px 0 #000,
+        -2px 1px 0 #000,
+        2px -1px 0 #000,
+        -2px -1px 0 #000;
+
+}
+
+.alterduOpfer {
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+}
+
+.wongames {
+    width: max-content;
+}
+
+.team5v5,
+.FiveVFiveOverlayContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team5v5 {
+    flex-direction: column;
+}

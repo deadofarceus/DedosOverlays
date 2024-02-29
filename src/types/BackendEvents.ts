@@ -1,4 +1,5 @@
 import { DeathData } from "./DeathTypes";
+import { Team } from "./FiveVFiveTypes";
 import { Account } from "./LeagueTypes";
 
 
@@ -119,15 +120,6 @@ export class FiveVFiveEvent {
         this.currentGame = currentGame;
         this.bestof = bestof;
         this.standing = standing;
-    }
-}
-
-export class Team {
-    teamName: string;
-    wonGames: string[];
-    constructor(teamName: string, wonGames: string[]) {
-        this.teamName = teamName;
-        this.wonGames = wonGames;
     }
 }
 

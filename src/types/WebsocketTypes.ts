@@ -1,5 +1,6 @@
-import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent, Team } from "./BackendEvents";
+import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
 import { DeathData } from "./DeathTypes";
+import { Team } from "./FiveVFiveTypes";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
 export class EloWebsocket {
