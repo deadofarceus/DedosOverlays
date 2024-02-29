@@ -1,9 +1,11 @@
 export class Team {
     teamName: string;
     wonGames: string[];
-    constructor(teamName: string, wonGames: string[]) {
+    points: number;
+    constructor(teamName: string, wonGames: string[], points: number) {
         this.teamName = teamName;
         this.wonGames = wonGames;
+        this.points = points;
     }
 }
 
