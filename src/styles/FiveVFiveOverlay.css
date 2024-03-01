@@ -53,3 +53,27 @@
 .team5v5 {
     flex-direction: column;
 }
+
+.currentGame {
+    border: #64ff64 solid 2px;
+    border-radius: 20px;
+    width: fit-content;
+    background-color: rgba(133, 191, 133, 0.201);
+}
+
+.VS5v5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.currentGame h4,
+h3 {
+    margin: 12px;
+}
+
+.currentGame h3 {
+    border: transparent solid 0px;
+    border-radius: 10px;
+    background-color: rgba(61, 108, 67, 0.833);
+}

@@ -20,7 +20,7 @@ function FiveVFiveOverlay() {
       ),
       "League of Legends",
       "BestOf3",
-      "0 : 0"
+      "1 : 0"
     )
   );
 
@@ -62,16 +62,16 @@ function TeamD({ teamName, wonGames, points }: Team) {
     <Col className="team5v5">
       <h1 style={{ color: color }}>{teamName + " " + points}</h1>
       <Col className="wongames">
-        {wonGames.map((game: string) => (
-          <WonGameD gameName={game}></WonGameD>
+        {wonGames.map((game: string, index: number) => (
+          <WonGameD gameName={game} points={index}></WonGameD>
         ))}
       </Col>
     </Col>
   );
 }
 
-function WonGameD({ gameName }: { gameName: string }) {
-  return <h5 style={{ color: "#64ff64" }}>{gameName}</h5>;
+function WonGameD({ gameName, points }: { gameName: string; points: number }) {
+  return <h5 style={{ color: "#daffda" }}>{`(${points}) ${gameName}`}</h5>;
 }
 
 function VSD({ currentGame, bestof, standing }: VS) {
@@ -79,8 +79,10 @@ function VSD({ currentGame, bestof, standing }: VS) {
     <Col className="VS5v5">
       <h1>VS</h1>
       <h2>{currentGame}</h2>
-      <h4>{bestof}</h4>
-      <h3>{standing}</h3>
+      <Col className="currentGame">
+        <h4>{bestof}</h4>
+        <h3>{standing}</h3>
+      </Col>
     </Col>
   );
 }
