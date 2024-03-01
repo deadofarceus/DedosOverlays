@@ -6,7 +6,6 @@ import {
   DropdownButton,
   Form,
   InputGroup,
-  Row,
 } from "react-bootstrap";
 import "../styles/FiveVFiveMod.css";
 import { useEffect, useState } from "react";
@@ -40,11 +39,6 @@ function FiveVFiveMod() {
   return (
     <Container className="FiveVFiveContainer">
       <h1 className="ssoos">5V5 Challenge Control</h1>
-      <Row className="pointsRow">
-        <PointsInput teamName="Rot"></PointsInput>
-        <PointsInput teamName="Blau"></PointsInput>
-      </Row>
-
       <Col className="allGames">
         {GAMES.map((game) => (
           <Game game={game} />
@@ -58,6 +52,7 @@ function Game({ game }: { game: string }) {
   const [playStatus, setPlayStatus] = useState<string>("Not played");
   const [gameFormat, setGameFormat] = useState<string>("Select Format");
   const [standing, setStanding] = useState<string>("0 : 0");
+  const [points, setPoints] = useState<number>(1);
 
   const handleGameFormatChange = (eventKey: string | null) => {
     setGameFormat(eventKey!);
@@ -66,12 +61,30 @@ function Game({ game }: { game: string }) {
 
   const handleOptionChange = (eventKey: string | null) => {
     setPlayStatus(eventKey!);
-    ws.gamePlayStatusChange(game, eventKey!);
+    ws.gamePlayStatusChange(game, eventKey!, points);
+  };
+
+  const handleIncrement = () => {
+    setPoints(points + 1);
+  };
+
+  const handleDecrement = () => {
+    setPoints(points - 1);
   };
 
   return (
     <Col className="gameplayed">
       <h1 className="gamename">{game}</h1>
+      <InputGroup className="gamePointsInput">
+        <InputGroup.Text>{`Punkte:`}</InputGroup.Text>
+        <Form.Control placeholder={points.toString()} readOnly />
+        <Button variant="outline-secondary" onClick={handleIncrement}>
+          +1
+        </Button>
+        <Button variant="outline-secondary" onClick={handleDecrement}>
+          -1
+        </Button>
+      </InputGroup>
       <DropdownButton
         title={playStatus}
         drop={"down"}
@@ -114,33 +127,6 @@ function Game({ game }: { game: string }) {
         </Form>
       )}
     </Col>
-  );
-}
-
-function PointsInput({ teamName }: { teamName: string }) {
-  const [points, setPoints] = useState(0);
-
-  const handleIncrement = () => {
-    setPoints(points + 1);
-    ws.sendPoints(teamName, points + 1);
-  };
-
-  const handleDecrement = () => {
-    setPoints(points - 1);
-    ws.sendPoints(teamName, points + 1);
-  };
-
-  return (
-    <InputGroup className="pointsInput">
-      <InputGroup.Text>{`Team ${teamName} Punkte:`}</InputGroup.Text>
-      <Form.Control placeholder={points.toString()} readOnly />
-      <Button variant="outline-secondary" onClick={handleIncrement}>
-        +1
-      </Button>
-      <Button variant="outline-secondary" onClick={handleDecrement}>
-        -1
-      </Button>
-    </InputGroup>
   );
 }
 

@@ -12,6 +12,14 @@
     border-radius: 10px;
     margin: 20px;
     width: fit-content;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameplayed .input-group,
+h1 {
+    margin: 5px;
 }
 
 .gamename,
@@ -38,4 +46,8 @@
 
 .pointsInput {
     margin: 20px;
+}
+
+.gamePointsInput {
+    width: 220px;
 }

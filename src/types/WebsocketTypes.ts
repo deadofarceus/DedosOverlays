@@ -1,6 +1,6 @@
 import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
 import { DeathData } from "./DeathTypes";
-import { Team } from "./FiveVFiveTypes";
+import { Game, Team } from "./FiveVFiveTypes";
 import { Account, Match, QUEUETYPES } from "./LeagueTypes";
 
 export class EloWebsocket {
@@ -305,10 +305,10 @@ export class FiveVFiveWebsocket {
 
     sendData() {
         const modEvent = new ModEvent("fiveVfive", this.data);
-        // this.ws.send(modEvent.tostring());
+        this.ws.send(modEvent.tostring());
     }
 
-    gamePlayStatusChange(game: string, status: string) {
+    gamePlayStatusChange(game: string, status: string, points: number) {
         switch (status) {
             case "Not played":
             case "Current Game":
@@ -320,14 +320,14 @@ export class FiveVFiveWebsocket {
                 break;
             case "Team 1 Gewinnt":
                 this.removeGame(this.data.teamB.wonGames, game);
-                if (!this.data.teamA.wonGames.includes(game)) {
-                    this.data.teamA.wonGames.push(game);
+                if (!this.data.teamA.wonGames.find((g) => g.gameName === game)) {
+                    this.data.teamA.wonGames.push(new Game(game, points));
                 }
                 break;
             case "Team 2 Gewinnt":
                 this.removeGame(this.data.teamA.wonGames, game);
-                if (!this.data.teamB.wonGames.includes(game)) {
-                    this.data.teamB.wonGames.push(game);
+                if (!this.data.teamB.wonGames.find((g) => g.gameName === game)) {
+                    this.data.teamB.wonGames.push(new Game(game, points));
                 }
                 break;
         }
@@ -342,23 +342,14 @@ export class FiveVFiveWebsocket {
         this.sendData();
     }
 
-    removeGame(wonGames: string[], game: string) {
-        if (wonGames.includes(game)) {
-            wonGames = wonGames.splice(wonGames.indexOf(game), 1);
+    removeGame(wonGames: Game[], game: string) {
+        if (wonGames.findIndex((g) => g.gameName === game) !== -1) {
+            wonGames = wonGames.splice(wonGames.findIndex((g) => g.gameName === game), 1);
         }
     }
 
     sendStanding(standing: string): void {
         this.data.standing = standing;
-        this.sendData();
-    }
-
-    sendPoints(team: string, points: number) {
-        if (team === "Rot") {
-            this.data.teamA.points = points;
-        } else if (team === "Blau") {
-            this.data.teamB.points = points;
-        }
         this.sendData();
     }
 }

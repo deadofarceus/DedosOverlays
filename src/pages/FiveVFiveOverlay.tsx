@@ -4,7 +4,7 @@ import "../styles/FiveVFiveOverlay.css";
 import { useQuery } from "../types/UsefulFunctions";
 import { FiveVFiveWebsocket } from "../types/WebsocketTypes";
 import { FiveVFiveEvent } from "../types/BackendEvents";
-import { Team, VS } from "../types/FiveVFiveTypes";
+import { Game, Team, VS } from "../types/FiveVFiveTypes";
 
 let ws: FiveVFiveWebsocket;
 
@@ -12,10 +12,23 @@ function FiveVFiveOverlay() {
   const [data, setData] = useState<FiveVFiveEvent>(
     new FiveVFiveEvent(
       "",
-      new Team("Rot", ["Dota2", "Smite", "Heroes of the Storm"], 4),
+      new Team(
+        "Rot",
+        [
+          new Game("Dota2", 1),
+          new Game("Smite", 2),
+          new Game("Heroes of the Storm", 1),
+        ],
+        4
+      ),
       new Team(
         "Blau",
-        ["Counter Strike 2", "Valorant", "Overwatch", "Rainbow6"],
+        [
+          new Game("Counter Strike 2", 1),
+          new Game("Valorant", 1),
+          new Game("Overwatch", 1),
+          new Game("Rainbow6", 1),
+        ],
         4
       ),
       "League of Legends",
@@ -33,13 +46,18 @@ function FiveVFiveOverlay() {
     }
   }, [query]);
 
+  let pointsA = 0;
+  data.teamA.wonGames.forEach((g) => (pointsA += g.points));
+  let pointsB = 0;
+  data.teamA.wonGames.forEach((g) => (pointsB += g.points));
+
   return (
     <Container className="FiveVFiveOverlayContainer">
       <Row className="alterduOpfer">
         <TeamD
           teamName={data.teamA.teamName}
           wonGames={data.teamA.wonGames}
-          points={data.teamA.points}
+          points={pointsA}
         ></TeamD>
         <VSD
           currentGame={data.currentGame}
@@ -49,7 +67,7 @@ function FiveVFiveOverlay() {
         <TeamD
           teamName={data.teamB.teamName}
           wonGames={data.teamB.wonGames}
-          points={data.teamB.points}
+          points={pointsB}
         ></TeamD>
       </Row>
     </Container>
@@ -62,8 +80,8 @@ function TeamD({ teamName, wonGames, points }: Team) {
     <Col className="team5v5">
       <h1 style={{ color: color }}>{teamName + " " + points}</h1>
       <Col className="wongames">
-        {wonGames.map((game: string, index: number) => (
-          <WonGameD gameName={game} points={index}></WonGameD>
+        {wonGames.map((game: Game) => (
+          <WonGameD gameName={game.gameName} points={game.points}></WonGameD>
         ))}
       </Col>
     </Col>
