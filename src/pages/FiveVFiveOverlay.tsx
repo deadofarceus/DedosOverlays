@@ -49,7 +49,7 @@ function FiveVFiveOverlay() {
   let pointsA = 0;
   data.teamA.wonGames.forEach((g) => (pointsA += g.points));
   let pointsB = 0;
-  data.teamA.wonGames.forEach((g) => (pointsB += g.points));
+  data.teamB.wonGames.forEach((g) => (pointsB += g.points));
 
   return (
     <Container className="FiveVFiveOverlayContainer">
