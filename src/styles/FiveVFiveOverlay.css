@@ -54,6 +54,11 @@
     flex-direction: column;
 }
 
+.team5v5 h1,
+h5 {
+    width: max-content;
+}
+
 .currentGame {
     border: #64ff64 solid 2px;
     border-radius: 20px;
