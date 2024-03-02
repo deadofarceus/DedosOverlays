@@ -289,12 +289,7 @@ export class FiveVFiveWebsocket {
             return;
         }
         const data = JSON.parse(message);
-        console.log(data);
-
-
         const FiveVFiveData = data as FiveVFiveEvent;
-
-        console.log(FiveVFiveData);
 
         if (this.callback) {
             this.callback(FiveVFiveData);
@@ -306,38 +301,31 @@ export class FiveVFiveWebsocket {
     }
 
     sendData() {
-
         const modEvent = new ModEvent("fiveVfive", this.data);
         this.ws.send(modEvent.tostring());
     }
 
     gamePlayStatusChange(game: string, status: string, points: number) {
+        this.data = { ...this.data, currentGame: "", bestof: "", standing: "" };
+
         switch (status) {
             case "Not played":
             case "Current Game":
                 this.removeGame(this.data.teamB.wonGames, game);
                 this.removeGame(this.data.teamA.wonGames, game);
                 this.data.currentGame = status === "Current Game" ? game : "";
-                this.data.bestof = "";
-                this.data.standing = "";
                 break;
             case "Team 1 Gewinnt":
                 this.removeGame(this.data.teamB.wonGames, game);
                 if (!this.data.teamA.wonGames.find((g) => g.gameName === game)) {
                     this.data.teamA.wonGames.push(new Game(game, points));
                 }
-                this.data.currentGame = "";
-                this.data.bestof = "";
-                this.data.standing = "";
                 break;
             case "Team 2 Gewinnt":
                 this.removeGame(this.data.teamA.wonGames, game);
                 if (!this.data.teamB.wonGames.find((g) => g.gameName === game)) {
                     this.data.teamB.wonGames.push(new Game(game, points));
                 }
-                this.data.currentGame = "";
-                this.data.bestof = "";
-                this.data.standing = "";
                 break;
         }
         this.sendData();
