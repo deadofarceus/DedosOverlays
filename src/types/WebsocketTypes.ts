@@ -289,8 +289,10 @@ export class FiveVFiveWebsocket {
             return;
         }
         const data = JSON.parse(message);
+        console.log(data);
 
-        const FiveVFiveData = data.deathData as FiveVFiveEvent;
+
+        const FiveVFiveData = data as FiveVFiveEvent;
 
         console.log(FiveVFiveData);
 
@@ -304,6 +306,7 @@ export class FiveVFiveWebsocket {
     }
 
     sendData() {
+
         const modEvent = new ModEvent("fiveVfive", this.data);
         this.ws.send(modEvent.tostring());
     }
@@ -323,12 +326,18 @@ export class FiveVFiveWebsocket {
                 if (!this.data.teamA.wonGames.find((g) => g.gameName === game)) {
                     this.data.teamA.wonGames.push(new Game(game, points));
                 }
+                this.data.currentGame = "";
+                this.data.bestof = "";
+                this.data.standing = "";
                 break;
             case "Team 2 Gewinnt":
                 this.removeGame(this.data.teamA.wonGames, game);
                 if (!this.data.teamB.wonGames.find((g) => g.gameName === game)) {
                     this.data.teamB.wonGames.push(new Game(game, points));
                 }
+                this.data.currentGame = "";
+                this.data.bestof = "";
+                this.data.standing = "";
                 break;
         }
         this.sendData();
