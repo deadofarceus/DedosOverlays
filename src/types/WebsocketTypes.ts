@@ -244,8 +244,8 @@ export class FiveVFiveWebsocket {
     constructor(id: string, callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>> | undefined) {
         this.id = id;
         this.callback = callback;
-        // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
-        this.wsAddress = `ws://localhost:8080?id=${id}`;
+        this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
+        // this.wsAddress = `ws://localhost:8080?id=${id}`;
 
         this.data = new FiveVFiveEvent(id, new Team("Rot", [], 0), new Team("Blau", [], 0), "", "", "");
         this.ws = new WebSocket(this.wsAddress);
