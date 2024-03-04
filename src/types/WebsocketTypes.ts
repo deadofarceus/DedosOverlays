@@ -290,6 +290,8 @@ export class FiveVFiveWebsocket {
         }
         const data = JSON.parse(message);
         const FiveVFiveData = data as FiveVFiveEvent;
+        console.log(data);
+
 
         if (this.callback) {
             this.callback(FiveVFiveData);

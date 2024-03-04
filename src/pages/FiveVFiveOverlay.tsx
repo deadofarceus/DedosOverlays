@@ -97,10 +97,12 @@ function VSD({ currentGame, bestof, standing }: VS) {
     <Col className="VS5v5">
       <h1>VS</h1>
       <h2>{currentGame}</h2>
-      <Col className="currentGame">
-        <h4>{bestof}</h4>
-        <h3>{standing}</h3>
-      </Col>
+      {bestof && (
+        <Col className="currentGame">
+          <h4>{bestof}</h4>
+          <h3>{standing}</h3>
+        </Col>
+      )}
     </Col>
   );
 }

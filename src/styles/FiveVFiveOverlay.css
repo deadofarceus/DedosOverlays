@@ -41,10 +41,12 @@
 
 .wongames {
     width: max-content;
+    flex-direction: column;
 }
 
 .team5v5,
-.FiveVFiveOverlayContainer {
+.FiveVFiveOverlayContainer,
+.wongames {
     display: flex;
     justify-content: center;
     align-items: center;
