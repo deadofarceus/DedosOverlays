@@ -15,25 +15,28 @@ function FiveVFiveOverlay() {
       new Team(
         "Rot",
         [
-          new Game("Dota2", 1),
-          new Game("Smite", 2),
-          new Game("Heroes of the Storm", 1),
+          //   new Game("Dota2", 1),
+          //   new Game("Smite", 2),
+          //   new Game("Heroes of the Storm", 1),
         ],
-        4
+        0
       ),
       new Team(
         "Blau",
         [
-          new Game("Counter Strike 2", 1),
-          new Game("Valorant", 1),
-          new Game("Overwatch", 1),
-          new Game("Rainbow6", 1),
+          //   new Game("Counter Strike 2", 1),
+          //   new Game("Valorant", 1),
+          //   new Game("Overwatch", 1),
+          //   new Game("Rainbow6", 1),
         ],
-        4
+        0
       ),
-      "League of Legends",
-      "BestOf3",
-      "1 : 0"
+      "Warte auf Beginn...",
+      "",
+      ""
+      //   "League of Legends",
+      //   "BestOf3",
+      //   "1 : 0"
     )
   );
 
