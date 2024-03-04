@@ -6,8 +6,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import ErrorPage from "./ErrorPage";
 import DeathOverlay from "./pages/DeathOverlay";
-import FiveVFiveMod from "./pages/fiveVfiveMod";
 import FiveVFiveOverlay from "./pages/FiveVFiveOverlay";
+import FiveVFiveMod from "./pages/FiveVFiveMod";
 
 function App() {
   return (
