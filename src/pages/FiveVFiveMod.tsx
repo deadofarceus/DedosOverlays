@@ -20,7 +20,7 @@ const GAMES = [
   "Counter Strike 2",
   "Valorant",
   "Overwatch",
-  "Rainbow6",
+  "Paladins",
 ];
 
 let ws: FiveVFiveWebsocket;
