@@ -8,6 +8,7 @@ import ErrorPage from "./ErrorPage";
 import DeathOverlay from "./pages/DeathOverlay";
 import FiveVFiveOverlay from "./pages/FiveVFiveOverlay";
 import FiveVFiveMod from "./pages/FiveVFiveMod";
+import AbisZOverlay from "./pages/AbisZOverlay";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         <Route path="EloOverlay">
           <Route index element={<EloOverlayTutorial />} />
           <Route path=":queueType" element={<EloOverlay />} />
+        </Route>
+        <Route path="AbisZ">
+          <Route path=":accountName" element={<AbisZOverlay />} />
         </Route>
       </Route>
 

@@ -122,7 +122,7 @@ export class ChampionAbisZ {
     }
 }
 
-export const DEFAULTABISZ = {
+export const DEFAULTABISZ: AbisZAccount = {
     "name": "Broeki",
     "accountId": "oUj4gYU5Uq_0xqYfXlS8YYA9TH2xAZ3bbuSFsWcHQ3ug7FU",
     "id": "HK-WoPpnryGSFUs8Xu00gWX8Tjxhx6IobbwK_rgKlPjYB9M",
