@@ -133,18 +133,18 @@ export const DEFAULTABISZ: AbisZAccount = {
             "group": {
                 "letter": "A",
                 "champions": [
-                    { "name": "Aatrox", "won": false },
+                    { "name": "Aatrox", "won": true },
                     { "name": "Ahri", "won": false },
-                    { "name": "Akali", "won": false },
-                    { "name": "Akshan", "won": false },
+                    { "name": "Akali", "won": true },
+                    { "name": "Akshan", "won": true },
                     { "name": "Alistar", "won": false },
                     { "name": "Amumu", "won": false },
-                    { "name": "Anivia", "won": false },
+                    { "name": "Anivia", "won": true },
                     { "name": "Annie", "won": false },
                     { "name": "Aphelios", "won": false },
                     { "name": "Ashe", "won": false },
-                    { "name": "AurelionSol", "won": false },
-                    { "name": "Azir", "won": false }
+                    { "name": "AurelionSol", "won": true },
+                    { "name": "Azir", "won": true }
                 ],
                 "won": false
             }

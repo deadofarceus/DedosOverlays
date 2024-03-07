@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+
+.AbisZContainer {
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    /* filter: drop-shadow(4px 4px 3px #222); */
+    text-shadow: 1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000,
+        0px 1px 0 #000,
+        0px -1px 0 #000,
+        -1px 0px 0 #000,
+        1px 0px 0 #000,
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000,
+        0px 2px 0 #000,
+        0px -2px 0 #000,
+        -2px 0px 0 #000,
+        2px 0px 0 #000,
+        1px 2px 0 #000,
+        -1px 2px 0 #000,
+        1px -2px 0 #000,
+        -1px -2px 0 #000,
+        2px 1px 0 #000,
+        -2px 1px 0 #000,
+        2px -1px 0 #000,
+        -2px -1px 0 #000;
+    width: 1280px;
+    display: flex;
+    justify-content: center;
+}
+
+.topROW {
+    width: 1280px;
+}
+
+.azChampCol,
+.azChampRow {
+    width: 650px;
+    max-width: 650px;
+}
+
+.champImg {
+    width: 120px;
+    border-radius: 50%;
+    clip-path: circle(46% at 50% 50%);
+}
+
+.imgdivAZ {
+    display: flex;
+    filter: drop-shadow(7px 9px 3px #222);
+    width: 120px;
+}
+
+.champLoseAZ {
+    filter: grayscale(1);
+}
