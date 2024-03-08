@@ -364,7 +364,7 @@ export class AbisZWebsocket {
         this.id = id;
         this.callback = callback;
         // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
-        this.wsAddress = `ws://localhost:8080?id=Broeki`;
+        this.wsAddress = `ws://localhost:8080?id=${id}`;
 
         this.ws = new WebSocket(this.wsAddress);
 
@@ -407,8 +407,8 @@ export class AbisZWebsocket {
             return;
         }
         const data = JSON.parse(message);
-        const account = data as AbisZAccount;
-        console.log(data);
+        const account = data.account as AbisZAccount;
+        console.log(account);
 
         this.callback(account);
     };

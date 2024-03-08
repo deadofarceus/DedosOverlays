@@ -9,17 +9,19 @@ import {
 } from "../types/LeagueTypes";
 import { Col, Container, Row } from "react-bootstrap";
 import "../styles/AbisZOverlay.css";
+import { useParams } from "react-router-dom";
 
 let ws: AbisZWebsocket;
 
 function AbisZOverlay() {
   const [account, setAccount] = useState<AbisZAccount>(TESTABISZ);
+  const { accountName } = useParams();
 
   useEffect(() => {
-    if (!ws) {
-      ws = new AbisZWebsocket("id", setAccount);
+    if (!ws && accountName) {
+      ws = new AbisZWebsocket(accountName, setAccount);
     }
-  }, []);
+  }, [accountName]);
 
   const currentGroup1 = account.championGroups.find((g) => !g.group.won);
   const currentGroup = currentGroup1
@@ -34,6 +36,10 @@ function AbisZOverlay() {
           champions={currentGroup.champions}
           won={currentGroup.won}
         />
+        <Col className="gamesPlayed">
+          <h3>Games</h3>
+          <h1>{account.loses + account.wins}</h1>
+        </Col>
         <EloD
           eloLP={account.leaguePoints}
           eloDivision={account.tier}

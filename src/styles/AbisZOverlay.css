@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
 
 .AbisZContainer {
+    width: 1160px;
+    padding: 0;
+    margin: 0;
     color: azure;
     font-weight: bold;
     font-family: 'Signika', sans-serif;
     text-align: center;
-    /* filter: drop-shadow(4px 4px 3px #222); */
+    filter: drop-shadow(4px 4px 3px #222);
     text-shadow: 1px 1px 0 #000,
         -1px 1px 0 #000,
         1px -1px 0 #000,
@@ -30,13 +33,12 @@
         -2px 1px 0 #000,
         2px -1px 0 #000,
         -2px -1px 0 #000;
-    width: 1280px;
     display: flex;
     justify-content: center;
 }
 
 .topROW {
-    width: 1280px;
+    width: 1160px;
     height: 500px;
 }
 
@@ -54,7 +56,7 @@
 
 .imgdivAZ {
     display: flex;
-    filter: drop-shadow(7px 9px 3px #222);
+    filter: drop-shadow(4px 4px 3px #222);
     width: 120px;
 }
 
@@ -73,17 +75,30 @@
 }
 
 .eloInfoAZ {
-    width: 600px;
+    width: 400px;
 }
 
 .ELOAZ {
-    width: 600px;
+    width: 400px;
 }
 
 .eloimgAZ {
-    width: 500px;
+    width: 300px;
 }
 
 .eloAndLPAZ {
-    margin-top: -100px;
+    margin-top: -80px;
+}
+
+.gamesPlayed {
+    max-width: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gamesPlayed h1 {
+    font-size: 6em;
+    margin-top: -30px;
+    filter: drop-shadow(4px 4px 3px #222);
 }
