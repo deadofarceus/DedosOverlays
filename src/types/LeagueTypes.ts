@@ -122,7 +122,7 @@ export class ChampionAbisZ {
     }
 }
 
-export const DEFAULTABISZ: AbisZAccount = {
+export const TESTABISZ: AbisZAccount = {
     "name": "Broeki",
     "accountId": "oUj4gYU5Uq_0xqYfXlS8YYA9TH2xAZ3bbuSFsWcHQ3ug7FU",
     "id": "HK-WoPpnryGSFUs8Xu00gWX8Tjxhx6IobbwK_rgKlPjYB9M",
@@ -530,5 +530,8 @@ export const DEFAULTABISZ: AbisZAccount = {
             }
         }
     ],
+    "rank": "IV",
+    "tier": "EMERALD",
+    "leaguePoints": 99,
     "lastMatch": "EUW1_6846468909"
 } as AbisZAccount;

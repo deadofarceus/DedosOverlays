@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { AbisZWebsocket } from "../types/WebsocketTypes";
 import {
   AbisZAccount,
+  AccountElo,
   ChampionAbisZ,
-  DEFAULTABISZ,
+  TESTABISZ,
   LetterGroup,
 } from "../types/LeagueTypes";
 import { Col, Container, Row } from "react-bootstrap";
@@ -12,7 +13,7 @@ import "../styles/AbisZOverlay.css";
 let ws: AbisZWebsocket;
 
 function AbisZOverlay() {
-  const [account, setAccount] = useState<AbisZAccount>(DEFAULTABISZ);
+  const [account, setAccount] = useState<AbisZAccount>(TESTABISZ);
 
   useEffect(() => {
     if (!ws) {
@@ -33,21 +34,27 @@ function AbisZOverlay() {
           champions={currentGroup.champions}
           won={currentGroup.won}
         />
+        <EloD
+          eloLP={account.leaguePoints}
+          eloDivision={account.tier}
+          eloRank={account.rank}
+          lpDiff={0}
+          gmBorder={0}
+          challBorder={0}
+        />
       </Row>
     </Container>
   );
 }
 
-function ChampGroupD({ letter, champions, won }: LetterGroup) {
+function ChampGroupD({ champions }: LetterGroup) {
   return (
     <Col className="azChampCol">
-      <h1>{letter}</h1>
       <Row className="azChampRow">
         {champions.map((champ) => (
           <ChampD name={champ.name} won={champ.won} />
         ))}
       </Row>
-      <h1>{won}</h1>
     </Col>
   );
 }
@@ -75,6 +82,28 @@ function ChampD({ name, won }: ChampionAbisZ) {
       />
       {won && <div className="overlayIMGAZ" />}
     </div>
+  );
+}
+
+function EloD({ eloLP, eloDivision, eloRank }: AccountElo) {
+  let lpDisplay =
+    eloDivision === "MASTER" ||
+    eloDivision === "GRANDMASTER" ||
+    eloDivision === "CHALLENGER"
+      ? eloLP + " LP"
+      : eloRank + " " + eloLP + " LP";
+  lpDisplay = !eloDivision ? "UNRANKED" : lpDisplay;
+
+  return (
+    <Row className="eloInfoAZ">
+      <Col className="ELOAZ d-flex flex-column justify-content-center align-items-center">
+        <img
+          src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`}
+          className="eloimgAZ"
+        />
+        <p className="eloAndLPAZ">{lpDisplay}</p>
+      </Col>
+    </Row>
   );
 }
 

@@ -37,6 +37,7 @@
 
 .topROW {
     width: 1280px;
+    height: 500px;
 }
 
 .azChampCol,
@@ -69,4 +70,20 @@
     height: 116px;
     border: 5px solid #00d924;
     border-radius: 50%;
+}
+
+.eloInfoAZ {
+    width: 600px;
+}
+
+.ELOAZ {
+    width: 600px;
+}
+
+.eloimgAZ {
+    width: 500px;
+}
+
+.eloAndLPAZ {
+    margin-top: -100px;
 }
