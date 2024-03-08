@@ -63,7 +63,6 @@ function ChampD({ name, won }: ChampionAbisZ) {
       style={{
         paddingLeft: 0,
         paddingRight: 0,
-        filter: `${won ? "drop-shadow(7px 9px 3px #00d924)" : ""}`,
       }}
     >
       <img
@@ -74,6 +73,7 @@ function ChampD({ name, won }: ChampionAbisZ) {
           width: `120px`,
         }}
       />
+      {won && <div className="overlayIMGAZ" />}
     </div>
   );
 }

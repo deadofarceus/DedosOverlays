@@ -60,3 +60,13 @@
 .champLoseAZ {
     filter: grayscale(1);
 }
+
+.overlayIMGAZ {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 116px;
+    height: 116px;
+    border: 3px solid #00d924;
+    border-radius: 50%;
+}
