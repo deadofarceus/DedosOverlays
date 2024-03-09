@@ -66,10 +66,11 @@ function ChampGroupD({ champions }: LetterGroup) {
 }
 
 function ChampD({ name, won }: ChampionAbisZ) {
+  const champName = name === "Wukong" ? "MonkeyKing" : name;
   const imgsrc =
     name === "null"
       ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${name}.png`;
+      : `https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champName}.png`;
   return (
     <div
       className={"imgdivAZ"}
