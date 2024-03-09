@@ -13,7 +13,7 @@ function FiveVFiveOverlay() {
     new FiveVFiveEvent(
       "",
       new Team(
-        "Rot",
+        "Team 1",
         [
           //   new Game("Dota2", 1),
           //   new Game("Smite", 2),
@@ -22,7 +22,7 @@ function FiveVFiveOverlay() {
         0
       ),
       new Team(
-        "Blau",
+        "Team 2",
         [
           //   new Game("Counter Strike 2", 1),
           //   new Game("Valorant", 1),
@@ -78,10 +78,10 @@ function FiveVFiveOverlay() {
 }
 
 function TeamD({ teamName, wonGames, points }: Team) {
-  const color = teamName === "Rot" ? "#FF2222" : "#4876FF";
+  const color = teamName === "Team 1" ? "#FF2222" : "#4876FF";
   return (
     <Col className="team5v5">
-      <h1 style={{ color: color }}>{teamName + " " + points}</h1>
+      <h1 style={{ color: color }}>{`(${points}) ${teamName}`}</h1>
       <Col className="wongames">
         {wonGames.map((game: Game) => (
           <WonGameD gameName={game.gameName} points={game.points}></WonGameD>

@@ -247,7 +247,7 @@ export class FiveVFiveWebsocket {
         this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
         // this.wsAddress = `ws://localhost:8080?id=${id}`;
 
-        this.data = new FiveVFiveEvent(id, new Team("Rot", [], 0), new Team("Blau", [], 0), "", "", "");
+        this.data = new FiveVFiveEvent(id, new Team("Team 1", [], 0), new Team("Team 2", [], 0), "", "", "");
         this.ws = new WebSocket(this.wsAddress);
 
         this.setupWebSocket();
