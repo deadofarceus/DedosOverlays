@@ -4,7 +4,7 @@ import {
   AbisZAccount,
   AccountElo,
   ChampionAbisZ,
-  TESTABISZ,
+  DEFAULTABISZ,
   LetterGroup,
 } from "../types/LeagueTypes";
 import { Col, Container, Row } from "react-bootstrap";
@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 let ws: AbisZWebsocket;
 
 function AbisZOverlay() {
-  const [account, setAccount] = useState<AbisZAccount>(TESTABISZ);
+  const [account, setAccount] = useState<AbisZAccount>(DEFAULTABISZ);
   const { accountName } = useParams();
 
   useEffect(() => {
