@@ -363,8 +363,8 @@ export class AbisZWebsocket {
     constructor(id: string, callback: React.Dispatch<React.SetStateAction<AbisZAccount>>) {
         this.id = id;
         this.callback = callback;
-        // this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
-        this.wsAddress = `ws://localhost:8080?id=${id}`;
+        this.wsAddress = `wss://modserver-dedo.glitch.me?id=${id}`;
+        // this.wsAddress = `ws://localhost:8080?id=${id}`;
 
         this.ws = new WebSocket(this.wsAddress);
 
