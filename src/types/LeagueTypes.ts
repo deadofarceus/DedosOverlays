@@ -117,6 +117,7 @@ export class LetterGroup {
 export class ChampionAbisZ {
     name: string;
     won: boolean = false;
+    games: number = 0;
     constructor(name: string) {
         this.name = name;
     }

@@ -6,6 +6,7 @@ import {
   ChampionAbisZ,
   DEFAULTABISZ,
   LetterGroup,
+  //   TESTABISZ,
 } from "../types/LeagueTypes";
 import { Col, Container, Row } from "react-bootstrap";
 import "../styles/AbisZOverlay.css";
@@ -58,14 +59,14 @@ function ChampGroupD({ champions }: LetterGroup) {
     <Col className="azChampCol">
       <Row className="azChampRow">
         {champions.map((champ) => (
-          <ChampD name={champ.name} won={champ.won} />
+          <ChampD name={champ.name} won={champ.won} games={champ.games} />
         ))}
       </Row>
     </Col>
   );
 }
 
-function ChampD({ name, won }: ChampionAbisZ) {
+function ChampD({ name, won, games }: ChampionAbisZ) {
   const champName = name === "Wukong" ? "MonkeyKing" : name;
   const imgsrc =
     name === "null"
@@ -87,7 +88,9 @@ function ChampD({ name, won }: ChampionAbisZ) {
           width: `120px`,
         }}
       />
-      {won && <div className="overlayIMGAZ" />}
+      <div className={`${won ? "overlayIMGAZ" : "overlayIMGAZLose"}`}>
+        <p className="numOfWins">{games > 0 ? games : ""}</p>
+      </div>
     </div>
   );
 }

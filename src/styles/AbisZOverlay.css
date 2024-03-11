@@ -103,3 +103,20 @@
     margin-top: -30px;
     filter: drop-shadow(4px 4px 3px #222);
 }
+
+.overlayIMGAZLose {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 116px;
+    height: 116px;
+    /* border: 5px solid #00d924;
+    border-radius: 50%; */
+}
+
+.numOfWins {
+    position: absolute;
+    bottom: -3px;
+    right: 24px;
+    font-size: 3em;
+}
