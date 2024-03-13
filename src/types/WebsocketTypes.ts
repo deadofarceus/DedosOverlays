@@ -29,7 +29,6 @@ export abstract class BaseWebSocket<T> {
         this.ws.onopen = this.handleOpen;
         this.ws.onclose = this.handleClose;
         this.ws.onerror = this.handleError;
-        this.ws.onmessage = this.handleMessage;
     }
 
     handleOpen = () => {
@@ -82,7 +81,7 @@ export class EloWebsocket extends BaseWebSocket<Account> {
         this.tag = tag;
         this.key = key;
         this.queueID = QUEUETYPES.get(queuetype)!.queueId;
-        this.setupWebSocket();
+        this.ws.onmessage = this.handleMessage;
     }
 
     handleOpen = () => {
@@ -145,6 +144,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<DeathData> {
         this.currentStats = deathData;
         this.callback = callback;
         this.timerCallback = setBosstimer;
+        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
@@ -203,6 +203,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
         super(callback!, `${GLOBALWSADRESS}?id=${id}`);
         this.id = id;
         this.data = new FiveVFiveEvent(id, new Team("Team 1", [], 0), new Team("Team 2", [], 0), "", "", "");
+        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
@@ -270,12 +271,11 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
     constructor(id: string, callback: React.Dispatch<React.SetStateAction<AbisZAccount>>) {
         super(callback, `${GLOBALWSADRESS}?id=${id}`);
         this.id = id;
+        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
         const message = event.data;
-        console.log(message);
-
         if (this.checkUtilityEvent(message)) {
             return;
         }
