@@ -3,8 +3,8 @@ import { DeathData } from "./DeathTypes";
 import { Game, Team } from "./FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 
-const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
-// const GLOBALWSADRESS = "ws://localhost:8080";
+// const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
+const GLOBALWSADRESS = "ws://localhost:8080";
 
 export abstract class BaseWebSocket<T> {
     callback: React.Dispatch<React.SetStateAction<T>>;
@@ -82,6 +82,7 @@ export class EloWebsocket extends BaseWebSocket<Account> {
         this.key = key;
         this.queueID = QUEUETYPES.get(queuetype)!.queueId;
         this.ws.onmessage = this.handleMessage;
+        this.ws.onopen = this.handleOpen;
     }
 
     handleOpen = () => {
