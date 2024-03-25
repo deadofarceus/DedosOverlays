@@ -53,6 +53,9 @@ export interface ChampionMatchHistory {
 }
 
 export interface AccountElo {
+    dScore: boolean;
+    wins: number;
+    loses: number;
     eloLP: number;
     eloDivision: string;
     eloRank: string;
