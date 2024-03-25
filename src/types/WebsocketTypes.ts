@@ -26,9 +26,28 @@ export abstract class BaseWebSocket<T> {
         if (this.ws.readyState === this.ws.CLOSED) {
             this.ws = new WebSocket(this.wsAddress);
         }
-        this.ws.onopen = this.handleOpen;
-        this.ws.onclose = this.handleClose;
+        this.ws.onopen = this.onOpenWrapper();
+        this.ws.onclose = this.onCloseWrapper();
         this.ws.onerror = this.handleError;
+        this.ws.onmessage = this.onMessageWrapper();
+    }
+
+    onMessageWrapper(): (event: MessageEvent) => void {
+        return (event: MessageEvent) => {
+            this.handleMessage(event);
+        };
+    }
+
+    onCloseWrapper(): (ev: CloseEvent) => void {
+        return (ev: CloseEvent) => {
+            this.handleClose(ev);
+        };
+    }
+
+    onOpenWrapper(): () => void {
+        return () => {
+            this.handleOpen();
+        };
     }
 
     handleOpen = () => {
@@ -81,8 +100,6 @@ export class EloWebsocket extends BaseWebSocket<Account> {
         this.tag = tag;
         this.key = key;
         this.queueID = QUEUETYPES.get(queuetype)!.queueId;
-        this.ws.onmessage = this.handleMessage;
-        this.ws.onopen = this.handleOpen;
     }
 
     handleOpen = () => {
@@ -145,7 +162,6 @@ export class DeathCounterWebsocket extends BaseWebSocket<DeathData> {
         this.currentStats = deathData;
         this.callback = callback;
         this.timerCallback = setBosstimer;
-        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
@@ -204,7 +220,6 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
         super(callback!, `${GLOBALWSADRESS}?id=${id}`);
         this.id = id;
         this.data = new FiveVFiveEvent(id, new Team("Team 1", [], 0), new Team("Team 2", [], 0), "", "", "");
-        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
@@ -272,7 +287,6 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
     constructor(id: string, callback: React.Dispatch<React.SetStateAction<AbisZAccount>>) {
         super(callback, `${GLOBALWSADRESS}?id=${id}`);
         this.id = id;
-        this.ws.onmessage = this.handleMessage;
     }
 
     handleMessage = (event: MessageEvent) => {
