@@ -15,6 +15,7 @@ import { useQuery } from "../types/UsefulFunctions";
 let ws: EloWebsocket;
 
 function EloOverlay() {
+  document.body.style.backgroundColor = "transparent";
   const oldAccount: object = {
     summonerId: "",
     name: "",
