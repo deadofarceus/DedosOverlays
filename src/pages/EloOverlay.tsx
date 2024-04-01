@@ -96,11 +96,6 @@ function EloOverlay() {
       style={{ width: "1140px" }}
     >
       <EloInfo
-        dScore={
-          playerInfo.name === "Philly Westside" && playerInfo.hashtag === "MEGA"
-        }
-        wins={playerInfo.wins}
-        loses={playerInfo.loses}
         eloLP={playerInfo.leaguePoints}
         eloDivision={playerInfo.tier}
         eloRank={playerInfo.rank}
@@ -124,9 +119,6 @@ function EloOverlay() {
 }
 
 function EloInfo({
-  dScore,
-  wins,
-  loses,
   eloLP,
   eloDivision,
   eloRank,
@@ -148,8 +140,6 @@ function EloInfo({
   } else if (eloDivision === "GRANDMASTER") {
     border = "Challenger <br> Border: " + challBorder;
   }
-
-  const score = dScore ? `${wins - 261} - ${loses - 248}` : "";
 
   return (
     <Row className="eloInfo">
@@ -173,8 +163,6 @@ function EloInfo({
         >
           {lpToday}
         </p>
-        {dScore && <p className="challengeScore">Challenge</p>}
-        {dScore && <p className="challengeScore">{score}</p>}
       </Col>
     </Row>
   );
