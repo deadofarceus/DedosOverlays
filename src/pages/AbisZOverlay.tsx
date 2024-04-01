@@ -42,9 +42,6 @@ function AbisZOverlay() {
           <h1>{account.loses + account.wins}</h1>
         </Col>
         <EloD
-          wins={account.wins}
-          loses={account.loses}
-          dScore={false}
           eloLP={account.leaguePoints}
           eloDivision={account.tier}
           eloRank={account.rank}
