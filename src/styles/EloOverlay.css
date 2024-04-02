@@ -104,3 +104,9 @@ p {
     font-size: 30px;
     padding-bottom: 1em;
 }
+
+.flamesOverlayIMG {
+    position: absolute;
+    top: -64px;
+    right: -33px;
+}

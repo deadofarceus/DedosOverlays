@@ -37,15 +37,18 @@ export class Match {
     championID: number;
     win: boolean;
     id: string;
-    constructor(id: string, championName: string, championID: number, win: boolean) {
+    mvp: boolean;
+    constructor(id: string, championName: string, championID: number, win: boolean, mvp: boolean) {
         this.id = id;
         this.championName = championName;
         this.championID = championID;
         this.win = win;
+        this.mvp = mvp;
     }
 }
 
 export interface ChampionMatchHistory {
+    mvp: boolean;
     index: number;
     championName: string;
     win: boolean;
