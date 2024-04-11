@@ -9,17 +9,5 @@ export function useQuery() {
 
 export function isOBSBrowser(): boolean {
     const browserName = navigator.userAgent.toLowerCase();
-
-    if (browserName.indexOf('firefox') > -1) {
-        return false;
-    } else if (browserName.indexOf('chrome') > -1) {
-        return true;
-    } else if (browserName.indexOf('safari') > -1) {
-        return false;
-    } else if (browserName.indexOf('opera') > -1) {
-        return false;
-    } else if (browserName.indexOf('edge') > -1) {
-        return false;
-    }
-    return true;
+    return browserName.indexOf('obs') > -1;
 }
