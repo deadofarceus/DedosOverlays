@@ -10,12 +10,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
 import { Col, Container, Row } from "react-bootstrap";
-import { useQuery } from "../types/UsefulFunctions";
+import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 
 let ws: EloWebsocket;
 
 function EloOverlay() {
-  document.body.style.backgroundColor = "transparent";
+  if (isOBSBrowser()) {
+    document.body.style.backgroundColor = "transparent";
+  } else {
+    document.body.style.backgroundColor = "black";
+  }
   const oldAccount: object = {
     summonerId: "",
     name: "",
