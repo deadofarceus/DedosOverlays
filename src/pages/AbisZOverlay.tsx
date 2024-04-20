@@ -13,6 +13,7 @@ import "../styles/AbisZOverlay.css";
 import { useParams } from "react-router-dom";
 
 let ws: AbisZWebsocket;
+let fertig: boolean = false;
 
 function AbisZOverlay() {
   const [account, setAccount] = useState<AbisZAccount>(DEFAULTABISZ);
@@ -28,9 +29,10 @@ function AbisZOverlay() {
   const currentGroup = currentGroup1
     ? currentGroup1.group
     : account.championGroups[account.championGroups.length - 1].group;
+  fertig = !currentGroup1;
 
   return (
-    <Container className="AbisZContainer">
+    <Container className={fertig ? "fertigAZ" : "AbisZContainer"}>
       <Row className="topROW">
         <ChampGroupD
           letter={currentGroup.letter}
@@ -88,7 +90,10 @@ function ChampD({ name, won, games }: ChampionAbisZ) {
           width: `120px`,
         }}
       />
-      <div className={`${won ? "overlayIMGAZ" : "overlayIMGAZLose"}`}>
+      <div
+        className={`${won ? "overlayIMGAZ" : "overlayIMGAZLose"}`}
+        style={fertig ? { border: `5px solid rgb(255, 226, 59)` } : {}}
+      >
         <p className="numOfWins">{games > 0 ? games : ""}</p>
       </div>
     </div>
