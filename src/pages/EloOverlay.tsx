@@ -145,11 +145,16 @@ function EloInfo({
   } else if (eloDivision === "GRANDMASTER") {
     border = "Challenger <br> Border: " + challBorder;
   }
+  const query = useQuery();
+  const legacy = query.get("legacy") === "true" ? "L" : "";
 
   return (
     <Row className="eloInfo">
       <Col className="ELO d-flex flex-column justify-content-center align-items-center">
-        <img src={`../../${eloDivision}.png`} className="eloimg eloAndLP" />
+        <img
+          src={`../../${eloDivision + legacy}.png`}
+          className="eloimg eloAndLP"
+        />
         <p className="eloAndLP">{lpDisplay}</p>
       </Col>
       <Col className="ELO text-center">

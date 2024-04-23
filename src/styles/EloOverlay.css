@@ -4,6 +4,7 @@
     margin-bottom: -18%;
     width: 120%;
     filter: drop-shadow(7px 9px 3px #222);
+    image-rendering: optimizeQuality;
 }
 
 .eloOverlayContainer {
