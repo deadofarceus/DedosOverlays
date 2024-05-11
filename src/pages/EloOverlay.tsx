@@ -90,19 +90,19 @@ function EloOverlay() {
     } else {
       if (!ws) {
         ws = new EloWebsocket(summonerName, tag, key, queueType, setPlayerInfo);
-        fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
-          method: "HEAD",
-          mode: "no-cors",
-        })
-          .then(function (response) {
-            return response;
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (e) {
-            console.log(e);
-          });
+        // fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
+        //   method: "HEAD",
+        //   mode: "no-cors",
+        // })
+        //   .then(function (response) {
+        //     return response;
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (e) {
+        //     console.log(e);
+        //   });
       }
     }
   }, [nav, query, queueType]);
