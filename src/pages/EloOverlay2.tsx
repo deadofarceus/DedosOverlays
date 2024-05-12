@@ -85,7 +85,7 @@ function EloOverlay2() {
       // Redirect to error page if any of the parameters is missing
       nav("/EloOverlay");
     } else {
-      if (playerInfo.accountId) {
+      if (playerInfo.tier) {
         fetch(
           `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${summonerName}/${tag}`,
           {
@@ -101,7 +101,7 @@ function EloOverlay2() {
           .catch((error) => console.log(error.code));
       }
     }
-  }, [nav, playerInfo.accountId, query, queueType]);
+  }, [nav, playerInfo.tier, query, queueType]);
 
   return (
     <Container
