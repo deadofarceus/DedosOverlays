@@ -958,3 +958,53 @@ export const DEFAULTABISZ: AbisZAccount = {
     // "wins": 100,
     // "loses": 100
 } as AbisZAccount;
+
+export const DEFAULTELOOVERLAY: object = {
+    summonerId: "",
+    name: "",
+    hashtag: "",
+    puuid: "",
+    tier: "UNRANKED",
+    rank: "IV",
+    leaguePoints: 0,
+    combinedLP: 0,
+    wins: 205,
+    loses: 173,
+    hotstreak: false,
+    lastThree: [
+        {
+            championName: "null",
+            championID: 497,
+            win: false,
+            id: "EUW1_6792213944",
+        },
+        {
+            championName: "null",
+            championID: 432,
+            win: true,
+            id: "EUW1_6792270986",
+        },
+        {
+            championName: "null",
+            championID: 497,
+            win: false,
+            id: "EUW1_6792346795",
+        },
+        {
+            championName: "null",
+            championID: 497,
+            win: true,
+            id: "EUW1_6792427799",
+        },
+        {
+            championName: "null",
+            championID: 432,
+            win: false,
+            id: "EUW1_6792492999",
+        },
+    ],
+    startTime: 0,
+    lpStart: 0,
+    gmBorder: 200,
+    challBorder: 700,
+};

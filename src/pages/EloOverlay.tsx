@@ -1,75 +1,38 @@
 import { useEffect, useState } from "react";
-import {
-  Account,
-  AccountElo,
-  ChampionMatchHistory,
-} from "../types/LeagueTypes";
+import { Account, DEFAULTELOOVERLAY } from "../types/LeagueTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
+import Champion from "../components/league/ChampionEO";
+import EloInfo from "../components/league/EloInfo";
 
 let ws: EloWebsocket;
 
 function EloOverlay() {
-  if (isOBSBrowser()) {
+  const obs = isOBSBrowser();
+  if (obs) {
     document.body.style.backgroundColor = "transparent";
   } else {
     document.body.style.backgroundColor = "black";
   }
-  const oldAccount: object = {
-    summonerId: "",
-    name: "",
-    hashtag: "",
-    puuid: "",
-    tier: "UNRANKED",
-    rank: "IV",
-    leaguePoints: 0,
-    combinedLP: 0,
-    wins: 205,
-    loses: 173,
-    hotstreak: false,
-    lastThree: [
-      {
-        championName: "null",
-        championID: 497,
-        win: false,
-        id: "EUW1_6792213944",
-      },
-      {
-        championName: "null",
-        championID: 432,
-        win: true,
-        id: "EUW1_6792270986",
-      },
-      {
-        championName: "null",
-        championID: 497,
-        win: false,
-        id: "EUW1_6792346795",
-      },
-      {
-        championName: "null",
-        championID: 497,
-        win: true,
-        id: "EUW1_6792427799",
-      },
-      {
-        championName: "null",
-        championID: 432,
-        win: false,
-        id: "EUW1_6792492999",
-      },
-    ],
-    startTime: 0,
-    lpStart: 0,
-    gmBorder: 200,
-    challBorder: 700,
+  const [playerInfo, setPlayerInfo] = useState<Account>(
+    DEFAULTELOOVERLAY as Account
+  );
+
+  const [lastClickTime, setLastClickTime] = useState(0);
+  const [disabled, setDisabled] = useState(false);
+
+  const handleClick = () => {
+    const currentTime = Date.now();
+    if (currentTime - lastClickTime >= 15 * 60 * 1000) {
+      ws.requestUpdate();
+      setLastClickTime(currentTime);
+    }
   };
-  const [playerInfo, setPlayerInfo] = useState<Account>(oldAccount as Account);
 
   const nav = useNavigate();
   const { queueType } = useParams();
@@ -105,7 +68,18 @@ function EloOverlay() {
         //   });
       }
     }
-  }, [nav, query, queueType]);
+    const currentTime = Date.now();
+    const timeElapsed = currentTime - lastClickTime;
+    if (timeElapsed < 15 * 60 * 1000) {
+      setDisabled(true);
+      const timer = setTimeout(() => {
+        setDisabled(false);
+      }, 15 * 60 * 1000 - timeElapsed);
+      return () => clearTimeout(timer);
+    } else {
+      setDisabled(false);
+    }
+  }, [lastClickTime, nav, query, queueType]);
 
   return (
     <Container
@@ -132,101 +106,12 @@ function EloOverlay() {
           />
         ))}
       </Row>
-    </Container>
-  );
-}
-
-function EloInfo({
-  eloLP,
-  eloDivision,
-  eloRank,
-  lpDiff,
-  gmBorder,
-  challBorder,
-}: AccountElo) {
-  let lpDisplay =
-    eloDivision === "MASTER" ||
-    eloDivision === "GRANDMASTER" ||
-    eloDivision === "CHALLENGER"
-      ? eloLP + " LP"
-      : eloRank + " " + eloLP + " LP";
-  lpDisplay = eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
-  const lpToday = lpDiff >= 0 ? `+${lpDiff} LP ↑` : `${lpDiff} LP ↓`;
-  let border = undefined;
-  if (eloDivision === "MASTER") {
-    border = "GM Border: " + gmBorder;
-  } else if (eloDivision === "GRANDMASTER") {
-    border = "Challenger <br> Border: " + challBorder;
-  }
-  const query = useQuery();
-  const legacy = query.get("legacy") === "true" ? "L" : "";
-
-  return (
-    <Row className="eloInfo">
-      <Col className="ELO d-flex flex-column justify-content-center align-items-center">
-        <img
-          src={`../../${eloDivision + legacy}.png`}
-          className="eloimg eloAndLP"
-        />
-        <p className="eloAndLP">{lpDisplay}</p>
-      </Col>
-      <Col className="ELO text-center">
-        {border ? (
-          <p
-            className="leagueborder"
-            dangerouslySetInnerHTML={{ __html: border }}
-          />
-        ) : (
-          <div className="spacer"></div>
-        )}
-        <p className="lpDiff">Heute:</p>
-        <p
-          className="lpDiff"
-          style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}
-        >
-          {lpToday}
-        </p>
-      </Col>
-    </Row>
-  );
-}
-
-function Champion({
-  mvp,
-  index,
-  championName,
-  win,
-  length,
-}: ChampionMatchHistory) {
-  const imgsrc =
-    championName === "null"
-      ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/${championName}.png`;
-  return (
-    <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
-      {mvp && (
-        <img
-          src={`../../flames.png`}
-          alt="Overlay Image"
-          className="flamesOverlayIMG"
-          style={{ width: `${180 - (length - 1 - index) * 4.5}px` }}
-        />
+      {!obs && (
+        <Button size="lg" onClick={handleClick} disabled={disabled}>
+          Request Update
+        </Button>
       )}
-      <img
-        src={imgsrc}
-        alt=""
-        className="profileImg"
-        style={{
-          width: `${120 - (length - 1 - index) * 4.5}px`,
-        }}
-      />
-      <img
-        src={`../../${win}.png`}
-        alt="Overlay Image"
-        className="overlayIMG"
-        style={{ width: `${120 - (length - 1 - index) * 4.5}px` }}
-      />
-    </div>
+    </Container>
   );
 }
 

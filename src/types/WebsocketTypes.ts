@@ -149,6 +149,12 @@ export class EloWebsocket extends BaseWebSocket<Account> {
         const modEvent = new ModEvent("league/listenAccount", leagueLPEvent);
         this.sendEvent(modEvent);
     }
+
+    requestUpdate() {
+        const leagueLPEvent = new LeagueLPEvent([new Account("", "", this.summonerName, this.tag, this.queueID)], this.key);
+        const modEvent = new ModEvent("league/manualUpdate", leagueLPEvent);
+        this.sendEvent(modEvent);
+    }
 }
 
 export class DeathCounterWebsocket extends BaseWebSocket<DeathData> {
