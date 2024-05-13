@@ -11,11 +11,19 @@ import {
 import { Col, Container, Row } from "react-bootstrap";
 import "../styles/AbisZOverlay.css";
 import { useParams } from "react-router-dom";
+import { isOBSBrowser } from "../types/UsefulFunctions";
 
 let ws: AbisZWebsocket;
 let fertig: boolean = false;
 
 function AbisZOverlay() {
+  const obs = isOBSBrowser();
+  if (obs) {
+    document.body.style.backgroundColor = "transparent";
+    document.body.className = "";
+  } else {
+    document.body.className = "noOBS";
+  }
   const [account, setAccount] = useState<AbisZAccount>(DEFAULTABISZ);
   const { accountName } = useParams();
 

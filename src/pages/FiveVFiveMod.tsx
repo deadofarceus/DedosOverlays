@@ -26,7 +26,7 @@ const GAMES = [
 let ws: FiveVFiveWebsocket;
 
 function FiveVFiveMod() {
-  document.body.style.backgroundColor = "black";
+  document.body.className = "noOBS";
   const query = useQuery();
   useEffect(() => {
     const id = query.get("id");

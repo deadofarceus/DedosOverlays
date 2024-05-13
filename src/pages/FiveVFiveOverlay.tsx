@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import "../styles/FiveVFiveOverlay.css";
-import { useQuery } from "../types/UsefulFunctions";
+import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import { FiveVFiveWebsocket } from "../types/WebsocketTypes";
 import { FiveVFiveEvent } from "../types/BackendEvents";
 import { Game, Team, VS } from "../types/FiveVFiveTypes";
@@ -9,6 +9,13 @@ import { Game, Team, VS } from "../types/FiveVFiveTypes";
 let ws: FiveVFiveWebsocket;
 
 function FiveVFiveOverlay() {
+  const obs = isOBSBrowser();
+  if (obs) {
+    document.body.style.backgroundColor = "transparent";
+    document.body.className = "";
+  } else {
+    document.body.className = "noOBS";
+  }
   const [data, setData] = useState<FiveVFiveEvent>(
     new FiveVFiveEvent(
       "",

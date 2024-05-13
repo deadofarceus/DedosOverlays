@@ -15,8 +15,7 @@ import {
 import "../styles/EloOverlayTutorial.css";
 
 function EloOverlayTutorial() {
-  document.body.style.background =
-    "radial-gradient(circle, rgba(42,42,46,1) 15%, rgba(36,30,30,1) 100%)";
+  document.body.className = "noOBS";
   const nav = useNavigate();
   const query = useQuery();
   const [summonerName, setSummonerName] = useState<string>("");

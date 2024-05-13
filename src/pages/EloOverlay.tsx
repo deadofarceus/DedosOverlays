@@ -16,8 +16,9 @@ function EloOverlay() {
   const obs = isOBSBrowser();
   if (obs) {
     document.body.style.backgroundColor = "transparent";
+    document.body.className = "";
   } else {
-    document.body.style.backgroundColor = "black";
+    document.body.className = "noOBS";
   }
   const [playerInfo, setPlayerInfo] = useState<Account>(
     DEFAULTELOOVERLAY as Account
