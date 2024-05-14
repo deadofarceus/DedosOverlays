@@ -39,7 +39,7 @@ function EloOverlayTutorial() {
     }
   }, [key, legacyMode, nav, query, queuetype, summonerName, tag]);
   return (
-    <Container className="layout">
+    <Container className="layout ">
       <h1>Elo Overlay Creator</h1>
       <Form id="userInputs" className="centerC">
         <Col className="centerC">

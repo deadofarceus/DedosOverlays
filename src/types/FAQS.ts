@@ -14,5 +14,9 @@ export const FAQS = [
     {
         question: "Why weak links how can i get a premium link?",
         answer: "Weak links exist because I cant update all overlays every 30 Seconds becaus of 1. server performance 2. Rate Limits at the Riot API. To get a premium link, you have to ask me for a Premium link."
+    },
+    {
+        question: "Overlay Ideas or other programs to improve your stream?",
+        answer: "Just message me over Twitter"
     }
 ];

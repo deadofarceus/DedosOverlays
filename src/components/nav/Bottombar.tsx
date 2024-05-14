@@ -8,7 +8,7 @@ function Bottombar() {
   }
 
   return (
-    <footer className="footer bottom-0 position-fixed w-100">
+    <footer className="footer bottom-0 w-100 position-fixed">
       <Container className="centerR">
         <Row>
           <Col className="footer-bottom">
