@@ -13,7 +13,8 @@ function Help() {
               {1}. {FAQS[0].question}
             </h2>
             <p className="answers">
-              Yes, you can get the Elo Overlay just contact me over{" "}
+              Yes, the weak version is free to use. You can get the Elo Overlay
+              by contacting me on{" "}
               <a href="https://twitter.com/deadofarceus">Twitter</a>{" "}
               @deadofarceus or via Twitch whisper also @deadofarceus.
             </p>
