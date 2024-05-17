@@ -122,6 +122,7 @@ function EloOverlayTutorial() {
           <Button
             variant="outline-secondary"
             id="button-addon2"
+            disabled={summonerName === "" || tag === "" || key === ""}
             onClick={() => {
               navigator.clipboard.writeText(link);
             }}
