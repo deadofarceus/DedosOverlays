@@ -13,7 +13,8 @@ function Help() {
               {1}. {FAQS[0].question}
             </h2>
             <p className="answers">
-              Yes, the weak version is free to use. You can get the Elo Overlay
+              Yes, the weak version is free to use. You will need a key, either
+              weak or premium, to use the overlay. You can get the Elo Overlay
               by contacting me on{" "}
               <a href="https://twitter.com/deadofarceus">Twitter</a>{" "}
               @deadofarceus or via Twitch whisper also @deadofarceus.
