@@ -31,6 +31,7 @@
     width: 120px;
     border-radius: 50%;
     clip-path: circle(46% at 50% 50%);
+    image-rendering: optimizeQuality;
 }
 
 .ELO {
@@ -109,6 +110,6 @@ p {
 
 .flamesOverlayIMG {
     position: absolute;
-    top: -64px;
-    right: -33px;
+    top: -68px;
+    right: -35px;
 }

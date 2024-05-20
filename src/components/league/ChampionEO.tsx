@@ -1,5 +1,15 @@
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
 
+const iconScale = 8;
+const iconSize = 130;
+const flameSize = 195;
+// FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
+// FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
+// FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
+
+const iconSizeArray = [[0], [4, 0], [4, 2, 0], [3, 2, 1, 0], [4, 3, 2, 1, 0]];
+// const iconSizeArray = [[0], [4, 0], [4, 0, 0], [4, 0, 0, 0], [4, 0, 0, 0, 0]];
+
 function Champion({
   mvp,
   index,
@@ -18,7 +28,11 @@ function Champion({
           src={`../../flames.png`}
           alt="Overlay Image"
           className="flamesOverlayIMG"
-          style={{ width: `${180 - (length - 1 - index) * 4.5}px` }}
+          style={{
+            width: `${
+              flameSize - iconSizeArray[length - 1][index] * iconScale
+            }px`,
+          }}
         />
       )}
       <img
@@ -26,14 +40,16 @@ function Champion({
         alt=""
         className="profileImg"
         style={{
-          width: `${120 - (length - 1 - index) * 4.5}px`,
+          width: `${iconSize - iconSizeArray[length - 1][index] * iconScale}px`,
         }}
       />
       <img
         src={`../../${win}.png`}
         alt="Overlay Image"
         className="overlayIMG"
-        style={{ width: `${120 - (length - 1 - index) * 4.5}px` }}
+        style={{
+          width: `${iconSize - iconSizeArray[length - 1][index] * iconScale}px`,
+        }}
       />
     </div>
   );
