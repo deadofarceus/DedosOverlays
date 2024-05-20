@@ -17,7 +17,8 @@ function Help() {
               weak or premium, to use the overlay. You can get the Elo Overlay
               by contacting me on{" "}
               <a href="https://twitter.com/deadofarceus">Twitter</a>{" "}
-              @deadofarceus or via Twitch whisper also @deadofarceus.
+              @deadofarceus or via Twitch whisper also @deadofarceus. Gerne auch
+              auf Deutsch {":)"}
             </p>
           </div>
           <div className="faq">
