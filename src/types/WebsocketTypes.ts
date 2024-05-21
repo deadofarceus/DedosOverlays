@@ -2,6 +2,7 @@ import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEv
 import { DeathData } from "./DeathTypes";
 import { Game, Team } from "./FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
+import { PCEvent } from "./PCTurnierTypes";
 
 const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
 // const GLOBALWSADRESS = "ws://localhost:8080";
@@ -306,4 +307,30 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
 
         this.callback(account);
     };
+}
+
+export class PCTurnierWebsocket extends BaseWebSocket<PCEvent> {
+    id: string;
+
+    constructor(id: string, callback: React.Dispatch<React.SetStateAction<PCEvent>>) {
+        super(callback, `${GLOBALWSADRESS}?id=${id}`);
+        this.id = id;
+    }
+
+    handleMessage = (event: MessageEvent) => {
+        const message = event.data;
+        if (this.checkUtilityEvent(message)) {
+            return;
+        }
+
+        const data = JSON.parse(message);
+        const PCEventData = data as PCEvent;
+
+        this.callback(PCEventData);
+    };
+
+    sendData(event: PCEvent) {
+        event.id = this.id;
+        this.sendEvent(new ModEvent("defaultDATA", event));
+    }
 }

@@ -9,6 +9,7 @@ import FiveVFiveOverlay from "./pages/FiveVFiveOverlay";
 import FiveVFiveMod from "./pages/FiveVFiveMod";
 import AbisZOverlay from "./pages/AbisZOverlay";
 import Help from "./pages/Help";
+import PCTurnier from "./pages/PCTurnier";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="AbisZ">
           <Route path=":accountName" element={<AbisZOverlay />} />
+        </Route>
+        <Route path="PCTurnier">
+          <Route path=":mod" element={<PCTurnier />} />
         </Route>
       </Route>
 
