@@ -27,6 +27,8 @@ function EloInfo({
   const query = useQuery();
   const legacy = query.get("legacy") === "true" ? "L" : "";
 
+  const prideflag = getPrideFlag(eloLP);
+
   return (
     <Row className="eloInfo">
       <Col className="ELO d-flex flex-column justify-content-center align-items-center">
@@ -34,7 +36,10 @@ function EloInfo({
           src={`../../${eloDivision + legacy}.png`}
           className="eloimg eloAndLP"
         />
-        <p className="eloAndLP">{lpDisplay}</p>
+        <p className={"eloAndLP pride " + prideflag}>{lpDisplay}</p>
+        {lpDisplay !== "UNRANKED" && (
+          <p className="eloAndLP prideshadow">{lpDisplay}</p>
+        )}
       </Col>
       <Col className="ELO text-center">
         {border ? (
@@ -55,6 +60,19 @@ function EloInfo({
       </Col>
     </Row>
   );
+}
+
+function getPrideFlag(lp: number): string {
+  const flags = [
+    "lgbt-pride",
+    "pan-pride",
+    "ace-pride",
+    "nb-pride",
+    "trans-pride",
+    "bi-pride",
+  ];
+
+  return flags[lp % flags.length];
 }
 
 export default EloInfo;

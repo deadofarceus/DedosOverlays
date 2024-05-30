@@ -30,8 +30,10 @@ function Champion({
           className="flamesOverlayIMG"
           style={{
             width: `${
-              flameSize - iconSizeArray[length - 1][index] * iconScale
+              flameSize - iconSizeArray[length - 1][index] * iconScale * 1.4
             }px`,
+            top: `${-70 + iconSizeArray[length - 1][index] * 3}px`,
+            right: `${-37 + iconSizeArray[length - 1][index] * 1.4}px`,
           }}
         />
       )}

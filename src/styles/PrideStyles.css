@@ -1,0 +1,91 @@
+.lgbt-pride {
+    background: linear-gradient(to bottom,
+            #E50000 0%,
+            #E50000 16.67%,
+            #FF9900 16.67%,
+            #FF9900 33.33%,
+            #FFD500 33.33%,
+            #FFD500 50%,
+            #008000 50%,
+            #008000 66.67%,
+            #0044FF 66.67%,
+            #0044FF 83.33%,
+            #760089 83.33%,
+            #760089 100%);
+}
+
+.trans-pride {
+    background: linear-gradient(to bottom,
+            #55CDFC 0%,
+            #55CDFC 20%,
+            #F7A8B8 20%,
+            #F7A8B8 40%,
+            #FFFFFF 40%,
+            #FFFFFF 60%,
+            #F7A8B8 60%,
+            #F7A8B8 80%,
+            #55CDFC 80%,
+            #55CDFC 100%);
+}
+
+.bi-pride {
+    background: linear-gradient(to bottom,
+            #D60270 0%,
+            #D60270 38%,
+            #9B4F96 38%,
+            #9B4F96 62%,
+            #0038A8 62%,
+            #0038A8 100%);
+}
+
+.pan-pride {
+    background: linear-gradient(to bottom,
+            #FF218C 0%,
+            #FF218C 33.33%,
+            #FFD800 33.33%,
+            #FFD800 66.67%,
+            #21B1FF 66.67%,
+            #21B1FF 100%);
+}
+
+.ace-pride {
+    background: linear-gradient(to bottom,
+            #000000 0%,
+            #000000 25%,
+            #A4A4A4 25%,
+            #A4A4A4 50%,
+            #FFFFFF 50%,
+            #FFFFFF 75%,
+            #800080 75%,
+            #800080 100%);
+}
+
+.nb-pride {
+    background: linear-gradient(to bottom,
+            #FFF430 0%,
+            #FFF430 25%,
+            #FFFFFF 25%,
+            #FFFFFF 50%,
+            #9C59D1 50%,
+            #9C59D1 75%,
+            #222 75%,
+            #222 100%);
+}
+
+.pride {
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: none !important;
+    -webkit-text-fill-color: transparent;
+    background-position: 0 31px;
+    background-size: 100% 47%;
+    text-shadow: none !important;
+    background-repeat: no-repeat;
+}
+
+.prideshadow {
+    position: absolute;
+    top: 289px;
+    z-index: -1;
+    color: transparent;
+}
