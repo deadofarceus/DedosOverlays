@@ -14,6 +14,20 @@
             #760089 100%);
 }
 
+.lesbian-pride {
+    background: linear-gradient(to bottom,
+            #D43027 0%,
+            #D43027 20%,
+            #F99756 20%,
+            #F99756 40%,
+            #FFFFFF 40%,
+            #FFFFFF 60%,
+            #D461A4 60%,
+            #D461A4 80%,
+            #A41E63 80%,
+            #A41E63 100%);
+}
+
 .trans-pride {
     background: linear-gradient(to bottom,
             #55CDFC 0%,

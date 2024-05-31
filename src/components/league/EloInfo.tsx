@@ -70,6 +70,7 @@ function getPrideFlag(lp: number): string {
     "nb-pride",
     "trans-pride",
     "bi-pride",
+    "lesbian-pride",
   ];
 
   return flags[lp % flags.length];
