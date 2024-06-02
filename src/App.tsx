@@ -11,6 +11,7 @@ import FiveVFiveMod from "./pages/FiveVFiveMod";
 import AbisZOverlay from "./pages/AbisZOverlay";
 import Help from "./pages/Help";
 import PCTurnier from "./pages/PCTurnier";
+import GamingTierlist from "./pages/GamingTierlist";
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
         </Route>
         <Route path="PCTurnier">
           <Route path=":mod" element={<PCTurnier />} />
+        </Route>
+        <Route path="Stream">
+          <Route path="GamingTierlist">
+            <Route path=":streamer" element={<GamingTierlist />} />
+          </Route>
         </Route>
       </Route>
 
