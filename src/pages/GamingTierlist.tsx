@@ -17,7 +17,6 @@ function GamingTierlist() {
     const savedStats = localStorage.getItem(
       "gamingtierlist" + STREAMER[index].id
     );
-    console.log("yooooo", savedStats);
 
     if (savedStats) {
       const startStats: number[] = JSON.parse(savedStats);
