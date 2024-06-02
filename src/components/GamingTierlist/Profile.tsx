@@ -33,13 +33,11 @@ function Profile({ name, id, values, callback }: Streamer) {
                         <span key={value}>{value}</span>
                       ))}
                     </div>
-                    {/* <h1>{values[index]}</h1> */}
                     <Form.Range
                       max={6}
                       min={1}
                       step={1}
-                      //   value={values[index]}
-                      defaultValue={values[index]}
+                      defaultValue={1}
                       className="gameSlider"
                       onChange={(event) => {
                         handleSliderChange(index, parseInt(event.target.value));
@@ -59,7 +57,7 @@ function Profile({ name, id, values, callback }: Streamer) {
                       max={6}
                       min={1}
                       step={1}
-                      defaultValue={values[index + 1]}
+                      defaultValue={1}
                       className="gameSlider"
                       onChange={(event) => {
                         handleSliderChange(
