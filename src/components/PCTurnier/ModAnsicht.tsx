@@ -72,21 +72,21 @@ function ModAnsicht() {
                   key={index * 32 + 1}
                   variant="success"
                   onClick={() => {
-                    data.contenders[index].points += 5;
+                    data.contenders[index].points += 1;
                     setData(new PCEvent("", data.contenders));
                   }}
                 >
-                  +5
+                  +1
                 </Button>
                 <Button
                   key={index * 32 + 2}
                   variant="warning"
                   onClick={() => {
-                    data.contenders[index].points -= 5;
+                    data.contenders[index].points -= 1;
                     setData(new PCEvent("", data.contenders));
                   }}
                 >
-                  -5
+                  -1
                 </Button>
                 <Button
                   key={index * 32 + 3}
