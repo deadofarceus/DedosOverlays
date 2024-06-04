@@ -325,6 +325,7 @@ export class PCTurnierWebsocket extends BaseWebSocket<PCEvent> {
 
         const data = JSON.parse(message);
         const PCEventData = data as PCEvent;
+        PCEventData.contenders.sort((a, b) => b.points - a.points);
 
         this.callback(PCEventData);
     };

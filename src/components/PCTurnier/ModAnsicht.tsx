@@ -12,7 +12,6 @@ function ModAnsicht() {
   const query = useQuery();
   const [data, setData] = useState<PCEvent>(BLANKDATA);
   const [p, setP] = useState<string>("");
-  data.contenders.sort((a, b) => b.points - a.points);
 
   useEffect(() => {
     const id = query.get("id");
