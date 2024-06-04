@@ -3,6 +3,7 @@
     font-weight: bold;
     font-family: 'Signika', sans-serif;
     text-align: center;
+    width: 100%;
 }
 
 .PCOverlay {
@@ -162,6 +163,18 @@
     width: 200px;
     margin: 10px;
     filter: drop-shadow(3px 3px 6px #222);
+}
+
+.pointsTEXT {
+    color: azure;
+    border: none;
+    background-color: #222;
+    font-size: larger;
+    width: 100px;
+}
+
+.pointsACUTAL {
+    font-size: xx-large;
 }
 
 .textMitRand {

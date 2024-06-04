@@ -28,11 +28,21 @@ function ModAnsicht() {
         variant="success"
         id="button-addon2"
         className="updateOverlay"
-        onClick={() => ws.sendData(data)}
+        onClick={() => {
+          const forms = document.getElementsByClassName(
+            "pointsACUTAL"
+          ) as HTMLCollectionOf<HTMLInputElement>;
+
+          for (let i = 0; i < forms.length; i++) {
+            data.contenders[i].points += parseInt(forms[i].value);
+            forms[i].value = "0";
+          }
+          ws.sendData(data);
+        }}
       >
         UPDATE OVERLAY
       </Button>
-      <Col className="centerC">
+      <Col className="centerC w-75">
         <h3>Add Player:</h3>
         <InputGroup className="mb-3" id="linkCol">
           <Form.Control
@@ -67,26 +77,17 @@ function ModAnsicht() {
                 rank={index + 1}
               />
               <Col className="centerC" md="3">
-                <Button
-                  key={index * 32 + 1}
-                  variant="success"
-                  onClick={() => {
-                    data.contenders[index].points += 1;
-                    setData(new PCEvent("", data.contenders));
-                  }}
-                >
-                  +1
-                </Button>
-                <Button
-                  key={index * 32 + 2}
-                  variant="warning"
-                  onClick={() => {
-                    data.contenders[index].points -= 1;
-                    setData(new PCEvent("", data.contenders));
-                  }}
-                >
-                  -1
-                </Button>
+                <InputGroup className="mb-3 pointsINPUT">
+                  <InputGroup.Text className="pointsTEXT">
+                    + Punkte
+                  </InputGroup.Text>
+                  <Form.Control
+                    id={"pointsForPlayer" + index}
+                    defaultValue={0}
+                    type="number"
+                    className="pointsACUTAL"
+                  />
+                </InputGroup>
                 <Button
                   key={index * 32 + 3}
                   variant="danger"
