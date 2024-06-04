@@ -12,6 +12,7 @@ import AbisZOverlay from "./pages/AbisZOverlay";
 import Help from "./pages/Help";
 import PCTurnier from "./pages/PCTurnier";
 import GamingTierlist from "./pages/GamingTierlist";
+import RandomCharGen from "./pages/RandomCharGen";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path=":mod" element={<PCTurnier />} />
         </Route>
         <Route path="Stream">
+          <Route path="randomChar" element={<RandomCharGen />} />
           <Route path="GamingTierlist">
             <Route path=":streamer" element={<GamingTierlist />} />
           </Route>

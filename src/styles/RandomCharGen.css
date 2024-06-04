@@ -1,0 +1,15 @@
+.randomCharCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.randomIMG {
+    position: absolute;
+    top: 7%;
+    width: 600px;
+}
+
+.foundation {
+    filter: drop-shadow(4px 4px 3px #222);
+}
