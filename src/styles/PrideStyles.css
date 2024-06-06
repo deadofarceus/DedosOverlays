@@ -103,3 +103,9 @@
     z-index: -1;
     color: transparent;
 }
+
+.fatOutline {
+    -webkit-text-stroke-width: 9px;
+    -webkit-text-stroke-color: black;
+    filter: drop-shadow(4px 4px 2px #222);
+}

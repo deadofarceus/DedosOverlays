@@ -31,14 +31,16 @@ function EloInfo({
 
   return (
     <Row className="eloInfo">
-      <Col className="ELO d-flex flex-column justify-content-center align-items-center">
+      <Col className="ELO centerC">
         <img
           src={`../../${eloDivision + legacy}.png`}
           className="eloimg eloAndLP"
         />
-        <p className={"eloAndLP pride " + prideflag}>{lpDisplay}</p>
+        <p className={"currentLP eloAndLP pride " + prideflag}>{lpDisplay}</p>
         {lpDisplay !== "UNRANKED" && (
-          <p className="eloAndLP prideshadow">{lpDisplay}</p>
+          <p className="fatOutline currentLP eloAndLP prideshadow">
+            {lpDisplay}
+          </p>
         )}
       </Col>
       <Col className="ELO text-center">
@@ -50,9 +52,9 @@ function EloInfo({
         ) : (
           <div className="spacer"></div>
         )}
-        <p className="lpDiff">Heute:</p>
+        <p className="lpDiff blackOutline">Heute:</p>
         <p
-          className="lpDiff"
+          className="lpDiff blackOutline"
           style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}
         >
           {lpToday}

@@ -40,10 +40,12 @@ function EloOverlayTutorial() {
   }, [key, legacyMode, nav, query, queuetype, summonerName, tag]);
   return (
     <Container className="layout ">
-      <h1>Elo Overlay Creator</h1>
+      <h1 className="blackOutline">Elo Overlay Creator</h1>
       <Form id="userInputs" className="centerC">
         <Col className="centerC">
-          <Form.Label className="homeLabel">Summoner Name + Tag:</Form.Label>
+          <Form.Label className="homeLabel blackOutline">
+            Summoner Name + Tag:
+          </Form.Label>
           <InputGroup className="sumTag">
             <Form.Control
               type="text"
@@ -66,7 +68,7 @@ function EloOverlayTutorial() {
             />
           </InputGroup>
           <Form.Group>
-            <Form.Label>
+            <Form.Label className="blackOutline">
               Key: (if you don't have a key visit <a href="/help">Help</a>)
             </Form.Label>
             <Form.Control
@@ -82,7 +84,7 @@ function EloOverlayTutorial() {
         </Col>
         <Row className="centerR noWrap">
           <Form.Group>
-            <Form.Label>Queue Type:</Form.Label>
+            <Form.Label className="blackOutline">Queue Type:</Form.Label>
             <DropdownButton
               drop={"down"}
               variant="primary"
@@ -110,7 +112,7 @@ function EloOverlayTutorial() {
         </Row>
       </Form>
       <Col className="centerC">
-        <h3>Generated Link:</h3>
+        <h3 className="blackOutline">Generated Link:</h3>
         <InputGroup className="mb-3" id="linkCol">
           <Form.Control
             type="text"
@@ -131,7 +133,7 @@ function EloOverlayTutorial() {
           </Button>
         </InputGroup>
         <Container id="help">
-          <h4>What to do with the Link:</h4>
+          <h4 className="blackOutline">What to do with the Link:</h4>
           <ListGroup numbered>
             <ListGroup.Item>Add a Browser Source in OBS</ListGroup.Item>
             <ListGroup.Item>
