@@ -1,5 +1,5 @@
 import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
-import { DeathData } from "./DeathTypes";
+import { Player } from "./DeathcounterTypes";
 import { Game, Team } from "./FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 import { PCEvent } from "./PCTurnierTypes";
@@ -158,17 +158,15 @@ export class EloWebsocket extends BaseWebSocket<Account> {
     }
 }
 
-export class DeathCounterWebsocket extends BaseWebSocket<DeathData> {
+export class DeathCounterWebsocket extends BaseWebSocket<Player> {
     id: string;
-    currentStats: DeathData;
-    timerCallback: React.Dispatch<React.SetStateAction<number>>;
+    mod: boolean;
 
-    constructor(id: string, deathData: DeathData, callback: React.Dispatch<React.SetStateAction<DeathData>>, setBosstimer: React.Dispatch<React.SetStateAction<number>>) {
+    constructor(id: string, callback: React.Dispatch<React.SetStateAction<Player>>, mod: boolean) {
         super(callback, `${GLOBALWSADRESS}?id=${id}`);
         this.id = id;
-        this.currentStats = deathData;
         this.callback = callback;
-        this.timerCallback = setBosstimer;
+        this.mod = mod;
     }
 
     handleMessage = (event: MessageEvent) => {
@@ -178,44 +176,17 @@ export class DeathCounterWebsocket extends BaseWebSocket<DeathData> {
         }
         const data = JSON.parse(message);
 
-        const deathData = data.deathData as DeathData;
+        console.log(data);
 
-        this.currentStats = deathData;
+        const player = data.player as Player;
 
-        if (data.timerStart) {
-            this.timerCallback!(data.timerStart);
+        if (!this.mod) {
+            this.callback(player);
         }
-        this.callback(deathData);
     };
 
-    sendDeaths(timerStart: number) {
-        const deathEvent = new DeathEvent(this.id, this.currentStats, timerStart);
-        const modEvent = new ModEvent("death/new", deathEvent);
-        this.sendEvent(modEvent);
-    }
-
-    sendData() {
-        const deathEvent = new DeathEvent(this.id, this.currentStats, undefined!);
-        const modEvent = new ModEvent("death/new", deathEvent);
-        this.sendEvent(modEvent);
-    }
-
-    changeDeaths(playerName: string, deathsNew: number) {
-        this.currentStats.players.forEach(p => {
-            if (p.playerName === playerName) {
-                p.deaths = deathsNew;
-            }
-        });
-        this.sendData();
-    }
-
-    changeName(playerName: string, playerNameValue: string) {
-        this.currentStats.players.forEach(p => {
-            if (p.playerName === playerName) {
-                p.playerName = playerNameValue;
-            }
-        });
-        this.sendData();
+    sendData(player: Player): void {
+        this.sendEvent(new ModEvent("fiveVfive", new DeathEvent(this.id, player)));
     }
 }
 

@@ -5,7 +5,6 @@ import EloOverlay from "./pages/EloOverlay";
 import EloOverlayTutorial from "./pages/EloOverlayTutorial";
 import Home from "./pages/Home";
 import ErrorPage from "./ErrorPage";
-import DeathOverlay from "./pages/DeathOverlay";
 import FiveVFiveOverlay from "./pages/FiveVFiveOverlay";
 import FiveVFiveMod from "./pages/FiveVFiveMod";
 import AbisZOverlay from "./pages/AbisZOverlay";
@@ -13,6 +12,8 @@ import Help from "./pages/Help";
 import PCTurnier from "./pages/PCTurnier";
 import GamingTierlist from "./pages/GamingTierlist";
 import RandomCharGen from "./pages/RandomCharGen";
+import Deathcounter from "./pages/Deathcounter";
+import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
 
 function App() {
   return (
@@ -26,8 +27,9 @@ function App() {
           <Route path="Mod" element={<FiveVFiveMod />} />
           <Route path="Overlay" element={<FiveVFiveOverlay />} />
         </Route>
-        <Route path="Death">
-          <Route path="EldenRing" element={<DeathOverlay />} />
+        <Route path="DeathCounter">
+          <Route path="mod" element={<Deathcounter />} />
+          <Route path="overlay" element={<DeathOverlay />} />
         </Route>
         <Route path="EloOverlay">
           <Route index element={<EloOverlayTutorial />} />

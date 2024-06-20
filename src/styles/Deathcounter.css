@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+.DeathContainer {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    text-shadow: 1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000,
+        0px 1px 0 #000,
+        0px -1px 0 #000,
+        -1px 0px 0 #000,
+        1px 0px 0 #000,
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000,
+        0px 2px 0 #000,
+        0px -2px 0 #000,
+        -2px 0px 0 #000,
+        2px 0px 0 #000,
+        1px 2px 0 #000,
+        -1px 2px 0 #000,
+        1px -2px 0 #000,
+        -1px -2px 0 #000,
+        2px 1px 0 #000,
+        -2px 1px 0 #000,
+        2px -1px 0 #000,
+        -2px -1px 0 #000;
+}
+
+.scrollable-list {
+    max-height: 500px;
+    /* Du kannst die Höhe anpassen, wie du möchtest */
+    overflow-y: auto;
+}
+
+.changeBossContainer {
+    border-radius: 20px;
+    overflow: hidden;
+    border: solid 3px #6e41c0;
+}
+
+.changeBossItem {
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    font-size: 1.5em;
+}
+
+.changeBossItem:hover {
+    cursor: pointer;
+    background-color: antiquewhite;
+}
+
+.changeBossItem:active {
+    cursor: pointer;
+    background-color: rgb(192, 192, 172);
+}
+
+.percentageSlider {
+    padding: 15px;
+}
+
+.percentageSlider::-webkit-slider-runnable-track {
+    height: 25px;
+}
+
+.percentageSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 2px solid #936565;
+    height: 36px;
+    width: 36px;
+}
+
+.percentageSliderLabels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 25px;
+}
+
+.percentageGroup {
+    border: solid #36304a 4px;
+    border-radius: 15px;
+    margin: 3px;
+    padding: 5px;
+}
+
+.BossCard {
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    font-size: 1.3em;
+    border-radius: 20px;
+    border: solid #645691 4px;
+}
+
+.progressChart {
+    border-radius: 20px;
+    border: solid #645691 4px;
+    padding: 10px;
+    background-color: #000000;
+}
+
+.progressChartCon {
+    height: 400px;
+}
+
+
+
+
+
+.deathOverlayCon {
+    width: 800px;
+    height: 600px;
+    color: azure;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    padding: 0;
+}
+
+.deathOverlayGraph {
+    height: 400px;
+    background-color: #101010a6;
+    border: solid 4px #ef8b09;
+    padding: 10px;
+    border-radius: 30px;
+    margin: 5px;
+}
+
+.numOfDeaths {
+    width: 45%;
+    background-color: #101010a6;
+    border: solid 4px #ef8b09;
+    padding: 10px;
+    border-radius: 30px;
+    margin: 5px;
+    font-size: 2em;
+}
+
+.deathOverlayGraphCon {
+    padding: 0;
+}

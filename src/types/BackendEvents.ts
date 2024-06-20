@@ -1,4 +1,4 @@
-import { DeathData } from "./DeathTypes";
+import { Player } from "./DeathcounterTypes";
 import { Team } from "./FiveVFiveTypes";
 import { Account } from "./LeagueTypes";
 
@@ -98,12 +98,10 @@ export class LeagueLPEvent {
 
 export class DeathEvent {
     id: string;
-    deathData: DeathData;
-    timerStart: number;
-    constructor(id: string, deathData: DeathData, timerStart: number) {
-        this.deathData = deathData;
+    player: Player;
+    constructor(id: string, player: Player) {
+        this.player = player;
         this.id = id;
-        this.timerStart = timerStart;
     }
 }
 export class FiveVFiveEvent {
