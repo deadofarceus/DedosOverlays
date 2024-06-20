@@ -8,6 +8,9 @@ function ControlPanel({ player, callback }: PlayerD) {
   const HPARRAY = current.secondPhase
     ? [0, 50, 100, 150, 200]
     : [0, 25, 50, 75, 100];
+
+  const maximumHP = current.secondPhase ? 200 : 100;
+
   return (
     <Col xs={4} className="w-75">
       <h2>{current.name}</h2>
@@ -38,7 +41,7 @@ function ControlPanel({ player, callback }: PlayerD) {
             ))}
           </div>
           <Form.Range
-            max={100}
+            max={maximumHP}
             min={0}
             step={1}
             defaultValue={100}
