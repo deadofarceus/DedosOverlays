@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Player, PlayerD } from "../../types/DeathcounterTypes";
 
 function ControlPanel({ player, callback }: PlayerD) {
@@ -14,24 +14,43 @@ function ControlPanel({ player, callback }: PlayerD) {
   return (
     <Col xs={4} className="w-75">
       <h2>{current.name}</h2>
-      <Button
-        size="lg"
-        variant="primary"
-        className="mb-3 w-50"
-        onClick={() => {
-          player.bosses[player.currentBoss].deaths.push(percentage);
-          callback(
-            new Player(
-              player.id,
-              player.name,
-              player.bosses,
-              player.currentBoss
-            )
-          );
-        }}
-      >
-        {"New Death " + percentage + "%"}
-      </Button>
+      <Row className="w-100 centerR">
+        <Button
+          size="lg"
+          variant="primary"
+          className="w-50 deathbutton"
+          onClick={() => {
+            player.bosses[player.currentBoss].deaths.push(percentage);
+            callback(
+              new Player(
+                player.id,
+                player.name,
+                player.bosses,
+                player.currentBoss
+              )
+            );
+          }}
+        >
+          {"New Death " + percentage + "%"}
+        </Button>
+        <Button
+          className="w-25 deathbutton"
+          variant="warning"
+          onClick={() => {
+            player.bosses[player.currentBoss].deaths.pop();
+            callback(
+              new Player(
+                player.id,
+                player.name,
+                player.bosses,
+                player.currentBoss
+              )
+            );
+          }}
+        >
+          Delete last death
+        </Button>
+      </Row>
       {current.name !== "Other Monsters or Heights" && (
         <Form.Group className="percentageGroup">
           <Form.Label className="formlabel">HP Left %</Form.Label>
@@ -52,31 +71,35 @@ function ControlPanel({ player, callback }: PlayerD) {
           />
         </Form.Group>
       )}
-      {current.name !== "Other Monsters or Heights" &&
-        !current.secondPhase &&
-        percentage === 0 && (
-          <Button
-            size="lg"
-            variant="secondary"
-            className="mt-3"
-            onClick={() => {
-              current.secondPhase = true;
-              for (let i = 0; i < current.deaths.length; i++) {
+      {current.name !== "Other Monsters or Heights" && percentage === 0 && (
+        <Button
+          size="lg"
+          variant="secondary"
+          className="mt-3"
+          onClick={() => {
+            current.secondPhase = !current.secondPhase;
+            for (let i = 0; i < current.deaths.length; i++) {
+              if (current.secondPhase) {
                 current.deaths[i] = current.deaths[i] += 100;
+              } else {
+                current.deaths[i] = current.deaths[i] -= 100;
               }
-              callback(
-                new Player(
-                  player.id,
-                  player.name,
-                  player.bosses,
-                  player.currentBoss
-                )
-              );
-            }}
-          >
-            Enable Second Phase
-          </Button>
-        )}
+            }
+            callback(
+              new Player(
+                player.id,
+                player.name,
+                player.bosses,
+                player.currentBoss
+              )
+            );
+          }}
+        >
+          {!current.secondPhase
+            ? "Enable Second Phase"
+            : "Disable Second Phase"}
+        </Button>
+      )}
     </Col>
   );
 }

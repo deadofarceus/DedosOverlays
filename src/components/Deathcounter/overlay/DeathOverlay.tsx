@@ -25,8 +25,8 @@ function DeathOverlay() {
     <Container className="deathOverlayCon">
       <Col className="centerC">
         <Row className="w-100">
-          <span className="numOfDeaths">💀 Gesamt: {total}</span>
-          <span className="numOfDeaths">
+          <span className="numOfDeaths blackOutline">💀 Gesamt: {total}</span>
+          <span className="numOfDeaths blackOutline">
             💀 {current.name}: {current.deaths.length - 1}
           </span>
         </Row>
