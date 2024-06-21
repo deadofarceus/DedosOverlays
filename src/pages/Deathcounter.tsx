@@ -35,12 +35,6 @@ function Deathcounter() {
 
   if (ws && ws.ws.readyState === ws.ws.OPEN) {
     ws.sendData(player);
-    localStorage.setItem(id + "EldenRingDeathcounter", JSON.stringify(player));
-
-    console.log(
-      "NEUER SAVE",
-      JSON.parse(localStorage.getItem(id + "EldenRingDeathcounter")!)
-    );
   }
   console.log(player);
 

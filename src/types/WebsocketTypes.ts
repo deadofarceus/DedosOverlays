@@ -180,6 +180,8 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
 
         const player = data.player as Player;
 
+        localStorage.setItem(this.id + "EldenRingDeathcounter", JSON.stringify(player));
+
         if (!this.mod) {
             this.callback(player);
         }
