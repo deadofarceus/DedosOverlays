@@ -31,7 +31,7 @@ function GraphBox({ player }: PlayerD) {
       x: {
         title: {
           display: true,
-          text: "Trys",
+          text: "Tries",
           color: "#FFFFFF",
         },
         grid: {
@@ -65,7 +65,7 @@ function GraphBox({ player }: PlayerD) {
       },
       title: {
         display: true,
-        text: "BOSS NAME",
+        text: current.name,
         color: "#FFFFFF",
       },
     },
