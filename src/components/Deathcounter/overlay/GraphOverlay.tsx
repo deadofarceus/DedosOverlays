@@ -25,6 +25,8 @@ ChartJS.register(
 function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
   const boss = player.bosses[player.currentBoss];
   const NUMBEROFTRIESSHOWN = tries;
+  const personalBest = Math.min(...boss.deaths);
+
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
     scales: {
@@ -42,7 +44,7 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
           color: "#FFFFFF",
           font: {
             family: "Libre Baskerville", // Schriftart
-            size: 30, // Schriftgröße
+            size: 25, // Schriftgröße
           },
         },
       },
@@ -63,9 +65,9 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
           color: "#FFFFFF",
           font: {
             family: "Libre Baskerville", // Schriftart
-            size: 20, // Schriftgröße
+            size: 30, // Schriftgröße
           },
-          stepSize: 20,
+          stepSize: 1,
         },
       },
     },
@@ -97,8 +99,6 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
     deaths < NUMBEROFTRIESSHOWN || player.showAll
       ? boss.deaths
       : boss.deaths.slice(deaths - (NUMBEROFTRIESSHOWN - 1), deaths + 1);
-
-  const personalBest = Math.min(...boss.deaths);
 
   const data = {
     labels: labels,
