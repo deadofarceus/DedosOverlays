@@ -49,6 +49,7 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
         },
       },
       y: {
+        beginAtZero: true,
         title: {
           display: true,
           text: "HP left in %",
