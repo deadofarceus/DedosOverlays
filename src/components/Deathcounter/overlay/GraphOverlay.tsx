@@ -22,7 +22,8 @@ ChartJS.register(
   Legend
 );
 
-function GraphOverlay({ boss }: { boss: Boss }) {
+function GraphOverlay({ boss, tries }: { boss: Boss; tries: number }) {
+  const NUMBEROFTRIESSHOWN = tries;
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
     scales: {
@@ -86,11 +87,17 @@ function GraphOverlay({ boss }: { boss: Boss }) {
   const deaths = boss.deaths.length - 1;
 
   const labels =
-    deaths < 5
+    deaths < NUMBEROFTRIESSHOWN
       ? [...Array(deaths + 1).keys()]
-      : [...Array(5).keys()].map((i) => deaths - 5 + i + 1);
+      : [...Array(NUMBEROFTRIESSHOWN).keys()].map(
+          (i) => deaths - NUMBEROFTRIESSHOWN + i + 1
+        );
   const percentages =
-    deaths < 5 ? boss.deaths : boss.deaths.slice(deaths - 4, deaths + 1);
+    deaths < NUMBEROFTRIESSHOWN
+      ? boss.deaths
+      : boss.deaths.slice(deaths - (NUMBEROFTRIESSHOWN - 1), deaths + 1);
+
+  const personalBest = Math.min(...boss.deaths);
 
   const data = {
     labels: labels,
@@ -106,6 +113,13 @@ function GraphOverlay({ boss }: { boss: Boss }) {
         pointRadius: 4,
         fill: false,
         tension: 0.1, // für geschmeidigere Linien
+      },
+      {
+        label: "Personal Best",
+        data: Array.from({ length: percentages.length }, () => personalBest),
+        borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
+        borderWidth: 5,
+        fill: false,
       },
     ],
   };

@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { PlayerD } from "../../types/DeathcounterTypes";
+import { Player, PlayerD } from "../../types/DeathcounterTypes";
 
 ChartJS.register(
   CategoryScale,
@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-function GraphBox({ player }: PlayerD) {
+function GraphBox({ player, callback }: PlayerD) {
   const current = player.bosses[player.currentBoss];
 
   const options = {
@@ -93,7 +93,33 @@ function GraphBox({ player }: PlayerD) {
   return (
     <Container className="progressChartCon centerC">
       {current.name !== "Other Monsters or Heights" && (
-        <Line className="progressChart" options={options} data={data} />
+        <Container className="progressChartCon centerC">
+          <Line className="progressChart" options={options} data={data} />
+          <Form.Group className="percentageGroup">
+            <Form.Label className="formlabel">
+              Tries in Overlay: {player.triesInGraph}
+            </Form.Label>
+            <Form.Range
+              max={current.deaths.length - 1}
+              min={5}
+              step={1}
+              defaultValue={5}
+              className="percentageSlider"
+              onChange={(event) => {
+                player.triesInGraph = parseInt(event.target.value);
+                callback(
+                  new Player(
+                    player.id,
+                    player.name,
+                    player.bosses,
+                    player.currentBoss,
+                    player.triesInGraph
+                  )
+                );
+              }}
+            />
+          </Form.Group>
+        </Container>
       )}
     </Container>
   );

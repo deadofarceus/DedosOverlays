@@ -26,7 +26,8 @@ function ControlPanel({ player, callback }: PlayerD) {
                 player.id,
                 player.name,
                 player.bosses,
-                player.currentBoss
+                player.currentBoss,
+                player.triesInGraph
               )
             );
           }}
@@ -43,7 +44,8 @@ function ControlPanel({ player, callback }: PlayerD) {
                 player.id,
                 player.name,
                 player.bosses,
-                player.currentBoss
+                player.currentBoss,
+                player.triesInGraph
               )
             );
           }}
@@ -90,7 +92,8 @@ function ControlPanel({ player, callback }: PlayerD) {
                 player.id,
                 player.name,
                 player.bosses,
-                player.currentBoss
+                player.currentBoss,
+                player.triesInGraph
               )
             );
           }}
