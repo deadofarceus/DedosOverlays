@@ -4,13 +4,14 @@ export class Player {
     bosses: Boss[];
     currentBoss: number;
     triesInGraph: number;
-
-    constructor(id: string, name: string, bosses: Boss[] | undefined, currentBoss: number, triesInGraph: number) {
+    showAll: boolean;
+    constructor(id: string, name: string, bosses: Boss[] | undefined, currentBoss: number, triesInGraph: number, showAll: boolean) {
         this.id = id;
         this.name = name;
         this.bosses = bosses ? bosses : [new Boss("Other Monsters or Heights", undefined, false)];
         this.currentBoss = currentBoss;
         this.triesInGraph = triesInGraph;
+        this.showAll = showAll;
     }
 }
 
@@ -31,4 +32,4 @@ export interface PlayerD {
     callback: React.Dispatch<React.SetStateAction<Player>>;
 }
 
-export const DEFAULTPLAYER = new Player("TEST", "TESTPLAYER", undefined, 0, 5);
+export const DEFAULTPLAYER = new Player("TEST", "TESTPLAYER", undefined, 0, 5, false);

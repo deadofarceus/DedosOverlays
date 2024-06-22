@@ -23,7 +23,10 @@ function Deathcounter() {
     if (!ws && id) {
       ws = new DeathCounterWebsocket(id, setPlayer, true);
       if (savedPlayer) {
-        setPlayer(JSON.parse(savedPlayer));
+        const sPlayer = JSON.parse(savedPlayer) as Player;
+        sPlayer.triesInGraph = 5;
+        sPlayer.showAll = false;
+        setPlayer(sPlayer);
       } else {
         localStorage.setItem(
           id + "EldenRingDeathcounter",

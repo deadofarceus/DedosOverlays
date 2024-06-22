@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { Boss } from "../../../types/DeathcounterTypes";
+import { Player } from "../../../types/DeathcounterTypes";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -22,7 +22,8 @@ ChartJS.register(
   Legend
 );
 
-function GraphOverlay({ boss, tries }: { boss: Boss; tries: number }) {
+function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
+  const boss = player.bosses[player.currentBoss];
   const NUMBEROFTRIESSHOWN = tries;
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
@@ -87,13 +88,13 @@ function GraphOverlay({ boss, tries }: { boss: Boss; tries: number }) {
   const deaths = boss.deaths.length - 1;
 
   const labels =
-    deaths < NUMBEROFTRIESSHOWN
+    deaths < NUMBEROFTRIESSHOWN || player.showAll
       ? [...Array(deaths + 1).keys()]
       : [...Array(NUMBEROFTRIESSHOWN).keys()].map(
           (i) => deaths - NUMBEROFTRIESSHOWN + i + 1
         );
   const percentages =
-    deaths < NUMBEROFTRIESSHOWN
+    deaths < NUMBEROFTRIESSHOWN || player.showAll
       ? boss.deaths
       : boss.deaths.slice(deaths - (NUMBEROFTRIESSHOWN - 1), deaths + 1);
 
@@ -119,6 +120,8 @@ function GraphOverlay({ boss, tries }: { boss: Boss; tries: number }) {
         data: Array.from({ length: percentages.length }, () => personalBest),
         borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
         borderWidth: 5,
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
         fill: false,
       },
     ],

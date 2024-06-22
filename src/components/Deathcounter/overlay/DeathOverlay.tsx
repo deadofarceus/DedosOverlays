@@ -30,7 +30,7 @@ function DeathOverlay() {
             💀 {current.name}: {current.deaths.length - 1}
           </span>
         </Row>
-        <GraphOverlay boss={current} tries={player.triesInGraph} />
+        <GraphOverlay player={player} tries={player.triesInGraph} />
       </Col>
     </Container>
   );

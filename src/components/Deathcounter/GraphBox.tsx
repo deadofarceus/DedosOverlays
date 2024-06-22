@@ -1,4 +1,4 @@
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Row } from "react-bootstrap";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -95,30 +95,51 @@ function GraphBox({ player, callback }: PlayerD) {
       {current.name !== "Other Monsters or Heights" && (
         <Container className="progressChartCon centerC">
           <Line className="progressChart" options={options} data={data} />
-          <Form.Group className="percentageGroup">
-            <Form.Label className="formlabel">
-              Tries in Overlay: {player.triesInGraph}
-            </Form.Label>
-            <Form.Range
-              max={current.deaths.length - 1}
-              min={5}
-              step={1}
-              defaultValue={5}
-              className="percentageSlider"
-              onChange={(event) => {
-                player.triesInGraph = parseInt(event.target.value);
-                callback(
-                  new Player(
-                    player.id,
-                    player.name,
-                    player.bosses,
-                    player.currentBoss,
-                    player.triesInGraph
-                  )
-                );
-              }}
-            />
-          </Form.Group>
+          <Row className="w-100 centerR">
+            <Form.Group className="percentageGroup">
+              <Form.Label className="formlabel">
+                Tries in Overlay: {player.triesInGraph}
+              </Form.Label>
+              <Form.Range
+                max={current.deaths.length - 1}
+                min={5}
+                step={1}
+                defaultValue={5}
+                className="percentageSlider"
+                onChange={(event) => {
+                  player.triesInGraph = parseInt(event.target.value);
+                  callback(
+                    new Player(
+                      player.id,
+                      player.name,
+                      player.bosses,
+                      player.currentBoss,
+                      player.triesInGraph,
+                      player.showAll
+                    )
+                  );
+                }}
+              />
+              <Form.Check
+                type="switch"
+                className="checkAllDeaths"
+                label="Show all Tries"
+                onChange={(event) => {
+                  player.showAll = event.target.checked;
+                  callback(
+                    new Player(
+                      player.id,
+                      player.name,
+                      player.bosses,
+                      player.currentBoss,
+                      player.triesInGraph,
+                      player.showAll
+                    )
+                  );
+                }}
+              />
+            </Form.Group>
+          </Row>
         </Container>
       )}
     </Container>
