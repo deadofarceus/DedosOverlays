@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Tick,
 } from "chart.js";
 
 ChartJS.register(
@@ -63,12 +64,42 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
           color: "#606060",
         },
         ticks: {
-          color: "#FFFFFF",
+          color: function (context: { tick: Tick }) {
+            if (context.tick.value === personalBest) {
+              return "#00FF00"; // Grüne Farbe für Personal Best
+            }
+            return "#FFFFFF"; // Standardfarbe für andere Ticks
+          },
           font: {
             family: "Libre Baskerville", // Schriftart
             size: 30, // Schriftgröße
           },
-          stepSize: 1,
+          callback: function (value: string | number) {
+            if (value === personalBest) {
+              return `PB ${value}`;
+            }
+            return value;
+          },
+        },
+        afterBuildTicks: function (scale: LinearScale) {
+          if (!scale.ticks.find((t) => t.value === personalBest)) {
+            let iOfNearest20 = -1;
+            let distance = 100;
+            for (let i = 0; i < scale.ticks.length; i++) {
+              const currentDistance = Math.abs(
+                personalBest - scale.ticks[i].value
+              );
+              if (iOfNearest20 === -1) {
+                iOfNearest20 = i;
+                distance = currentDistance;
+              } else if (currentDistance < distance) {
+                iOfNearest20 = i;
+                distance = currentDistance;
+              }
+            }
+            scale.ticks.splice(iOfNearest20, 1);
+            scale.ticks.push({ value: personalBest, label: `${personalBest}` });
+          }
         },
       },
     },
