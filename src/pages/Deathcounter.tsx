@@ -20,23 +20,24 @@ function Deathcounter() {
   useEffect(() => {
     const savedPlayer = localStorage.getItem(id + "EldenRingDeathcounter");
 
+    if (savedPlayer) {
+      const sPlayer = JSON.parse(savedPlayer) as Player;
+      sPlayer.triesInGraph = 5;
+      sPlayer.showAll = false;
+      setPlayer(sPlayer);
+    } else {
+      localStorage.setItem(
+        id + "EldenRingDeathcounter",
+        JSON.stringify(DEFAULTPLAYER)
+      );
+    }
     if (!ws && id) {
       ws = new DeathCounterWebsocket(id, setPlayer, true);
-      if (savedPlayer) {
-        const sPlayer = JSON.parse(savedPlayer) as Player;
-        sPlayer.triesInGraph = 5;
-        sPlayer.showAll = false;
-        setPlayer(sPlayer);
-      } else {
-        localStorage.setItem(
-          id + "EldenRingDeathcounter",
-          JSON.stringify(DEFAULTPLAYER)
-        );
-      }
     }
   }, [id, query]);
 
   if (ws && ws.ws.readyState === ws.ws.OPEN) {
+    localStorage.setItem(id + "EldenRingDeathcounter", JSON.stringify(player));
     ws.sendData(player);
   }
   console.log(player);
