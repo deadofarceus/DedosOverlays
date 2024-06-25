@@ -36,7 +36,7 @@ function DeathOverlay() {
         {longestWord > 10 && (
           <Col className="w-100 centerC">
             <span className="numOfDeaths blackOutline">💀 Gesamt: {total}</span>
-            <span className="numOfDeaths w-100 blackOutline">
+            <span className="numOfDeathsLong blackOutline">
               💀 {current.name}: {current.deaths.length - 1}
             </span>
           </Col>
