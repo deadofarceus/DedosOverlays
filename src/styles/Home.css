@@ -42,6 +42,7 @@
 .image-container {
     position: relative;
     width: 100%;
+    background-color: black;
 }
 
 .hover-image {

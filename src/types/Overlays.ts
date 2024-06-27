@@ -11,7 +11,7 @@ export const OVERLAYS: Overlay[] = [
         game: "Elden Ring/other Soulslike",
         imageURL: "/EldenRing.png",
         hoverImageURL: "/EldenRingHover.png",
-        description: "Shows total and boss death with an nice little progress graph! Its not an overlay for the game but for your stream/when working with OBS. ",
+        description: "Shows total and boss death with an nice little progress graph! Its not an overlay for the game (not a mod) but for your stream/when working with OBS. ",
         url: "Deathcounter"
     },
     {

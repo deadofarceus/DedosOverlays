@@ -1,60 +1,100 @@
-import { Container, Row, Col } from "react-bootstrap";
-import BossInfo from "../components/Deathcounter/BossInfo";
-import ControlPanel from "../components/Deathcounter/ControlPanel";
-import GraphBox from "../components/Deathcounter/GraphBox";
-import ChangeBoss from "../components/Deathcounter/ChangeBoss";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 import "../styles/Deathcounter.css";
-import { DEFAULTPLAYER, Player } from "../types/DeathcounterTypes";
-import { useEffect, useState } from "react";
-import { useQuery } from "../types/UsefulFunctions";
-import { DeathCounterWebsocket } from "../types/WebsocketTypes";
-
-let ws: DeathCounterWebsocket;
+import { useState } from "react";
 
 function Deathcounter() {
   document.body.className = "noOBS";
-  const [player, setPlayer] = useState<Player>(DEFAULTPLAYER);
-  const query = useQuery();
-  const id = query.get("id");
-
-  useEffect(() => {
-    const savedPlayer = localStorage.getItem(id + "EldenRingDeathcounter");
-
-    if (savedPlayer) {
-      const sPlayer = JSON.parse(savedPlayer) as Player;
-      sPlayer.triesInGraph = 5;
-      sPlayer.showAll = false;
-      setPlayer(sPlayer);
-    } else {
-      localStorage.setItem(
-        id + "EldenRingDeathcounter",
-        JSON.stringify(DEFAULTPLAYER)
-      );
-    }
-    if (!ws && id) {
-      ws = new DeathCounterWebsocket(id, setPlayer, true);
-    }
-  }, [id, query]);
-
-  if (ws && ws.ws.readyState === ws.ws.OPEN) {
-    localStorage.setItem(id + "EldenRingDeathcounter", JSON.stringify(player));
-    ws.sendData(player);
-  }
-  console.log(player);
+  const [id, setID] = useState<string>("");
+  const overlayLink = `https://arceus-overlays.netlify.app/deathcounter/overlay?id=${id}`;
+  const modLink = `https://arceus-overlays.netlify.app/deathcounter/mod?id=${id}`;
 
   return (
-    <Container className="DeathContainer w-100 centerC">
-      <Row className="w-100">
-        <ChangeBoss player={player} callback={setPlayer} />
-        <Col className="centerC" xs={9}>
-          <Row className="w-100 h-50">
-            <BossInfo player={player} callback={setPlayer} />
-            <ControlPanel player={player} callback={setPlayer} />
-          </Row>
-          <Row className="mt-3 w-100 h-50">
-            <GraphBox player={player} callback={setPlayer} />
-          </Row>
+    <Container className="DeathCounterCon w-100 centerC">
+      <h1 className="">Deathcounter Overlay</h1>
+      <Row className="centerR w-100">
+        <Col className="centerC w-50">
+          <Form className="centerC">
+            <Col className="centerC">
+              <Form.Group>
+                <Form.Label className="blackOutline">
+                  Choose a random ID it can be anything:
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your ID"
+                  value={id}
+                  id="dedoKey"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setID(e.target.value)
+                  }
+                />
+              </Form.Group>
+            </Col>
+          </Form>
+          <h3 className="blackOutline">Generated Mod Link</h3>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              value={modLink}
+              readOnly
+              aria-describedby="basic-addon2"
+              className="link"
+            />
+            <Button
+              variant="outline-secondary"
+              id="button-addon2"
+              disabled={!id}
+              onClick={() => {
+                navigator.clipboard.writeText(modLink);
+              }}
+            >
+              Copy
+            </Button>
+          </InputGroup>
+          <h3 className="blackOutline">Generated Overlay Link</h3>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              value={overlayLink}
+              readOnly
+              aria-describedby="basic-addon2"
+              className="link"
+            />
+            <Button
+              variant="outline-secondary"
+              id="button-addon2"
+              disabled={!id}
+              onClick={() => {
+                navigator.clipboard.writeText(overlayLink);
+              }}
+            >
+              Copy
+            </Button>
+          </InputGroup>
+          <Container id="help">
+            <h4 className="blackOutline">What to do with the overlay link:</h4>
+            <ListGroup numbered>
+              <ListGroup.Item>Add a Browser Source in OBS</ListGroup.Item>
+              <ListGroup.Item>
+                Copy and paste the link in the URL field
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Set width to 800px and heigth to 800px an resize it the way you
+                want. Most of the time in souls games the top right corner is
+                the way to go.
+              </ListGroup.Item>
+            </ListGroup>
+          </Container>
         </Col>
+        <Col className="centerC w-50">FRAGEN UND ERKLÄRUNG</Col>
       </Row>
     </Container>
   );

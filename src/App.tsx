@@ -14,6 +14,7 @@ import GamingTierlist from "./pages/GamingTierlist";
 import RandomCharGen from "./pages/RandomCharGen";
 import Deathcounter from "./pages/Deathcounter";
 import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
+import DeathcounterMod from "./pages/DeathcounterMod";
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path="Overlay" element={<FiveVFiveOverlay />} />
         </Route>
         <Route path="DeathCounter">
-          <Route path="mod" element={<Deathcounter />} />
+          <Route index element={<Deathcounter />} />
+          <Route path="mod" element={<DeathcounterMod />} />
           <Route path="overlay" element={<DeathOverlay />} />
         </Route>
         <Route path="EloOverlay">
