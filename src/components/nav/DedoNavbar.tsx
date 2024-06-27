@@ -18,6 +18,12 @@ function DedoNavbar() {
         <Navbar.Brand href="/">Dedos Overlays</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/help">Help</Nav.Link>
+          <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
+            <img
+              height="36"
+              src="https://storage.ko-fi.com/cdn/kofi1.png?v=3"
+            />
+          </a>
           {/* <Nav.Link href="/about">About</Nav.Link> */}
         </Nav>
       </Container>
