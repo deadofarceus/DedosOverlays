@@ -20,9 +20,9 @@ export function createDedoicPrediction(deaths: number[]): number[] {
                 distanceBetweenPBs.push(distance);
                 distance = 0;
             }
-            distanceBetweenProgressTries.push({ distance: distanceBPT, times: Math.pow(Math.E, 0.05 * i) });
-            distanceBPT = 0;
+            distanceBetweenProgressTries.push({ distance: distanceBPT, times: Math.pow(Math.E, 0.05 * i) * distanceBPT });
             deathsToDistance.push({ distance: death, times: Math.pow(Math.E, 0.05 * i) + 1 });
+            distanceBPT = 0;
         } else {
             deathsToDistance.push({ distance: death, times: 1 });
         }
@@ -41,15 +41,15 @@ export function createDedoicPrediction(deaths: number[]): number[] {
 
     // console.log("------------------------------------");
     // console.log("DEATHS", deaths);
-    // console.log("DISTANCE TO LAST PROGRESS", distanceBPT);
+    console.log("DISTANCE TO LAST PROGRESS", distanceBPT);
     // console.log("pushAmount", pushAmount);
     // console.log("LINEAR FUNCTION", linearFunction);
     // console.log("personalBests:", personalBests);
     // console.log("distanceBetweenPBs:", distanceBetweenPBs);
-    // console.log("distanceBetweenProgressTries:", distanceBetweenProgressTries);
+    console.log("distanceBetweenProgressTries:", distanceBetweenProgressTries);
     // console.log("mean:", mean);
     // console.log("stdDev:", stdDev);
-    // console.log("meanOfDistance:", meanOfDistance);
+    console.log("meanOfDistance:", meanOfDistance);
     // console.log("deathsToDistance:", deathsToDistance);
     // console.log("PREDICTION:", prediction);
     return prediction;
