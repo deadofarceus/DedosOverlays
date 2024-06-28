@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Player, PlayerD } from "../../types/DeathcounterTypes";
+import { createDedoicPrediction } from "../../types/DedoicPrediction";
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,8 @@ ChartJS.register(
 
 function GraphBox({ player, callback }: PlayerD) {
   const current = player.bosses[player.currentBoss];
+  const personalBest = Math.min(...current.deaths);
+  const prediction = createDedoicPrediction(current.deaths);
 
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
@@ -73,7 +76,7 @@ function GraphBox({ player, callback }: PlayerD) {
   };
 
   const data = {
-    labels: [...Array(current.deaths.length).keys()],
+    labels: [...Array(current.deaths.length + prediction.length).keys()],
     datasets: [
       {
         label: "Deaths",
@@ -86,6 +89,15 @@ function GraphBox({ player, callback }: PlayerD) {
         pointRadius: 4,
         fill: false,
         tension: 0.1, // für geschmeidigere Linien
+      },
+      {
+        label: "Personal Best",
+        data: Array.from({ length: current.deaths.length }, () => personalBest),
+        borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
+        borderWidth: 5,
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
+        fill: false,
       },
     ],
   };
@@ -124,6 +136,7 @@ function GraphBox({ player, callback }: PlayerD) {
                 type="switch"
                 className="checkAllDeaths"
                 label="Show all Tries"
+                defaultChecked={true}
                 onChange={(event) => {
                   player.showAll = event.target.checked;
                   callback(

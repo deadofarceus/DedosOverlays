@@ -23,7 +23,7 @@ function DeathcounterMod() {
     if (savedPlayer) {
       const sPlayer = JSON.parse(savedPlayer) as Player;
       sPlayer.triesInGraph = 5;
-      sPlayer.showAll = false;
+      sPlayer.showAll = true;
       setPlayer(sPlayer);
     } else {
       localStorage.setItem(
