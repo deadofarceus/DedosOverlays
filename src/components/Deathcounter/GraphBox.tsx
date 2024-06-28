@@ -61,7 +61,7 @@ function GraphBox({ player, callback }: PlayerD) {
     },
     plugins: {
       legend: {
-        display: false,
+        display: true,
         labels: {
           color: "#FFFFFF",
         },
@@ -92,11 +92,23 @@ function GraphBox({ player, callback }: PlayerD) {
       },
       {
         label: "Personal Best",
-        data: Array.from({ length: current.deaths.length }, () => personalBest),
+        data: Array.from(
+          { length: current.deaths.length + prediction.length },
+          () => personalBest
+        ),
         borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
         borderWidth: 5,
         pointBackgroundColor: "rgba(0, 0, 0, 0)",
         pointBorderColor: "rgba(0, 0, 0, 0)",
+        fill: false,
+      },
+      {
+        label: "Prediction",
+        data: current.deaths.concat(prediction),
+        borderColor: "rgba(255, 0, 0, 1)", // Linienfarbe
+        borderWidth: 1,
+        pointBackgroundColor: "rgba(255, 0, 0, 1)",
+        pointBorderColor: "rgba(255, 0, 0, 1)",
         fill: false,
       },
     ],
