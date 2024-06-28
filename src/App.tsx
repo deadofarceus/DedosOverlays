@@ -14,7 +14,7 @@ import GamingTierlist from "./pages/GamingTierlist";
 import RandomCharGen from "./pages/RandomCharGen";
 import Deathcounter from "./pages/Deathcounter";
 import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
-import DeathcounterMod from "./pages/DeathcounterMod";
+import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
 
 function App() {
   return (

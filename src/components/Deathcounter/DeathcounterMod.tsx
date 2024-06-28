@@ -1,13 +1,13 @@
 import { Container, Row, Col } from "react-bootstrap";
-import BossInfo from "../components/Deathcounter/BossInfo";
-import ControlPanel from "../components/Deathcounter/ControlPanel";
-import GraphBox from "../components/Deathcounter/GraphBox";
-import ChangeBoss from "../components/Deathcounter/ChangeBoss";
-import "../styles/Deathcounter.css";
-import { DEFAULTPLAYER, Player } from "../types/DeathcounterTypes";
+import BossInfo from "./BossInfo";
+import ControlPanel from "./ControlPanel";
+import GraphBox from "./GraphBox";
+import ChangeBoss from "./ChangeBoss";
+import "../../styles/Deathcounter.css";
+import { DEFAULTPLAYER, Player } from "../../types/DeathcounterTypes";
 import { useEffect, useState } from "react";
-import { useQuery } from "../types/UsefulFunctions";
-import { DeathCounterWebsocket } from "../types/WebsocketTypes";
+import { useQuery } from "../../types/UsefulFunctions";
+import { DeathCounterWebsocket } from "../../types/WebsocketTypes";
 
 let ws: DeathCounterWebsocket;
 
