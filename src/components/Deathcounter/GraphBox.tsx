@@ -11,7 +11,10 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Player, PlayerD } from "../../types/DeathcounterTypes";
-import { createDedoicPrediction } from "../../types/DedoicPrediction";
+import {
+  createDedoicPrediction,
+  linearRegression,
+} from "../../types/DedoicPrediction";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +30,10 @@ function GraphBox({ player, callback }: PlayerD) {
   const current = player.bosses[player.currentBoss];
   const personalBest = Math.min(...current.deaths);
   const prediction = createDedoicPrediction(current.deaths);
+  const linear = linearRegression(
+    [...Array(current.deaths.length).keys()],
+    current.deaths
+  );
 
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
@@ -109,6 +116,18 @@ function GraphBox({ player, callback }: PlayerD) {
         borderWidth: 1,
         pointBackgroundColor: "rgba(255, 0, 0, 1)",
         pointBorderColor: "rgba(255, 0, 0, 1)",
+        fill: false,
+      },
+      {
+        label: "Linear Regression",
+        data: Array.from(
+          { length: current.deaths.length + prediction.length },
+          (_, i) => linear.m * i + linear.b
+        ),
+        borderColor: "rgba(0, 0, 255, 1)", // Linienfarbe
+        borderWidth: 2,
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
         fill: false,
       },
     ],
