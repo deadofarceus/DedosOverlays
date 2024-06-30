@@ -40,7 +40,7 @@ function DeathcounterMod() {
   const prediction = createDedoicPrediction(
     player.bosses[player.currentBoss].deaths
   );
-  player.prediction = player.settings.showPrediction ? prediction : [];
+  player.prediction = prediction;
 
   if (ws && ws.ws.readyState === ws.ws.OPEN) {
     ws.sendData(player);

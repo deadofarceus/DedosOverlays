@@ -102,6 +102,15 @@ function GraphBox({ player, callback }: PlayerD) {
       pointBorderColor: "rgba(0, 0, 0, 0)",
       fill: false,
     },
+    {
+      label: "Prediction",
+      data: current.deaths.concat(player.prediction),
+      borderColor: "rgba(255, 0, 0, 1)", // Linienfarbe
+      borderWidth: 1,
+      pointBackgroundColor: "rgba(255, 0, 0, 1)",
+      pointBorderColor: "rgba(255, 0, 0, 1)",
+      fill: false,
+    },
   ];
 
   if (player.settings.showLinear) {
@@ -124,17 +133,6 @@ function GraphBox({ player, callback }: PlayerD) {
       borderWidth: 2,
       pointBackgroundColor: "rgba(0, 0, 0, 0)",
       pointBorderColor: "rgba(0, 0, 0, 0)",
-      fill: false,
-    });
-  }
-  if (player.settings.showPrediction) {
-    datasets.push({
-      label: "Prediction",
-      data: current.deaths.concat(player.prediction),
-      borderColor: "rgba(255, 0, 0, 1)", // Linienfarbe
-      borderWidth: 1,
-      pointBackgroundColor: "rgba(255, 0, 0, 1)",
-      pointBorderColor: "rgba(255, 0, 0, 1)",
       fill: false,
     });
   }

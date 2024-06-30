@@ -27,6 +27,7 @@ ChartJS.register(
 function GraphOverlay({ player }: { player: Player }) {
   const boss = player.bosses[player.currentBoss];
   const NUMBEROFTRIESSHOWN = player.settings.triesInGraph;
+  player.prediction = !player.settings.showPrediction ? [] : player.prediction;
   const personalBest = Math.min(...boss.deaths);
   const linear = linearRegression(
     [...Array(boss.deaths.length).keys()],
@@ -110,9 +111,13 @@ function GraphOverlay({ player }: { player: Player }) {
     },
     plugins: {
       legend: {
-        display: false,
+        display: player.settings.showPrediction,
         labels: {
           color: "#FFFFFF",
+          font: {
+            family: "Libre Baskerville", // Schriftart
+            size: 25, // Schriftgröße
+          },
         },
       },
       title: {
@@ -139,7 +144,7 @@ function GraphOverlay({ player }: { player: Player }) {
 
   const datasets = [
     {
-      label: "Deaths",
+      label: "HP%",
       data: percentages,
       backgroundColor: "rgba(255, 165, 0, 0.4)", // Punktfarbe
       borderColor: "rgba(255, 165, 0, 1)", // Linienfarbe
@@ -150,7 +155,7 @@ function GraphOverlay({ player }: { player: Player }) {
       fill: false,
     },
     {
-      label: "Personal Best",
+      label: "PB",
       data: Array.from(
         { length: percentages.length + player.prediction.length },
         () => personalBest
