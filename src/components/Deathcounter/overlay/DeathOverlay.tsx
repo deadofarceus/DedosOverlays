@@ -41,7 +41,7 @@ function DeathOverlay() {
             </span>
           </Col>
         )}
-        <GraphOverlay player={player} tries={player.triesInGraph} />
+        <GraphOverlay player={player} />
       </Col>
     </Container>
   );

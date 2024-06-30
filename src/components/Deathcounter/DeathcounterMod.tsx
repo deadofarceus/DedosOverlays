@@ -4,10 +4,11 @@ import ControlPanel from "./ControlPanel";
 import GraphBox from "./GraphBox";
 import ChangeBoss from "./ChangeBoss";
 import "../../styles/Deathcounter.css";
-import { DEFAULTPLAYER, Player } from "../../types/DeathcounterTypes";
+import { DEFAULTPLAYER, Player, Settings } from "../../types/DeathcounterTypes";
 import { useEffect, useState } from "react";
 import { useQuery } from "../../types/UsefulFunctions";
 import { DeathCounterWebsocket } from "../../types/WebsocketTypes";
+import { createDedoicPrediction } from "../../types/DedoicPrediction";
 
 let ws: DeathCounterWebsocket;
 
@@ -19,11 +20,11 @@ function DeathcounterMod() {
 
   useEffect(() => {
     const savedPlayer = localStorage.getItem(id + "EldenRingDeathcounter");
+    console.log("SAVEDPLAYER", savedPlayer);
 
     if (savedPlayer) {
       const sPlayer = JSON.parse(savedPlayer) as Player;
-      sPlayer.triesInGraph = 5;
-      sPlayer.showAll = true;
+      sPlayer.settings = new Settings(5, true, false, false);
       setPlayer(sPlayer);
     } else {
       localStorage.setItem(
@@ -36,9 +37,14 @@ function DeathcounterMod() {
     }
   }, [id, query]);
 
+  const prediction = createDedoicPrediction(
+    player.bosses[player.currentBoss].deaths
+  );
+  player.prediction = player.settings.showPrediction ? prediction : [];
+
   if (ws && ws.ws.readyState === ws.ws.OPEN) {
-    localStorage.setItem(id + "EldenRingDeathcounter", JSON.stringify(player));
     ws.sendData(player);
+    localStorage.setItem(id + "EldenRingDeathcounter", JSON.stringify(player));
   }
   console.log(player);
 
@@ -46,12 +52,12 @@ function DeathcounterMod() {
     <Container className="DeathContainer w-100 centerC">
       <Row className="w-100">
         <ChangeBoss player={player} callback={setPlayer} />
-        <Col className="centerC" xs={9}>
-          <Row className="w-100 h-50">
+        <Col className="align-items-baseline" xs={9}>
+          <Row className="w-75">
             <BossInfo player={player} callback={setPlayer} />
             <ControlPanel player={player} callback={setPlayer} />
           </Row>
-          <Row className="mt-3 w-100 h-50">
+          <Row className="mt-3 w-100">
             <GraphBox player={player} callback={setPlayer} />
           </Row>
         </Col>

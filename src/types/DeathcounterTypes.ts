@@ -3,15 +3,27 @@ export class Player {
     name: string;
     bosses: Boss[];
     currentBoss: number;
-    triesInGraph: number;
-    showAll: boolean;
-    constructor(id: string, name: string, bosses: Boss[] | undefined, currentBoss: number, triesInGraph: number, showAll: boolean) {
+    settings: Settings;
+    prediction: number[] = [];
+    constructor(id: string, name: string, bosses: Boss[] | undefined, currentBoss: number, settings: Settings) {
         this.id = id;
         this.name = name;
         this.bosses = bosses ? bosses : [new Boss("Other Monsters or Heights", undefined, false)];
         this.currentBoss = currentBoss;
+        this.settings = settings;
+    }
+}
+
+export class Settings {
+    triesInGraph: number;
+    showAll: boolean;
+    showPrediction: boolean;
+    showLinear: boolean;
+    constructor(triesInGraph: number, showAll: boolean, showPrediction: boolean, showLinear: boolean) {
         this.triesInGraph = triesInGraph;
         this.showAll = showAll;
+        this.showPrediction = showPrediction;
+        this.showLinear = showLinear;
     }
 }
 
@@ -32,4 +44,4 @@ export interface PlayerD {
     callback: React.Dispatch<React.SetStateAction<Player>>;
 }
 
-export const DEFAULTPLAYER = new Player("TEST", "TESTPLAYER", undefined, 0, 5, false);
+export const DEFAULTPLAYER = new Player("TEST", "TESTPLAYER", undefined, 0, new Settings(5, true, false, false));

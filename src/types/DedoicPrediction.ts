@@ -43,8 +43,7 @@ export function createDedoicPrediction(deaths: number[]): number[] {
     } else {
         prediction.push(deaths[0]);
     }
-
-    pushTries(prediction, meanOfDistance, mean + stdDev, stdDev, deaths[0]);
+    pushTries(prediction, meanOfDistance, mean, stdDev, deaths[0]);
 
     console.log("------------------------------------");
     // console.log("DEATHS", deaths);

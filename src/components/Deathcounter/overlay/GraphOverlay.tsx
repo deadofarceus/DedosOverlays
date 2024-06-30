@@ -12,6 +12,7 @@ import {
   Legend,
   Tick,
 } from "chart.js";
+import { linearRegression } from "../../../types/DedoicPrediction";
 
 ChartJS.register(
   CategoryScale,
@@ -23,10 +24,14 @@ ChartJS.register(
   Legend
 );
 
-function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
+function GraphOverlay({ player }: { player: Player }) {
   const boss = player.bosses[player.currentBoss];
-  const NUMBEROFTRIESSHOWN = tries;
+  const NUMBEROFTRIESSHOWN = player.settings.triesInGraph;
   const personalBest = Math.min(...boss.deaths);
+  const linear = linearRegression(
+    [...Array(boss.deaths.length).keys()],
+    boss.deaths
+  );
 
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
@@ -122,41 +127,80 @@ function GraphOverlay({ player, tries }: { player: Player; tries: number }) {
   const deaths = boss.deaths.length - 1;
 
   const labels =
-    deaths < NUMBEROFTRIESSHOWN || player.showAll
-      ? [...Array(deaths + 1).keys()]
-      : [...Array(NUMBEROFTRIESSHOWN).keys()].map(
+    deaths < NUMBEROFTRIESSHOWN || player.settings.showAll
+      ? [...Array(deaths + 1 + player.prediction.length).keys()]
+      : [...Array(NUMBEROFTRIESSHOWN + player.prediction.length).keys()].map(
           (i) => deaths - NUMBEROFTRIESSHOWN + i + 1
         );
   const percentages =
-    deaths < NUMBEROFTRIESSHOWN || player.showAll
+    deaths < NUMBEROFTRIESSHOWN || player.settings.showAll
       ? boss.deaths
       : boss.deaths.slice(deaths - (NUMBEROFTRIESSHOWN - 1), deaths + 1);
 
+  const datasets = [
+    {
+      label: "Deaths",
+      data: percentages,
+      backgroundColor: "rgba(255, 165, 0, 0.4)", // Punktfarbe
+      borderColor: "rgba(255, 165, 0, 1)", // Linienfarbe
+      borderWidth: 4,
+      pointBackgroundColor: "rgba(255, 165, 0, 1)", // Punktfarbe
+      pointBorderColor: "rgba(255, 165, 0, 1)", // Punktkonturfarbe
+      pointRadius: 5,
+      fill: false,
+    },
+    {
+      label: "Personal Best",
+      data: Array.from(
+        { length: percentages.length + player.prediction.length },
+        () => personalBest
+      ),
+      borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
+      borderWidth: 5,
+      pointBackgroundColor: "rgba(0, 0, 0, 0)",
+      pointBorderColor: "rgba(0, 0, 0, 0)",
+      fill: false,
+    },
+  ];
+
+  if (player.settings.showLinear) {
+    const linearArray = Array.from(
+      { length: boss.deaths.length + player.prediction.length },
+      (_, i) => linear.m * i + linear.b
+    );
+    for (let i = 0; i < linearArray.length; i++) {
+      if (linearArray[i] < 0) {
+        linearArray[i] = 0;
+      }
+      if (linearArray[i] > boss.deaths[0]) {
+        linearArray[i] = boss.deaths[0];
+      }
+    }
+    datasets.push({
+      label: "Linear Regression",
+      data: linearArray,
+      borderColor: "rgba(0, 211, 235, 1)", // Linienfarbe
+      borderWidth: 2,
+      pointBackgroundColor: "rgba(0, 0, 0, 0)",
+      pointBorderColor: "rgba(0, 0, 0, 0)",
+      fill: false,
+    });
+  }
+  if (player.settings.showPrediction) {
+    datasets.push({
+      label: "Prediction",
+      data: percentages.concat(player.prediction),
+      borderColor: "rgba(255, 0, 0, 1)", // Linienfarbe
+      borderWidth: 3,
+      pointBackgroundColor: "rgba(255, 0, 0, 1)",
+      pointBorderColor: "rgba(255, 0, 0, 1)",
+      fill: false,
+    });
+  }
+
   const data = {
     labels: labels,
-    datasets: [
-      {
-        label: "Deaths",
-        data: percentages,
-        backgroundColor: "rgba(255, 165, 0, 0.4)", // Punktfarbe
-        borderColor: "rgba(255, 165, 0, 1)", // Linienfarbe
-        borderWidth: 2,
-        pointBackgroundColor: "rgba(255, 165, 0, 1)", // Punktfarbe
-        pointBorderColor: "rgba(255, 165, 0, 1)", // Punktkonturfarbe
-        pointRadius: 4,
-        fill: false,
-        tension: 0.1, // für geschmeidigere Linien
-      },
-      {
-        label: "Personal Best",
-        data: Array.from({ length: percentages.length }, () => personalBest),
-        borderColor: "rgba(0, 255, 0, 1)", // Linienfarbe
-        borderWidth: 5,
-        pointBackgroundColor: "rgba(0, 0, 0, 0)",
-        pointBorderColor: "rgba(0, 0, 0, 0)",
-        fill: false,
-      },
-    ],
+    datasets: datasets,
   };
   return (
     <Container className="deathOverlayGraphCon">

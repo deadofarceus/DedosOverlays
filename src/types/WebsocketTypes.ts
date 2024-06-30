@@ -176,7 +176,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
         }
         const data = JSON.parse(message);
 
-        console.log(data);
+        // console.log(data);
 
         const player = data.player as Player;
 

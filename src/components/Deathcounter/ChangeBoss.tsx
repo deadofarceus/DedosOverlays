@@ -38,8 +38,7 @@ function ChangeBoss({ player, callback }: PlayerD) {
                 player.name,
                 player.bosses,
                 player.currentBoss,
-                player.triesInGraph,
-                player.showAll
+                player.settings
               )
             );
           }}
@@ -63,8 +62,7 @@ function ChangeBoss({ player, callback }: PlayerD) {
                       player.name,
                       player.bosses,
                       player.currentBoss,
-                      player.triesInGraph,
-                      player.showAll
+                      player.settings
                     )
                   );
                 }}
