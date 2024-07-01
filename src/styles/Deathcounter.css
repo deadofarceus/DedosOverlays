@@ -201,3 +201,44 @@
     text-align: center;
     filter: drop-shadow(4px 4px 3px #222);
 }
+
+.hpOverlay {
+    width: 1920px;
+    height: 1080px;
+    color: azure;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+}
+
+.hpIMG {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+}
+
+.signRow {
+    width: 1000px;
+    justify-content: space-between;
+    position: absolute;
+    top: 876px;
+    left: 450px;
+    font-size: 21px;
+    filter: drop-shadow(2px 2px 1px #0a0a0a);
+}
+
+.sign {
+    width: 50px;
+    margin: 0;
+}
+
+.labelRow {
+    width: 850px;
+    justify-content: space-between;
+    position: absolute;
+    top: 896px;
+    left: 550px;
+    font-size: 17px;
+    filter: drop-shadow(2px 2px 1px #0a0a0a);
+}

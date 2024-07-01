@@ -15,6 +15,7 @@ import RandomCharGen from "./pages/RandomCharGen";
 import Deathcounter from "./pages/Deathcounter";
 import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
 import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
+import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverlay";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route index element={<Deathcounter />} />
           <Route path="mod" element={<DeathcounterMod />} />
           <Route path="overlay" element={<DeathOverlay />} />
+          <Route path="hpoverlay" element={<PercentageOverlay />} />
         </Route>
         <Route path="EloOverlay">
           <Route index element={<EloOverlayTutorial />} />
