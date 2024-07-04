@@ -9,5 +9,5 @@ export function useQuery() {
 
 export function isOBSBrowser(): boolean {
     const browserName = navigator.userAgent.toLowerCase();
-    return browserName.indexOf('obs') > -1 || browserName.indexOf('sld') > -1;
+    return browserName.indexOf('obs') > -1 || browserName.indexOf('sld') > -1 || browserName.indexOf('electron') > -1;
 }
