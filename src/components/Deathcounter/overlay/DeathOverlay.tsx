@@ -21,13 +21,21 @@ function DeathOverlay() {
   let total = 0;
   player.bosses.forEach((b) => {
     total += b.deaths.length - 1;
-    if (b.deaths.includes(0)) {
+    if (
+      b.deaths.includes(0) &&
+      b.deaths.length - 1 > 0 &&
+      b.name !== "Other Monsters or Heights"
+    ) {
       total = -1;
     }
   });
   const current = player.bosses[player.currentBoss];
   let bossDeaths = current.deaths.length - 1;
-  if (current.deaths.includes(0)) {
+  if (
+    current.deaths.includes(0) &&
+    bossDeaths > 0 &&
+    current.name !== "Other Monsters or Heights"
+  ) {
     bossDeaths = -1;
   }
   const longestWord = findLongestWordLength(current.name);
