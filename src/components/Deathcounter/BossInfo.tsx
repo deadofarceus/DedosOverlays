@@ -11,7 +11,7 @@ function BossInfo({ player }: PlayerD) {
       b.deaths.length - 1 > 0 &&
       b.name !== "Other Monsters or Heights"
     ) {
-      total = -1;
+      total--;
     }
   });
   let bossDeaths = current.deaths.length - 1;
@@ -20,7 +20,7 @@ function BossInfo({ player }: PlayerD) {
     bossDeaths > 0 &&
     current.name !== "Other Monsters or Heights"
   ) {
-    bossDeaths = -1;
+    bossDeaths--;
   }
   return (
     <Col xs={8} className="w-25">

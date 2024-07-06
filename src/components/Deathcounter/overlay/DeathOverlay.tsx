@@ -26,7 +26,7 @@ function DeathOverlay() {
       b.deaths.length - 1 > 0 &&
       b.name !== "Other Monsters or Heights"
     ) {
-      total = -1;
+      total--;
     }
   });
   const current = player.bosses[player.currentBoss];
@@ -36,7 +36,7 @@ function DeathOverlay() {
     bossDeaths > 0 &&
     current.name !== "Other Monsters or Heights"
   ) {
-    bossDeaths = -1;
+    bossDeaths--;
   }
   const longestWord = findLongestWordLength(current.name);
   return (
