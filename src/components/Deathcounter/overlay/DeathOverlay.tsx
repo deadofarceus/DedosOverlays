@@ -19,8 +19,17 @@ function DeathOverlay() {
   }, [id, query]);
 
   let total = 0;
-  player.bosses.forEach((b) => (total += b.deaths.length - 1));
+  player.bosses.forEach((b) => {
+    total += b.deaths.length - 1;
+    if (b.deaths.includes(0)) {
+      total = -1;
+    }
+  });
   const current = player.bosses[player.currentBoss];
+  let bossDeaths = current.deaths.length - 1;
+  if (current.deaths.includes(0)) {
+    bossDeaths = -1;
+  }
   const longestWord = findLongestWordLength(current.name);
   return (
     <Container className="deathOverlayCon">
@@ -29,7 +38,7 @@ function DeathOverlay() {
           <Row className="w-100">
             <span className="numOfDeaths blackOutline">💀 Total: {total}</span>
             <span className="numOfDeaths blackOutline">
-              💀 {current.name}: {current.deaths.length - 1}
+              💀 {current.name}: {bossDeaths}
             </span>
           </Row>
         )}
@@ -37,7 +46,7 @@ function DeathOverlay() {
           <Col className="w-100 centerC">
             <span className="numOfDeaths blackOutline">💀 Total: {total}</span>
             <span className="numOfDeathsLong blackOutline">
-              💀 {current.name}: {current.deaths.length - 1}
+              💀 {current.name}: {bossDeaths}
             </span>
           </Col>
         )}

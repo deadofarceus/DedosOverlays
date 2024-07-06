@@ -4,7 +4,16 @@ import { PlayerD } from "../../types/DeathcounterTypes";
 function BossInfo({ player }: PlayerD) {
   const current = player.bosses[player.currentBoss];
   let total = 0;
-  player.bosses.forEach((b) => (total += b.deaths.length - 1));
+  player.bosses.forEach((b) => {
+    total += b.deaths.length - 1;
+    if (b.deaths.includes(0)) {
+      total = -1;
+    }
+  });
+  let bossDeaths = current.deaths.length - 1;
+  if (current.deaths.includes(0)) {
+    bossDeaths = -1;
+  }
   return (
     <Col xs={8} className="w-25">
       <Card className="BossCard">
@@ -12,7 +21,7 @@ function BossInfo({ player }: PlayerD) {
           <Card.Text>
             Total Deaths: {total}
             <br />
-            {current.name} Deaths: {current.deaths.length - 1}
+            {current.name} Deaths: {bossDeaths}
           </Card.Text>
         </Card.Body>
       </Card>
