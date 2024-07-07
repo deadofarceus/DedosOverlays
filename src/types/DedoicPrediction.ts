@@ -1,13 +1,14 @@
 export function createDedoicPrediction(deaths: number[]): number[] {
+    const tries = Array.from(deaths).splice(1, deaths.length - 1);
     const prediction: number[] = [];
     const personalBests: number[] = [100];
     const distanceBetweenProgressTries: Distance[] = [];
     const progressTries: Distance[] = [];
     const deathsToDistance: Distance[] = [];
-    const linearFunction = linearRegression([...Array(deaths.length).keys()], deaths);
+    const linearFunction = linearRegression([...Array(tries.length).keys()], tries);
     let distanceBPT = -1;
-    for (let i = 0; i < deaths.length; i++) {
-        const death = deaths[i];
+    for (let i = 0; i < tries.length; i++) {
+        const death = tries[i];
         distanceBPT++;
 
         // hier maybe nur den ersten teil vom prädikat dann bekommt man nächsten PB
