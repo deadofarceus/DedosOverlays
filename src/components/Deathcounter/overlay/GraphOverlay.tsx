@@ -12,7 +12,7 @@ import {
   Legend,
   Tick,
 } from "chart.js";
-import { linearRegression } from "../../../types/DedoicPrediction";
+import { linearRegression } from "../../../types/ComplexMath";
 
 ChartJS.register(
   CategoryScale,

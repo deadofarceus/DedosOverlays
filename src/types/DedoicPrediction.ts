@@ -1,149 +1,133 @@
-export function createDedoicPrediction(deaths: number[]): number[] {
-    const tries = Array.from(deaths).splice(1, deaths.length - 1);
-    const prediction: number[] = [];
-    const personalBests: number[] = [100];
-    const distanceBetweenProgressTries: Distance[] = [];
-    const progressTries: Distance[] = [];
-    const deathsToDistance: Distance[] = [];
-    const linearFunction = linearRegression([...Array(tries.length).keys()], tries);
-    let distanceBPT = -1;
-    for (let i = 0; i < tries.length; i++) {
-        const death = tries[i];
-        distanceBPT++;
+import { linearRegression, meanWeighted, normalCDF, randomFromND, standardDeviationWeighted } from "./ComplexMath";
 
-        // hier maybe nur den ersten teil vom prädikat dann bekommt man nächsten PB
-        if (death < personalBests[personalBests.length - 1] || death < (linearFunction.m * i + linearFunction.b)) {
-            // if (death < personalBests[personalBests.length - 1]) {
-            if (death < personalBests[personalBests.length - 1]) {
-                personalBests.push(death);
+const PREDICTIONLENGTH = 7;
+const MINIMUM = 0;
+
+export function createOracle(): DedoicOracle {
+    return new DedoicOracle();
+}
+
+export class DedoicOracle {
+    mean: number = 0;
+    meanProgress: number = 0;
+    stdDev: number = 0;
+    stdDevProgress: number = 0;
+    meanOfDistance: number = 0;
+    distanceBPT: number = 0;
+    personalBests: number[] = [];
+    prediction: number[] = [];
+    max: number = 0;
+    personalBest: number = 0;
+
+    constructor() {
+
+    }
+
+    createDedoicPrediction(deaths: number[]): number[] {
+        this.max = deaths[0];
+
+        const tries = Array.from(deaths).splice(1, deaths.length - 1);
+        this.personalBests = [tries[0]];
+        this.personalBest = tries[0];
+        const deathsToDistance: AttemptData[] = [];
+        const distanceBetweenProgressTries: AttemptData[] = [];
+        const progressTries: AttemptData[] = [];
+        const linearFunction = linearRegression([...Array(tries.length).keys()], tries);
+        this.distanceBPT = -1;
+        for (let i = 0; i < tries.length; i++) {
+            const death = tries[i];
+            this.distanceBPT++;
+
+            // hier maybe nur den ersten teil vom prädikat dann bekommt man nächsten PB
+            if (death < this.personalBest || death < (linearFunction.m * i + linearFunction.b)) {
+                // if (death < personalBests[personalBests.length - 1]) {
+                if (death < this.personalBest) {
+                    this.personalBests.push(death);
+                    this.personalBest = death;
+                }
+                this.distanceBPT--;
+                const newDistance = new AttemptData(this.distanceBPT, Math.pow(Math.E, 0.05 * i), i);
+                distanceBetweenProgressTries.push(newDistance);
+                const newProgress = new AttemptData(death, Math.pow(Math.E, 0.05 * (deaths[0] - death)), i);
+                progressTries.push(newProgress);
+                // progressTries.push({ distance: death, times: Math.pow(Math.E, 0.05 * i) + 1 });
+                this.distanceBPT = 0;
             }
-            distanceBetweenProgressTries.push({ distance: distanceBPT, times: Math.pow(Math.E, 0.05 * i) * distanceBPT });
-            progressTries.push({ distance: death, times: Math.pow(Math.E, 0.1 * (deaths[0] - death)) });
-            // progressTries.push({ distance: death, times: Math.pow(Math.E, 0.05 * i) + 1 });
-            distanceBPT = 0;
+            const newDeathsToDistance = new AttemptData(death, Math.pow(Math.E, 0.05 * i) + 1, i);
+            deathsToDistance.push(newDeathsToDistance);
         }
-        deathsToDistance.push({ distance: death, times: Math.pow(Math.E, 0.05 * i) + 1 });
+
+        this.meanProgress = meanWeighted(progressTries);
+        this.stdDevProgress = standardDeviationWeighted(progressTries, this.meanProgress);
+        this.meanOfDistance = Math.floor(meanWeighted(distanceBetweenProgressTries) + 1);
+
+        this.mean = meanWeighted(deathsToDistance);
+        this.stdDev = standardDeviationWeighted(deathsToDistance, this.mean);
+
+
+        // const goodTry = mean - (Math.random() + 1.5) * stdDev;
+        // const linearFunction2 = linearRegression(progressTries.map(t => t.position), progressTries.map(t => t.distance));
+        // const exponential = exponentialRegression(progressTries.map(t => t.position), progressTries.map(t => t.distance));
+        //Push Tries till progressTry
+        const pushAmount = this.meanOfDistance - this.distanceBPT < 0 ? 0 : this.meanOfDistance - this.distanceBPT;
+        this.pushTries(pushAmount, this.mean, this.stdDev);
+
+        //recursive pushing till length of prediction is reached
+        this.fillPrediction(1);
+
+        this.logStats();
+
+        return this.prediction;
     }
 
-    const meanProgress = calculateMeanDistance(progressTries);
-    const stdDevProgress = calculateStandardDeviationDistance(progressTries, meanProgress);
-    const meanOfDistance = Math.floor(calculateMeanDistance(distanceBetweenProgressTries) + 1);
-
-    const mean = calculateMeanDistance(deathsToDistance);
-    const stdDev = calculateStandardDeviationDistance(deathsToDistance, mean);
-
-    const pushAmount = meanOfDistance - distanceBPT < 0 ? 0 : meanOfDistance - distanceBPT
-    pushTries(prediction, pushAmount, mean, stdDev, deaths[0]);
-
-    // const goodTry = mean - (Math.random() + 1.5) * stdDev;
-    const goodTry = randomTry(meanProgress, stdDevProgress);
-    if (goodTry <= deaths[0] && goodTry >= 0) {
-        prediction.push(goodTry);
-    } else if (goodTry <= deaths[0] && goodTry < 0) {
-        prediction.push(0);
-    } else {
-        prediction.push(deaths[0]);
-    }
-    pushTries(prediction, meanOfDistance, mean, stdDev, deaths[0]);
-
-    console.log("------------------------------------");
-    // console.log("DEATHS", deaths);
-    // console.log("DISTANCE TO LAST PROGRESS", distanceBPT);
-    // console.log("pushAmount", pushAmount);
-    // console.log("LINEAR FUNCTION", linearFunction);
-    // console.log("personalBests:", personalBests);
-    // console.log("distanceBetweenPBs:", distanceBetweenPBs);
-    // console.log("distanceBetweenProgressTries:", distanceBetweenProgressTries);
-    console.log("mean:", mean);
-    console.log("stdDev:", stdDev);
-    // console.log("meanOfDistance:", meanOfDistance);
-    // console.log("deathsToDistance:", deathsToDistance);
-    console.log("meanProgress:", meanProgress);
-    console.log("stdDevProgress:", stdDevProgress);
-    console.log("CHANCE OF BEATING BOSS:", normalCDF(0, meanProgress, stdDevProgress) * 100);
-    // console.log("PREDICTION:", prediction);
-    return prediction;
-}
-
-function pushTries(prediction: number[], numoOfTries: number, mean: number, stdDev: number, max: number) {
-    for (let i = 0; i < numoOfTries; i++) {
-        const r = randomTry(mean, stdDev);
-        if (r <= max && r >= 0) {
-            prediction.push(r);
-        } else if (r <= max && r < 0) {
-            prediction.push(0);
-        } else {
-            prediction.push(max);
+    pushTries(numoOfTries: number, mean: number, stdDev: number) {
+        for (let i = 0; i < numoOfTries; i++) {
+            this.pushOneTry(randomFromND(mean, stdDev));
         }
     }
-}
 
-function calculateMeanDistance(data: Distance[]): number {
-    const sum = data.reduce((acc, val) => acc + (val.distance * val.times), 0);
-    const entries = data.reduce((acc, val) => acc + val.times, 0);
-    return sum / entries;
-}
-
-function calculateStandardDeviationDistance(data: Distance[], mean: number): number {
-    for (let i = 0; i < data.length; i++) {
-        data[i] = { distance: Math.pow(data[i].distance - mean, 2), times: data[i].times };
-    }
-    const avgSquaredDiff = calculateMeanDistance(data);
-    return Math.sqrt(avgSquaredDiff);
-}
-
-// Generate normal distribution data points
-function randomTry(mean: number, stdDev: number): number {
-    const u1 = Math.random();
-    const u2 = Math.random();
-    const randStdNormal = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(2.0 * Math.PI * u2);
-    const randNormal = mean + stdDev * randStdNormal;
-    return randNormal;
-}
-
-export function linearRegression(x: number[], y: number[]) {
-    const n = y.length;
-    let sum_x = 0, sum_y = 0, sum_xy = 0, sum_xx = 0;
-
-    for (let i = 0; i < y.length; i++) {
-
-        sum_x += x[i];
-        sum_y += y[i];
-        sum_xy += (x[i] * y[i]);
-        sum_xx += (x[i] * x[i]);
+    pushOneTry(tryToPush: number) {
+        this.prediction.push(Math.min(Math.max(tryToPush, MINIMUM), this.max));
     }
 
-    const m = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
-    const intercept = (sum_y - m * sum_x) / n;
+    fillPrediction(recursive: number) {
+        const goodTry = randomFromND(this.meanProgress - 0.5 * this.stdDevProgress, 1.25 * this.stdDevProgress);
+        this.pushOneTry(goodTry);
+        this.pushTries(this.meanOfDistance, this.mean - recursive * 0.2 * this.stdDev, recursive * 0.1 * this.stdDev + this.stdDev);
+        if (this.prediction.length < PREDICTIONLENGTH) {
+            this.fillPrediction(recursive + 1);
+        }
+    }
 
-    return { m: m, b: intercept };
+    logStats() {
+        const separator = '------------------------------------';
+        console.log(separator);
+
+        const stats = {
+            "Mean of Distance": this.meanOfDistance,
+            "Distance to Last Progress": this.distanceBPT,
+            "Mean": this.mean,
+            "Standard Deviation": this.stdDev,
+            "Mean Progress": this.meanProgress,
+            "Standard Deviation Progress": this.stdDevProgress,
+            "Chance of Beating Boss": `${normalCDF(0, Math.min(...this.personalBests), this.stdDevProgress) * 100}%`,
+            "Prediction": this.prediction
+        };
+
+        for (const [key, value] of Object.entries(stats)) {
+            console.log(`%c${key}: %c[${value}]`, 'color: #1e90ff; font-weight: bold;', 'color: #32cd32;');
+        }
+    }
 }
 
-function erf(x: number): number {
-    // Using the approximation of the error function
-    const a1 = 0.254829592;
-    const a2 = -0.284496736;
-    const a3 = 1.421413741;
-    const a4 = -1.453152027;
-    const a5 = 1.061405429;
-    const p = 0.3275911;
+export class AttemptData {
+    percentage: number;
+    weight: number;
+    position: number;
 
-    // Save the sign of x
-    const sign = Math.sign(x);
-    x = Math.abs(x);
-
-    // A&S formula 7.1.26
-    const t = 1.0 / (1.0 + p * x);
-    const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-
-    return sign * y;
-}
-
-function normalCDF(x: number, mean: number, stdDev: number): number {
-    return 0.5 * (1 + erf((x - mean) / (stdDev * Math.sqrt(2))));
-}
-
-interface Distance {
-    distance: number;
-    times: number;
+    constructor(percentage: number, weight: number, position: number) {
+        this.weight = weight;
+        this.position = position;
+        this.percentage = percentage;
+    }
 }

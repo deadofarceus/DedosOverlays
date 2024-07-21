@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Player, PlayerD } from "../../types/DeathcounterTypes";
-import { linearRegression } from "../../types/DedoicPrediction";
+import { linearRegression } from "../../types/ComplexMath";
 
 ChartJS.register(
   CategoryScale,
@@ -30,6 +30,26 @@ function GraphBox({ player, callback }: PlayerD) {
     [...Array(current.deaths.length).keys()],
     current.deaths
   );
+  //   const personalBests: number[] = [current.deaths[0]];
+  //   const progressTries = [];
+  //   for (let i = 0; i < current.deaths.length; i++) {
+  //     const death = current.deaths[i];
+  //     if (
+  //       death < personalBests[personalBests.length - 1] ||
+  //       death < linear.m * i + linear.b
+  //     ) {
+  //       const newProgess = {
+  //         distance: death,
+  //         times: Math.pow(Math.E, 0.1 * (current.deaths[0] - death)),
+  //         position: i,
+  //       };
+  //       progressTries.push(newProgess);
+  //     }
+  //   }
+  //   const expo = exponentialRegression(
+  //     progressTries.map((t) => t.position),
+  //     progressTries.map((t) => t.distance)
+  //   );
 
   const options = {
     backgroundColor: "rgba(255, 165, 0, 0.4)",
@@ -135,6 +155,28 @@ function GraphBox({ player, callback }: PlayerD) {
       pointBorderColor: "rgba(0, 0, 0, 0)",
       fill: false,
     });
+
+    // const expoArray = Array.from(
+    //   { length: current.deaths.length + player.prediction.length },
+    //   (_, i) => 100 - expo.a * Math.pow(Math.E, expo.b * i)
+    // );
+    // for (let i = 0; i < expoArray.length; i++) {
+    //   if (expoArray[i] < 0) {
+    //     expoArray[i] = 0;
+    //   }
+    //   if (expoArray[i] > current.deaths[0]) {
+    //     expoArray[i] = current.deaths[0];
+    //   }
+    // }
+    // datasets.push({
+    //   label: "EXPO Regression",
+    //   data: expoArray,
+    //   borderColor: "rgba(255, 211, 0, 1)", // Linienfarbe
+    //   borderWidth: 2,
+    //   pointBackgroundColor: "rgba(0, 0, 0, 0)",
+    //   pointBorderColor: "rgba(0, 0, 0, 0)",
+    //   fill: false,
+    // });
   }
 
   const data = {

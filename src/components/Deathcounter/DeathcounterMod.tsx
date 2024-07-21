@@ -8,9 +8,10 @@ import { DEFAULTPLAYER, Player, Settings } from "../../types/DeathcounterTypes";
 import { useEffect, useState } from "react";
 import { useQuery } from "../../types/UsefulFunctions";
 import { DeathCounterWebsocket } from "../../types/WebsocketTypes";
-import { createDedoicPrediction } from "../../types/DedoicPrediction";
+import { createOracle } from "../../types/DedoicPrediction";
 
 let ws: DeathCounterWebsocket;
+const oracle = createOracle();
 
 function DeathcounterMod() {
   document.body.className = "noOBS";
@@ -37,7 +38,7 @@ function DeathcounterMod() {
     }
   }, [id, query]);
 
-  const prediction = createDedoicPrediction(
+  const prediction = oracle.createDedoicPrediction(
     player.bosses[player.currentBoss].deaths
   );
   player.prediction = prediction;
