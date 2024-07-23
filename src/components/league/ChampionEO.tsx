@@ -20,7 +20,7 @@ function Champion({
   const imgsrc =
     championName === "null"
       ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/14.7.1/img/champion/${championName}.png`;
+      : `https://ddragon.leagueoflegends.com/cdn/14.14.1/img/champion/${championName}.png`;
   return (
     <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
       {mvp && (
