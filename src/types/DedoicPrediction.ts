@@ -24,6 +24,8 @@ export class DedoicOracle {
     }
 
     createDedoicPrediction(deaths: number[]): number[] {
+        //clear prediction to start fresh each time
+        this.prediction = [];
         this.max = deaths[0];
 
         const tries = Array.from(deaths).splice(1, deaths.length - 1);
@@ -71,6 +73,7 @@ export class DedoicOracle {
         //Push Tries till progressTry
         const pushAmount = this.meanOfDistance - this.distanceBPT < 0 ? 0 : this.meanOfDistance - this.distanceBPT;
         this.pushTries(pushAmount, this.mean, this.stdDev);
+
 
         //recursive pushing till length of prediction is reached
         this.fillPrediction(1);
