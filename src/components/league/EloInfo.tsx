@@ -26,6 +26,7 @@ function EloInfo({
   }
   const query = useQuery();
   const legacy = query.get("legacy") === "true" ? "L" : "";
+  const today = query.get("lang") === "en" ? "Today:" : "Heute:";
 
   //   const prideflag = getPrideFlag(eloLP);
 
@@ -53,7 +54,7 @@ function EloInfo({
         ) : (
           <div className="spacer"></div>
         )}
-        <p className="lpDiff blackOutline">Heute:</p>
+        <p className="lpDiff blackOutline">{today}</p>
         <p
           className="lpDiff blackOutline"
           style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}
