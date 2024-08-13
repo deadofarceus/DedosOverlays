@@ -28,7 +28,7 @@ function EloInfo({
   const legacy = query.get("legacy") === "true" ? "L" : "";
   const today = query.get("lang") === "en" ? "Today:" : "Heute:";
 
-  //   const prideflag = getPrideFlag(eloLP);
+  //   const prideflag = getPrideFlag(eloLP);d
 
   return (
     <Row className="eloInfo">
