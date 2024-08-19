@@ -6,7 +6,7 @@ function Help() {
   document.body.className = "noOBS";
   return (
     <Container className="HelpContainer centerC w-75">
-      <Row className="w-75 centerR m-5">
+      <Row className="w-75 centerR">
         <Col>
           <div className="faq">
             <h2>
@@ -30,18 +30,6 @@ function Help() {
           <div className="faq">
             <h2>
               {3}. {FAQS[2].question}
-            </h2>
-            <p className="answers">{FAQS[2].answer}</p>
-          </div>
-          <div className="faq">
-            <h2>
-              {4}. {FAQS[3].question}
-            </h2>
-            <p className="answers">{FAQS[3].answer}</p>
-          </div>
-          <div className="faq">
-            <h2>
-              {5}. {FAQS[4].question}
             </h2>
             <p className="answers">
               Just message me over{" "}
