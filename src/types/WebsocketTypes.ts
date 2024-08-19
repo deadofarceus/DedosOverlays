@@ -1,11 +1,12 @@
-import { DeathEvent, FiveVFiveEvent, LeagueLPEvent, ModEvent } from "./BackendEvents";
+import { DeathEvent, FiveVFiveEvent, ModEvent } from "./BackendEvents";
 import { Player } from "./DeathcounterTypes";
 import { Game, Team } from "./FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 import { PCEvent } from "./PCTurnierTypes";
 
-const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
-// const GLOBALWSADRESS = "ws://localhost:8080";
+// const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
+const GLOBALWSADRESS = "wss://dedosserver.deno.dev";
+// const GLOBALWSADRESS = "ws://localhost:8000";
 
 export abstract class BaseWebSocket<T> {
     callback: React.Dispatch<React.SetStateAction<T>>;
@@ -88,27 +89,11 @@ export abstract class BaseWebSocket<T> {
 
 
 export class EloWebsocket extends BaseWebSocket<Account> {
-
-    summonerName: string;
-    tag: string;
-    key: string;
-    queueID: number;
-    ingame: boolean = false;
-
-    constructor(summonerName: string, tag: string, key: string, queuetype: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
-        super(callback, `${GLOBALWSADRESS}?name=${summonerName}&tag=${tag}`);
-        this.summonerName = summonerName;
-        this.tag = tag;
-        this.key = key;
-        this.queueID = QUEUETYPES.get(queuetype)!.queueId;
+    queueId: number;
+    constructor(summonerName: string, tag: string, key: string, queuetype: string, region: string, callback: React.Dispatch<React.SetStateAction<Account>>) {
+        super(callback, `${GLOBALWSADRESS}?name=${summonerName}&tag=${tag}&key=${key}&queueID=${QUEUETYPES.get(queuetype)!.queueId}&region=${region}`);
+        this.queueId = QUEUETYPES.get(queuetype)!.queueId;
     }
-
-    handleOpen = () => {
-        console.log("WebSocket connection established.");
-        this.setupPing();
-        while (this.ws.readyState !== this.ws.OPEN) { /* empty */ }
-        this.sendListenEvent();
-    };
 
     handleMessage = (event: MessageEvent) => {
         const message = event.data;
@@ -116,20 +101,23 @@ export class EloWebsocket extends BaseWebSocket<Account> {
             return;
         }
         const data = JSON.parse(message);
-        const account = data.accounts[0] as Account;
-        console.log(account, Date.now().toLocaleString());
+        console.log(data.data.accounts[0], new Date().toLocaleTimeString());
+        const account = data.data.accounts[0] as Account;
+        // log with current time in hh:mm:ss format
 
-        account.lastThree = Array.from(
-            new Set(account.lastThree.map((obj: Match) => JSON.stringify(obj)))
+        const entry = account.leagueEntrys.find(entry => entry.queueId === this.queueId)!;
+
+        entry.lastMatches = Array.from(
+            new Set(entry.lastMatches!.map((obj: Match) => JSON.stringify(obj)))
         ).map((str) => JSON.parse(str as string));
 
-        while (account.lastThree.length > 5) {
-            account.lastThree.shift();
+        while (entry.lastMatches.length > 5) {
+            entry.lastMatches.shift();
         }
 
         // account.lastThree.reverse();
 
-        if (!account.tier) {
+        if (!entry.tier) {
             Object.assign(account, {
                 hotstreak: false,
                 leaguePoints: 0,
@@ -144,18 +132,6 @@ export class EloWebsocket extends BaseWebSocket<Account> {
 
         this.callback(account);
     };
-
-    sendListenEvent() {
-        const leagueLPEvent = new LeagueLPEvent([new Account("", "", this.summonerName, this.tag, this.queueID)], this.key);
-        const modEvent = new ModEvent("league/listenAccount", leagueLPEvent);
-        this.sendEvent(modEvent);
-    }
-
-    requestUpdate() {
-        const leagueLPEvent = new LeagueLPEvent([new Account("", "", this.summonerName, this.tag, this.queueID)], this.key);
-        const modEvent = new ModEvent("league/manualUpdate", leagueLPEvent);
-        this.sendEvent(modEvent);
-    }
 }
 
 export class DeathCounterWebsocket extends BaseWebSocket<Player> {
@@ -178,7 +154,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
 
         // console.log(data);
 
-        const player = data.player as Player;
+        const player = data.data.player as Player;
 
         localStorage.setItem(this.id + "EldenRingDeathcounter", JSON.stringify(player));
 
@@ -188,7 +164,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
     };
 
     sendData(player: Player): void {
-        this.sendEvent(new ModEvent("fiveVfive", new DeathEvent(this.id, player)));
+        this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", new DeathEvent(this.id, player)));
     }
 }
 
@@ -208,7 +184,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
             return;
         }
         const data = JSON.parse(message);
-        const FiveVFiveData = data as FiveVFiveEvent;
+        const FiveVFiveData = data.data as FiveVFiveEvent;
 
         if (this.callback) {
             this.callback(FiveVFiveData);
@@ -238,7 +214,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
                 }
                 break;
         }
-        this.sendEvent(new ModEvent("fiveVfive", this.data));
+        this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", this.data));
     }
 
     gameFormatChange(format: string) {
@@ -246,7 +222,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
         if (format === "BestOf3" || format === "BestOf5") {
             this.data.standing = "0 : 0"
         }
-        this.sendEvent(new ModEvent("fiveVfive", this.data));
+        this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", this.data));
     }
 
     removeGame(wonGames: Game[], game: string) {
@@ -257,7 +233,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
 
     sendStanding(standing: string): void {
         this.data.standing = standing;
-        this.sendEvent(new ModEvent("fiveVfive", this.data));
+        this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", this.data));
     }
 }
 
@@ -275,7 +251,7 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
             return;
         }
         const data = JSON.parse(message);
-        const account = data.account as AbisZAccount;
+        const account = data.data.account as AbisZAccount;
         console.log(Date.now().toLocaleString(), account);
 
         this.callback(account);
@@ -305,6 +281,6 @@ export class PCTurnierWebsocket extends BaseWebSocket<PCEvent> {
 
     sendData(event: PCEvent) {
         event.id = this.id;
-        this.sendEvent(new ModEvent("defaultDATA", event));
+        this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", event));
     }
 }

@@ -3,13 +3,15 @@ import { Team } from "./FiveVFiveTypes";
 import { Account } from "./LeagueTypes";
 
 
-class ModEvent {
+export class ModEvent {
     type: string;
-    data: unknown;
+    data: object;
+    id: string;
 
-    constructor(type: string, data: unknown) {
+    constructor(id: string, type: string, data: object) {
         this.type = type;
         this.data = data;
+        this.id = id;
     }
 
     public tostring(): string {
@@ -121,4 +123,4 @@ export class FiveVFiveEvent {
     }
 }
 
-export { ModEvent, VoteEvent, BingoEvent, VotingControlEvent, LOLBingoEvent, ControlEvent, WatchEvent }
+export { VoteEvent, BingoEvent, VotingControlEvent, LOLBingoEvent, ControlEvent, WatchEvent }

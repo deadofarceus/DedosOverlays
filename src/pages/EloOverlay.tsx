@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Account, DEFAULTELOOVERLAY } from "../types/LeagueTypes";
+import { Account, DEFAULTELOOVERLAY, QUEUETYPES } from "../types/LeagueTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -30,7 +30,7 @@ function EloOverlay() {
   const handleClick = () => {
     const currentTime = Date.now();
     if (currentTime - lastClickTime >= 15 * 60 * 1000) {
-      ws.requestUpdate();
+      //   ws.requestUpdate();
       setLastClickTime(currentTime);
     }
   };
@@ -53,7 +53,14 @@ function EloOverlay() {
       nav("/EloOverlay");
     } else {
       if (!ws) {
-        ws = new EloWebsocket(summonerName, tag, key, queueType, setPlayerInfo);
+        ws = new EloWebsocket(
+          summonerName,
+          tag,
+          key,
+          queueType,
+          "EUW1",
+          setPlayerInfo
+        );
         // fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
         //   method: "HEAD",
         //   mode: "no-cors",
@@ -82,28 +89,32 @@ function EloOverlay() {
     }
   }, [lastClickTime, nav, query, queueType]);
 
+  const entry = playerInfo.leagueEntrys.find(
+    (entry) => entry.queueId === QUEUETYPES.get(queueType!)!.queueId
+  )!;
+
   return (
     <Container
       className="d-flex flex-column justify-content-center align-items-center eloOverlayContainer"
       style={{ width: "1140px" }}
     >
       <EloInfo
-        eloLP={playerInfo.leaguePoints}
-        eloDivision={playerInfo.tier}
-        eloRank={playerInfo.rank}
-        lpDiff={playerInfo.combinedLP - playerInfo.lpStart}
-        gmBorder={playerInfo.gmBorder}
-        challBorder={playerInfo.challBorder}
+        eloLP={entry.leaguePoints}
+        eloDivision={entry.tier}
+        eloRank={entry.rank}
+        lpDiff={entry.combinedLP - entry.lpStart}
+        gmBorder={entry.gmBorder}
+        challBorder={entry.challBorder}
       />
       <Row className="matchhistory" md="auto">
-        {playerInfo.lastThree.map((match, index) => (
+        {entry.lastMatches.map((match, index) => (
           <Champion
             key={match.id}
             mvp={match.mvp}
             index={index}
             championName={match.championName}
             win={match.win}
-            length={playerInfo.lastThree.length}
+            length={entry.lastMatches.length}
           />
         ))}
       </Row>

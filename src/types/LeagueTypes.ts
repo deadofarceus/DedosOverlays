@@ -1,35 +1,50 @@
 export class Account {
     summonerId: string;
     name: string;
-    hashtag: string;
-    accountId!: string;
+    tagline: string;
+    regionGroup: string;
+    region: string;
+    accountId: string | undefined;
     puuid: string;
-    tier!: string;
-    rank!: string;
-    leaguePoints!: number;
-    combinedLP!: number;
-    wins!: number;
-    loses!: number;
-    hotstreak!: boolean;
-    lastThree: Match[] = [];
-    lpStart!: number;
-    queueListenID: number;
-    gmBorder!: number;
-    challBorder!: number;
+    premium: boolean;
+    queueTypes: number[];
+    leagueEntrys: LeagueEntry[] = [];
 
     constructor(
         puuid: string,
         summonerId: string,
         name: string,
-        hashtag: string,
-        queueListenID: number
+        tagline: string,
+        premium: boolean,
+        queueTypes: number[],
+        regionGroup: string,
+        region: string
     ) {
         this.puuid = puuid;
         this.summonerId = summonerId;
         this.name = name;
-        this.hashtag = hashtag;
-        this.queueListenID = queueListenID;
+        this.tagline = tagline;
+        this.premium = premium;
+        this.queueTypes = queueTypes;
+        this.regionGroup = regionGroup;
+        this.region = region;
     }
+}
+
+export interface LeagueEntry {
+    queueType: string;
+    queueId: number;
+    lastTimeUpdatedDay: number;
+    tier: string;
+    rank: string;
+    leaguePoints: number;
+    combinedLP: number;
+    wins: number;
+    loses: number;
+    lastMatches: Match[];
+    lpStart: number;
+    gmBorder: number;
+    challBorder: number;
 }
 
 export class Match {
@@ -959,57 +974,118 @@ export const DEFAULTABISZ: AbisZAccount = {
     // "loses": 100
 } as AbisZAccount;
 
-export const DEFAULTELOOVERLAY: object = {
+export const DEFAULTELOOVERLAY: Account = {
     summonerId: "",
     name: "",
-    hashtag: "",
+    tagline: "",
     puuid: "",
-    tier: "UNRANKED",
-    rank: "IV",
-    leaguePoints: 0,
-    combinedLP: 0,
-    wins: 205,
-    loses: 173,
-    hotstreak: false,
-    lastThree: [
+    region: "EUW1",
+    accountId: "",
+    regionGroup: "euw",
+    premium: true,
+    queueTypes: [420],
+    leagueEntrys: [
         {
-            championName: "null",
-            championID: 497,
-            win: true,
-            id: "EUW1_6792213944",
-            mvp: false
+            tier: "UNRANKED",
+            rank: "IV",
+            leaguePoints: 0,
+            combinedLP: 0,
+            wins: 205,
+            loses: 173,
+            lastMatches: [
+                {
+                    championName: "null",
+                    championID: 497,
+                    win: true,
+                    id: "EUW1_6792213944",
+                    mvp: false
+                },
+                {
+                    championName: "null",
+                    championID: 432,
+                    win: true,
+                    mvp: false,
+                    id: "EUW1_6792270986",
+                },
+                {
+                    championName: "null",
+                    championID: 497,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792346795",
+                },
+                {
+                    championName: "null",
+                    championID: 497,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792427799",
+                },
+                {
+                    championName: "null",
+                    championID: 432,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792492999",
+                },
+            ],
+            lpStart: 0,
+            gmBorder: 200,
+            challBorder: 700,
+            queueId: 420,
+            queueType: "RANKED_SOlO_5x5",
+            lastTimeUpdatedDay: 0
         },
         {
-            championName: "null",
-            championID: 432,
-            win: true,
-            mvp: false,
-            id: "EUW1_6792270986",
-        },
-        {
-            championName: "null",
-            championID: 497,
-            mvp: false,
-            win: true,
-            id: "EUW1_6792346795",
-        },
-        {
-            championName: "null",
-            championID: 497,
-            mvp: false,
-            win: true,
-            id: "EUW1_6792427799",
-        },
-        {
-            championName: "null",
-            championID: 432,
-            mvp: false,
-            win: true,
-            id: "EUW1_6792492999",
-        },
+            tier: "UNRANKED",
+            rank: "IV",
+            leaguePoints: 0,
+            combinedLP: 0,
+            wins: 205,
+            loses: 173,
+            lastMatches: [
+                {
+                    championName: "null",
+                    championID: 497,
+                    win: true,
+                    id: "EUW1_6792213944",
+                    mvp: false
+                },
+                {
+                    championName: "null",
+                    championID: 432,
+                    win: true,
+                    mvp: false,
+                    id: "EUW1_6792270986",
+                },
+                {
+                    championName: "null",
+                    championID: 497,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792346795",
+                },
+                {
+                    championName: "null",
+                    championID: 497,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792427799",
+                },
+                {
+                    championName: "null",
+                    championID: 432,
+                    mvp: false,
+                    win: true,
+                    id: "EUW1_6792492999",
+                },
+            ],
+            lpStart: 0,
+            gmBorder: 200,
+            challBorder: 700,
+            queueId: 440,
+            queueType: "RANKED_SOlO_5x5",
+            lastTimeUpdatedDay: 0
+        }
     ],
-    startTime: 0,
-    lpStart: 0,
-    gmBorder: 200,
-    challBorder: 700,
 };
