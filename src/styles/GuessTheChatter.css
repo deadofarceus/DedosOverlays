@@ -1,0 +1,13 @@
+.GTCContainer {
+    margin-top: 100px;
+    width: 100%;
+    height: 100vh;
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+}
+
+.chatter {
+    margin-top: 150px;
+}
