@@ -16,6 +16,7 @@ import Deathcounter from "./pages/Deathcounter";
 import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
 import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
 import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverlay";
+import GuessTheChatter from "./pages/GuessTheChatter";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="PCTurnier">
           <Route path=":mod" element={<PCTurnier />} />
         </Route>
+        <Route path="GuessTheChatter" element={<GuessTheChatter />} />
         <Route path="Stream">
           <Route path="randomChar" element={<RandomCharGen />} />
           <Route path="GamingTierlist">
