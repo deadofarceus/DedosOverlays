@@ -18,7 +18,8 @@ function GuessTheChatter() {
   );
   const [score, setScore] = useState(0);
 
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheChatter&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  //   const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheChatter&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheChatter&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
 
   const fetchChatters = async () => {
     await twitchService.getStreamer();
