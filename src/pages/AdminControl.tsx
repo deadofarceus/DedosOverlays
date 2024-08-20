@@ -15,12 +15,14 @@ function AdminControl() {
         if (res.status === 200) {
           console.log("Access Granted");
         } else {
-          window.location.href = "/";
+          console.log(res);
+
+          //   window.location.href = "/";
         }
       })
       .catch((error) => {
         console.log(error);
-        window.location.href = "/";
+        // window.location.href = "/";
       });
   }, [adminKey]);
   return (
