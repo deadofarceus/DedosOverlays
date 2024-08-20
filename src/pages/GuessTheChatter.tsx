@@ -27,7 +27,7 @@ function GuessTheChatter() {
     if (response.data) {
       const chatterList: Chatter[] = [];
       for (const user of response.data) {
-        const isSub = false;
+        const isSub = twitchService.isSubscriber(user.user_id);
         chatterList.push(new Chatter(user.user_id, user.user_name, "", isSub!));
       }
       setChatters(chatterList);
