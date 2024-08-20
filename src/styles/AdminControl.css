@@ -1,0 +1,9 @@
+.AdminControl {
+    margin-top: 50px;
+    width: 100%;
+    height: 100vh;
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+}
