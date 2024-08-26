@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
-import { Button, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import Champion from "../components/league/ChampionEO";
 import EloInfo from "../components/league/EloInfo";
@@ -24,25 +24,38 @@ function EloOverlay() {
     DEFAULTELOOVERLAY as Account
   );
 
-  const [lastClickTime, setLastClickTime] = useState(0);
-  const [disabled, setDisabled] = useState(false);
-
-  const handleClick = () => {
-    const currentTime = Date.now();
-    if (currentTime - lastClickTime >= 15 * 60 * 1000) {
-      //   ws.requestUpdate();
-      setLastClickTime(currentTime);
-    }
-  };
-
   const nav = useNavigate();
   const { queueType } = useParams();
   const query = useQuery();
+  const summonerName = query.get("name");
+  const tag = query.get("tag");
+  const key = query.get("key");
+
+  const checkIngame = async (check: boolean) => {
+    const timeoutPromise = new Promise((resolve) => {
+      setTimeout(resolve, 10000, "ingame");
+    });
+    const fetchPromise = fetch(
+      "http://127.0.0.1:2999/liveclientdata/allgamedata"
+    );
+    Promise.race([timeoutPromise, fetchPromise])
+      .then(() => checkIngame(true))
+      .catch(() => {
+        if (check) {
+          console.log("call");
+
+          fetch(
+            `https://dedosserver.deno.dev/lol/requestUpdate/${summonerName}/${tag}?key=${key}`
+          )
+            .then((res) => res.text())
+            .then((val) => console.log(val))
+            .catch((error) => console.log(error));
+        }
+        setTimeout(() => checkIngame(false), 10000);
+      });
+  };
 
   useEffect(() => {
-    const summonerName = query.get("name");
-    const tag = query.get("tag");
-    const key = query.get("key");
     if (
       summonerName === null ||
       tag === null ||
@@ -61,33 +74,11 @@ function EloOverlay() {
           "EUW1",
           setPlayerInfo
         );
-        // fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
-        //   method: "HEAD",
-        //   mode: "no-cors",
-        // })
-        //   .then(function (response) {
-        //     return response;
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (e) {
-        //     console.log(e);
-        //   });
       }
+
+      checkIngame(false);
     }
-    const currentTime = Date.now();
-    const timeElapsed = currentTime - lastClickTime;
-    if (timeElapsed < 15 * 60 * 1000) {
-      setDisabled(true);
-      const timer = setTimeout(() => {
-        setDisabled(false);
-      }, 15 * 60 * 1000 - timeElapsed);
-      return () => clearTimeout(timer);
-    } else {
-      setDisabled(false);
-    }
-  }, [lastClickTime, nav, query, queueType]);
+  }, [key, nav, query, queueType, summonerName, tag]);
 
   const entry = playerInfo.leagueEntrys.find(
     (entry) => entry.queueId === QUEUETYPES.get(queueType!)!.queueId
@@ -118,11 +109,6 @@ function EloOverlay() {
           />
         ))}
       </Row>
-      {!obs && (
-        <Button size="lg" onClick={handleClick} disabled={disabled}>
-          Request Update
-        </Button>
-      )}
     </Container>
   );
 }
