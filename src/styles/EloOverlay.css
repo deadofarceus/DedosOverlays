@@ -86,6 +86,6 @@
 .currentLP {
     margin-top: -12px;
     margin-bottom: -27px;
-    /* filter: drop-shadow(4px 4px 3px #222); */
+    filter: drop-shadow(4px 4px 3px #222);
     font-size: 5em;
 }
