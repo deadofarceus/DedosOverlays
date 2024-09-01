@@ -3,6 +3,7 @@ import "../styles/AdminControl.css";
 import Database from "../components/admin/database/Database";
 import { useEffect } from "react";
 import { useQuery } from "../types/UsefulFunctions";
+import ClientControl from "../components/admin/Clients/ClientControl";
 
 function AdminControl() {
   document.body.className = "noOBS";
@@ -28,6 +29,7 @@ function AdminControl() {
   return (
     <Container className="AdminControl centerC w-100">
       <h1>ControlPanel</h1>
+      <ClientControl />
       <Database />
     </Container>
   );

@@ -18,6 +18,7 @@ import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
 import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverlay";
 import GuessTheChatter from "./pages/GuessTheChatter";
 import AdminControl from "./pages/AdminControl";
+import Impressum from "./pages/Impressum";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="errorpage" element={<ErrorPage />} />
         {/* <Route path="about" element={<About />} /> */}
         <Route path="help" element={<Help />} />
+        <Route path="imprint" element={<Impressum />} />
         <Route path="AdminControl" element={<AdminControl />} />
         <Route path="5v5">
           <Route path="Mod" element={<FiveVFiveMod />} />

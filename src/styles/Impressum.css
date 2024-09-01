@@ -1,0 +1,10 @@
+.Impressum {
+    margin-top: 60px;
+    color: azure;
+    margin-bottom: 60px;
+    background-color: rgba(28, 0, 118, 0.169);
+    box-shadow: 0 0 30px rgb(37, 2, 112);
+    padding: 10px;
+    border: 2px solid rgba(28, 0, 118, 0.5);
+    border-radius: 40px;
+}

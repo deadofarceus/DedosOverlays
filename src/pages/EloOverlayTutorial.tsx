@@ -146,16 +146,6 @@ function EloOverlayTutorial() {
             <ListGroup.Item>
               After a short period of time your Elo is displayed
             </ListGroup.Item>
-            <ListGroup.Item>
-              If you got a <a href="/help">weak link</a> then you have to click
-              the button on your (
-              <a
-                href={`/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&key=${key}`}
-              >
-                link
-              </a>
-              ) in your browser after every game
-            </ListGroup.Item>
           </ListGroup>
         </Container>
       </Col>
