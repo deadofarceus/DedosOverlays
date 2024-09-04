@@ -59,14 +59,14 @@ function MapcoverTutorial() {
                 </DropdownButton>
               </Form.Group>
               <Row className="w-100" md={4}>
-                <Form.Group className="m-2">
+                <Form.Group className="w-50">
                   <Form.Label>
                     {
                       "Choose your Minimap Scale (you can find it under Options -> Interface -> Minimap Scale):"
                     }
                   </Form.Label>
                   <h2>{size}</h2>
-                  <div className="sliderLabels">
+                  <div className="sliderLabelsMapcover">
                     {[0, 25, 50, 75, 100].map((value) => (
                       <span key={value}>{value}</span>
                     ))}
@@ -80,7 +80,7 @@ function MapcoverTutorial() {
                     onChange={(event) => setSize(parseInt(event.target.value))}
                   />
                 </Form.Group>
-                <Form.Group className="m-2">
+                <Form.Group className="w-25">
                   <Form.Label>Toggle Fog of War:</Form.Label>
                   <DropdownButton
                     drop={"down"}
@@ -92,7 +92,7 @@ function MapcoverTutorial() {
                     <Dropdown.Item eventKey="false">Disabled</Dropdown.Item>
                   </DropdownButton>
                 </Form.Group>
-                <Form.Group className="m-2">
+                <Form.Group className="w-25">
                   <Form.Label>Toggle show Lanes:</Form.Label>
                   <DropdownButton
                     drop={"down"}

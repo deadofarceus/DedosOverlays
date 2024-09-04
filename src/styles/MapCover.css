@@ -27,3 +27,13 @@
     filter: drop-shadow(4px 4px 3px #222);
     width: 100%;
 }
+
+.sliderLabelsMapcover {
+    display: flex;
+    justify-content: space-between;
+    /* position: absolute; */
+    /* top: 0; */
+    width: 100%;
+    padding: 0 10px;
+    margin-left: 8px;
+}
