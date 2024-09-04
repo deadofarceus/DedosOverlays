@@ -1,0 +1,13 @@
+.mapCover {
+    width: 420px;
+    height: 420px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.mapCover img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

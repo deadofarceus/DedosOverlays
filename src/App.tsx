@@ -19,6 +19,8 @@ import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverl
 import GuessTheChatter from "./pages/GuessTheChatter";
 import AdminControl from "./pages/AdminControl";
 import Impressum from "./pages/Impressum";
+import Mapcover from "./pages/Mapcover";
+import MapcoverTutorial from "./pages/MapcoverTutorial";
 
 function App() {
   return (
@@ -46,6 +48,10 @@ function App() {
         </Route>
         <Route path="AbisZ">
           <Route path=":accountName" element={<AbisZOverlay />} />
+        </Route>
+        <Route path="mapcover">
+          <Route index element={<MapcoverTutorial />} />
+          <Route path=":game" element={<Mapcover />} />
         </Route>
         <Route path="PCTurnier">
           <Route path=":mod" element={<PCTurnier />} />
