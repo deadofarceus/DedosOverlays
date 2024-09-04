@@ -23,10 +23,7 @@ function Mapcover() {
   }
   const fog = query.get("showFog") === "true";
   const size = query.get("size") ? parseInt(query.get("size")!) : 100;
-
   const calcSize = 0.5 * size + 50;
-  console.log(calcSize);
-
   const lanes = query.get("showLanes") === "true";
   mapName += fog ? "Fog_" : "noFog_";
   mapName += lanes ? "Lanes" : "noLanes";

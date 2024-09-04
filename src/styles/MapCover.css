@@ -6,8 +6,24 @@
     right: 0;
 }
 
+.mapCover2 {
+    width: 420px;
+    height: 420px;
+}
+
 .mapCover img {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.mapcoverTut {
+    margin-top: 60px;
+    margin-bottom: 80px;
+    color: azure;
+    font-weight: bold;
+    font-family: 'Signika', sans-serif;
+    text-align: center;
+    filter: drop-shadow(4px 4px 3px #222);
+    width: 100%;
 }
