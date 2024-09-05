@@ -14,8 +14,8 @@ import { useState } from "react";
 
 function MapcoverTutorial() {
   document.body.className = "noOBS";
-  const [fog, setFog] = useState<boolean>(false);
-  const [lanes, setLanes] = useState<boolean>(false);
+  const [fog, setFog] = useState<boolean>(true);
+  const [lanes, setLanes] = useState<boolean>(true);
   const [size, setSize] = useState<number>(50);
   const [game, setGame] = useState<string>("lol");
   const overlayLink = `https://arceus-overlays.netlify.app/mapcover/${game}?showFog=${fog}&showLanes=${lanes}&size=${size}`;
