@@ -3,6 +3,59 @@ import { useState, useEffect } from "react";
 const randint = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
+function randomAngle() {
+  const minAngle = 25;
+  const maxAngle = 65;
+  const angleInDegrees = Math.random() * (maxAngle - minAngle) + minAngle;
+  return (angleInDegrees * Math.PI) / 180; // Umrechnung in Radianten
+}
+
+// Berechne die neuen Bewegungsrichtungen basierend auf dem zufälligen Winkel -- -> +-
+function calculateNewDirection(abprallVariante: number) {
+  const angle = randomAngle();
+  let b1 = 0;
+  let b2 = 0;
+
+  switch (abprallVariante) {
+    case 0:
+      b2 = -Math.cos(angle);
+      b1 = Math.sqrt(1 - b2 * b2);
+      break;
+    case 1:
+      b2 = Math.cos(angle);
+      b1 = Math.sqrt(1 - b2 * b2);
+      break;
+    case 2:
+      b1 = Math.cos(angle);
+      b2 = -Math.sqrt(1 - b1 * b1);
+      break;
+    case 3:
+      b1 = -Math.cos(angle);
+      b2 = -Math.sqrt(1 - b1 * b1);
+      break;
+    case 4:
+      b2 = -Math.cos(angle);
+      b1 = -Math.sqrt(1 - b2 * b2);
+      break;
+    case 5:
+      b2 = Math.cos(angle);
+      b1 = -Math.sqrt(1 - b2 * b2);
+      break;
+    case 6:
+      b1 = -Math.cos(angle);
+      b2 = Math.sqrt(1 - b1 * b1);
+      break;
+    case 7:
+      b1 = Math.cos(angle);
+      b2 = Math.sqrt(1 - b1 * b1);
+      break;
+    default:
+      break;
+  }
+
+  return [b1, b2];
+}
+
 interface DVDLogoProps {
   logoSrc: string;
   initialColor?: string;
@@ -39,17 +92,14 @@ const Screensaver: React.FC<DVDLogoProps> = ({
 
   //   console.log(position);
 
-  const [direction, setDirection] = useState([1, 1]);
+  const [direction, setDirection] = useState([-1, -1]);
   const [color, setColor] = useState(initialColor);
 
-  const updateDirection = (index: number, value: number) => {
-    const newDirection = [...direction];
-    newDirection[index] = value;
-    setDirection(newDirection);
-
+  const changeColor = () => {
     if (randomizeColor) {
       setColor(
-        `rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`
+        // `rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`
+        `hue-rotate(${randint(0, 360)}deg)`
       );
     }
   };
@@ -67,15 +117,36 @@ const Screensaver: React.FC<DVDLogoProps> = ({
         const newY = prev.y + speed * direction[1];
         // Bounce on the left/right side
         if (newX <= minX) {
-          updateDirection(0, 1);
+          if (direction[1] >= 0) {
+            setDirection(calculateNewDirection(1));
+          } else {
+            setDirection(calculateNewDirection(0));
+          }
+          changeColor();
         } else if (newX >= maxX) {
-          updateDirection(0, -1);
+          if (direction[1] >= 0) {
+            setDirection(calculateNewDirection(5));
+          } else {
+            setDirection(calculateNewDirection(4));
+          }
+          changeColor();
         }
+
         // Bounce on the top/bottom side
         if (newY <= minY) {
-          updateDirection(1, 1);
+          if (direction[0] >= 0) {
+            setDirection(calculateNewDirection(7));
+          } else {
+            setDirection(calculateNewDirection(6));
+          }
+          changeColor();
         } else if (newY >= maxY) {
-          updateDirection(1, -1);
+          if (direction[0] >= 0) {
+            setDirection(calculateNewDirection(2));
+          } else {
+            setDirection(calculateNewDirection(3));
+          }
+          changeColor();
         }
         return { x: newX, y: newY };
       });
@@ -84,17 +155,15 @@ const Screensaver: React.FC<DVDLogoProps> = ({
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction, speed]);
-
   return (
     <img
       id="dvd-logo"
       src={logoSrc}
-      //   alt="DVD Logo"
       style={{
+        filter: color,
         left: `${position.x}px`,
         top: `${position.y}px`,
         position: "absolute",
-        fill: color,
         width: `${width}px`, // Use your preferred size here
         height: `${height}px`, // Use your preferred size here
       }}
