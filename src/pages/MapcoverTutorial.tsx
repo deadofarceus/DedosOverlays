@@ -10,15 +10,19 @@ import {
   Row,
 } from "react-bootstrap";
 import "../styles/MapCover.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Screensaver from "../components/mapcover/Screensaver";
 
 function MapcoverTutorial() {
   document.body.className = "noOBS";
+  const imgRef = useRef<HTMLImageElement>(null);
   const [fog, setFog] = useState<boolean>(true);
   const [lanes, setLanes] = useState<boolean>(true);
+  const [dvd, setDVD] = useState<boolean>(false);
   const [size, setSize] = useState<number>(50);
+  const [speed, setSpeed] = useState<number>(1);
   const [game, setGame] = useState<string>("lol");
-  const overlayLink = `https://arceus-overlays.netlify.app/mapcover/${game}?showFog=${fog}&showLanes=${lanes}&size=${size}`;
+  const overlayLink = `https://arceus-overlays.netlify.app/mapcover/${game}?showFog=${fog}&showLanes=${lanes}&size=${size}&dvd=${dvd}&speed=${speed}`;
 
   let mapName = "../../mapcover_";
   switch (game) {
@@ -105,6 +109,39 @@ function MapcoverTutorial() {
                   </DropdownButton>
                 </Form.Group>
               </Row>
+              <Row className="w-100" md={4}>
+                <Form.Group className="w-25">
+                  <Form.Label>Toggle Challenger Screensaver:</Form.Label>
+                  <DropdownButton
+                    drop={"down"}
+                    variant="primary"
+                    title={dvd ? "Enabled" : "Disabled"}
+                    onSelect={(evt) => setDVD(evt! === "true")}
+                  >
+                    <Dropdown.Item eventKey="true">Enabled</Dropdown.Item>
+                    <Dropdown.Item eventKey="false">Disabled</Dropdown.Item>
+                  </DropdownButton>
+                </Form.Group>
+                <Form.Group className="w-50">
+                  <Form.Label>Set Challenger Speed</Form.Label>
+                  <h2>{speed}</h2>
+                  <div className="sliderLabelsMapcover">
+                    {[0, 0.5, 0.1, 1.5, 2].map((value) => (
+                      <span key={value}>{value}</span>
+                    ))}
+                  </div>
+                  <Form.Range
+                    max={2}
+                    min={0}
+                    step={0.1}
+                    defaultValue={1}
+                    className="gameSlider"
+                    onChange={(event) =>
+                      setSpeed(parseFloat(event.target.value))
+                    }
+                  />
+                </Form.Group>
+              </Row>
             </Col>
           </Form>
           <h3 className="blackOutline">Generated Mapcover Link</h3>
@@ -142,11 +179,23 @@ function MapcoverTutorial() {
         </Col>
         <Container className="mapCover2 centerC justify-content-center">
           <img
+            ref={imgRef}
             src={mapName}
             alt=""
+            id="mapcover"
             className="mapCoverImg"
             style={{ width: `${calcSize}%` }}
           />
+          {imgRef.current && dvd && (
+            <Screensaver
+              logoSrc="../CHALLENGER.png"
+              initialColor="white"
+              randomizeColor={true}
+              speed={speed}
+              containerRect={imgRef.current}
+              calcSize={calcSize}
+            />
+          )}
         </Container>
       </Row>
     </Container>
