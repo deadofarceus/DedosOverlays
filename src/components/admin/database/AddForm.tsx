@@ -13,8 +13,14 @@ function AddForm() {
 
   const handleSubmit = () => {
     fetch(
-      `https://dedosserver.deno.dev/database/add/${group}/${key}/${value}?adminKey=${adminKey}`,
-      { method: "POST" }
+      `https://dedosserver.deno.dev/database/add/${group}/${key}?adminKey=${adminKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ value }),
+      }
     )
       .then((response) => response.text())
       .then((data) => {
