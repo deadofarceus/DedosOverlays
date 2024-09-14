@@ -16,10 +16,7 @@ function AddForm() {
       `https://dedosserver.deno.dev/database/add/${group}/${key}?adminKey=${adminKey}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ value }),
+        body: value,
       }
     )
       .then((response) => response.text())
