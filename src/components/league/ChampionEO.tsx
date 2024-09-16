@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
 
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
@@ -16,13 +17,29 @@ function Champion({
   championName,
   win,
   length,
+  isNew,
 }: ChampionMatchHistory) {
+  const championRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isNew) {
+      const element = championRef.current;
+      if (element) {
+        element.classList.add("grow-animation");
+      }
+    }
+  }, [isNew]);
+
   const imgsrc =
     championName === "null"
       ? "../../null.png"
       : `https://ddragon.leagueoflegends.com/cdn/14.14.1/img/champion/${championName}.png`;
   return (
-    <div className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
+    <div
+      ref={championRef}
+      className="imgdiv"
+      style={{ paddingLeft: 0, paddingRight: 0 }}
+    >
       {mvp && (
         <img
           src={`../../flames.png`}

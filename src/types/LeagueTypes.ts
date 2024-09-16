@@ -67,7 +67,8 @@ export interface ChampionMatchHistory {
     index: number;
     championName: string;
     win: boolean;
-    length: number
+    length: number;
+    isNew: boolean;
 }
 
 export interface MatchhistoryD {
