@@ -90,3 +90,29 @@
     filter: drop-shadow(4px 4px 3px #222);
     font-size: 5em;
 }
+
+
+.eloLPValue {
+    transition: transform 0.6s ease;
+}
+
+.eloLPValue.bounce {
+    animation: bounce 0.6s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    90% {
+        transform: translateY(1px);
+    }
+
+    50% {
+        transform: translateY(15px);
+        /* Adjust how far it moves down */
+    }
+}
