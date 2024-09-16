@@ -47,10 +47,7 @@ function EloInfo({
       </Col>
       <Col className="ELO text-center">
         {border ? (
-          <p
-            className="leagueborder"
-            dangerouslySetInnerHTML={{ __html: border }}
-          />
+          <p className="leagueborder">{border}</p>
         ) : (
           <div className="spacer"></div>
         )}
