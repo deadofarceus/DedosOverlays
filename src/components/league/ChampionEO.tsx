@@ -1,14 +1,14 @@
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
 
-const iconScale = 8;
-const iconSize = 130;
-const flameSize = 195;
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
 
-const iconSizeArray = [[0], [4, 0], [4, 2, 0], [3, 2, 1, 0], [4, 3, 2, 1, 0]];
 // const iconSizeArray = [[0], [4, 0], [4, 0, 0], [4, 0, 0, 0], [4, 0, 0, 0, 0]];
+const iconScale = 8;
+const iconSize = 130;
+const flameSize = 195;
+const iconSizeArray = [[0], [4, 0], [4, 2, 0], [3, 2, 1, 0], [4, 3, 2, 1, 0]];
 
 function Champion({
   mvp,

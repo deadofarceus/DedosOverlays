@@ -70,6 +70,10 @@ export interface ChampionMatchHistory {
     length: number
 }
 
+export interface MatchhistoryD {
+    entry: LeagueEntry
+}
+
 export interface AccountElo {
     eloLP: number;
     eloDivision: string;

@@ -5,10 +5,10 @@ import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
-import Champion from "../components/league/ChampionEO";
 import EloInfo from "../components/league/EloInfo";
+import Matchhistory from "../components/league/Matchhistory";
 
 let ws: EloWebsocket;
 
@@ -106,18 +106,7 @@ function EloOverlay() {
         gmBorder={entry.gmBorder}
         challBorder={entry.challBorder}
       />
-      <Row className="matchhistory" md="auto">
-        {entry.lastMatches.map((match, index) => (
-          <Champion
-            key={match.id}
-            mvp={match.mvp}
-            index={index}
-            championName={match.championName}
-            win={match.win}
-            length={entry.lastMatches.length}
-          />
-        ))}
-      </Row>
+      <Matchhistory entry={entry} />
       {!obs && (
         <Button size="lg" onClick={handleClick} disabled={disabled}>
           Request Update
