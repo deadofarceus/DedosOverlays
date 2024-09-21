@@ -44,7 +44,7 @@
         -2px -1px 0 #000;
 }
 
-.noOBS {
+.noOBSold {
     --s: 50px;
     --c: #0d111d;
     --_s: calc(2*var(--s)) calc(2*var(--s));
@@ -58,4 +58,11 @@
         repeating-conic-gradient(var(--c) 0 25%, #0000 0 50%) 0 0/var(--_s),
         radial-gradient(var(--_c)) 0 calc(var(--s)/2)/var(--s) var(--s) var(--c);
     background-attachment: fixed;
+}
+
+.noOBS {
+    background-color: #131315;
+  background-image: radial-gradient(rgba(95, 81, 115, 0.171) 2px, transparent 0);
+  background-size: 30px 30px;
+  background-position: -5px -5px
 }
