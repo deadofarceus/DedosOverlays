@@ -4,56 +4,22 @@ const randint = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
 function randomAngle() {
-  const minAngle = 25;
-  const maxAngle = 65;
+  const minAngle = 30;
+  const maxAngle = 60;
   const angleInDegrees = Math.random() * (maxAngle - minAngle) + minAngle;
   return (angleInDegrees * Math.PI) / 180; // Umrechnung in Radianten
 }
 
-// Berechne die neuen Bewegungsrichtungen basierend auf dem zufälligen Winkel -- -> +-
+// Berechne die neuen Bewegungsrichtungen basierend auf dem zufälligen Winkel
 function calculateNewDirection(abprallVariante: number) {
   const angle = randomAngle();
-  let b1 = 0;
-  let b2 = 0;
-
-  switch (abprallVariante) {
-    case 0:
-      b2 = -Math.cos(angle);
-      b1 = Math.sqrt(1 - b2 * b2);
-      break;
-    case 1:
-      b2 = Math.cos(angle);
-      b1 = Math.sqrt(1 - b2 * b2);
-      break;
-    case 2:
-      b1 = Math.cos(angle);
-      b2 = -Math.sqrt(1 - b1 * b1);
-      break;
-    case 3:
-      b1 = -Math.cos(angle);
-      b2 = -Math.sqrt(1 - b1 * b1);
-      break;
-    case 4:
-      b2 = -Math.cos(angle);
-      b1 = -Math.sqrt(1 - b2 * b2);
-      break;
-    case 5:
-      b2 = Math.cos(angle);
-      b1 = -Math.sqrt(1 - b2 * b2);
-      break;
-    case 6:
-      b1 = -Math.cos(angle);
-      b2 = Math.sqrt(1 - b1 * b1);
-      break;
-    case 7:
-      b1 = Math.cos(angle);
-      b2 = Math.sqrt(1 - b1 * b1);
-      break;
-    default:
-      break;
-  }
-
-  return [b1, b2];
+  const cosAngle = Math.cos(angle);
+  const sinAngle = Math.sin(angle);
+  
+  const signX = [1, 1,  -1, -1 ][abprallVariante];
+  const signY = [-1, 1,  -1, 1][abprallVariante];
+  
+  return [signX * sinAngle, signY * cosAngle];
 }
 
 interface DVDLogoProps {
@@ -73,8 +39,11 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   containerRect,
   calcSize,
 }) => {
-  const width = 70 * calcSize * 0.01;
-  const height = 70 * calcSize * 0.01;
+  //load image and use width of logoSrc 
+  const img = new Image();
+  img.src = logoSrc;
+  const width = img.width* calcSize;
+  const height = img.height* calcSize;
   const minX = containerRect.offsetLeft;
   const minY = containerRect.offsetTop;
   const maxX = minX + containerRect.offsetWidth - width - 1;
@@ -84,8 +53,8 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   //   console.log(minY, maxY);
 
   const [position, setPosition] = useState({
-    x: randint(minX, maxX),
-    y: randint(minY, maxY),
+    x: minX + (maxX-minX)/2,
+    y: minY + (minY-maxY)/2,
     // x: maxX,
     // y: maxY,
   });
@@ -115,37 +84,15 @@ const Screensaver: React.FC<DVDLogoProps> = ({
       setPosition((prev) => {
         const newX = prev.x + speed * direction[0];
         const newY = prev.y + speed * direction[1];
-        // Bounce on the left/right side
-        if (newX <= minX) {
-          if (direction[1] >= 0) {
-            setDirection(calculateNewDirection(1));
-          } else {
-            setDirection(calculateNewDirection(0));
-          }
-          changeColor();
-        } else if (newX >= maxX) {
-          if (direction[1] >= 0) {
-            setDirection(calculateNewDirection(5));
-          } else {
-            setDirection(calculateNewDirection(4));
-          }
+        if (newX <= minX || newX >= maxX) {
+          const directionIndex = newX <= minX ? (direction[1] >= 0 ? 1 : 0) : (direction[1] >= 0 ? 3 : 2);
+          setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
 
-        // Bounce on the top/bottom side
-        if (newY <= minY) {
-          if (direction[0] >= 0) {
-            setDirection(calculateNewDirection(7));
-          } else {
-            setDirection(calculateNewDirection(6));
-          }
-          changeColor();
-        } else if (newY >= maxY) {
-          if (direction[0] >= 0) {
-            setDirection(calculateNewDirection(2));
-          } else {
-            setDirection(calculateNewDirection(3));
-          }
+        if (newY <= minY || newY >= maxY) {
+          const directionIndex = newY <= minY ? (direction[0] >= 0 ? 1 : 3) : (direction[0] >= 0 ? 0 : 2);
+          setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
         return { x: newX, y: newY };

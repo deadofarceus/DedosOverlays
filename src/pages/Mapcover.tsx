@@ -53,12 +53,12 @@ function Mapcover() {
       />
       {imgRef.current && dvd && (
         <Screensaver
-          logoSrc="../CHALLENGER.png"
+          logoSrc="../CHALLENGERScreenSaver.png"
           initialColor="white"
           randomizeColor={true}
           speed={speed}
           containerRect={imgRef.current}
-          calcSize={calcSize}
+          calcSize={calcSize*0.01}
         />
       )}
     </Container>

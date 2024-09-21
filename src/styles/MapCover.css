@@ -17,6 +17,10 @@
     right: 0;
 }
 
+.mapBorder {
+    border: solid 4px #45386e;
+}
+
 .mapcoverTut {
     margin-top: 60px;
     margin-bottom: 80px;

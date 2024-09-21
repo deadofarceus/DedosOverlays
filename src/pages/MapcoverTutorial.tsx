@@ -183,17 +183,17 @@ function MapcoverTutorial() {
             src={mapName}
             alt=""
             id="mapcover"
-            className="mapCoverImg"
+            className="mapCoverImg mapBorder"
             style={{ width: `${calcSize}%` }}
           />
           {imgRef.current && dvd && (
             <Screensaver
-              logoSrc="../CHALLENGER.png"
+              logoSrc="../CHALLENGERScreenSaver.png"
               initialColor="white"
               randomizeColor={true}
               speed={speed}
               containerRect={imgRef.current}
-              calcSize={calcSize}
+              calcSize={calcSize*0.01}
             />
           )}
         </Container>
