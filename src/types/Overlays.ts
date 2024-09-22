@@ -28,7 +28,7 @@ export const OVERLAYS: Overlay[] = [
     imageURL: "/Screensaver.png",
     hoverImageURL: "/Screensaver.gif",
     description:
-      "Your costum screensaver for OBS. You can choose your own custom image or gif and watch it hit the edges of your screen. ",
+      "Your custom screensaver for OBS. You can choose your own custom image or gif and watch it hit the edges of your screen. ",
     url: "ScreensaverTutorial",
   },
   {
