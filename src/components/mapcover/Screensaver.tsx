@@ -15,10 +15,10 @@ function calculateNewDirection(abprallVariante: number) {
   const angle = randomAngle();
   const cosAngle = Math.cos(angle);
   const sinAngle = Math.sin(angle);
-  
-  const signX = [1, 1,  -1, -1 ][abprallVariante];
-  const signY = [-1, 1,  -1, 1][abprallVariante];
-  
+
+  const signX = [1, 1, -1, -1][abprallVariante];
+  const signY = [-1, 1, -1, 1][abprallVariante];
+
   return [signX * sinAngle, signY * cosAngle];
 }
 
@@ -27,8 +27,10 @@ interface DVDLogoProps {
   initialColor?: string;
   randomizeColor?: boolean;
   speed?: number;
-  containerRect: HTMLImageElement;
+  containerRect: HTMLImageElement | HTMLDivElement;
   calcSize: number;
+  border?: boolean;
+  opacity?: number;
 }
 
 const Screensaver: React.FC<DVDLogoProps> = ({
@@ -38,29 +40,33 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   speed = 1,
   containerRect,
   calcSize,
+  border = false,
+  opacity = 1,
 }) => {
-  //load image and use width of logoSrc 
+  //load image and use width of logoSrc
   const img = new Image();
   img.src = logoSrc;
-  const width = img.width* calcSize;
-  const height = img.height* calcSize;
+  const width = img.width * calcSize;
+  const height = img.height * calcSize;
   const minX = containerRect.offsetLeft;
   const minY = containerRect.offsetTop;
   const maxX = minX + containerRect.offsetWidth - width - 1;
-  const maxY = minY + containerRect.offsetWidth - height - 1;
+  const maxY = minY + containerRect.offsetHeight - height - 1;
 
   const [position, setPosition] = useState({
-    x: minX + width*2,
-    y: minY - height*2,
+    x: minX + width * 2,
+    y: minY - height * 2,
   });
 
   const [direction, setDirection] = useState([-1, -1]);
   const [color, setColor] = useState(initialColor);
+  const [borderColor, setBorderColor] = useState(initialColor);
 
   const changeColor = () => {
     if (randomizeColor) {
-      setColor(
-        `hue-rotate(${randint(0, 360)}deg)`
+      setColor(`hue-rotate(${randint(0, 360)}deg)`);
+      setBorderColor(
+        `rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`
       );
     }
   };
@@ -77,13 +83,27 @@ const Screensaver: React.FC<DVDLogoProps> = ({
         const newX = prev.x + speed * direction[0];
         const newY = prev.y + speed * direction[1];
         if (newX <= minX || newX >= maxX) {
-          const directionIndex = newX <= minX ? (direction[1] >= 0 ? 1 : 0) : (direction[1] >= 0 ? 3 : 2);
+          const directionIndex =
+            newX <= minX
+              ? direction[1] >= 0
+                ? 1
+                : 0
+              : direction[1] >= 0
+              ? 3
+              : 2;
           setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
 
         if (newY <= minY || newY >= maxY) {
-          const directionIndex = newY <= minY ? (direction[0] >= 0 ? 1 : 3) : (direction[0] >= 0 ? 0 : 2);
+          const directionIndex =
+            newY <= minY
+              ? direction[0] >= 0
+                ? 1
+                : 3
+              : direction[0] >= 0
+              ? 0
+              : 2;
           setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
@@ -103,8 +123,10 @@ const Screensaver: React.FC<DVDLogoProps> = ({
         left: `${position.x}px`,
         top: `${position.y}px`,
         position: "absolute",
-        width: `${width}px`, // Use your preferred size here
-        height: `${height}px`, // Use your preferred size here
+        width: `${width}px`,
+        height: `${height}px`,
+        border: border ? `2px solid ${borderColor}` : "none",
+        opacity: opacity,
       }}
     />
   );

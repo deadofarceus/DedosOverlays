@@ -22,6 +22,7 @@ import AdminControl from "./pages/AdminControl";
 import Impressum from "./pages/Impressum";
 import Mapcover from "./pages/Mapcover";
 import MapcoverTutorial from "./pages/MapcoverTutorial";
+import GlobalScreensaver from "./pages/GlobalScreensaver";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="help" element={<Help />} />
         <Route path="imprint" element={<Impressum />} />
         <Route path="AdminControl" element={<AdminControl />} />
+        <Route path="Screensaver" element={<GlobalScreensaver />} />
         <Route path="5v5">
           <Route path="Mod" element={<FiveVFiveMod />} />
           <Route path="Overlay" element={<FiveVFiveOverlay />} />

@@ -1,0 +1,12 @@
+.globalScreensaver {
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.screensaverReady {
+  width: 100%;
+  height: 100vh;
+  margin: 0px;
+}
