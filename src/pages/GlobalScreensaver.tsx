@@ -23,7 +23,7 @@ function GlobalScreensaver() {
   const query = useQuery();
   const imgSrc = query.get("imgSrc") || "../CHALLENGERScreenSaver.png";
   const border = query.get("border") === "true" || false;
-  const speed = parseInt(query.get("speed") || "6");
+  const speed = parseFloat(query.get("speed") || "6");
   const opacity = parseFloat(query.get("opacity") || "1");
   const calcSize = parseFloat(query.get("size") || "1");
   return (
