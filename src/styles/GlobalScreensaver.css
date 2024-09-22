@@ -10,3 +10,9 @@
   height: 100vh;
   margin: 0px;
 }
+
+.rangeLabel {
+  width: 75%;
+  margin-bottom: 0;
+  text-align: left;
+}

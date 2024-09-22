@@ -16,7 +16,7 @@ function ScreensaverTutorial() {
   const divRef = useRef<HTMLDivElement>(null);
   const [settings, setSettings] = useState({
     border: false,
-    speed: 0.5,
+    speed: 3,
     size: 1,
     opacity: 1,
     imgSrc: "",
@@ -55,8 +55,10 @@ function ScreensaverTutorial() {
               onChange={(checked) => updateSetting("border", checked)}
             />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Screensaver-Speed: {settings.speed}</Form.Label>
+            <Form.Group className="mb-3 w-50">
+              <Form.Label className="rangeLabel">
+                Screensaver-Speed: {settings.speed}
+              </Form.Label>
               <input
                 type="range"
                 className="dedo-range"
@@ -69,8 +71,10 @@ function ScreensaverTutorial() {
                 step={0.5}
               ></input>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Screensaver-Size: {settings.size}</Form.Label>
+            <Form.Group className="mb-3 w-50">
+              <Form.Label className="rangeLabel">
+                Screensaver-Size: {settings.size}
+              </Form.Label>
               <input
                 type="range"
                 className="dedo-range"
@@ -83,8 +87,10 @@ function ScreensaverTutorial() {
                 step={0.1}
               ></input>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Screensaver-Opacity: {settings.opacity}</Form.Label>
+            <Form.Group className="mb-3 w-50">
+              <Form.Label className="rangeLabel">
+                Screensaver-Opacity: {settings.opacity}
+              </Form.Label>
               <input
                 type="range"
                 className="dedo-range"
