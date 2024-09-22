@@ -44,7 +44,7 @@ function MapcoverTutorial() {
     <Container className="mapcoverTut">
       <Row className="centerR w-100">
         <Col className="centerC w-50">
-          <h1>Mapcover-Generator</h1>
+          <h1 className="blackOutline">Mapcover-Generator</h1>
           <Form className="mb-3 w-75 centerC blackOutline">
             <Form.Group className="mb-3">
               <Form.Label>Minimap-Skala: {settings.size}</Form.Label>

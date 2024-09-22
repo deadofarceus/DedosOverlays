@@ -1,11 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Screensaver from "../components/mapcover/Screensaver";
-import { useQuery } from "../types/UsefulFunctions";
+import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import "../styles/GlobalScreensaver.css";
 
 function GlobalScreensaver() {
-  document.body.className = "screensaverReady";
+  const obs = isOBSBrowser();
+  if (obs) {
+    document.body.className = "screensaverReady";
+  } else {
+    document.body.className = "noOBS";
+  }
   const [dummy, setDummy] = useState<boolean>(true);
 
   const divRef = useRef<HTMLDivElement>(null);
