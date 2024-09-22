@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import "./styles/util.css";
 import "./styles/PrideStyles.css";
 import EloOverlay from "./pages/EloOverlay";
 import EloOverlayTutorial from "./pages/EloOverlayTutorial";

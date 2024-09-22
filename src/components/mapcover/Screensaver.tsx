@@ -49,17 +49,10 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   const maxX = minX + containerRect.offsetWidth - width - 1;
   const maxY = minY + containerRect.offsetWidth - height - 1;
 
-  //   console.log(containerRect.offsetTop);
-  //   console.log(minY, maxY);
-
   const [position, setPosition] = useState({
-    x: minX + (maxX-minX)/2,
-    y: minY + (minY-maxY)/2,
-    // x: maxX,
-    // y: maxY,
+    x: minX + width*2,
+    y: minY - height*2,
   });
-
-  //   console.log(position);
 
   const [direction, setDirection] = useState([-1, -1]);
   const [color, setColor] = useState(initialColor);
@@ -67,7 +60,6 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   const changeColor = () => {
     if (randomizeColor) {
       setColor(
-        // `rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`
         `hue-rotate(${randint(0, 360)}deg)`
       );
     }

@@ -1,43 +1,43 @@
 .mapCover {
-    width: 420px;
-    height: 420px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  width: 420px;
+  height: 420px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .mapCover2 {
-    width: 420px;
-    height: 420px;
+  width: 420px;
+  height: 420px;
 }
 
 .mapCover img {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .mapBorder {
-    border: solid 4px #45386e;
+  border: solid 4px #45386e;
 }
 
 .mapcoverTut {
-    margin-top: 60px;
-    margin-bottom: 80px;
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
-    filter: drop-shadow(4px 4px 3px #222);
-    width: 100%;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(2px 2px 1px #222);
+  width: 100%;
 }
 
 .sliderLabelsMapcover {
-    display: flex;
-    justify-content: space-between;
-    /* position: absolute; */
-    /* top: 0; */
-    width: 100%;
-    padding: 0 10px;
-    margin-left: 8px;
+  display: flex;
+  justify-content: space-between;
+  /* position: absolute; */
+  /* top: 0; */
+  width: 100%;
+  padding: 0 10px;
+  margin-left: 8px;
 }
