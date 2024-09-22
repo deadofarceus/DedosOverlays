@@ -1,91 +1,100 @@
 .HomeContainer {
-    margin-top: 60px;
-    margin-bottom: 80px;
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
-    filter: drop-shadow(4px 4px 3px #222);
-    width: 80%;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(4px 4px 3px #222);
+  width: 80%;
 }
 
 .headlineHome {
-    font-size: 4em;
+  font-size: 4em;
 }
 
 .overlayCards {
-    display: flex;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .article-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f8e6ff;
-    border-radius: 20px;
-    overflow: hidden;
-    max-width: 400px;
-    margin: 20px;
-    border: solid 4px #45386e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8e6ff;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 350px;
+  min-width: 350px;
+  margin: 20px;
+  border: solid 4px #45386e;
 }
 
 .article-wrapper:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .article-image {
-    width: 100%;
-    height: auto;
-    transition: opacity 0.5s ease-in-out;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .image-container {
-    position: relative;
-    width: 100%;
-    background-color: black;
+  position: relative;
+  width: 100%;
+  background-color: black;
+}
+
+.screensaver-container {
+  position: relative;
+  width: 100%;
+  height: 192px;
+  background-color: black;
 }
 
 .hover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 .image-container:hover .default-image {
-    opacity: 0;
+  opacity: 0;
 }
 
 .image-container:hover .hover-image {
-    opacity: 1;
+  opacity: 1;
 }
 
 .article-body {
-    padding: 10px;
-    text-align: center;
+  padding: 10px;
+  text-align: center;
 }
 
 .article-title {
-    font-size: 24px;
-    color: #0f0f0f;
-    margin-bottom: 10px;
+  font-size: 24px;
+  color: #0f0f0f;
+  margin-bottom: 10px;
 }
 
 .article-description {
-    font-size: 16px;
-    color: #282828;
+  font-size: 16px;
+  color: #282828;
 }
 
 .read-more {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
 }
 
 .read-more .icon {
-    margin-left: 8px;
-    width: 16px;
-    height: 16px;
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
 }

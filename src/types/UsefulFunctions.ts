@@ -2,12 +2,16 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 export function useQuery() {
-    const { search } = useLocation();
+  const { search } = useLocation();
 
-    return React.useMemo(() => new URLSearchParams(search), [search]);
+  return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
 export function isOBSBrowser(): boolean {
-    const browserName = navigator.userAgent.toLowerCase();
-    return browserName.indexOf('obs') > -1 || browserName.indexOf('sld') > -1 || browserName.indexOf('electron') > -1;
+  const browserName = navigator.userAgent.toLowerCase();
+  return (
+    browserName.indexOf("obs") > -1 ||
+    browserName.indexOf("sld") > -1 ||
+    browserName.indexOf("electron") > -1
+  );
 }

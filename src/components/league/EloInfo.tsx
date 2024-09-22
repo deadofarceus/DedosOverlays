@@ -89,7 +89,7 @@ function EloInfo({
       </Col>
       <Col className="ELO text-center">
         {border ? (
-          <p className="leagueborder">{border}</p>
+          <p className="leagueborder blackOutline">{border}</p>
         ) : (
           <div className="spacer"></div>
         )}

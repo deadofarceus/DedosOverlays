@@ -94,7 +94,6 @@ const Screensaver: React.FC<DVDLogoProps> = ({
           setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
-
         if (newY <= minY || newY >= maxY) {
           const directionIndex =
             newY <= minY

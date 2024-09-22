@@ -24,6 +24,14 @@ export const OVERLAYS: Overlay[] = [
     url: "Mapcover",
   },
   {
+    game: "Screensaver to distract your viewers",
+    imageURL: "/Screensaver.png",
+    hoverImageURL: "/Screensaver.gif",
+    description:
+      "Your costum screensaver for OBS. You can choose your own custom image or gif and watch it hit the edges of your screen. ",
+    url: "ScreensaverTutorial",
+  },
+  {
     game: "Elden Ring/other Soulslike",
     imageURL: "/EldenRing.png",
     hoverImageURL: "/EldenRingHover.png",
