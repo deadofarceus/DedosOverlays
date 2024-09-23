@@ -65,6 +65,8 @@ function WorldsCoCast() {
     }
   }, [query]);
 
+  console.log("recieved", CoStreams);
+
   return (
     <Container className="co-stream-container">
       <Col className="co-stream-col">

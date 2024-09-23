@@ -3,16 +3,17 @@ import { CoStreamCardProps } from "../../../types/CoStreamTypes";
 import MatchUpCard from "./MatchUpCard";
 
 function CoStreamCard({ date, matchups }: CoStreamCardProps) {
+  const usedDate = new Date(date);
   return (
     <Container className="co-stream-card-container centerC m-2">
       <h4>
-        {date.toLocaleDateString("de-DE", {
+        {usedDate.toLocaleDateString("de-DE", {
           weekday: "long",
           day: "2-digit",
           month: "2-digit",
         })}{" "}
         ab{" "}
-        {date.toLocaleTimeString("de-DE", {
+        {usedDate.toLocaleTimeString("de-DE", {
           hour: "2-digit",
           minute: "2-digit",
         })}{" "}

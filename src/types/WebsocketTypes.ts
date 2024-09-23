@@ -95,8 +95,9 @@ export abstract class BaseWebSocket<T> {
 
 export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
   id: string;
-  constructor(id: string, callback: React.Dispatch<React.SetStateAction<T>>) {
-    super(callback, `${GLOBALWSADRESS}?id=${id}`);
+  constructor(id: string, callback?: React.Dispatch<React.SetStateAction<T>>) {
+    const dummyCallback: React.Dispatch<React.SetStateAction<T>> = () => {};
+    super(callback ?? dummyCallback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
   }
 
@@ -105,11 +106,13 @@ export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
     if (this.checkUtilityEvent(message)) {
       return;
     }
-    const data = JSON.parse(message);
+    const data = JSON.parse(message).data;
+    console.log("recieved222222222222", data);
     this.callback(data);
   };
 
   sendData(data: T) {
+    console.log("sendData", data);
     this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", data));
   }
 }

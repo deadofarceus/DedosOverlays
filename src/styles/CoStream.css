@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* height: 100vh; */
   font-family: "Roboto Mono", monospace;
   font-weight: bold;
   font-style: normal;
@@ -71,4 +71,27 @@
 .date-time,
 .format {
   font-size: 1em;
+}
+
+.coCastMod {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  font-style: normal;
+  color: azure;
+  filter: drop-shadow(1px 1px 1px #000);
+}
+
+.coCastForm label {
+  font-size: 1.2em;
+}
+
+.coCastFormDiv {
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px;
 }
