@@ -24,6 +24,8 @@ import Mapcover from "./pages/Mapcover";
 import MapcoverTutorial from "./pages/MapcoverTutorial";
 import GlobalScreensaver from "./pages/GlobalScreensaver";
 import ScreensaverTutorial from "./pages/ScreensaverTutorial";
+import WorldsCoCast from "./pages/WorldsCoCast";
+import WorldsCoCastMod from "./pages/WorldsCoCastMod";
 
 function App() {
   return (
@@ -62,6 +64,10 @@ function App() {
           <Route path=":mod" element={<PCTurnier />} />
         </Route>
         <Route path="GuessTheChatter" element={<GuessTheChatter />} />
+        <Route path="WorldsCoCast">
+          <Route index element={<WorldsCoCast />} />
+          <Route path="mod" element={<WorldsCoCastMod />} />
+        </Route>
         <Route path="Stream">
           <Route path="randomChar" element={<RandomCharGen />} />
           <Route path="GamingTierlist">
