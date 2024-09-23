@@ -93,6 +93,27 @@ export abstract class BaseWebSocket<T> {
   }
 }
 
+export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
+  id: string;
+  constructor(id: string, callback: React.Dispatch<React.SetStateAction<T>>) {
+    super(callback, `${GLOBALWSADRESS}?id=${id}`);
+    this.id = id;
+  }
+
+  handleMessage = (event: MessageEvent) => {
+    const message = event.data;
+    if (this.checkUtilityEvent(message)) {
+      return;
+    }
+    const data = JSON.parse(message);
+    this.callback(data);
+  };
+
+  sendData(data: T) {
+    this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", data));
+  }
+}
+
 export class EloWebsocket extends BaseWebSocket<Account> {
   queueId: number;
   constructor(

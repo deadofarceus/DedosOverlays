@@ -1,0 +1,74 @@
+.co-stream-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  font-style: normal;
+  color: azure;
+  filter: drop-shadow(1px 1px 1px #000);
+}
+
+.co-stream-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.match-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.match-card {
+  background-color: #1111115a;
+  margin-bottom: 5px;
+  border: 1px solid #333;
+  padding: 5px;
+  width: 66%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.team-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.team-name {
+  font-size: 1.9em;
+  margin: 0 10px;
+  width: 51px;
+  text-align: center;
+}
+
+.score {
+  font-size: 1.4em;
+  margin: 0 10px;
+}
+
+.details-section {
+  margin-top: -5px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.date-time,
+.format {
+  font-size: 1em;
+}
