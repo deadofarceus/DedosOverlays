@@ -6,36 +6,6 @@ import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import { useEffect, useState } from "react";
 import { BroadcastWebsocket } from "../types/WebsocketTypes";
 
-const test: CoStreamCardProps = {
-  date: new Date("2024-09-25T14:00:00"),
-  matchups: [
-    {
-      team1: "MDK",
-      team2: "T1",
-      format: "Bo3",
-      standing: "0-0",
-    },
-  ],
-};
-const test2: CoStreamCardProps = {
-  date: new Date("2024-09-26T14:00:00"),
-  matchups: [
-    {
-      team1: "MDK",
-      team2: "T1",
-      format: "Bo3",
-      standing: "0-0",
-    },
-    {
-      team1: "FNC",
-      team2: "HLE",
-      format: "Bo3",
-      standing: "0-0",
-    },
-  ],
-};
-const testArray: CoStreamCardProps[] = [test, test2];
-
 let ws: BroadcastWebsocket<CoStreamCardProps[]>;
 
 function WorldsCoCast() {
