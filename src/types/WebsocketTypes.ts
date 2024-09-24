@@ -107,12 +107,10 @@ export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
       return;
     }
     const data = JSON.parse(message).data;
-    console.log("recieved222222222222", data);
     this.callback(data);
   };
 
   sendData(data: T) {
-    console.log("sendData", data);
     this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", data));
   }
 }

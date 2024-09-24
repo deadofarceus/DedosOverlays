@@ -5,7 +5,28 @@ import { CoStreamCardProps, Matchup } from "../types/CoStreamTypes";
 import { useQuery } from "../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../types/WebsocketTypes";
 
-const teams = ["FNC", "T1", "Team C", "Team D"]; // Beispielteams
+const teams = [
+  "FNC",
+  "T1",
+  "100",
+  "DK",
+  "TL",
+  "BLG",
+  "G2",
+  "FLY",
+  "GAM",
+  "GEN",
+  "HLE",
+  "LNG",
+  "MDK",
+  "PNG",
+  "PSG",
+  "R7",
+  "SHG",
+  "TES",
+  "VKE",
+  "WBG",
+];
 
 let ws: BroadcastWebsocket<CoStreamCardProps[]>;
 
@@ -166,7 +187,9 @@ function WorldsCoCastMod() {
           </Form.Group>
         </Form>
       </Col>
-      <WorldsCoCast />
+      <Container className="w-50">
+        <WorldsCoCast />
+      </Container>
     </Container>
   );
 }
