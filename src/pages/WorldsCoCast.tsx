@@ -47,7 +47,7 @@ function WorldsCoCast() {
     document.body.className = "noOBS";
   }
 
-  const [CoStreams, setCoStreams] = useState<CoStreamCardProps[]>(testArray);
+  const [CoStreams, setCoStreams] = useState<CoStreamCardProps[]>([]);
 
   const query = useQuery();
 
