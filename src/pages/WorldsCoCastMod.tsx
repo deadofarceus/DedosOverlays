@@ -47,7 +47,7 @@ function WorldsCoCastMod() {
     setCoStreamCards([
       ...coStreamCards,
       new CoStreamCardProps(new Date(), [
-        new Matchup("FNC", "T1", "", "", "Bo1", "0-0"),
+        new Matchup("FNC", "T1", "Bo1", "0-0"),
       ]),
     ]);
   };
@@ -60,7 +60,7 @@ function WorldsCoCastMod() {
   const addMatchup = (index: number) => {
     const newCoStreamCards = [...coStreamCards];
     newCoStreamCards[index].matchups.push(
-      new Matchup("FNC", "T1", "", "", "Bo1", "0-0")
+      new Matchup("FNC", "T1", "Bo1", "0-0")
     );
     setCoStreamCards(newCoStreamCards);
   };

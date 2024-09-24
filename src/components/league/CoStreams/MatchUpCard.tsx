@@ -1,7 +1,7 @@
 import { Matchup } from "../../../types/CoStreamTypes";
 
 function MatchUpCard({ matchup }: { matchup: Matchup }) {
-  const { team1, team2, logo1, logo2, format } = matchup;
+  const { team1, team2, format } = matchup;
   return (
     <div className="match-card centerC">
       <div className="team-section">

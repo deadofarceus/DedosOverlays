@@ -14,8 +14,6 @@ const test: CoStreamCardProps = {
       team2: "T1",
       format: "Bo3",
       standing: "0-0",
-      logo1: "",
-      logo2: "",
     },
   ],
 };
@@ -27,16 +25,12 @@ const test2: CoStreamCardProps = {
       team2: "T1",
       format: "Bo3",
       standing: "0-0",
-      logo1: "",
-      logo2: "",
     },
     {
       team1: "FNC",
       team2: "HLE",
       format: "Bo3",
       standing: "0-0",
-      logo1: "",
-      logo2: "",
     },
   ],
 };
