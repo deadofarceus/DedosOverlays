@@ -9,6 +9,15 @@
   font-style: normal;
   color: azure;
   filter: drop-shadow(1px 1px 1px #000);
+  border: 2px solid #333333d6;
+  border-radius: 30px;
+  background-color: #13131580;
+  background-image: radial-gradient(
+    rgba(95, 81, 115, 0.171) 2px,
+    transparent 0
+  );
+  background-size: 30px 30px;
+  background-position: -5px -5px;
 }
 
 .co-stream-col {
@@ -27,7 +36,7 @@
 }
 
 .match-card {
-  background-color: #1111115a;
+  background-color: #11111119;
   margin-bottom: 5px;
   border: 1px solid #333;
   padding: 5px;
