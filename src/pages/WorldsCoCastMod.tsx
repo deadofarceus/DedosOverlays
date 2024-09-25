@@ -32,7 +32,19 @@ let ws: BroadcastWebsocket<CoStreamCardProps[]>;
 
 function WorldsCoCastMod() {
   document.body.className = "noOBS";
-  const [coStreamCards, setCoStreamCards] = useState<CoStreamCardProps[]>([]);
+  const [coStreamCards, setCoStreamCards] = useState<CoStreamCardProps[]>(
+    () => {
+      const savedCards = JSON.parse(
+        localStorage.getItem("coStreamCards") || "[]"
+      );
+      return savedCards.map((card: any) => ({
+        ...card,
+        date: new Date(card.date),
+      }));
+    }
+  );
+
+  console.log(coStreamCards);
   const query = useQuery();
 
   useEffect(() => {
@@ -67,9 +79,9 @@ function WorldsCoCastMod() {
     setCoStreamCards(newCoStreamCards);
   };
 
-  if (coStreamCards.length > 0) {
+  if (ws) {
     ws.sendData(coStreamCards);
-    console.log(coStreamCards);
+    localStorage.setItem("coStreamCards", JSON.stringify(coStreamCards));
   }
   return (
     <Container className="centerR coCastMod">
