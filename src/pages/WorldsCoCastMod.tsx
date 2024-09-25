@@ -46,9 +46,7 @@ function WorldsCoCastMod() {
   const addCoStreamCard = () => {
     setCoStreamCards([
       ...coStreamCards,
-      new CoStreamCardProps(new Date(), [
-        new Matchup("FNC", "T1", "Bo1", "0-0"),
-      ]),
+      new CoStreamCardProps(new Date(), [new Matchup("", "", "Bo1", "0-0")]),
     ]);
   };
 
@@ -59,9 +57,7 @@ function WorldsCoCastMod() {
 
   const addMatchup = (index: number) => {
     const newCoStreamCards = [...coStreamCards];
-    newCoStreamCards[index].matchups.push(
-      new Matchup("FNC", "T1", "Bo1", "0-0")
-    );
+    newCoStreamCards[index].matchups.push(new Matchup("", "", "Bo1", "0-0"));
     setCoStreamCards(newCoStreamCards);
   };
 
@@ -73,6 +69,7 @@ function WorldsCoCastMod() {
 
   if (coStreamCards.length > 0) {
     ws.sendData(coStreamCards);
+    console.log(coStreamCards);
   }
   return (
     <Container className="centerR coCastMod">
@@ -101,7 +98,7 @@ function WorldsCoCastMod() {
                       value={matchup.team1 || ""}
                       onChange={(e) => {
                         const newCoStreamCards = [...coStreamCards];
-                        newCoStreamCards[index].matchups[index].team1 =
+                        newCoStreamCards[index].matchups[matchupIndex].team1 =
                           e.target.value;
                         setCoStreamCards(newCoStreamCards);
                       }}
@@ -119,7 +116,7 @@ function WorldsCoCastMod() {
                       value={matchup.team2 || ""}
                       onChange={(e) => {
                         const newCoStreamCards = [...coStreamCards];
-                        newCoStreamCards[index].matchups[index].team2 =
+                        newCoStreamCards[index].matchups[matchupIndex].team2 =
                           e.target.value;
                         setCoStreamCards(newCoStreamCards);
                       }}
@@ -137,8 +134,8 @@ function WorldsCoCastMod() {
                       value={matchup.format || "Bo1"}
                       onChange={(e) => {
                         const newCoStreamCards = [...coStreamCards];
-                        newCoStreamCards[index].matchups[index].format = e
-                          .target.value as "Bo1" | "Bo3" | "Bo5";
+                        newCoStreamCards[index].matchups[matchupIndex].format =
+                          e.target.value as "Bo1" | "Bo3" | "Bo5";
                         setCoStreamCards(newCoStreamCards);
                       }}
                     >
@@ -154,8 +151,9 @@ function WorldsCoCastMod() {
                       value={matchup.standing || ""}
                       onChange={(e) => {
                         const newCoStreamCards = [...coStreamCards];
-                        newCoStreamCards[index].matchups[index].standing =
-                          e.target.value;
+                        newCoStreamCards[index].matchups[
+                          matchupIndex
+                        ].standing = e.target.value;
                         setCoStreamCards(newCoStreamCards);
                       }}
                     />

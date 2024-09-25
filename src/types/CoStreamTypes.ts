@@ -11,13 +11,13 @@ export class CoStreamCardProps {
 export class Matchup {
   team1: string;
   team2: string;
-  format: "Bo1" | "Bo3" | "Bo5";
+  format: "Bo1" | "Bo3" | "Bo5" | "";
   standing: string;
 
   constructor(
     team1: string,
     team2: string,
-    format: "Bo1" | "Bo3" | "Bo5",
+    format: "Bo1" | "Bo3" | "Bo5" | "",
     standing: string
   ) {
     this.team1 = team1;
