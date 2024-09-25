@@ -52,6 +52,11 @@ function WorldsCoCastMod() {
 
     if (!ws && id) {
       ws = new BroadcastWebsocket(id);
+      if (coStreamCards.length > 0) {
+        setTimeout(() => {
+          ws.sendData(coStreamCards);
+        }, 200);
+      }
     }
   }, [query]);
 
