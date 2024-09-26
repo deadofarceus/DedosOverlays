@@ -13,7 +13,7 @@ function MatchUpCard({ matchup }: { matchup: Matchup }) {
           />
         )}
         <span className="team-name">{team1}</span>
-        <span className="score">{standing}</span>
+        <span className="format">{format}</span>
         <span className="team-name">{team2}</span>
         {team2 && (
           <img
@@ -24,7 +24,7 @@ function MatchUpCard({ matchup }: { matchup: Matchup }) {
         )}
       </div>
       <div className="details-section centerC">
-        <span className="format">{format}</span>
+        <span className="score">{standing}</span>
       </div>
     </div>
   );
