@@ -26,6 +26,13 @@ function WorldsCoCast() {
 
     if (!ws && id) {
       ws = new BroadcastWebsocket(id, setCoStreams);
+      setInterval(() => {
+        fetch(`https://dedosserver.deno.dev/worlds/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setCoStreams(data);
+          });
+      }, 10000);
     }
   }, [query]);
 

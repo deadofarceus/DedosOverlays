@@ -46,10 +46,9 @@ function WorldsCoCastMod() {
 
   console.log(coStreamCards);
   const query = useQuery();
+  const id = query.get("id");
 
   useEffect(() => {
-    const id = query.get("id");
-
     if (!ws && id) {
       ws = new BroadcastWebsocket(id);
       if (coStreamCards.length > 0) {
@@ -87,6 +86,10 @@ function WorldsCoCastMod() {
   if (ws) {
     ws.sendData(coStreamCards);
     localStorage.setItem("coStreamCards", JSON.stringify(coStreamCards));
+    fetch(`https://dedosserver.deno.dev/worldsSave/${id}`, {
+      method: "POST",
+      body: JSON.stringify(coStreamCards),
+    });
   }
   return (
     <Container className="centerR coCastMod">
