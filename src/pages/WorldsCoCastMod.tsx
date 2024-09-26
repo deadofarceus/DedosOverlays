@@ -6,6 +6,7 @@ import { useQuery } from "../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../types/WebsocketTypes";
 
 const teams = [
+  "TBD",
   "FNC",
   "T1",
   "100",
