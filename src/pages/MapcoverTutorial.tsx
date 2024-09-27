@@ -48,6 +48,11 @@ function MapcoverTutorial() {
           <Form className="mb-3 w-75 centerC blackOutline">
             <Form.Group className="mb-3">
               <Form.Label>Minimap-Skala: {settings.size}</Form.Label>
+              <p>
+                {
+                  "You can find your size under settings -> interface -> minimap scale."
+                }
+              </p>
               <input
                 type="range"
                 className="dedo-range"
