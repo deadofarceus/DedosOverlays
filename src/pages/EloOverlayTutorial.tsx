@@ -146,6 +146,21 @@ function EloOverlayTutorial() {
             <ListGroup.Item>
               After a short period of time your Elo is displayed
             </ListGroup.Item>
+            <ListGroup.Item>
+              If you want to support me you can do it here:{" "}
+              <a href="https://paypal.me/deadofarceus" aria-label="PayPal">
+                <i
+                  className="fab fa-paypal"
+                  style={{ fontSize: "1.5em", color: "#003087" }}
+                ></i>
+              </a>{" "}
+              <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
+                <img
+                  height="36"
+                  src="https://storage.ko-fi.com/cdn/kofi1.png?v=3"
+                />
+              </a>{" "}
+            </ListGroup.Item>
           </ListGroup>
         </Container>
       </Col>
