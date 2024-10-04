@@ -1,7 +1,7 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import ChatterComp from "../components/guessthechatter/Chatter";
 import { useEffect, useState } from "react";
-import { Chatter } from "../types/GuessTheChatterTypes";
+import { Chatter } from "../types/GuessTheSubTypes";
 import "../styles/GuessTheChatter.css";
 import { TwitchService } from "../service/TwitchService";
 
@@ -14,21 +14,36 @@ function GuessTheChatter() {
   const [token, setToken] = useState<string>("");
   const [chatters, setChatters] = useState<Chatter[]>([]);
   const [currentChatter, setCurrentChatter] = useState<Chatter>(
-    new Chatter("", "Start", "", true)
+    new Chatter(
+      "",
+      "Start",
+      "",
+      true,
+      "https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/3"
+    )
   );
   const [score, setScore] = useState(0);
 
-  //   const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheChatter&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheChatter&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
 
   const fetchChatters = async () => {
     await twitchService.getStreamer();
     const response = await twitchService.getAllChatters();
+    console.log(response);
     if (response.data) {
       const chatterList: Chatter[] = [];
       for (const user of response.data) {
         const isSub = twitchService.isSubscriber(user.user_id);
-        chatterList.push(new Chatter(user.user_id, user.user_name, "", isSub!));
+        chatterList.push(
+          new Chatter(
+            user.user_id,
+            user.user_name,
+            "",
+            isSub!,
+            twitchService.getBadge()
+          )
+        );
       }
       setChatters(chatterList);
     }
@@ -63,7 +78,7 @@ function GuessTheChatter() {
 
   return (
     <Container className="GTCContainer centerC blackOutline">
-      <h1>Guess The Chatter</h1>
+      <h1>Guess the Sub</h1>
       <h2>{twitchService.broadcaster.name}</h2>
       <Row className="w-100">
         {!token ? (

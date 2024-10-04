@@ -17,7 +17,6 @@ import Deathcounter from "./pages/Deathcounter";
 import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
 import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
 import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverlay";
-import GuessTheChatter from "./pages/GuessTheChatter";
 import AdminControl from "./pages/AdminControl";
 import Impressum from "./pages/Impressum";
 import Mapcover from "./pages/Mapcover";
@@ -26,6 +25,7 @@ import GlobalScreensaver from "./pages/GlobalScreensaver";
 import ScreensaverTutorial from "./pages/ScreensaverTutorial";
 import WorldsCoCast from "./pages/WorldsCoCast";
 import WorldsCoCastMod from "./pages/WorldsCoCastMod";
+import GuessTheSub from "./pages/GuessTheSub";
 
 function App() {
   return (
@@ -63,7 +63,7 @@ function App() {
         <Route path="PCTurnier">
           <Route path=":mod" element={<PCTurnier />} />
         </Route>
-        <Route path="GuessTheChatter" element={<GuessTheChatter />} />
+        <Route path="GuessTheSub" element={<GuessTheSub />} />
         <Route path="WorldsCoCast">
           <Route index element={<WorldsCoCast />} />
           <Route path="mod" element={<WorldsCoCastMod />} />

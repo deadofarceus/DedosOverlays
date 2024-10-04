@@ -1,10 +1,11 @@
-import { Chatter } from "../types/GuessTheChatterTypes";
+import { Chatter } from "../types/GuessTheSubTypes";
 
 export class TwitchService {
   clientID: string;
   accessToken: string;
-  broadcaster: Chatter = new Chatter("", "", "", false);
+  broadcaster: Chatter = new Chatter("", "", "", false, "");
   subIDs: string[] = [];
+  subBadgeUrls: string[] = [];
   constructor(clientID: string, accessToken: string) {
     this.clientID = clientID;
     this.accessToken = accessToken;
@@ -21,9 +22,11 @@ export class TwitchService {
       res.data[0].id,
       res.data[0].display_name,
       res.data[0].profile_image_url,
-      true
+      true,
+      ""
     );
     await this.getAllSubs();
+    await this.getSubBadges();
   }
 
   async getAllChatters() {
@@ -72,5 +75,46 @@ export class TwitchService {
     } while (cursor);
 
     console.log(`Insgesamt ${this.subIDs.length} Abonnenten gefunden.`);
+  }
+
+  async getSubBadges() {
+    const url = new URL("https://api.twitch.tv/helix/chat/badges");
+    url.searchParams.append("broadcaster_id", this.broadcaster.id);
+
+    try {
+      const response = await fetch(url.toString(), {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+          "Client-Id": this.clientID,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      this.subBadgeUrls = data.data
+        .filter((badge: any) => badge.set_id === "subscriber")
+        .flatMap((badge: any) =>
+          badge.versions.map((version: any) => version.image_url_2x)
+        );
+
+      console.log(`${this.subBadgeUrls.length} Subbadge-URLs gefunden.`);
+      if (this.subBadgeUrls.length === 0) {
+        this.subBadgeUrls.push(
+          "https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/3"
+        );
+      }
+    } catch (error) {
+      console.error("Fehler beim Abrufen der Subbadges:", error);
+    }
+  }
+
+  getBadge(): string {
+    return this.subBadgeUrls[
+      Math.floor(Math.random() * this.subBadgeUrls.length)
+    ];
   }
 }

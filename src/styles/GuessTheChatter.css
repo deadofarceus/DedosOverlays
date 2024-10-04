@@ -1,13 +1,86 @@
 .GTCContainer {
-    margin-top: 100px;
-    width: 100%;
-    height: 100vh;
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
+  margin-top: 100px;
+  width: 100%;
+  height: 100vh;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
 }
 
 .chatter {
-    margin-top: 150px;
+  margin-top: 150px;
+}
+
+.twitch-chat-message {
+  background-color: #18181b;
+  color: #efeff1;
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: solid 3px #62626c;
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  align-items: center;
+}
+
+.sub-icon {
+  margin-right: 5px;
+  width: 42px;
+  height: 42px;
+}
+
+.chatter-name {
+  font-weight: bold;
+  font-size: 28px;
+  margin-right: 5px;
+}
+
+.message-text {
+  font-size: 28px;
+  font-weight: normal;
+  word-wrap: break-word;
+}
+
+.guessButton {
+  padding: 17px 40px;
+  border-radius: 10px;
+  height: 135px;
+  border: 0;
+  font-size: 50px;
+  font-family: "Roboto Mono", monospace;
+  background-color: #4caf50; /* Grün */
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+  box-shadow: #45a049 0px 10px 0px 0px;
+  color: azure;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guessButton:hover {
+  box-shadow: #45a049 0px 7px 0px 0px;
+  background-color: #45a049; /* Dunkleres Grün */
+}
+
+.guessButton:active {
+  background-color: #3e8e41; /* Noch dunkleres Grün */
+  box-shadow: #3e8e41 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+.guessNO {
+  background-color: #af4c4c; /* Grün */
+  box-shadow: #a04545 0px 10px 0px 0px;
+}
+
+.guessNO:hover {
+  box-shadow: #a04545 0px 7px 0px 0px;
+  background-color: #a04545; /* Dunkleres Grün */
+}
+
+.guessNO:active {
+  background-color: #8e3e3e; /* Noch dunkleres Grün */
+  box-shadow: #8e3e3e 0px 0px 0px 0px;
 }
