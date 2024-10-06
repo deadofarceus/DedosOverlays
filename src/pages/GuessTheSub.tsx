@@ -23,6 +23,10 @@ function GuessTheChatter() {
     )
   );
   const [score, setScore] = useState(0);
+  const [highscore, setHighscore] = useState(0);
+  if (score > highscore) {
+    setHighscore(score);
+  }
 
   // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
   const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
@@ -90,6 +94,7 @@ function GuessTheChatter() {
             <Col className="centerC">
               <ChatterComp chatter={currentChatter} onGuess={handleGuess} />
               <h3>Score: {score}</h3>
+              <h3>Highscore: {highscore}</h3>
             </Col>
           </>
         )}
