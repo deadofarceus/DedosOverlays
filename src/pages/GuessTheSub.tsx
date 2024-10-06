@@ -28,29 +28,13 @@ function GuessTheChatter() {
     setHighscore(score);
   }
 
-  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
 
   const fetchChatters = async () => {
     await twitchService.getStreamer();
-    const response = await twitchService.getAllChatters();
-    console.log(response);
-    if (response.data) {
-      const chatterList: Chatter[] = [];
-      for (const user of response.data) {
-        const isSub = twitchService.isSubscriber(user.user_id);
-        chatterList.push(
-          new Chatter(
-            user.user_id,
-            user.user_name,
-            "",
-            isSub!,
-            twitchService.getBadge()
-          )
-        );
-      }
-      setChatters(chatterList);
-    }
+    const fetchedChatters = await twitchService.getAllChatters();
+    setChatters(fetchedChatters);
   };
 
   useEffect(() => {
@@ -72,6 +56,9 @@ function GuessTheChatter() {
   };
 
   const handleGuess = (isSub: boolean) => {
+    if (chatters.length === 0) {
+      return;
+    }
     if (currentChatter.isSubscribed === isSub) {
       setScore(score + 1);
     } else {

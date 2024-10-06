@@ -30,18 +30,47 @@ export class TwitchService {
   }
 
   async getAllChatters() {
-    return await fetch(
-      `https://api.twitch.tv/helix/chat/chatters?broadcaster_id=${this.broadcaster.id}&moderator_id=${this.broadcaster.id}`,
-      {
+    let cursor: string | null = null;
+    const allChatters: Chatter[] = [];
+
+    do {
+      const url = new URL(`https://api.twitch.tv/helix/chat/chatters`);
+      url.searchParams.append("broadcaster_id", this.broadcaster.id);
+      url.searchParams.append("moderator_id", this.broadcaster.id);
+      url.searchParams.append("first", "100"); // Maximale Anzahl pro Anfrage
+      if (cursor) {
+        url.searchParams.append("after", cursor);
+      }
+
+      const response = await fetch(url.toString(), {
         method: "GET",
         headers: {
           Authorization: `Bearer ${this.accessToken}`,
           "Client-Id": this.clientID,
         },
+      });
+
+      const data = await response.json();
+      if (data.data) {
+        allChatters.push(
+          ...data.data.map(
+            (user: any) =>
+              new Chatter(
+                user.user_id,
+                user.user_name,
+                "",
+                this.isSubscriber(user.user_id),
+                this.getBadge()
+              )
+          )
+        );
       }
-    )
-      .then((response) => response.json())
-      .catch((error) => console.error("Error fetching chatters:", error));
+
+      cursor = data.pagination?.cursor || null;
+    } while (cursor);
+
+    console.log(`Insgesamt ${allChatters.length} Chatter gefunden.`);
+    return allChatters;
   }
 
   isSubscriber(userID: string) {
