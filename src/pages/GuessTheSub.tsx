@@ -28,8 +28,8 @@ function GuessTheChatter() {
     setHighscore(score);
   }
 
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
-  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/GuessTheSub&response_type=token&scope=moderator:read:chatters channel:read:subscriptions`;
 
   const fetchChatters = async () => {
     await twitchService.getStreamer();
