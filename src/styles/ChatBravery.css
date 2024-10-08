@@ -1,0 +1,61 @@
+.CBContainer {
+  margin-top: 100px;
+  width: 100%;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+}
+
+.headlineCB {
+  font-size: 50px;
+}
+
+.messages {
+  max-height: 400px;
+  max-width: 600px;
+  min-width: 600px;
+  min-height: 400px;
+  border: 2px solid azure;
+  overflow-y: auto;
+  border: 1px solid #ccc; /* Optional: Rahmen für die Nachrichtenansicht */
+  padding: 10px; /* Optional: Innenabstand */
+}
+
+.message {
+  background-color: #18181b;
+  color: #efeff1;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  align-items: center;
+}
+
+.chatterButton {
+  padding: 4px 10px;
+  border-radius: 5px;
+  max-width: 150px;
+  border: 0;
+  font-size: 20px;
+  font-family: "Roboto Mono", monospace;
+  background-color: #4caf50; /* Grün */
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+  box-shadow: #45a049 0px 10px 0px 0px;
+  color: azure;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatterButton:hover {
+  box-shadow: #45a049 0px 7px 0px 0px;
+  background-color: #45a049; /* Dunkleres Grün */
+}
+
+.chatterButton:active {
+  background-color: #3e8e41; /* Noch dunkleres Grün */
+  box-shadow: #3e8e41 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}

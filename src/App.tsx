@@ -26,6 +26,7 @@ import ScreensaverTutorial from "./pages/ScreensaverTutorial";
 import WorldsCoCast from "./pages/WorldsCoCast";
 import WorldsCoCastMod from "./pages/WorldsCoCastMod";
 import GuessTheSub from "./pages/GuessTheSub";
+import ChatBravery from "./pages/ChatBravery";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           <Route path=":mod" element={<PCTurnier />} />
         </Route>
         <Route path="GuessTheSub" element={<GuessTheSub />} />
+        <Route path="ChatBravery" element={<ChatBravery />} />
         <Route path="WorldsCoCast">
           <Route index element={<WorldsCoCast />} />
           <Route path="mod" element={<WorldsCoCastMod />} />
