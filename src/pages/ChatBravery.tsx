@@ -27,7 +27,7 @@ function GuessTheChatter() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // Zustand für Chatnachrichten
   const chatMessagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  //   const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
   const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
 
   const fetchChatters = async () => {
@@ -42,9 +42,12 @@ function GuessTheChatter() {
       braveryService.chatter = rc;
       setCurrentChatter(rc);
     } else {
-      //   braveryService.chatter = rc;
-      //   setCurrentChatter(rc);
-      getRandomChatter(); //BEIM TESTEN AUS
+      if (chatters.filter((c) => c.isSubscribed).length === 0) {
+        braveryService.chatter = rc;
+        setCurrentChatter(rc);
+      } else {
+        getRandomChatter();
+      }
     }
   };
 
@@ -92,15 +95,18 @@ function GuessTheChatter() {
         ) : (
           <>
             <Row className="centerR w-100">
-              <button
-                className="m-2 w-25 chatterButton centerR"
-                onClick={() => {
-                  setChatMessages([]);
-                  getRandomChatter();
-                }}
-              >
-                Reroll Chatter
-              </button>
+              {braveryService.broadcaster.name && (
+                <button
+                  className="m-2 w-25 chatterButton centerR"
+                  onClick={() => {
+                    setChatMessages([]);
+                    getRandomChatter();
+                  }}
+                >
+                  Reroll Chatter
+                </button>
+              )}
+
               {currentChatter.name !== "Start" && (
                 <Col className="centerC w-50">
                   <h3>The chosen one: {currentChatter.name}</h3>
