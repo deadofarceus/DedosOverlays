@@ -13,8 +13,15 @@ interface ChatMessageProps {
 export function ChatMessageComp({ chatter, message }: ChatMessageProps) {
   return (
     <div className="message centerR">
-      <img className="sub-icon" src={chatter.subIcon} alt="Subscriber Icon" />
-      <span className="chatter-name" style={{ color: message.userInfo.color }}>
+      <img
+        className="sub-iconComp"
+        src={chatter.subIcon}
+        alt="Subscriber Icon"
+      />
+      <span
+        className="chatter-nameComp"
+        style={{ color: message.userInfo.color }}
+      >
         {chatter.name}:
       </span>
       <span className="message-text">{message.text}</span>

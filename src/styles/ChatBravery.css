@@ -11,15 +11,19 @@
   font-size: 50px;
 }
 
+.messageCon {
+  border: 2px solid azure;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 .messages {
   max-height: 400px;
   max-width: 600px;
   min-width: 600px;
   min-height: 400px;
-  border: 2px solid azure;
   overflow-y: auto;
-  border: 1px solid #ccc; /* Optional: Rahmen für die Nachrichtenansicht */
-  padding: 10px; /* Optional: Innenabstand */
+  padding: 10px;
 }
 
 .message {
@@ -34,6 +38,7 @@
 .chatterButton {
   padding: 4px 10px;
   border-radius: 5px;
+  min-width: 150px;
   max-width: 150px;
   border: 0;
   font-size: 20px;
@@ -58,4 +63,15 @@
   box-shadow: #3e8e41 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 200ms;
+}
+
+.chatter-nameComp {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.sub-iconComp {
+  margin-right: 5px;
+  width: 20px;
 }

@@ -9,6 +9,8 @@ export class BraveryService {
   chatter: Chatter = new Chatter("", "", "", false, "");
   subIDs: string[] = [];
   subBadgeUrls: string[] = [];
+  chatters: Chatter[] = [];
+
   constructor(clientID: string, accessToken: string) {
     this.clientID = clientID;
     this.accessToken = accessToken;
@@ -28,86 +30,7 @@ export class BraveryService {
       true,
       ""
     );
-    await this.getAllSubs();
     await this.getSubBadges();
-    //log into chat and read messages
-  }
-
-  async getAllChatters() {
-    let cursor: string | null = null;
-    const allChatters: Chatter[] = [];
-
-    do {
-      const url = new URL(`https://api.twitch.tv/helix/chat/chatters`);
-      url.searchParams.append("broadcaster_id", this.broadcaster.id);
-      url.searchParams.append("moderator_id", this.broadcaster.id);
-      url.searchParams.append("first", "100"); // Maximale Anzahl pro Anfrage
-      if (cursor) {
-        url.searchParams.append("after", cursor);
-      }
-
-      const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`,
-          "Client-Id": this.clientID,
-        },
-      });
-
-      const data = await response.json();
-      if (data.data) {
-        allChatters.push(
-          ...data.data.map(
-            (user: any) =>
-              new Chatter(
-                user.user_id,
-                user.user_name,
-                "",
-                this.isSubscriber(user.user_id),
-                this.getBadge()
-              )
-          )
-        );
-      }
-
-      cursor = data.pagination?.cursor || null;
-    } while (cursor);
-
-    console.log(`Insgesamt ${allChatters.length} Chatter gefunden.`);
-    return allChatters;
-  }
-
-  isSubscriber(userID: string) {
-    return this.subIDs.includes(userID);
-  }
-
-  async getAllSubs() {
-    let cursor: string | null = null;
-    do {
-      const url = new URL("https://api.twitch.tv/helix/subscriptions");
-      url.searchParams.append("broadcaster_id", this.broadcaster.id);
-      url.searchParams.append("first", "100"); // Maximale Anzahl pro Anfrage
-      if (cursor) {
-        url.searchParams.append("after", cursor);
-      }
-
-      const res = await fetch(url.toString(), {
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`,
-          "Client-Id": this.clientID,
-        },
-      }).then((res) => res.json());
-
-      if (res.data) {
-        for (const user of res.data) {
-          this.subIDs.push(user.user_id);
-        }
-      }
-
-      cursor = res.pagination?.cursor || null;
-    } while (cursor);
-
-    console.log(`Insgesamt ${this.subIDs.length} Abonnenten gefunden.`);
   }
 
   async getSubBadges() {
@@ -151,7 +74,10 @@ export class BraveryService {
     ];
   }
 
-  connectToChat(messageDispenser: (message: ChatMessage) => void) {
+  connectToChat(
+    messageDispenser: (message: ChatMessage) => void,
+    parties: (partys: number) => void
+  ) {
     const authProvider = new StaticAuthProvider(
       this.clientID,
       this.accessToken
@@ -161,6 +87,7 @@ export class BraveryService {
       channels: [this.broadcaster.name],
     });
     chatClient.connect();
+    console.log("Connected");
 
     chatClient.onMessage(
       async (
@@ -169,10 +96,40 @@ export class BraveryService {
         _text: string,
         msg: ChatMessage
       ) => {
+        if (
+          msg.text === "!chatbravery" &&
+          !this.chatters.some((c) => c.name === msg.userInfo.displayName)
+        ) {
+          this.chatters.push(
+            new Chatter(
+              msg.userInfo.userId,
+              msg.userInfo.displayName,
+              "",
+              msg.userInfo.isSubscriber,
+              this.getBadge()
+            )
+          );
+          parties(this.chatters.length);
+        }
         if (this.chatter.name === msg.userInfo.displayName) {
           messageDispenser(msg);
         }
       }
     );
+  }
+
+  getRandomChatter() {
+    const rc = this.chatters[Math.floor(Math.random() * this.chatters.length)];
+    if (rc.isSubscribed) {
+      this.chatter = rc;
+      return rc;
+    } else {
+      if (this.chatters.some((c) => c.isSubscribed)) {
+        return rc;
+      } else {
+        this.chatter = rc;
+        return rc;
+      }
+    }
   }
 }
