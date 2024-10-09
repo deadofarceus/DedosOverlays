@@ -40,7 +40,6 @@ function GuessTheChatter() {
     );
     setBroad(braveryService.broadcaster.name);
   };
-  console.log("YO WHAT IS HAPPENING???????????", chatMessages);
 
   useEffect(() => {
     const hash = window.location.hash;

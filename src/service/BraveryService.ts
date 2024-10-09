@@ -96,24 +96,28 @@ export class BraveryService {
         _text: string,
         msg: ChatMessage
       ) => {
-        if (
-          msg.text === "!chatbravery" &&
-          !this.chatters.some((c) => c.name === msg.userInfo.displayName) &&
-          msg.userInfo.isSubscriber
-        ) {
-          this.chatters.push(
-            new Chatter(
-              msg.userInfo.userId,
-              msg.userInfo.displayName,
-              "",
-              msg.userInfo.isSubscriber,
-              this.getBadge()
-            )
+        console.log(
+          msg.userInfo.displayName,
+          "hat geschriben?: " + msg.text === "!chatbravery",
+          "ist sub?: " + msg.userInfo.isSubscriber
+        );
+        if (msg.text === "!chatbravery" && msg.userInfo.isSubscriber) {
+          const existingChatter = this.chatters.find(
+            (chatter) => chatter.name === msg.userInfo.displayName
           );
-          parties(this.chatters.length);
+          if (!existingChatter) {
+            this.chatters.push(
+              new Chatter(
+                msg.userInfo.userId,
+                msg.userInfo.displayName,
+                "",
+                msg.userInfo.isSubscriber,
+                this.getBadge()
+              )
+            );
+            parties(this.chatters.length);
+          }
         }
-        console.log(this.chatter.name);
-
         if (this.chatter.name === msg.userInfo.displayName) {
           messageDispenser(msg);
         }
