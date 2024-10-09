@@ -98,7 +98,8 @@ export class BraveryService {
       ) => {
         if (
           msg.text === "!chatbravery" &&
-          !this.chatters.some((c) => c.name === msg.userInfo.displayName)
+          !this.chatters.some((c) => c.name === msg.userInfo.displayName) &&
+          msg.userInfo.isSubscriber
         ) {
           this.chatters.push(
             new Chatter(
@@ -119,17 +120,6 @@ export class BraveryService {
   }
 
   getRandomChatter() {
-    const rc = this.chatters[Math.floor(Math.random() * this.chatters.length)];
-    if (rc.isSubscribed) {
-      this.chatter = rc;
-      return rc;
-    } else {
-      if (this.chatters.some((c) => c.isSubscribed)) {
-        return rc;
-      } else {
-        this.chatter = rc;
-        return rc;
-      }
-    }
+    return this.chatters[Math.floor(Math.random() * this.chatters.length)];
   }
 }
