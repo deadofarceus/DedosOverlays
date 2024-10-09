@@ -98,8 +98,10 @@ export class BraveryService {
       ) => {
         console.log(
           msg.userInfo.displayName,
-          "hat geschriben?: " + msg.text === "!chatbravery",
-          "ist sub?: " + msg.userInfo.isSubscriber
+          "hat geschriben?: ",
+          msg.text === "!chatbravery",
+          "ist sub?: ",
+          msg.userInfo.isSubscriber
         );
         if (msg.text === "!chatbravery" && msg.userInfo.isSubscriber) {
           const existingChatter = this.chatters.find(
