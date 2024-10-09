@@ -99,7 +99,7 @@ export class BraveryService {
         if (
           msg.text === "!chatbravery" &&
           !this.chatters.some((c) => c.name === msg.userInfo.displayName) &&
-          !msg.userInfo.isSubscriber
+          msg.userInfo.isSubscriber
         ) {
           this.chatters.push(
             new Chatter(
