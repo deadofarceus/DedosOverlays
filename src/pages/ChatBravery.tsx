@@ -28,8 +28,8 @@ function GuessTheChatter() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // Zustand für Chatnachrichten
   const chatMessagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
 
   const connectToChat = () => {
     braveryService.connectToChat(
@@ -40,12 +40,7 @@ function GuessTheChatter() {
     );
     setBroad(braveryService.broadcaster.name);
   };
-  console.log(
-    "YO WHAT IS HAPPENING???????????",
-    broad,
-    currentChatter.name,
-    participants
-  );
+  console.log("YO WHAT IS HAPPENING???????????", chatMessages);
 
   useEffect(() => {
     const hash = window.location.hash;
