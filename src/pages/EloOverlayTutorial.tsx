@@ -149,15 +149,19 @@ function EloOverlayTutorial() {
             <ListGroup.Item>
               If you want to support me you can do it here:{" "}
               <a href="https://paypal.me/deadofarceus" aria-label="PayPal">
-                <i
-                  className="fab fa-paypal"
-                  style={{ fontSize: "1.5em", color: "#003087" }}
-                ></i>
+                <img
+                  height="36"
+                  width="36"
+                  style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
+                />
               </a>{" "}
               <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
                 <img
                   height="36"
-                  src="https://storage.ko-fi.com/cdn/kofi1.png?v=3"
+                  width="36"
+                  style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
+                  src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/61e1116779fc0a9bd5bdbcc7_Frame%206.png"
                 />
               </a>{" "}
             </ListGroup.Item>

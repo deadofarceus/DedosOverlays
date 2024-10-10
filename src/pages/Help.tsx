@@ -13,9 +13,27 @@ function Help() {
               {1}. {FAQS[0].question}
             </h2>
             <p className="answers">
-              Yes, the weak version is free to use. You will need a key, either
-              weak or premium, to use the overlay. You can get the Elo Overlay
-              by contacting me on{" "}
+              Yes, it is free to use. Check out the{" "}
+              <a href="/EloOverlay">tutorial</a>. Although it is free, I
+              appreciate any small donation:{" "}
+              <a href="https://paypal.me/deadofarceus" aria-label="PayPal">
+                <img
+                  height="36"
+                  width="36"
+                  style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
+                />
+              </a>{" "}
+              <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
+                <img
+                  height="36"
+                  width="36"
+                  style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
+                  src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/61e1116779fc0a9bd5bdbcc7_Frame%206.png"
+                />
+              </a>{" "}
+              You will need a key to use the overlay. You can get the Elo
+              Overlay (and your key) by contacting me on{" "}
               <a href="https://twitter.com/deadofarceus">Twitter</a>{" "}
               @deadofarceus or via Twitch whisper also @deadofarceus. Gerne auch
               auf Deutsch {":)"}
