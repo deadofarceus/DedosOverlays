@@ -7,6 +7,12 @@
   text-align: center;
 }
 
+.ajsdk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .headlineCB {
   font-size: 50px;
 }

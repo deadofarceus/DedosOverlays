@@ -7,6 +7,7 @@ import { ChatMessage } from "@twurple/chat";
 import "../styles/ChatBravery.css";
 import { ChatMessageComp } from "../components/twitch/ChatBravery/ChatMessageComp";
 import DedoSwitch from "../components/util/DedoSwitch";
+import DedoCopy from "../components/util/DedoCopy";
 
 const CLIENTID = "2qu2j6vzku0fad8z9ee5lohdc0iwm1";
 const dummyChatter = new Chatter(
@@ -85,7 +86,12 @@ function GuessTheChatter() {
               {broad && (
                 <Col className="centerC">
                   <h3>Participants: {participants}</h3>
-                  <h4>to join type "!chatbravery"</h4>
+                  <h4 className="ajsdk">
+                    to join type "!chatbravery"{" "}
+                    <div className="m-1">
+                      <DedoCopy textToCopy={"!chatbravery"} />
+                    </div>
+                  </h4>
                   <div>
                     <DedoSwitch
                       label="Sub Only"
