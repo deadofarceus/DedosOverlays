@@ -121,6 +121,8 @@ export class BraveryService {
                 this.getBadge()
               )
             );
+            console.log(this.chatters);
+
             parties(this.chatters.length);
           }
         }
