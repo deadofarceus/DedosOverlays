@@ -8,6 +8,7 @@ export class BraveryService {
   broadcaster: Chatter = new Chatter("", "", "", false, "");
   chatter: Chatter = new Chatter("", "", "", false, "");
   subIDs: string[] = [];
+  isSubNeeded: boolean = true;
   subBadgeUrls: string[] = [];
   chatters: Chatter[] = [];
 
@@ -103,7 +104,10 @@ export class BraveryService {
           "ist sub?: ",
           msg.userInfo.isSubscriber
         );
-        if (msg.text === "!chatbravery" && msg.userInfo.isSubscriber) {
+        if (
+          msg.text === "!chatbravery" &&
+          (msg.userInfo.isSubscriber || !this.isSubNeeded)
+        ) {
           const existingChatter = this.chatters.find(
             (chatter) => chatter.name === msg.userInfo.displayName
           );

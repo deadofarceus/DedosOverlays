@@ -6,6 +6,7 @@ import { BraveryService } from "../service/BraveryService";
 import { ChatMessage } from "@twurple/chat";
 import "../styles/ChatBravery.css";
 import { ChatMessageComp } from "../components/twitch/ChatBravery/ChatMessageComp";
+import DedoSwitch from "../components/util/DedoSwitch";
 
 const CLIENTID = "2qu2j6vzku0fad8z9ee5lohdc0iwm1";
 const dummyChatter = new Chatter(
@@ -23,13 +24,14 @@ function GuessTheChatter() {
   const [token, setToken] = useState<string>("");
   const [currentChatter, setCurrentChatter] = useState<Chatter>(dummyChatter);
   const [broad, setBroad] = useState<string>("");
+  const [isSubNeeded, setIsSubNeeded] = useState<boolean>(true);
   const [participants, setParticipants] = useState<number>(0);
 
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // Zustand für Chatnachrichten
   const chatMessagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
-  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
+  const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=http://localhost:5173/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
+  // const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://arceus-overlays.netlify.app/ChatBravery&response_type=token&scope=moderator:read:chatters channel:read:subscriptions chat:read`;
 
   const connectToChat = () => {
     braveryService.connectToChat(
@@ -67,6 +69,8 @@ function GuessTheChatter() {
     scrollToBottom(); // Scrollen, wenn sich die Chatnachrichten ändern
   }, [chatMessages]);
 
+  braveryService.isSubNeeded = isSubNeeded;
+
   return (
     <Container className="CBContainer centerC blackOutline">
       <h1 className="headlineCB">Chat Bravery</h1>
@@ -83,6 +87,13 @@ function GuessTheChatter() {
                 <Col className="centerC">
                   <h3>Participants: {participants}</h3>
                   <h4>to join type "!chatbravery"</h4>
+                  <div>
+                    <DedoSwitch
+                      label="Sub Only"
+                      checked={isSubNeeded}
+                      onChange={(checked) => setIsSubNeeded(checked)}
+                    />
+                  </div>
                   <button
                     className="m-2 w-25 chatterButton centerR"
                     onClick={() => {
