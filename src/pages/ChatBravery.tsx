@@ -27,6 +27,7 @@ function GuessTheChatter() {
   const [broad, setBroad] = useState<string>("");
   const [isSubNeeded, setIsSubNeeded] = useState<boolean>(true);
   const [participants, setParticipants] = useState<number>(0);
+  const [champURL, setChampURL] = useState<string>("");
 
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // Zustand für Chatnachrichten
   const chatMessagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -66,7 +67,16 @@ function GuessTheChatter() {
   };
 
   useEffect(() => {
-    scrollToBottom(); // Scrollen, wenn sich die Chatnachrichten ändern
+    if (chatMessages.length > 0) {
+      const champ = braveryService.checkChamps(
+        chatMessages[chatMessages.length - 1]
+      );
+      if (champ) {
+        setChampURL(champ);
+      }
+
+      scrollToBottom(); // Scrollen, wenn sich die Chatnachrichten ändern
+    }
   }, [chatMessages]);
 
   braveryService.isSubNeeded = isSubNeeded;
@@ -111,25 +121,34 @@ function GuessTheChatter() {
                 </Col>
               )}
 
-              {currentChatter.name !== "Start" && (
-                <Col className="centerC w-50">
-                  <h3>The chosen one: {currentChatter.name}</h3>
-                  <div className="w-100 h-100 messageCon">
-                    <Col className="messages">
-                      {chatMessages.map((msg, index) => (
-                        <ChatMessageComp
-                          key={index}
-                          message={msg}
-                          chatter={currentChatter}
-                        />
-                      ))}
-                      <div ref={chatMessagesEndRef} />{" "}
-                      {/* Referenz für das Ende der Nachrichten */}
-                    </Col>
-                  </div>
-                </Col>
-              )}
-              <div className="w-25">itembuild und runen Placeholder</div>
+              <Col className="centerC w-50">
+                {currentChatter.name !== "Start" && (
+                  <>
+                    <h3>The chosen one: {currentChatter.name}</h3>
+                    <div className="w-100 h-100 messageCon">
+                      <Col className="messages">
+                        {chatMessages.map((msg, index) => (
+                          <ChatMessageComp
+                            key={index}
+                            message={msg}
+                            chatter={currentChatter}
+                          />
+                        ))}
+                        <div ref={chatMessagesEndRef} />{" "}
+                        {/* Referenz für das Ende der Nachrichten */}
+                      </Col>
+                    </div>
+                  </>
+                )}
+              </Col>
+              <div className="w-25 chosenChamp">
+                {champURL && (
+                  <>
+                    <h3>Chosen Champion:</h3>
+                    <img src={champURL} alt="" className="" />
+                  </>
+                )}
+              </div>
             </Row>
           </>
         )}

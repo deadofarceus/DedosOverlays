@@ -82,3 +82,10 @@
   margin-right: 5px;
   width: 20px;
 }
+
+.chosenChamp img {
+  clip: rect(110px, 160px, 170px, 60px);
+  filter: drop-shadow(3px 3px 4px #222);
+  width: 308px;
+  height: 560px;
+}
