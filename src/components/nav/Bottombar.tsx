@@ -11,7 +11,10 @@ function Bottombar() {
   }
 
   const isRiotGamesRelated =
-    pathname.indexOf("elooverlay") > -1 || pathname.indexOf("abisz") > -1;
+    pathname.indexOf("elooverlay") > -1 ||
+    pathname.indexOf("abisz") > -1 ||
+    pathname.indexOf("chatbravery") > -1 ||
+    pathname.indexOf("mapcover") > -1;
 
   return (
     <footer className="footer bottom-0 w-100 position-fixed">
