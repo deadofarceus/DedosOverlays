@@ -1,12 +1,14 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "../../styles/Footer.css";
-import { isOBSBrowser } from "../../types/UsefulFunctions";
+import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
 import { useLocation } from "react-router-dom";
 
 function Bottombar() {
   const location = useLocation();
   const pathname = location.pathname.toLowerCase();
-  if (isOBSBrowser() || pathname.indexOf("stream") > -1) {
+  const query = useQuery();
+  const obsQ = query.get("obs");
+  if (isOBSBrowser() || pathname.indexOf("stream") > -1 || obsQ === "true") {
     return <></>;
   }
 

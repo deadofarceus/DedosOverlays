@@ -13,7 +13,9 @@ import Matchhistory from "../components/league/Matchhistory";
 let ws: EloWebsocket;
 
 function EloOverlay() {
-  const obs = isOBSBrowser();
+  const query = useQuery();
+  const obs = isOBSBrowser() || query.get("obs") === "true";
+
   if (obs) {
     document.body.style.backgroundColor = "transparent";
     document.body.className = "";
@@ -37,7 +39,6 @@ function EloOverlay() {
 
   const nav = useNavigate();
   const { queueType } = useParams();
-  const query = useQuery();
 
   useEffect(() => {
     const summonerName = query.get("name");

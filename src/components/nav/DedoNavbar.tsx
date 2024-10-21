@@ -1,10 +1,16 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { isOBSBrowser } from "../../types/UsefulFunctions";
+import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
 import { useLocation } from "react-router-dom";
 
 function DedoNavbar() {
   const location = useLocation();
-  if (isOBSBrowser() || location.pathname.indexOf("Stream") > -1) {
+  const query = useQuery();
+  const obsQ = query.get("obs");
+  if (
+    isOBSBrowser() ||
+    location.pathname.indexOf("Stream") > -1 ||
+    obsQ === "true"
+  ) {
     return <></>;
   }
 
