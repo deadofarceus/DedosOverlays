@@ -21,7 +21,7 @@ function Help() {
                   height="36"
                   width="36"
                   style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
+                  src="../paypal.png"
                 />
               </a>{" "}
               <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
