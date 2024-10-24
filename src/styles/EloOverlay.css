@@ -1,135 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap");
 
 .eloimg {
-    margin-bottom: -18%;
-    width: 120%;
-    filter: drop-shadow(7px 9px 3px #222);
-    image-rendering: optimizeQuality;
+  margin-bottom: -18%;
+  width: 120%;
+  filter: drop-shadow(7px 9px 3px #222);
+  image-rendering: optimizeQuality;
 }
 
 .eloOverlayContainer {
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
 }
 
 .row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
 .imgdiv {
-    display: flex;
-    filter: drop-shadow(7px 9px 3px #222);
-    margin-right: 20px;
+  display: flex;
+  filter: drop-shadow(7px 9px 3px #222);
+  margin-right: 20px;
 }
 
 .profileImg {
-    width: 120px;
-    border-radius: 50%;
-    clip-path: circle(46% at 50% 50%);
-    image-rendering: optimizeQuality;
+  width: 120px;
+  border-radius: 50%;
+  clip-path: circle(46% at 50% 50%);
+  image-rendering: optimizeQuality;
 }
 
 .ELO {
-    width: 65%;
+  width: 65%;
 }
 
 .eloAndLP {
-    margin-right: -50px;
+  margin-right: -50px;
 }
 
 .eloInfo {
-    width: 55%;
+  width: 55%;
 }
 
 .matchhistory {
-    width: 75%;
-    margin-bottom: 100px;
+  width: 75%;
+  margin-bottom: 100px;
 }
 
 .lpDiff {
-    font-size: 3.5em;
-    margin: -27px;
-    margin-left: -75px;
-    filter: drop-shadow(4px 4px 3px #222);
+  font-size: 3.5em;
+  margin: -27px;
+  margin-left: -75px;
+  filter: drop-shadow(4px 4px 3px #222);
 }
 
 .challengeScore {
-    font-size: 2.5em;
-    margin: -27px;
-    margin-left: -75px;
-    margin-top: 15px;
+  font-size: 2.5em;
+  margin: -27px;
+  margin-left: -75px;
+  margin-top: 15px;
 }
 
 .overlayIMG {
-    position: absolute;
-    top: 0;
+  position: absolute;
+  top: 0;
 }
 
 .spacer {
-    height: 5em;
+  height: 5em;
 }
 
 .leagueborder {
-    font-size: 30px;
-    padding-bottom: 1em;
-    filter: drop-shadow(4px 4px 3px #222);
+  font-size: 30px;
+  padding-bottom: 1em;
+  width: 246px;
+  margin-left: 5px;
+  filter: drop-shadow(4px 4px 3px #222);
 }
 
 .flamesOverlayIMG {
-    position: absolute;
+  position: absolute;
 }
 
 .currentLP {
-    margin-top: -12px;
-    margin-bottom: -27px;
-    filter: drop-shadow(4px 4px 3px #222);
-    font-size: 5em;
+  margin-top: -12px;
+  margin-bottom: -27px;
+  filter: drop-shadow(4px 4px 3px #222);
+  font-size: 5em;
 }
 
-
 .eloLPValue {
-    transition: transform 0.6s ease;
+  transition: transform 0.6s ease;
 }
 
 .eloLPValue.bounce {
-    animation: bounce 0.6s;
+  animation: bounce 0.6s;
 }
 
 @keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
 
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
+  90% {
+    transform: translateY(1px);
+  }
 
-    90% {
-        transform: translateY(1px);
-    }
-
-    50% {
-        transform: translateY(15px);
-        /* Adjust how far it moves down */
-    }
+  50% {
+    transform: translateY(15px);
+    /* Adjust how far it moves down */
+  }
 }
 
-
 .grow-animation {
-    animation: grow 1.2s forwards;
+  animation: grow 1.2s forwards;
 }
 
 @keyframes grow {
-    0% {
-        transform: scale(0.1);
-        opacity: 0;
-    }
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
 
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

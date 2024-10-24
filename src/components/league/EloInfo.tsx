@@ -62,7 +62,7 @@ function EloInfo({
   if (eloDivision === "MASTER") {
     border = "GM Border: " + gmBorder;
   } else if (eloDivision === "GRANDMASTER") {
-    border = "Challenger <br> Border: " + challBorder;
+    border = "Challenger Border: " + challBorder;
   }
   const query = useQuery();
   const legacy = query.get("legacy") === "true" ? "L" : "";
