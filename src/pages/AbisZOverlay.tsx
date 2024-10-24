@@ -115,7 +115,8 @@ function EloD({ eloLP, eloDivision, eloRank }: AccountElo) {
     eloDivision === "CHALLENGER"
       ? eloLP + " LP"
       : eloRank + " " + eloLP + " LP";
-  lpDisplay = !eloDivision ? "UNRANKED" : lpDisplay;
+  lpDisplay =
+    !eloDivision || eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
 
   return (
     <Row className="eloInfoAZ">
