@@ -4,6 +4,7 @@ import Database from "../components/admin/database/Database";
 import { useEffect } from "react";
 import { useQuery } from "../types/UsefulFunctions";
 import ClientControl from "../components/admin/Clients/ClientControl";
+import { GLOBALADDRESS } from "../types/WebsocketTypes";
 
 function AdminControl() {
   document.body.className = "noOBS";
@@ -11,7 +12,7 @@ function AdminControl() {
   const adminKey = query.get("adminKey");
   useEffect(() => {
     document.title = "Admin Control";
-    fetch(`https://dedosserver.deno.dev/admin/grantAccess?adminKey=${adminKey}`)
+    fetch(`https://${GLOBALADDRESS}/admin/grantAccess?adminKey=${adminKey}`)
       .then((res) => {
         if (res.status === 200) {
           console.log("Access Granted");

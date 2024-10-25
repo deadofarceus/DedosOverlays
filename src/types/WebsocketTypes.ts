@@ -4,15 +4,16 @@ import { Game, Team } from "./FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 import { PCEvent } from "./PCTurnierTypes";
 
+export const GLOBALADDRESS = "cacedray.ddns.net:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
-const GLOBALWSADRESS = "wss://dedosserver.deno.dev";
-// const GLOBALWSADRESS = "wss://dedosserverv2.onrender.com";
+// const GLOBALWSADRESS = "wss://dedosserver.deno.dev";
+const GLOBALWSADRESS = "wss://" + GLOBALADDRESS;
 // const GLOBALWSADRESS = "ws://localhost:3000";
 
 export abstract class BaseWebSocket<T> {
   callback: React.Dispatch<React.SetStateAction<T>>;
   ws: WebSocket;
-  pingInterval!: NodeJS.Timeout;
+  //   pingInterval!: NodeJS.Timeout;
   wsAddress: string;
 
   constructor(
@@ -58,7 +59,7 @@ export abstract class BaseWebSocket<T> {
 
   handleOpen = () => {
     console.log("WebSocket connection established.");
-    this.setupPing();
+    // this.setupPing();
     while (this.ws.readyState !== this.ws.OPEN) {
       /* empty */
     }
@@ -67,7 +68,7 @@ export abstract class BaseWebSocket<T> {
   handleClose = (ev: CloseEvent) => {
     if (ev.code !== 3500) {
       console.log("WebSocket connection closed. Attempting to reconnect...");
-      clearInterval(this.pingInterval);
+      //   clearInterval(this.pingInterval);
       setTimeout(() => this.setupWebSocket(), 5000);
     }
   };
@@ -76,9 +77,9 @@ export abstract class BaseWebSocket<T> {
     console.error("WebSocket error occurred:", error);
   };
 
-  setupPing() {
-    this.pingInterval = setInterval(() => this.ws.send("ping"), 10000);
-  }
+  //   setupPing() {
+  //     this.pingInterval = setInterval(() => this.ws.send("ping"), 10000);
+  //   }
 
   sendEvent(modEvent: ModEvent) {
     this.ws.send(JSON.stringify(modEvent));

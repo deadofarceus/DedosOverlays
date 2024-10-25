@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import { useQuery } from "../../../types/UsefulFunctions";
+import { GLOBALADDRESS } from "../../../types/WebsocketTypes";
 
 function AddForm() {
   const [group, setGroup] = useState<string>("");
@@ -13,7 +14,7 @@ function AddForm() {
 
   const handleSubmit = () => {
     fetch(
-      `https://dedosserver.deno.dev/database/add/${group}/${key}?adminKey=${adminKey}`,
+      `https://${GLOBALADDRESS}/database/add/${group}/${key}?adminKey=${adminKey}`,
       {
         method: "POST",
         body: value,

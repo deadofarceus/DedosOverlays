@@ -87,10 +87,6 @@ function WorldsCoCastMod() {
   if (ws) {
     ws.sendData(coStreamCards);
     localStorage.setItem("coStreamCards", JSON.stringify(coStreamCards));
-    fetch(`https://dedosserver.deno.dev/worldsSave/${id}`, {
-      method: "POST",
-      body: JSON.stringify(coStreamCards),
-    });
   }
   return (
     <Container className="centerR coCastMod">

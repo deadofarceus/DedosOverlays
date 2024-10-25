@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { useQuery } from "../../../types/UsefulFunctions";
 import Client from "./Client";
 import { WSClient } from "../../../types/AdminTypes";
+import { GLOBALADDRESS } from "../../../types/WebsocketTypes";
 
 function ClientControl() {
   const [clients, setClients] = useState<WSClient[]>([]);
@@ -11,7 +12,7 @@ function ClientControl() {
   useEffect(() => {
     document.title = "Admin Control";
     fetch(
-      `https://dedosserver.deno.dev/admin/websocket/clients?adminKey=${adminKey}`
+      `https://${GLOBALADDRESS}/admin/websocket/clients?adminKey=${adminKey}`
     )
       .then((res) => {
         if (res.status === 200) {
