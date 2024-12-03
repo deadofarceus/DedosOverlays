@@ -81,7 +81,7 @@ function ChampD({ name, won, games }: ChampionAbisZ) {
   const imgsrc =
     name === "null"
       ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/14.14.1/img/champion/${champName}.png`;
+      : `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${champName}.png`;
   return (
     <div
       className={"imgdivAZ"}
