@@ -1,0 +1,59 @@
+.OTPRaceCon {
+  width: 1000px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+}
+
+.optIconDiv {
+  position: relative;
+}
+
+.optCol {
+  max-width: 330px;
+  min-width: 330px;
+  height: 600px;
+  display: flex;
+  justify-content: flex-end;
+  filter: drop-shadow(3px 3px 2px #222);
+}
+
+.otpProfileImg {
+  width: 100%;
+  border-radius: 50%;
+  clip-path: circle(46% at 50% 50%);
+  image-rendering: optimizeQuality;
+  position: relative;
+}
+
+.otpRand {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 94%;
+  height: 94%;
+  border: 7px solid #ffe23b;
+  border-radius: 50%;
+}
+
+.otpCrown {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 94%;
+  height: 94%;
+}
+
+.otpLP {
+  align-items: center;
+}
+
+.otpDiv {
+  width: 150px;
+}

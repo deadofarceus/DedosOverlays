@@ -27,6 +27,7 @@ import WorldsCoCast from "./pages/WorldsCoCast";
 import WorldsCoCastMod from "./pages/WorldsCoCastMod";
 import GuessTheSub from "./pages/GuessTheSub";
 import ChatBravery from "./pages/ChatBravery";
+import OTPRace from "./pages/OTPRace";
 
 function App() {
   return (
@@ -56,6 +57,9 @@ function App() {
         </Route>
         <Route path="AbisZ">
           <Route path=":accountName" element={<AbisZOverlay />} />
+        </Route>
+        <Route path="OTPRace">
+          <Route path=":accountName" element={<OTPRace />} />
         </Route>
         <Route path="mapcover">
           <Route index element={<MapcoverTutorial />} />
