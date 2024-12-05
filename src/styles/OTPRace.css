@@ -21,7 +21,7 @@
   height: 600px;
   display: flex;
   justify-content: flex-end;
-  filter: drop-shadow(3px 3px 2px #222);
+  filter: drop-shadow(4px 4px 2px #222);
 }
 
 .otpProfileImg {
@@ -56,4 +56,14 @@
 
 .otpDiv {
   width: 150px;
+}
+
+.otpRank {
+  position: absolute;
+  font-size: 66px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  font-style: normal;
+  color: #fffcdf;
+  filter: drop-shadow(2px 2px 1px #000);
 }

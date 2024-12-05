@@ -1,7 +1,14 @@
 import { Col } from "react-bootstrap";
 import { OTPPlayerProps } from "../../../types/OTPTypes";
 
-function OTPPlayer({ index, lp, tier, rank, summonerName }: OTPPlayerProps) {
+function OTPPlayer({
+  index,
+  lp,
+  tier,
+  rank,
+  summonerName,
+  rang,
+}: OTPPlayerProps) {
   const iconSrc =
     summonerName === "Fat Houdini"
       ? "../Karma.png"
@@ -25,6 +32,15 @@ function OTPPlayer({ index, lp, tier, rank, summonerName }: OTPPlayerProps) {
         <img src={iconSrc} alt="ICON" className="otpProfileImg" />
         {index === 2 && <div className={"otpRand"}></div>}
         {index === 2 && <img className="otpCrown" src="../crown.png" />}
+        <h2
+          className="otpRank"
+          style={{
+            bottom: index * 10 + -8 + "px",
+            right: index * 10 + 35 + "px",
+          }}
+        >
+          {rang}
+        </h2>
       </div>
       <div className="centerR otpLP">
         <img src={`../${tier}.png`} alt="divison" className="otpDiv" />

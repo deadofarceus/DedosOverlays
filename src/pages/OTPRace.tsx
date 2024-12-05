@@ -47,6 +47,9 @@ function OTPRace() {
       otpRaceData[karmaIndex - 1],
       otpRaceData[karmaIndex],
     ];
+    kontrahenten[0].rang = 49 - karmaIndex - 2;
+    kontrahenten[1].rang = 49 - karmaIndex - 1;
+    kontrahenten[1].rang = 49 - karmaIndex;
   } else if (betterKarmaIndex === bestOTP) {
     console.log("Better Karma is second to best");
     kontrahenten = [
@@ -54,6 +57,9 @@ function OTPRace() {
       otpRaceData[karmaIndex],
       otpRaceData[bestOTP],
     ];
+    kontrahenten[0].rang = 49 - karmaIndex - 1;
+    kontrahenten[1].rang = 49 - karmaIndex;
+    kontrahenten[1].rang = 49 - bestOTP;
   } else {
     console.log("Karma is third to best or worse");
     kontrahenten = [
@@ -61,6 +67,9 @@ function OTPRace() {
       otpRaceData[betterKarmaIndex],
       otpRaceData[bestOTP],
     ];
+    kontrahenten[0].rang = 49 - karmaIndex;
+    kontrahenten[1].rang = 49 - betterKarmaIndex;
+    kontrahenten[2].rang = 49 - bestOTP;
   }
 
   console.log(karmaIndex, betterKarmaIndex, bestOTP);
@@ -78,6 +87,7 @@ function OTPRace() {
           rank={player.rank}
           summonerName={player.summonerName}
           combinedLP={player.combinedLP}
+          rang={player.rang}
         />
       ))}
     </Container>
