@@ -14,7 +14,7 @@ function OTPPlayer({
       ? "../Karma.png"
       : summonerName === "e7c3c0fd-cee3-4399-877b-baf89c9f6f46"
       ? "../Baus.png"
-      : "https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/Gragas.png";
+      : "https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/Gragas.png";
   const lpDisplay =
     tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER"
       ? lp + " LP"

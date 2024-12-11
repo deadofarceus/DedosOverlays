@@ -25,7 +25,7 @@ export class BraveryService {
 
   loadChamps() {
     fetch(
-      "https://ddragon.leagueoflegends.com/cdn/14.23.1/data/en_US/champion.json"
+      "https://ddragon.leagueoflegends.com/cdn/14.24.1/data/en_US/champion.json"
     )
       .then((res) => res.json())
       .then((data) => {
