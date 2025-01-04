@@ -28,6 +28,7 @@ import WorldsCoCastMod from "./pages/WorldsCoCastMod";
 import GuessTheSub from "./pages/GuessTheSub";
 import ChatBravery from "./pages/ChatBravery";
 import OTPRace from "./pages/OTPRace";
+import VTuber from "./pages/VTuber";
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
         </Route>
         <Route path="Stream">
           <Route path="randomChar" element={<RandomCharGen />} />
+          <Route path="VTuber" element={<VTuber />} />
           <Route path="GamingTierlist">
             <Route path=":streamer" element={<GamingTierlist />} />
           </Route>
