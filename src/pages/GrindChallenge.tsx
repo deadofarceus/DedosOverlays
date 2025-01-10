@@ -89,6 +89,7 @@ function GrindChallenge() {
         const matchhistory = data.games.map(
           (match: any) => match.didwin === "1"
         );
+        matchhistory.reverse();
         climber.matchhistory = matchhistory;
       }
 
