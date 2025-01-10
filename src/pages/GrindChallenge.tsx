@@ -109,8 +109,8 @@ function GrindChallenge() {
   const ownClimber = climbers.find((c) => c.streamer === streamer)!;
   const ownIndex = climbers.findIndex((c) => c.streamer === streamer);
 
-  climbers.splice(3);
-  if (ownIndex > 2) {
+  climbers.splice(5);
+  if (ownIndex > 4) {
     climbers.push(ownClimber);
   }
 
