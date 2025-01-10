@@ -29,6 +29,7 @@ import GuessTheSub from "./pages/GuessTheSub";
 import ChatBravery from "./pages/ChatBravery";
 import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
+import GrindChallenge from "./pages/GrindChallenge";
 
 function App() {
   return (
@@ -61,6 +62,9 @@ function App() {
         </Route>
         <Route path="OTPRace">
           <Route path=":accountName" element={<OTPRace />} />
+        </Route>
+        <Route path="Grindchallenge">
+          <Route path=":streamer" element={<GrindChallenge />} />
         </Route>
         <Route path="mapcover">
           <Route index element={<MapcoverTutorial />} />

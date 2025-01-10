@@ -1,0 +1,95 @@
+.climber-container {
+  width: 800px !important;
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.GCiconDiv {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 20px;
+  margin-left: 11px;
+  margin-bottom: 4px;
+}
+
+.GCeloDIV {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 80px;
+  margin-left: 5px;
+  margin-bottom: 4px;
+}
+
+.climber-image {
+  /* position: absolute; */
+  border-radius: 50%;
+  /* clip-path: circle(46% at 50% 50%); */
+  width: 55px;
+  image-rendering: optimizeQuality;
+}
+
+.tier-image {
+  width: 80px;
+}
+
+.climber {
+  width: 400px;
+}
+
+.wonGC {
+  width: 4px;
+  margin: -5px;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  color: #6eff57;
+  font-size: 48px;
+}
+
+.loseGC {
+  margin: -5px;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  width: 4px;
+  color: #ff6565;
+  font-size: 48px;
+}
+
+.GCeloLP {
+  font-family: "Roboto Mono", monospace;
+  filter: drop-shadow(1px 1px 1px #000);
+  color: azure;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+  position: absolute;
+  bottom: -14px;
+  right: 5px;
+}
+
+.GClpDisplay {
+  font-family: "Signika", sans-serif;
+  filter: drop-shadow(1px 1px 1px #000);
+  color: azure;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 24px;
+  width: 100px;
+  margin-right: -20px;
+}
+
+.GC-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 400px;
+}
