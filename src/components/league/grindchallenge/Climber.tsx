@@ -34,14 +34,17 @@ function Climber({ elo, today, icon, matchhistory, place }: ClimberProps) {
 
   return (
     <Row className="climber climber-container">
-      {matchhistory.map((mh, index) => (
-        <h1
-          key={index}
-          className={mh ? "wonGC blackOutline" : "loseGC blackOutline"}
-        >
-          I
-        </h1>
-      ))}
+      <div className="GCmhDiv centerR">
+        {matchhistory.map((mh, index) => (
+          <h1
+            key={index}
+            className={mh ? "wonGC blackOutline" : "loseGC blackOutline"}
+          >
+            I
+          </h1>
+        ))}
+      </div>
+
       <div className="GCiconDiv" style={{ backgroundColor: placeColor }}>
         <img src={icon} alt="" className="climber-image" />
       </div>

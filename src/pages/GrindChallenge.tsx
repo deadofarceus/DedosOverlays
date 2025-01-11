@@ -5,93 +5,55 @@ import Climber, {
 } from "../components/league/grindchallenge/Climber";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { GLOBALADDRESS } from "../types/WebsocketTypes";
+import { Account } from "../types/LeagueTypes";
 
 function GrindChallenge() {
   const [climbers, setClimbers] = useState<ClimberProps[]>([]);
   const iconMap = new Map<string, string>();
-  iconMap.set(
-    "Karni",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "kutcherlol",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "Sola",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "Obsess3",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "RevalLoL",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "Broeki",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "SGAhri",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "Thunny",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "Autophil",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "LPGjustJohnny",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "TwoStoneLoL",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
-  iconMap.set(
-    "SirRaydus",
-    "https://static-cdn.jtvnw.net/jtv_user_pictures/4fb151e7-be38-44c7-a31a-d00fd265fa0f-profile_image-300x300.png"
-  );
+  iconMap.set("Karni", "karni");
+  iconMap.set("Philly Westside", "kutcherlol");
+  iconMap.set("Sola", "sola");
+  iconMap.set("Obsess", "obsess3");
+  iconMap.set("Reval", "revallol");
+  iconMap.set("Broeki", "broeki");
+  iconMap.set("SGAhri", "sgahri");
+  iconMap.set("Thunny", "thunny");
+  iconMap.set("Ichbinbesserals", "autophil");
+  iconMap.set("Midlane Opa", "lpgjustjohnny");
+  iconMap.set("TwoStone", "twostonelol");
+  iconMap.set("Pusteblume", "sirraydus");
 
   const fetchAllPlayers = async () => {
     try {
       const response = await fetch(
-        "https://backend.grindchallenge.de/wp-json/challenge/v1/player-stats"
+        "https://" + GLOBALADDRESS + "/grindchallenge/requestUpdate"
       );
-      const data = await response.json();
+      const data: Account[] = await response.json();
+      data.sort(
+        (a, b) => b.leagueEntrys[0].combinedLP - a.leagueEntrys[0].combinedLP
+      );
+
       const climbersData: ClimberProps[] = data.map(
-        (climber: any, index: number) => ({
-          streamer: climber.streamer,
+        (climber: Account, index: number) => ({
+          streamer: climber.name,
           elo: {
-            rank: climber.tier,
-            tier: climber.rank,
-            lp: climber.lp,
+            rank: climber.leagueEntrys[0].rank,
+            tier: climber.leagueEntrys[0].tier,
+            lp: climber.leagueEntrys[0].leaguePoints,
           },
-          today: climber.elo - climber.startelo,
-          matchhistory: Array(5).fill(true),
-          icon: `https://grindchallenge.de/avatar/${climber.streamer.toLowerCase()}.png`,
+          today:
+            climber.leagueEntrys[0].combinedLP -
+            climber.leagueEntrys[0].lpStart,
+          matchhistory: climber.leagueEntrys[0].lastMatches
+            .map((game) => game.win)
+            .slice(-5),
+          icon: `https://grindchallenge.de/avatar/${iconMap.get(
+            climber.name
+          )}.png`,
           place: index + 1,
         })
       );
-
-      for (let i = 0; i < climbersData.length; i++) {
-        const climber = climbersData[i];
-        const response = await fetch(
-          "https://backend.grindchallenge.de/wp-json/challenge/v1/player/" +
-            climber.streamer
-        );
-        const data = await response.json();
-        const matchhistory = data.games.map(
-          (match: any) => match.didwin === "1"
-        );
-        matchhistory.reverse();
-        climber.matchhistory = matchhistory;
-      }
 
       setClimbers(climbersData);
     } catch (error) {
