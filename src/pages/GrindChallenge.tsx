@@ -30,6 +30,8 @@ function GrindChallenge() {
         "https://" + GLOBALADDRESS + "/grindchallenge/requestUpdate"
       );
       const data: Account[] = await response.json();
+      console.log(data);
+
       data.sort(
         (a, b) => b.leagueEntrys[0].combinedLP - a.leagueEntrys[0].combinedLP
       );
