@@ -10,7 +10,7 @@ function NoDeathRunGames({ games }: NoDeathRunGamesProps) {
       {games.map((game, index) => (
         <div className="centerR nodeathgamesDiv" key={index}>
           <div
-            className="nodeathrungame"
+            className="nodeathrungame blackOutline"
             key={index}
             style={{
               color:

@@ -38,4 +38,5 @@
 .nodeathgamesDiv {
   max-width: 100px;
   align-items: center;
+  filter: drop-shadow(3px 3px 2px #222);
 }
