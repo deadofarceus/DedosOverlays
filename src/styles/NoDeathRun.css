@@ -1,0 +1,41 @@
+.nodeathrunControls {
+  margin-top: 100px;
+}
+
+.gamedragable {
+  border: 3px solid #6bff54;
+  color: azure;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-size: 32px;
+  font-style: normal;
+  text-align: center;
+  filter: drop-shadow(4px 4px 3px #222);
+  padding: 5px;
+  width: 100px;
+  margin: 10px;
+}
+
+.nodeathrungame {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-size: 32px;
+  font-style: normal;
+  text-align: center;
+  /* width: 52px; */
+}
+
+.dividerNodeath {
+  /* font-family: "Libre Baskerville", serif; */
+  font-weight: 700;
+  /* font-size: 32px; */
+  font-style: normal;
+  text-align: center;
+  color: grey;
+  width: 30px;
+}
+
+.nodeathgamesDiv {
+  max-width: 100px;
+  align-items: center;
+}

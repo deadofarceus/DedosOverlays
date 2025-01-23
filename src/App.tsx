@@ -30,6 +30,7 @@ import ChatBravery from "./pages/ChatBravery";
 import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import GrindChallenge from "./pages/GrindChallenge";
+import NoDeathRun from "./pages/NoDeathRun";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         </Route>
         <Route path="GuessTheSub" element={<GuessTheSub />} />
         <Route path="ChatBravery" element={<ChatBravery />} />
+        <Route path="NoDeathRun" element={<NoDeathRun />} />
         <Route path="WorldsCoCast">
           <Route index element={<WorldsCoCast />} />
           <Route path="mod" element={<WorldsCoCastMod />} />
