@@ -30,7 +30,6 @@ function GrindChallenge() {
         "https://" + GLOBALADDRESS + "/grindchallenge/requestUpdate"
       );
       const data: Account[] = await response.json();
-      console.log(data);
 
       data.sort(
         (a, b) => b.leagueEntrys[0].combinedLP - a.leagueEntrys[0].combinedLP
@@ -71,8 +70,14 @@ function GrindChallenge() {
 
   const { streamer } = useParams();
 
-  const ownClimber = climbers.find((c) => c.streamer === streamer)!;
-  const ownIndex = climbers.findIndex((c) => c.streamer === streamer);
+  const ownClimber = climbers.find(
+    (c) => iconMap.get(c.streamer!) === streamer
+  )!;
+  const ownIndex = climbers.findIndex(
+    (c) => iconMap.get(c.streamer!) === streamer
+  );
+
+  console.log("ALL CLIMBERS", climbers);
 
   climbers.splice(5);
   if (ownIndex > 4) {
