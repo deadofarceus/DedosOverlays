@@ -3,7 +3,6 @@
 }
 
 .gamedragable {
-  border: 3px solid #6bff54;
   color: azure;
   font-family: "Libre Baskerville", serif;
   font-weight: 700;
@@ -36,7 +35,7 @@
 }
 
 .nodeathgamesDiv {
-  max-width: 100px;
+  max-width: 140px;
   align-items: center;
   filter: drop-shadow(3px 3px 2px #222);
 }

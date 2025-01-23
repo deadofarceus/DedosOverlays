@@ -10,7 +10,7 @@ interface NoDeathRunControlsProps {
 
 const ItemType = "GAME_ITEM";
 
-const DraggableGameItem = ({ game, index, moveGame }: any) => {
+const DraggableGameItem = ({ game, index, moveGame, useGame }: any) => {
   const [, ref] = useDrag({
     type: ItemType,
     item: { index },
@@ -27,13 +27,20 @@ const DraggableGameItem = ({ game, index, moveGame }: any) => {
   });
 
   return (
-    <div ref={(node) => ref(drop(node))} className="gamedragable">
+    <div
+      ref={(node) => ref(drop(node))}
+      className="gamedragable"
+      style={{
+        border: game.active ? "3px solid #6bff54" : "3px solid #ec2828",
+      }}
+      onClick={() => useGame(index)}
+    >
       {game.name} {/* Hier kannst du die Darstellung des Spiels anpassen */}
     </div>
   );
 };
 
-const GameList = ({ games, moveGame }: any) => {
+const GameList = ({ games, moveGame, useGame }: any) => {
   return (
     <Row className="centerR w-100">
       {games.map((game: NoDeathRunGame, index: any) => (
@@ -42,6 +49,7 @@ const GameList = ({ games, moveGame }: any) => {
           index={index}
           game={game}
           moveGame={moveGame}
+          useGame={useGame}
         />
       ))}
     </Row>
@@ -83,11 +91,17 @@ function NoDeathRunControls({ games, callback }: NoDeathRunControlsProps) {
     callback(updatedGames);
   };
 
+  const useGame = (index: number) => {
+    const updatedGames = [...games];
+    updatedGames[index].active = !updatedGames[index].active;
+    callback(updatedGames);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <Container className="centerR nodeathrunControls">
         <Col>
-          <GameList games={games} moveGame={moveGame} />
+          <GameList games={games} moveGame={moveGame} useGame={useGame} />
           <Row className="">
             <Button className="w-25 m-3" onClick={randomizeOrder}>
               Zufällige Reihenfolge
