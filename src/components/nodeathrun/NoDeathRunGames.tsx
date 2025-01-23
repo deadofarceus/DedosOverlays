@@ -22,7 +22,7 @@ function NoDeathRunGames({ games }: NoDeathRunGamesProps) {
                   game.status === "PLAYING"
                     ? "azure"
                     : game.status === "OPEN"
-                    ? "#313131d1"
+                    ? "#a3a3a3d1"
                     : "#08ff08",
               }}
             >
