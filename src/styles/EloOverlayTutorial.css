@@ -1,12 +1,12 @@
 .layout {
   margin-top: 60px;
-  width: 65%;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: azure;
-  font-size: x-large;
   font-weight: bold;
   font-family: "Signika", sans-serif;
   text-align: center;
@@ -40,4 +40,14 @@
 
 .noWrap {
   flex-wrap: nowrap;
+}
+
+.previewELO {
+  width: 550px;
+  background-color: green;
+  border: 4px solid rgb(72, 36, 72);
+  border-radius: 40px;
+  box-shadow: 5px 5px 5px #222;
+  margin: 10px;
+  padding: 0;
 }
