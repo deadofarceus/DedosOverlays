@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "../../types/UsefulFunctions";
 import { PCTurnierWebsocket } from "../../types/WebsocketTypes";
-import { BLANKDATA, PCEvent, PCPlayer } from "../../types/PCTurnierTypes";
+import {
+  BLANKDATA,
+  PCEvent,
+  PCPlayer,
+} from "../../types/oldOrUnused/PCTurnierTypes";
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { PlayerDisplayOther } from "./PlayerDisplay";
 

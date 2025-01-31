@@ -1,8 +1,8 @@
 import { DeathEvent, FiveVFiveEvent, ModEvent } from "./BackendEvents";
 import { Player } from "./DeathcounterTypes";
-import { Game, Team } from "./FiveVFiveTypes";
+import { Game, Team } from "./oldOrUnused/FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
-import { PCEvent } from "./PCTurnierTypes";
+import { PCEvent } from "./oldOrUnused/PCTurnierTypes";
 
 export const GLOBALADDRESS = "cacedray.ddns.net:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";

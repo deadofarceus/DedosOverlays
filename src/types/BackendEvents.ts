@@ -1,5 +1,5 @@
 import { Player } from "./DeathcounterTypes";
-import { Team } from "./FiveVFiveTypes";
+import { Team } from "./oldOrUnused/FiveVFiveTypes";
 import { Account } from "./LeagueTypes";
 
 export class ModEvent {

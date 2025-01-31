@@ -1,4 +1,4 @@
-import { Matchup } from "../../../types/CoStreamTypes";
+import { Matchup } from "../../../types/oldOrUnused/CoStreamTypes";
 
 function MatchUpCard({ matchup }: { matchup: Matchup }) {
   const { team1, team2, format, standing } = matchup;

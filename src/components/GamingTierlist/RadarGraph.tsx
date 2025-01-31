@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { Radar } from "react-chartjs-2";
-import { SKILLS } from "../../types/GamingTierlistTypes";
+import { SKILLS } from "../../types/oldOrUnused/GamingTierlistTypes";
 import {
   Chart as ChartJS,
   RadialLinearScale,

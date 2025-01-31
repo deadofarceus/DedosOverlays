@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
-import ModAnsicht from "../components/PCTurnier/ModAnsicht";
-import Overlay from "../components/PCTurnier/Overlay";
-import "../styles/PCTurnier.css";
+import ModAnsicht from "../../components/PCTurnier/ModAnsicht";
+import Overlay from "../../components/PCTurnier/Overlay";
+import "../../styles/oldOrUnused/PCTurnier.css";
 
 function PCTurnier() {
   const { mod } = useParams();

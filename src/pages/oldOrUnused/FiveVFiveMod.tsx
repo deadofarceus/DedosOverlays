@@ -7,10 +7,10 @@ import {
   Form,
   InputGroup,
 } from "react-bootstrap";
-import "../styles/FiveVFiveMod.css";
+import "../../styles/oldOrUnused/FiveVFiveMod.css";
 import { useEffect, useState } from "react";
-import { FiveVFiveWebsocket } from "../types/WebsocketTypes";
-import { useQuery } from "../types/UsefulFunctions";
+import { FiveVFiveWebsocket } from "../../types/WebsocketTypes";
+import { useQuery } from "../../types/UsefulFunctions";
 
 const GAMES = [
   "League of Legends",

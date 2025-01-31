@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import { CoStreamCardProps } from "../../../types/CoStreamTypes";
+import { CoStreamCardProps } from "../../../types/oldOrUnused/CoStreamTypes";
 import MatchUpCard from "./MatchUpCard";
 
 function CoStreamCard({ date, matchups }: CoStreamCardProps) {

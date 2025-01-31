@@ -1,7 +1,11 @@
 import { Col, Container } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
 import { useState, useEffect } from "react";
-import { PCEvent, BLANKDATA, PCPlayer } from "../../types/PCTurnierTypes";
+import {
+  PCEvent,
+  BLANKDATA,
+  PCPlayer,
+} from "../../types/oldOrUnused/PCTurnierTypes";
 import { PCTurnierWebsocket } from "../../types/WebsocketTypes";
 import PlayerDisplay from "./PlayerDisplay";
 import madGaming from "../../assets/MADGAMING.png";

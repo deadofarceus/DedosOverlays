@@ -1,4 +1,4 @@
-import { PCPlayer } from "../../types/PCTurnierTypes";
+import { PCPlayer } from "../../types/oldOrUnused/PCTurnierTypes";
 
 function PlayerDisplay({ name, points, rank }: PCPlayer) {
   const numberColor =

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import "../styles/FiveVFiveOverlay.css";
-import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
-import { FiveVFiveWebsocket } from "../types/WebsocketTypes";
-import { FiveVFiveEvent } from "../types/BackendEvents";
-import { Game, Team, VS } from "../types/FiveVFiveTypes";
+import "../../styles/oldOrUnused/FiveVFiveOverlay.css";
+import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
+import { FiveVFiveWebsocket } from "../../types/WebsocketTypes";
+import { FiveVFiveEvent } from "../../types/BackendEvents";
+import { Game, Team, VS } from "../../types/oldOrUnused/FiveVFiveTypes";
 
 let ws: FiveVFiveWebsocket;
 

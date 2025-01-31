@@ -1,9 +1,12 @@
 import { Container, Col, Button, Form } from "react-bootstrap";
-import WorldsCoCast from "./WorldsCoCast";
 import { useEffect, useState } from "react";
-import { CoStreamCardProps, Matchup } from "../types/CoStreamTypes";
-import { useQuery } from "../types/UsefulFunctions";
-import { BroadcastWebsocket } from "../types/WebsocketTypes";
+import {
+  CoStreamCardProps,
+  Matchup,
+} from "../../types/oldOrUnused/CoStreamTypes";
+import { useQuery } from "../../types/UsefulFunctions";
+import { BroadcastWebsocket } from "../../types/WebsocketTypes";
+import WorldsCoCast from "./WorldsCoCast";
 
 const teams = [
   "TBD",

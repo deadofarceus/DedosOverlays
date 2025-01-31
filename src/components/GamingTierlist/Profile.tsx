@@ -1,5 +1,5 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { SKILLS, Streamer } from "../../types/GamingTierlistTypes";
+import { SKILLS, Streamer } from "../../types/oldOrUnused/GamingTierlistTypes";
 
 function Profile({ name, id, values, callback }: Streamer) {
   const handleSliderChange = (index: number, value: number) => {

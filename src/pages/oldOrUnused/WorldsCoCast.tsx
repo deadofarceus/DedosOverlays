@@ -1,10 +1,10 @@
 import { Col, Container } from "react-bootstrap";
-import { CoStreamCardProps } from "../types/CoStreamTypes";
-import CoStreamCard from "../components/league/CoStreams/CoStreamCard";
-import "../styles/CoStream.css";
-import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
+import { CoStreamCardProps } from "../../types/oldOrUnused/CoStreamTypes";
+import CoStreamCard from "../../components/league/CoStreams/CoStreamCard";
+import "../../styles/oldOrUnused/CoStream.css";
+import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
 import { useEffect, useState } from "react";
-import { BroadcastWebsocket } from "../types/WebsocketTypes";
+import { BroadcastWebsocket } from "../../types/WebsocketTypes";
 
 let ws: BroadcastWebsocket<CoStreamCardProps[]>;
 

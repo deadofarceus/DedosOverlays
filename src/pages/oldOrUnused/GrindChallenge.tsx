@@ -1,12 +1,12 @@
 import { Container } from "react-bootstrap";
-import "../styles/grindchallenge.css";
+import "../../styles/oldOrUnused/grindchallenge.css";
 import Climber, {
   ClimberProps,
-} from "../components/league/grindchallenge/Climber";
+} from "../../components/league/grindchallenge/Climber";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GLOBALADDRESS } from "../types/WebsocketTypes";
-import { Account } from "../types/LeagueTypes";
+import { GLOBALADDRESS } from "../../types/WebsocketTypes";
+import { Account } from "../../types/LeagueTypes";
 
 function GrindChallenge() {
   const [climbers, setClimbers] = useState<ClimberProps[]>([]);
