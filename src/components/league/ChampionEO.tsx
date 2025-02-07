@@ -33,7 +33,7 @@ function Champion({
   const imgsrc =
     championName === "null"
       ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/14.24.1/img/champion/${championName}.png`;
+      : `https://ddragon.leagueoflegends.com/cdn/15.2.1/img/champion/${championName}.png`;
   return (
     <div
       ref={championRef}
