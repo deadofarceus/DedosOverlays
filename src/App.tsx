@@ -24,6 +24,7 @@ import ChatBravery from "./pages/ChatBravery";
 import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import NoDeathRun from "./pages/NoDeathRun";
+import TeamElo from "./pages/TeamElo";
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route path="OTPRace">
           <Route path=":accountName" element={<OTPRace />} />
+        </Route>
+        <Route path="TeamElo">
+          <Route path=":team" element={<TeamElo />} />
         </Route>
         <Route path="mapcover">
           <Route index element={<MapcoverTutorial />} />

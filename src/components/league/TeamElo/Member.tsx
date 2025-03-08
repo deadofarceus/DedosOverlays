@@ -6,7 +6,7 @@ interface Elo {
   lp: number;
 }
 
-export interface ClimberProps {
+export interface MemberProps {
   elo: Elo;
   today: number;
   icon: string;
@@ -15,7 +15,7 @@ export interface ClimberProps {
   streamer: string;
 }
 
-function Climber({ elo, today, icon, matchhistory, place }: ClimberProps) {
+function Member({ elo, today, icon, matchhistory, place }: MemberProps) {
   const placeColor =
     place === 1
       ? "#ffd90077"
@@ -63,4 +63,4 @@ function Climber({ elo, today, icon, matchhistory, place }: ClimberProps) {
   );
 }
 
-export default Climber;
+export default Member;

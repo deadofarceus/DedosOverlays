@@ -1,15 +1,13 @@
 import { Container } from "react-bootstrap";
 import "../../styles/oldOrUnused/grindchallenge.css";
-import Climber, {
-  ClimberProps,
-} from "../../components/league/grindchallenge/Climber";
+import Member, { MemberProps } from "../../components/league/TeamElo/Member";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GLOBALADDRESS } from "../../types/WebsocketTypes";
 import { Account } from "../../types/LeagueTypes";
 
 function GrindChallenge() {
-  const [climbers, setClimbers] = useState<ClimberProps[]>([]);
+  const [climbers, setClimbers] = useState<MemberProps[]>([]);
   const iconMap = new Map<string, string>();
   iconMap.set("Karni", "karni");
   iconMap.set("Philly Westside", "kutcherlol");
@@ -35,7 +33,7 @@ function GrindChallenge() {
         (a, b) => b.leagueEntrys[0].combinedLP - a.leagueEntrys[0].combinedLP
       );
 
-      const climbersData: ClimberProps[] = data.map(
+      const climbersData: MemberProps[] = data.map(
         (climber: Account, index: number) => ({
           streamer: climber.name,
           elo: {
@@ -87,7 +85,7 @@ function GrindChallenge() {
   return (
     <Container className="GC-container">
       {climbers.map((data, index) => (
-        <Climber
+        <Member
           key={index}
           place={index + 1}
           streamer={data.streamer}

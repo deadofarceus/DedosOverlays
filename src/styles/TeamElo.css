@@ -1,5 +1,5 @@
 .climber-container {
-  width: 800px !important;
+  width: 500px !important;
   filter: drop-shadow(2px 2px 2px #222);
 }
 
@@ -43,7 +43,6 @@
 }
 
 .wonGC {
-  width: 4px;
   font-family: "Signika", sans-serif;
   font-weight: bold;
   font-style: normal;
@@ -51,11 +50,15 @@
   font-size: 48px;
 }
 
+.wonGC,
+.loseGC {
+  width: 14px;
+}
+
 .loseGC {
   font-family: "Signika", sans-serif;
   font-weight: bold;
   font-style: normal;
-  width: 4px;
   color: #ff6565;
   font-size: 48px;
 }
@@ -79,7 +82,7 @@
   font-weight: bold;
   font-style: normal;
   font-size: 24px;
-  width: 100px;
+  width: 105px;
   margin-right: -20px;
 }
 
@@ -89,7 +92,7 @@
   justify-content: center;
   align-items: center;
   width: 500px;
-  height: 600px;
+  height: 500px;
 }
 
 .GCmhDiv {
