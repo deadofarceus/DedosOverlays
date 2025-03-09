@@ -13,7 +13,7 @@ const LoLProsIcons = new Map<string, string>([
     "Pride",
   ],
   [
-    "xpQG-7J8hPqa5JcXxnjpneE2SVqZnTNx0Gg5D93aJRecWeLoWG0l6-vza12dZUzoFJfflXdIzstIvA",
+    "EskFW0sCArYVlZTY4tzX7IIVAR7IBnZ4IQLU_4vVyYTFNjW5mxc_bK3bPG_xdAgmv91Rc05ppwW9cg",
     "Jokaa",
   ],
   [
