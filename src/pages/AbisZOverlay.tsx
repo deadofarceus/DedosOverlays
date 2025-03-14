@@ -12,6 +12,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "../styles/AbisZOverlay.css";
 import { useParams } from "react-router-dom";
 import { isOBSBrowser } from "../types/UsefulFunctions";
+import { CHAMPIMG_URL } from "../types/Constants";
 
 let ws: AbisZWebsocket;
 let fertig: boolean = false;
@@ -79,9 +80,7 @@ function ChampGroupD({ champions }: LetterGroup) {
 function ChampD({ name, won, games }: ChampionAbisZ) {
   const champName = name === "Wukong" ? "MonkeyKing" : name;
   const imgsrc =
-    name === "null"
-      ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/15.2.1/img/champion/${champName}.png`;
+    name === "null" ? "../../null.png" : `${CHAMPIMG_URL}${champName}.png`;
   return (
     <div
       className={"imgdivAZ"}

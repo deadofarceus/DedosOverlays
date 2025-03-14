@@ -1,5 +1,6 @@
 import { Col } from "react-bootstrap";
 import { OTPPlayerProps } from "../../../types/OTPTypes";
+import { CHAMPIMG_URL } from "../../../types/Constants";
 
 function OTPPlayer({
   index,
@@ -14,7 +15,7 @@ function OTPPlayer({
       ? "../Karma.png"
       : summonerName === "e7c3c0fd-cee3-4399-877b-baf89c9f6f46"
       ? "../Baus.png"
-      : "https://ddragon.leagueoflegends.com/cdn/15.2.1/img/champion/Gragas.png";
+      : `${CHAMPIMG_URL}Gragas.png`;
   const lpDisplay =
     tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER"
       ? lp + " LP"

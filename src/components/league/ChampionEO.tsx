@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
+import { CHAMPIMG_URL } from "../../types/Constants";
 
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
@@ -33,7 +34,9 @@ function Champion({
   const imgsrc =
     championName === "null"
       ? "../../null.png"
-      : `https://ddragon.leagueoflegends.com/cdn/15.2.1/img/champion/${championName}.png`;
+      : championName === "FiddleSticks"
+      ? `${CHAMPIMG_URL}Fiddlesticks.png`
+      : `${CHAMPIMG_URL}${championName}.png`;
   return (
     <div
       ref={championRef}
