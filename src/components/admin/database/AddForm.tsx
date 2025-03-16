@@ -4,7 +4,6 @@ import { useQuery } from "../../../types/UsefulFunctions";
 import { GLOBALADDRESS } from "../../../types/WebsocketTypes";
 
 function AddForm() {
-  const [group, setGroup] = useState<string>("");
   const [key, setKey] = useState<string>("");
   const [value, setValue] = useState<string>("");
   const [response, setResponse] = useState<string>("");
@@ -12,14 +11,20 @@ function AddForm() {
   const query = useQuery();
   const adminKey = query.get("adminKey");
 
+  const entry = {
+    key: key,
+    value: value,
+  };
+
   const handleSubmit = () => {
-    fetch(
-      `https://${GLOBALADDRESS}/database/add/${group}/${key}?adminKey=${adminKey}`,
-      {
-        method: "POST",
-        body: value,
-      }
-    )
+    fetch(`https://${GLOBALADDRESS}/database/addKey`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        adminKey: adminKey || "",
+      },
+      body: JSON.stringify(entry),
+    })
       .then((response) => response.text())
       .then((data) => {
         console.log(data);
@@ -29,23 +34,24 @@ function AddForm() {
 
   return (
     <Container className="centerC w-100">
-      <h3>Add to Database</h3>
+      <h3>Add Key to Database</h3>
       <Form className="w-100">
         <Row className="centerR w-100" md={3}>
           <Form.Group className="centerC">
-            <Form.Label className="blackOutline">Group:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Group"
-              value={group}
-              id="databaseGroup"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setGroup(e.target.value)
-              }
-            />
-          </Form.Group>
-          <Form.Group className="centerC">
-            <Form.Label className="blackOutline">Key:</Form.Label>
+            <Row className="centerR w-100 m-1">
+              <Form.Label className="blackOutline w-25">Key:</Form.Label>
+              <Button
+                className="w-25"
+                onClick={() =>
+                  setKey(
+                    Math.random().toString(36).substring(2, 10) +
+                      Math.random().toString(36).substring(2, 10)
+                  )
+                }
+              >
+                Randomize
+              </Button>
+            </Row>
             <Form.Control
               type="text"
               placeholder="Enter key"
@@ -57,10 +63,12 @@ function AddForm() {
             />
           </Form.Group>
           <Form.Group className="centerC">
-            <Form.Label className="blackOutline">Value:</Form.Label>
+            <Row className="centerR w-100 m-2">
+              <Form.Label className="blackOutline">User:</Form.Label>
+            </Row>
             <Form.Control
               type="text"
-              placeholder="Enter Value"
+              placeholder="Enter User"
               value={value}
               id="databaseValue"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -73,7 +81,7 @@ function AddForm() {
       <h3 className="blackOutline">Generated Entry</h3>
       <Form.Control
         type="text"
-        value={`[${group}, ${key}] = ${value}`}
+        value={`Key: ${key} User: ${value}`}
         readOnly
         aria-describedby="basic-addon2"
         className="link"
