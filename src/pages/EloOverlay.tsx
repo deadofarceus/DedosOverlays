@@ -44,6 +44,7 @@ function EloOverlay() {
     const summonerName = query.get("name");
     const tag = query.get("tag");
     const key = query.get("key");
+    const region = query.get("region") || "EUW1";
     if (
       summonerName === null ||
       tag === null ||
@@ -59,7 +60,7 @@ function EloOverlay() {
           tag,
           key,
           queueType,
-          "EUW1",
+          region,
           setPlayerInfo
         );
         // fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
