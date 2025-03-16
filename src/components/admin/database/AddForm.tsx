@@ -11,20 +11,10 @@ function AddForm() {
   const query = useQuery();
   const adminKey = query.get("adminKey");
 
-  const entry = {
-    key: key,
-    value: value,
-  };
-
   const handleSubmit = () => {
-    fetch(`https://${GLOBALADDRESS}/database/addKey`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        adminKey: adminKey || "",
-      },
-      body: JSON.stringify(entry),
-    })
+    fetch(
+      `https://${GLOBALADDRESS}/database/addKey/${key}/${value}?adminKey=${adminKey}`
+    )
       .then((response) => response.text())
       .then((data) => {
         console.log(data);
