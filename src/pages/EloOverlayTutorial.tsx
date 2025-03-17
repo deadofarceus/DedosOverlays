@@ -14,6 +14,24 @@ import {
 import "../styles/EloOverlayTutorial.css";
 import DedoCopy from "../components/util/DedoCopy";
 
+const REGIONS = [
+  "EUW1",
+  "EUN1",
+  "NA1",
+  "KR",
+  "JP1",
+  "LA1",
+  "LA2",
+  "ME1",
+  "BR1",
+  "OC1",
+  "RU",
+  "SG2",
+  "TR1",
+  "TW2",
+  "VN2",
+];
+
 function EloOverlayTutorial() {
   document.body.className = "noOBS";
   const nav = useNavigate();
@@ -25,6 +43,7 @@ function EloOverlayTutorial() {
   const [lang, setLang] = useState<string>("de");
   const [legacyMode, setLegacyMode] = useState<boolean>(false);
   const [queuetype, setQueuetype] = useState<string>("soloduo");
+  const [region, setRegion] = useState<string>("EUW1");
 
   useEffect(() => {
     const summonerNameQ = query.get("name");
@@ -35,10 +54,10 @@ function EloOverlayTutorial() {
       nav(`/EloOverlay/soloduo?name=${summonerNameQ}&tag=${tagQ}&key=${keyQ}`);
     } else {
       setLink(
-        `https://arceus-overlays.netlify.app/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&key=${key}&legacy=${legacyMode}&lang=${lang}`
+        `https://arceus-overlays.netlify.app/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&region=${region}&key=${key}&legacy=${legacyMode}&lang=${lang}`
       );
     }
-  }, [key, legacyMode, nav, query, queuetype, summonerName, tag, lang]);
+  }, [key, legacyMode, nav, query, queuetype, summonerName, tag, lang, region]);
 
   const preview = legacyMode
     ? "../EloOverlay/LegacyELO.png"
@@ -75,20 +94,36 @@ function EloOverlayTutorial() {
                   }
                 />
               </InputGroup>
-              <Form.Group>
-                <Form.Label className="blackOutline">
-                  Key: (if you don't have a key visit <a href="/help">Help</a>)
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your Key"
-                  value={key}
-                  id="dedoKey"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setKey(e.target.value)
-                  }
-                />
-              </Form.Group>
+              <Row className="w-100">
+                <Form.Group className="w-50">
+                  <Form.Label className="blackOutline">
+                    Key: (if you don't have a key visit <a href="/help">Help</a>
+                    )
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your Key"
+                    value={key}
+                    id="dedoKey"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setKey(e.target.value)
+                    }
+                  />
+                </Form.Group>
+                <Form.Group className="w-25 regionSelect">
+                  <Form.Label>Region:</Form.Label>
+                  <DropdownButton
+                    drop={"down"}
+                    variant="primary"
+                    title={region}
+                    onSelect={(evt) => setRegion(evt!)}
+                  >
+                    {REGIONS.map((region) => (
+                      <Dropdown.Item eventKey={region}>{region}</Dropdown.Item>
+                    ))}
+                  </DropdownButton>
+                </Form.Group>
+              </Row>
             </Col>
             <Row className="centerR noWrap">
               <Form.Group>

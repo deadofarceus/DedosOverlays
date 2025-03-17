@@ -32,6 +32,7 @@
 
 .sumTag {
   width: 80% !important;
+  margin-bottom: 15px;
 }
 
 #tag {
@@ -50,4 +51,11 @@
   box-shadow: 5px 5px 5px #222;
   margin: 10px;
   padding: 0;
+}
+
+.regionSelect {
+  height: 94px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
