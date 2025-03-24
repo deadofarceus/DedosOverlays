@@ -25,7 +25,7 @@ const LoLProsIcons = new Map<string, string>([
     "Broeki",
   ],
   [
-    "jWsVjHz8XvoS1DMoPL4uqR3RgX7M8HORvb73-EceHYgsGGxDDoX9nThFOomtkhxSkPJPO2UZDUlluw",
+    "pecpyPDkyhd5o0vISeB4nrPitDQIL_9beuo7hZJBM7MYPTR7fnGuwOV1zVJtq4jBq1b1OBY_e7ilfA",
     "LiLipp",
   ],
 ]);
