@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
-import { CHAMPIMG_URL } from "../../types/Constants";
+// import { CHAMPIMG_URL } from "../../types/Constants";
 
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
