@@ -31,12 +31,18 @@ function Champion({
     }
   }, [isNew]);
 
+  // const imgsrc =
+  //   championName === "null"
+  //     ? "../../null.png"
+  //     : championName === "FiddleSticks"
+  //     ? `${CHAMPIMG_URL}Fiddlesticks.png`
+  //     : `${CHAMPIMG_URL}${championName}.png`;
   const imgsrc =
     championName === "null"
       ? "../../null.png"
       : championName === "FiddleSticks"
-      ? `${CHAMPIMG_URL}Fiddlesticks.png`
-      : `${CHAMPIMG_URL}${championName}.png`;
+      ? `../../champs/Fiddlesticks.png`
+      : `../../champs/${championName}.png`;
   return (
     <div
       ref={championRef}
