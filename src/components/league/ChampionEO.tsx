@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ChampionMatchHistory } from "../../types/LeagueTypes";
+import { CHAMPIMG_URL } from "../../types/Constants";
 // import { CHAMPIMG_URL } from "../../types/Constants";
 
 // FLAME SIZE IS MANUELL SONST GETH TOP LEFT HOPS DINK DONK
@@ -31,18 +32,18 @@ function Champion({
     }
   }, [isNew]);
 
-  // const imgsrc =
-  //   championName === "null"
-  //     ? "../../null.png"
-  //     : championName === "FiddleSticks"
-  //     ? `${CHAMPIMG_URL}Fiddlesticks.png`
-  //     : `${CHAMPIMG_URL}${championName}.png`;
   const imgsrc =
     championName === "null"
       ? "../../null.png"
       : championName === "FiddleSticks"
-      ? `../../champs/Fiddlesticks.png`
-      : `../../champs/${championName}.png`;
+      ? `${CHAMPIMG_URL}Fiddlesticks.png`
+      : `${CHAMPIMG_URL}${championName}.png`;
+  // const imgsrc =
+  //   championName === "null"
+  //     ? "../../null.png"
+  //     : championName === "FiddleSticks"
+  //     ? `../../champs/Fiddlesticks.png`
+  //     : `../../champs/${championName}.png`;
   return (
     <div
       ref={championRef}
