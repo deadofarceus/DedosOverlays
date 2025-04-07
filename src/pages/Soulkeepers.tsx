@@ -67,7 +67,12 @@ function Soulkeepers() {
           className="skButton"
           variant="danger"
           onClick={() => {
-            ws.sendEvent(new ModEvent(streamerId, "SoulkeepersKanone", "tot"));
+            // Browser confirmation window
+            if (confirm("Ist der Streamer wirklich gestorben?")) {
+              ws.sendEvent(
+                new ModEvent(streamerId, "SoulkeepersKanone", "tot")
+              );
+            }
           }}
         >
           Streamer gestorben
