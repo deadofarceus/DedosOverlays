@@ -4,6 +4,7 @@ import "../styles/Soulkeepers.css";
 import { BroadcastWebsocket } from "../types/WebsocketTypes";
 import { useEffect } from "react";
 import { ModEvent } from "../types/BackendEvents";
+import { useParams } from "react-router-dom";
 
 let ws: BroadcastWebsocket<string>;
 
@@ -19,14 +20,14 @@ function Soulkeepers() {
 
   const query = useQuery();
 
-  //   const hideProgressBar = query.get("hideProgressBar")
-  //     ? "&hideProgressBar"
-  //     : "";
-  //   const hideLevelsWithNoPoints = query.get("hideLevelsWithNoPoints")
-  //     ? "&hideLevelsWithNoPoints"
-  //     : "";
-  //   const sheetId = query.get("sheetId") || "";
-  //   const { website } = useParams();
+  const hideProgressBar = query.get("hideProgressBar")
+    ? "&hideProgressBar"
+    : "";
+  const hideLevelsWithNoPoints = query.get("hideLevelsWithNoPoints")
+    ? "&hideLevelsWithNoPoints"
+    : "";
+  const sheetId = query.get("sheetId") || "";
+  const { website } = useParams();
 
   const streamerId = query.get("streamerId") || "";
 
@@ -42,11 +43,11 @@ function Soulkeepers() {
 
   return isObs ? (
     <div className="obsSoulkeepersContainer">
-      {/* <iframe
+      <iframe
         src={`https://${website}.cloudfront.net/?sheetId=${sheetId}${hideProgressBar}${hideLevelsWithNoPoints}`}
         allowTransparency={true}
         className="w-100 h-100 skIframe"
-      ></iframe> */}
+      ></iframe>
     </div>
   ) : (
     <Container className="soulkeepersContainer">
