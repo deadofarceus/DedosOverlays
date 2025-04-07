@@ -1,0 +1,27 @@
+.obsSoulkeepersContainer {
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+}
+
+.skIframe {
+    background-color: transparent;
+}
+
+.soulkeepersContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skButton {
+    font-size: 50px;
+    color: azure;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    margin: 20px;
+}

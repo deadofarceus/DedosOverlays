@@ -25,6 +25,7 @@ import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import NoDeathRun from "./pages/NoDeathRun";
 import TeamElo from "./pages/TeamElo";
+import Soulkeepers from "./pages/Soulkeepers";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
         <Route path="AdminControl" element={<AdminControl />} />
         <Route path="Screensaver" element={<GlobalScreensaver />} />
         <Route path="ScreensaverTutorial" element={<ScreensaverTutorial />} />
+        <Route path="Soulkeepers">
+          <Route path=":website" element={<Soulkeepers />} />
+        </Route>
         <Route path="DeathCounter">
           <Route index element={<Deathcounter />} />
           <Route path="mod" element={<DeathcounterMod />} />
