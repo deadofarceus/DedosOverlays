@@ -25,7 +25,8 @@ import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import NoDeathRun from "./pages/NoDeathRun";
 import TeamElo from "./pages/TeamElo";
-import Soulkeepers from "./pages/Soulkeepers";
+import Soullink from "./pages/Soullink";
+import SoullinkLogin from "./pages/SoullinkLogin";
 
 function App() {
   return (
@@ -39,8 +40,11 @@ function App() {
         <Route path="AdminControl" element={<AdminControl />} />
         <Route path="Screensaver" element={<GlobalScreensaver />} />
         <Route path="ScreensaverTutorial" element={<ScreensaverTutorial />} />
-        <Route path="Soulkeepers">
-          <Route path=":website" element={<Soulkeepers />} />
+        <Route path="Pokemon">
+          <Route path="Soullink">
+            <Route index element={<SoullinkLogin />} />
+            <Route path=":channel" element={<Soullink />} />
+          </Route>
         </Route>
         <Route path="DeathCounter">
           <Route index element={<Deathcounter />} />
