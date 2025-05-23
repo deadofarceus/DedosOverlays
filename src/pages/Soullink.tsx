@@ -1,42 +1,75 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../styles/Soullink.css";
 import { Col, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { BroadcastWebsocket } from "../types/WebsocketTypes";
-import { useQuery } from "../types/UsefulFunctions";
-let gamepadWS: BroadcastWebsocket<Key>;
-
-interface Key {
-  key: string;
-  type: "down" | "up";
-}
+import { PokemonWebsocket } from "../types/WebsocketTypes";
+import { PokemonEvent } from "../types/Pokemon";
+let gamepadWS: PokemonWebsocket;
 
 function Soullink() {
   document.body.className = "noOBS";
   const { channel } = useParams();
-  const query = useQuery();
-  const [lastKey, setLastKey] = useState<Key>({ key: "", type: "down" });
+  const nav = useNavigate();
+  const [authToken, setToken] = useState<string>("");
+  const [message, handleMessage] = useState<PokemonEvent>({
+    type: "auth",
+    data: "",
+    token: "",
+  });
+  const [vdoLink, setVdoLink] = useState<string>("");
   let pressedKeys: string[] = [];
+
+  useEffect(() => {
+    if (authToken !== "") {
+      return;
+    }
+
+    const hash = window.location.hash;
+    if (hash) {
+      const token = new URLSearchParams(hash.substring(1)).get("access_token");
+      if (token) {
+        console.log("TOKEN: " + token);
+        setToken(token);
+      } else {
+        gamepadWS.ws.close();
+        nav("/Pokemon/Soullink");
+      }
+    }
+  }, [authToken]);
 
   const handle = (e: KeyboardEvent, type: "down" | "up") => {
     const key = e.key;
 
     if (type === "down" && !pressedKeys.includes(key)) {
-      gamepadWS.sendData({ key: key, type: type });
+      const wasdenn = {
+        type: "key",
+        data: { key: key, type: type },
+        token: authToken,
+      } as PokemonEvent;
+      console.log(wasdenn);
+
+      gamepadWS.sendData(wasdenn);
       console.log("SENDING DOWN: " + key);
       pressedKeys.push(key);
     } else if (type === "up" && pressedKeys.includes(key)) {
-      gamepadWS.sendData({ key: key, type: type });
+      gamepadWS.sendData({
+        type: "key",
+        data: { key: key, type: type },
+        token: authToken,
+      });
       console.log("SENDING UP: " + key);
       pressedKeys = pressedKeys.filter((k) => k !== key);
     }
   };
 
   useEffect(() => {
-    const id = query.get("id");
-    if (gamepadWS || !id) return;
-    gamepadWS = new BroadcastWebsocket(id, setLastKey);
+    if (gamepadWS || authToken === "") return;
+    gamepadWS = new PokemonWebsocket(
+      "pokemonRecieverClient",
+      authToken,
+      handleMessage
+    );
 
     window.addEventListener("keydown", (e) => handle(e, "down"));
     window.addEventListener("keyup", (e) => handle(e, "up"));
@@ -45,7 +78,28 @@ function Soullink() {
       window.removeEventListener("keydown", (e) => handle(e, "down"));
       window.removeEventListener("keyup", (e) => handle(e, "up"));
     };
-  }, []);
+  }, [authToken]);
+
+  switch (message.type) {
+    case "auth":
+      if (message.data === "declined") {
+        nav("/Pokemon/Soullink");
+      }
+      break;
+    case "vdo":
+      if (vdoLink === "") {
+        console.log("VDO", message.data);
+
+        setVdoLink(message.data);
+      }
+      break;
+    case "key":
+      console.log("Key pressed: " + message.data);
+      break;
+    default:
+      console.log("default");
+      break;
+  }
 
   return (
     <Container className="SoullinkContainer">
@@ -54,13 +108,13 @@ function Soullink() {
         <div id="video-container">
           <iframe
             id="player"
-            src="https://vdo.ninja/?view=sbM39yM"
+            src={vdoLink}
             allow="autoplay"
             width="1280"
             height="720"
           ></iframe>
         </div>
-        <h2>{lastKey.key === " " ? "Space" : lastKey.key.toUpperCase()}</h2>
+        <h2>{message.type}</h2>
       </Col>
     </Container>
   );

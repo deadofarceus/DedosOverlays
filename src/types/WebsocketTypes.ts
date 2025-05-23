@@ -3,6 +3,7 @@ import { Player } from "./DeathcounterTypes";
 import { Game, Team } from "./oldOrUnused/FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 import { PCEvent } from "./oldOrUnused/PCTurnierTypes";
+import { PokemonEvent } from "./Pokemon";
 
 export const GLOBALADDRESS = "cacedray.ddns.net:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
@@ -114,6 +115,49 @@ export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
   sendData(data: T) {
     this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", data));
   }
+}
+
+export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
+  id: string;
+  constructor(
+    id: string,
+    token: string,
+    callback: React.Dispatch<React.SetStateAction<PokemonEvent>>
+  ) {
+    super(callback, `${GLOBALWSADRESS}?id=${id}&token=${token}`);
+    this.id = id;
+  }
+
+  sendData(event: PokemonEvent) {
+    this.sendEvent(new ModEvent("pokemonclient", "pokemonRemote", event));
+  }
+
+  handleMessage(event: MessageEvent): void {
+    const message = event.data;
+    if (this.checkUtilityEvent(message)) {
+      return;
+    }
+    const data: PokemonEvent = JSON.parse(message);
+    switch (data.type) {
+      case "key":
+        this.callback(data);
+        break;
+      case "vdo":
+        this.callback(data);
+        break;
+      case "auth":
+        if (data.data === "declined") {
+          this.ws.close(4496);
+        }
+        this.callback(data);
+        break;
+      default:
+        console.log(data);
+        break;
+    }
+  }
+
+  handleClose = () => {};
 }
 
 export class EloWebsocket extends BaseWebSocket<Account> {
