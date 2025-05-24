@@ -88,8 +88,7 @@ function Soullink() {
       break;
     case "vdo":
       if (vdoLink === "") {
-        console.log("VDO", message.data);
-
+        console.log("VDO", message);
         setVdoLink(message.data);
       }
       break;

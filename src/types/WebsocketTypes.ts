@@ -119,6 +119,7 @@ export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
 
 export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
   id: string;
+  clientID: string = "";
   constructor(
     id: string,
     token: string,
@@ -129,7 +130,7 @@ export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
   }
 
   sendData(event: PokemonEvent) {
-    this.sendEvent(new ModEvent("pokemonclient", "pokemonRemote", event));
+    this.sendEvent(new ModEvent(this.clientID, "pokemonRemote", event));
   }
 
   handleMessage(event: MessageEvent): void {
@@ -143,6 +144,7 @@ export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
         this.callback(data);
         break;
       case "vdo":
+        this.clientID = data.token;
         this.callback(data);
         break;
       case "auth":
