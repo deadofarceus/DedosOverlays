@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/Soullink.css";
 import { Col, Container } from "react-bootstrap";
@@ -9,7 +9,6 @@ let gamepadWS: PokemonWebsocket;
 
 function Soullink() {
   document.body.className = "noOBS";
-  const { channel } = useParams();
   const nav = useNavigate();
   const [authToken, setToken] = useState<string>("");
   const [message, handleMessage] = useState<PokemonEvent>({
@@ -33,8 +32,10 @@ function Soullink() {
         setToken(token);
       } else {
         gamepadWS.ws.close();
-        nav("/Pokemon/Soullink");
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
       }
+    } else {
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     }
   }, [authToken]);
 
@@ -83,7 +84,7 @@ function Soullink() {
   switch (message.type) {
     case "auth":
       if (message.data === "declined") {
-        nav("/Pokemon/Soullink");
+        nav("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
       }
       break;
     case "vdo":
@@ -103,7 +104,6 @@ function Soullink() {
   return (
     <Container className="SoullinkContainer">
       <Col>
-        <h1>Soullink - {channel}</h1>
         <div id="video-container">
           <iframe
             id="player"

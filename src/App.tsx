@@ -42,8 +42,8 @@ function App() {
         <Route path="ScreensaverTutorial" element={<ScreensaverTutorial />} />
         <Route path="Pokemon">
           <Route path="Soullink">
-            <Route index element={<SoullinkLogin />} />
-            <Route path=":channel" element={<Soullink />} />
+            <Route index element={<Soullink />} />
+            <Route path="login" element={<SoullinkLogin />} />
           </Route>
         </Route>
         <Route path="DeathCounter">
