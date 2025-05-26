@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import "../styles/Soullink.css";
 import { Col, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
@@ -9,7 +7,6 @@ let gamepadWS: PokemonWebsocket;
 
 function Soullink() {
   document.body.className = "noOBS";
-  const nav = useNavigate();
   const [authToken, setToken] = useState<string>("");
   const [message, handleMessage] = useState<PokemonEvent>({
     type: "auth",
@@ -84,7 +81,7 @@ function Soullink() {
   switch (message.type) {
     case "auth":
       if (message.data === "declined") {
-        nav("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
       }
       break;
     case "vdo":
