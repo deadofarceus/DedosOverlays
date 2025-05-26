@@ -53,7 +53,7 @@ function Soullink() {
     } else if (type === "up" && pressedKeys.includes(key)) {
       gamepadWS.sendData({
         type: "key",
-        data: { key: key, type: type },
+        data: { key: key.toLowerCase(), type: type },
         token: authToken,
       });
       console.log("SENDING UP: " + key);
