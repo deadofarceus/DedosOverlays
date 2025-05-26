@@ -1,5 +1,5 @@
 import "../styles/Soullink.css";
-import { Col, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { PokemonWebsocket } from "../types/WebsocketTypes";
 import { PokemonEvent } from "../types/Pokemon";
@@ -13,7 +13,7 @@ function Soullink() {
     data: "",
     token: "",
   });
-  const [vdoLink, setVdoLink] = useState<string>("");
+  const [vdoLink, setVdoLink] = useState<string>("nolink");
   let pressedKeys: string[] = [];
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function Soullink() {
       }
       break;
     case "vdo":
-      if (vdoLink === "") {
+      if (vdoLink === "nolink") {
         console.log("VDO", message);
         setVdoLink(message.data);
       }
@@ -100,7 +100,31 @@ function Soullink() {
 
   return (
     <Container className="SoullinkContainer">
-      <Col>
+      <Row className="centerR w-100">
+        <Col className="centerC pokemon-side-text">
+          <h1>Regeln</h1>
+          <p>
+            {
+              "- Nur das erste Pokemon pro Bereich darf gefangen werden. Dieses ist gelinked mit dem Pokemon vom Partner im selben Bereich"
+            }
+            <br />
+            {"- Shinys immer gültig zu fangen Joker für den anderen"}
+            <br />
+            {
+              "- Pokemon ist tot -> Partner Pokemon stirbt darf aber im Fight noch benutzt werden"
+            }
+            <br />
+            {
+              "- Gelinkte Pokemon müssen immer entweder im Team oder auf dem PC liegen"
+            }
+            <br />
+            {"- VM-Sklave fangen immer gültig"}
+            <br />
+            {
+              "- Bei Regelfragen haben Arceus Evenso und Chaos11377 immer das letzte Wort"
+            }
+          </p>
+        </Col>
         <div id="video-container">
           <iframe
             id="player"
@@ -110,8 +134,30 @@ function Soullink() {
             height="720"
           ></iframe>
         </div>
-        <h2>{message.type}</h2>
-      </Col>
+        <Col className="centerC pokemon-side-text">
+          <h1>Controls</h1>
+          <p>
+            {" A Knopf: E"}
+            <br />
+            {" B Knopf: Spacebar"}
+            <br />
+            {" X Knopf: X"}
+            <br />
+            {" Y Knopf: Y"}
+            <br />
+            {" START Knopf: Esc"}
+            <br />
+            {" Turboschnell Umschalt: P"}
+            <br />
+            {" Schneller machen: arrow up"}
+            <br />
+            {" Langsamer machen: arrow down"}
+            <br />
+          </p>
+          <h4>Funktionieren deine Eingaben nicht?</h4>
+          <Button variant="danger">Klick einmal hier</Button>
+        </Col>
+      </Row>
     </Container>
   );
 }
