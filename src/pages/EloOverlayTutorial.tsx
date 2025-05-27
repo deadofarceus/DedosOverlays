@@ -189,7 +189,7 @@ function EloOverlayTutorial() {
                   Copy and paste the link in the URL field
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Set width to 1280px and heigth to 720px an resize it the way
+                  Set width to 1280px and heigth to 720px and resize it the way
                   you want
                 </ListGroup.Item>
                 <ListGroup.Item>

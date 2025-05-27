@@ -123,7 +123,7 @@ function Soullink() {
             {"- Heal gegen AP Taktik verboten"}
             <br />
             {
-              "- Bei Regelfragen haben Arceus Evenso und Chaos11377 immer das letzte Wort"
+              "- Bei Regelfragen haben Arceus, Evenso und Chaos11377 immer das letzte Wort"
             }
           </p>
         </Col>
