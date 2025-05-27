@@ -120,6 +120,8 @@ function Soullink() {
             <br />
             {"- VM-Sklave fangen immer gültig"}
             <br />
+            {"- Heal gegen AP Taktik verboten"}
+            <br />
             {
               "- Bei Regelfragen haben Arceus Evenso und Chaos11377 immer das letzte Wort"
             }
@@ -137,6 +139,8 @@ function Soullink() {
         <Col className="centerC pokemon-side-text">
           <h1>Controls</h1>
           <p>
+            {" Steuerkreuz: W, A, S, D"}
+            <br />
             {" A Knopf: E"}
             <br />
             {" B Knopf: Spacebar"}

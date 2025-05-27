@@ -7,6 +7,11 @@
     text-align: center;
 }
 
+.SoullinkLoginContainer {
+    min-height: 720px;
+    justify-content: center;
+}
+
 #player {
     border: 3px solid #008B8B;
     border-radius: 10px;
