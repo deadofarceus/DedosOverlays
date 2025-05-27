@@ -26,12 +26,14 @@ function Soullink() {
       const token = new URLSearchParams(hash.substring(1)).get("access_token");
       if (token) {
         console.log("TOKEN: " + token);
+        window.location.hash = "";
         setToken(token);
       } else {
-        gamepadWS.ws.close();
+        console.log("NO TOKEN");
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
       }
     } else {
+      console.log("NO HASH");
       window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     }
   }, [authToken]);
