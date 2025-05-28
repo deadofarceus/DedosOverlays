@@ -161,7 +161,11 @@ function Soullink() {
             <br />
           </p>
           <h4>Funktionieren deine Eingaben nicht?</h4>
-          <Button variant="danger">Klick einmal hier</Button>
+          <h3>
+            Klick irgendwo hin Hauptsache nicht auf den DS Bildschirm oder
+            einfach
+          </h3>
+          <Button variant="danger">hier</Button>
         </Col>
       </Row>
     </Container>
