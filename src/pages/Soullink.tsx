@@ -30,11 +30,13 @@ function Soullink() {
         setToken(token);
       } else {
         console.log("NO TOKEN");
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        window.location.href =
+          "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
       }
     } else {
       console.log("NO HASH");
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      window.location.href =
+        "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
     }
   }, [authToken]);
 
@@ -83,7 +85,8 @@ function Soullink() {
   switch (message.type) {
     case "auth":
       if (message.data === "declined") {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        window.location.href =
+          "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
       }
       break;
     case "vdo":
