@@ -65,11 +65,7 @@ function Soullink() {
 
   useEffect(() => {
     if (gamepadWS || authToken === "") return;
-    gamepadWS = new PokemonWebsocket(
-      "pokemonRecieverClient",
-      authToken,
-      handleMessage
-    );
+    gamepadWS = new PokemonWebsocket("pokemonRecieverClient", authToken, handleMessage);
 
     window.addEventListener("keydown", (e) => handle(e, "down"));
     window.addEventListener("keyup", (e) => handle(e, "up"));
@@ -112,31 +108,21 @@ function Soullink() {
             <br />
             {"- Shinys immer gültig zu fangen Joker für den anderen"}
             <br />
-            {
-              "- Pokemon ist tot -> Partner Pokemon stirbt darf aber im Fight noch benutzt werden"
-            }
+            {"- Pokemon ist tot -> Partner Pokemon stirbt darf aber im Fight noch benutzt werden"}
             <br />
-            {
-              "- Gelinkte Pokemon müssen immer entweder im Team oder auf dem PC liegen"
-            }
+            {"- Gelinkte Pokemon müssen immer entweder im Team oder auf dem PC liegen"}
             <br />
             {"- VM-Sklave fangen immer gültig"}
             <br />
             {"- Heal gegen AP Taktik verboten"}
             <br />
-            {
-              "- Bei Regelfragen haben Arceus, Evenso und Chaos11377 immer das letzte Wort"
-            }
+            {"- Bei Regelfragen haben Arceus, Evenso und Chaos11377 immer das letzte Wort"}
           </p>
         </Col>
         <div id="video-container">
-          <iframe
-            id="player"
-            src={vdoLink}
-            allow="autoplay"
-            width="1280"
-            height="720"
-          ></iframe>
+          {vdoLink !== "nolink" && (
+            <iframe id="player" src={vdoLink} allow="autoplay" width="1280" height="720"></iframe>
+          )}
         </div>
         <Col className="centerC pokemon-side-text">
           <h1>Controls</h1>
@@ -161,10 +147,7 @@ function Soullink() {
             <br />
           </p>
           <h4>Funktionieren deine Eingaben nicht?</h4>
-          <h3>
-            Klick irgendwo hin Hauptsache nicht auf den DS Bildschirm oder
-            einfach
-          </h3>
+          <h3>Klick irgendwo hin Hauptsache nicht auf den DS Bildschirm oder einfach</h3>
           <Button variant="danger">hier</Button>
         </Col>
       </Row>
