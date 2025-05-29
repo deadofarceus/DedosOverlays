@@ -120,7 +120,7 @@ function Soullink() {
           </p>
         </Col>
         <div id="video-container">
-          {vdoLink !== "nolink" && (
+          {vdoLink !== "nolink" && vdoLink !== "nolinkSet" && (
             <iframe id="player" src={vdoLink} allow="autoplay" width="1280" height="720"></iframe>
           )}
         </div>
