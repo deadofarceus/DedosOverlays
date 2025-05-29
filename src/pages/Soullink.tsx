@@ -30,11 +30,11 @@ function Soullink() {
         setToken(token);
       } else {
         console.log("NO TOKEN");
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        window.location.href = "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
       }
     } else {
       console.log("NO HASH");
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      window.location.href = "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
     }
   }, [authToken]);
 
@@ -79,7 +79,8 @@ function Soullink() {
   switch (message.type) {
     case "auth":
       if (message.data === "declined") {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        gamepadWS.ws.close();
+        window.location.href = "https://arceus-overlays.netlify.app/Pokemon/Soullink/login";
       }
       break;
     case "vdo":
@@ -119,7 +120,7 @@ function Soullink() {
             {"- Bei Regelfragen haben Arceus, Evenso und Chaos11377 immer das letzte Wort"}
           </p>
         </Col>
-        <div id="video-container">
+        <div id="video-container" className="centerC">
           {vdoLink !== "nolink" && vdoLink !== "nolinkSet" && (
             <iframe id="player" src={vdoLink} allow="autoplay" width="1280" height="720"></iframe>
           )}
