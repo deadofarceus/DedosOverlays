@@ -138,8 +138,6 @@ function Soullink() {
             <br />
             {" Y Knopf: Y"}
             <br />
-            {" START Knopf: Esc"}
-            <br />
             {" Turboschnell Umschalt: P"}
             <br />
             {" Schneller machen: arrow up"}
