@@ -25,8 +25,9 @@ import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import NoDeathRun from "./pages/NoDeathRun";
 import TeamElo from "./pages/TeamElo";
-import Soullink from "./pages/Soullink";
-import SoullinkLogin from "./pages/SoullinkLogin";
+import Soullink from "./components/soullink/Soullink";
+import SoullinkLogin from "./components/soullink/SoullinkLogin";
+import SoullinkOverlay from "./components/soullink/SoullinkOverlay";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="Soullink">
             <Route index element={<Soullink />} />
             <Route path="login" element={<SoullinkLogin />} />
+            <Route path="overlay" element={<SoullinkOverlay />} />
           </Route>
         </Route>
         <Route path="DeathCounter">

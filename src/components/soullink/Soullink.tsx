@@ -1,8 +1,8 @@
-import "../styles/Soullink.css";
+import "../../styles/Soullink.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { PokemonWebsocket } from "../types/WebsocketTypes";
-import { PokemonEvent } from "../types/Pokemon";
+import { PokemonWebsocket } from "../../types/WebsocketTypes";
+import { PokemonEvent } from "../../types/Pokemon";
 let gamepadWS: PokemonWebsocket;
 
 function Soullink() {
