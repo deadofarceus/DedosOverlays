@@ -53,15 +53,13 @@ function EloOverlayTutorial() {
       // Redirect to error page if any of the parameters is missing
       nav(`/EloOverlay/soloduo?name=${summonerNameQ}&tag=${tagQ}&key=${keyQ}`);
     } else {
-      setLink(
-        `https://arceus-overlays.netlify.app/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&region=${region}&key=${key}&legacy=${legacyMode}&lang=${lang}`
-      );
+      const constructedLink = `https://arceus-overlays.netlify.app/EloOverlay/${queuetype}?name=${summonerName}&tag=${tag}&region=${region}&key=${key}&legacy=${legacyMode}&lang=${lang}`;
+
+      setLink(new URL(constructedLink).href);
     }
   }, [key, legacyMode, nav, query, queuetype, summonerName, tag, lang, region]);
 
-  const preview = legacyMode
-    ? "../EloOverlay/LegacyELO.png"
-    : "../EloOverlay/StandardELO.png";
+  const preview = legacyMode ? "../EloOverlay/LegacyELO.png" : "../EloOverlay/StandardELO.png";
 
   return (
     <Container className="layout">
@@ -70,9 +68,7 @@ function EloOverlayTutorial() {
         <div className="centerC w-50">
           <Form id="userInputs" className="centerC">
             <Col className="centerC">
-              <Form.Label className="homeLabel blackOutline">
-                Summoner Name + Tag:
-              </Form.Label>
+              <Form.Label className="homeLabel blackOutline">Summoner Name + Tag:</Form.Label>
               <InputGroup className="sumTag">
                 <Form.Control
                   type="text"
@@ -89,25 +85,20 @@ function EloOverlayTutorial() {
                   placeholder="tag"
                   id="tag"
                   value={tag}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setTag(e.target.value)
-                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTag(e.target.value)}
                 />
               </InputGroup>
               <Row className="w-100">
                 <Form.Group className="w-50">
                   <Form.Label className="blackOutline">
-                    Key: (if you don't have a key visit <a href="/help">Help</a>
-                    )
+                    Key: (if you don't have a key visit <a href="/help">Help</a>)
                   </Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter your Key"
                     value={key}
                     id="dedoKey"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setKey(e.target.value)
-                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKey(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group className="w-25 regionSelect">
@@ -177,23 +168,20 @@ function EloOverlayTutorial() {
                 className="link"
               />
 
-              {summonerName !== "" && tag !== "" && key !== "" && (
-                <DedoCopy textToCopy={link} />
-              )}
+              {summonerName !== "" && tag !== "" && key !== "" && <DedoCopy textToCopy={link} />}
             </InputGroup>
             <Container id="help">
               <h4 className="blackOutline">What to do with the Link:</h4>
               <ListGroup numbered>
                 <ListGroup.Item>Add a Browser Source in OBS</ListGroup.Item>
+                <ListGroup.Item>Copy and paste the link in the URL field</ListGroup.Item>
                 <ListGroup.Item>
-                  Copy and paste the link in the URL field
+                  Set width to 1280px and heigth to 720px and resize it the way you want
                 </ListGroup.Item>
+                <ListGroup.Item>After a short period of time your Elo is displayed</ListGroup.Item>
                 <ListGroup.Item>
-                  Set width to 1280px and heigth to 720px and resize it the way
-                  you want
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  After a short period of time your Elo is displayed
+                  And yes, special characters or other non-Latin characters are supported, if not dm
+                  me i can help you
                 </ListGroup.Item>
                 <ListGroup.Item>
                   If you want to support me you can do it here:{" "}
