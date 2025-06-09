@@ -30,7 +30,7 @@ function SoullinkOverlay() {
 
   return (
     <div className="soulllink-overlay">
-      <h1>{pokemonInfos.userName}</h1>
+      <h1 className="blackOutline">{pokemonInfos.userName}</h1>
     </div>
   );
 }

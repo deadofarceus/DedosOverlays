@@ -36,4 +36,5 @@
     font-weight: bold;
     font-family: 'Signika', sans-serif;
     text-align: center;
+    filter: drop-shadow(3px 3px 3px #222);
 }
