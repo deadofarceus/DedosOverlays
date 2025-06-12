@@ -28,6 +28,8 @@ import TeamElo from "./pages/TeamElo";
 import Soullink from "./components/soullink/Soullink";
 import SoullinkLogin from "./components/soullink/SoullinkLogin";
 import SoullinkOverlay from "./components/soullink/SoullinkOverlay";
+import SoullinkTeam from "./components/soullink/team/SoullinkTeam";
+import SoullinkTutorial from "./components/soullink/team/SoullinkTutorial";
 
 function App() {
   return (
@@ -46,6 +48,10 @@ function App() {
             <Route index element={<Soullink />} />
             <Route path="login" element={<SoullinkLogin />} />
             <Route path="overlay" element={<SoullinkOverlay />} />
+            <Route path="team">
+              <Route index element={<SoullinkTeam />} />
+              <Route path="tutorial" element={<SoullinkTutorial />} />
+            </Route>
           </Route>
         </Route>
         <Route path="DeathCounter">
