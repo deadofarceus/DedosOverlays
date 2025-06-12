@@ -12,48 +12,41 @@ export interface PokemonInfos {
 export interface Soullink {
   id: string;
   routes: Route[];
-  trainer: Trainer[];
+  trainers: Trainer[];
 }
 
 export class Route {
   name: string;
   pokemon: Pokemon[];
-  trainer: Trainer[];
+  disabled: boolean = false;
+  inTeam: boolean = false;
   constructor(name: string, trainer: Trainer[]) {
     this.name = name;
     this.pokemon = [];
-    this.trainer = trainer;
     trainer.forEach((trainer) => {
-      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this, trainer));
+      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this.name, trainer.name));
     });
-  }
-
-  // wird nie benutzt hoffentlich
-  addTrainer(trainer: Trainer) {
-    this.trainer.push(trainer);
-    this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this, trainer));
   }
 }
 
 export interface Trainer {
   name: string;
-  pokemon: Pokemon[];
   team: Pokemon[];
 }
 
 export class Pokemon {
   id: string;
   name: string;
-  deName: string;
+  nickName: string;
   image: string;
-  route: Route;
-  trainer: Trainer;
-  constructor(id: string, name: string, deName: string, route: Route, trainer: Trainer) {
+  routeName: string;
+  trainerName: string;
+  constructor(id: string, name: string, nickName: string, routeName: string, trainerName: string) {
     this.id = id;
     this.name = name;
-    this.deName = deName;
+    this.nickName = nickName;
+    this.routeName = routeName;
+    this.trainerName = trainerName;
     this.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-    this.route = route;
-    this.trainer = trainer;
   }
 }

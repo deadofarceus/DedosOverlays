@@ -1,40 +1,144 @@
 .SoullinkContainer {
-    margin-top: 60px;
-    min-width: 100% !important;
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
+  margin-top: 60px;
+  min-width: 100% !important;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
 }
 
 .SoullinkLoginContainer {
-    min-height: 720px;
-    justify-content: center;
+  min-height: 720px;
+  justify-content: center;
 }
 
 #player {
-    padding: 5px;
-    margin: 5px;
-    width: 100%;
-    height: 100%;
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
+  height: 100%;
 }
 
 #video-container {
-    width: 1280px;
-    height: 720px;
-    border: 3px solid #008B8B;
-    border-radius: 10px;
-    background-color: rgba(88, 70, 255, 0.243);
+  width: 1280px;
+  height: 720px;
+  border: 3px solid #008b8b;
+  border-radius: 10px;
+  background-color: rgba(88, 70, 255, 0.243);
 }
 
 .pokemon-side-text {
-    max-width: 300px;
+  max-width: 300px;
 }
 
 .soulllink-overlay {
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: left;
-    filter: drop-shadow(3px 3px 3px #222);
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: left;
+  filter: drop-shadow(3px 3px 3px #222);
+}
+
+.pokemon-image {
+  width: 128px;
+  height: 128px;
+}
+
+.pokemon-cell {
+  width: 50%;
+  position: relative;
+}
+
+.route-row-container {
+  border: #008b8b 2px solid;
+  border-radius: 30px;
+  background-color: rgba(88, 70, 255, 0.243);
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 10px;
+}
+
+.link-dead {
+  filter: grayscale(100%);
+}
+
+.routeInfoCol {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: azure;
+  font-size: 30px;
+  height: 200px;
+  justify-content: space-between;
+}
+
+.soulLinkContainer {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.route-name {
+  text-align: center;
+}
+
+.pokemon-name {
+  text-align: center;
+  color: azure;
+  font-family: "Signika", sans-serif;
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+}
+
+.soullink-desc-heaader {
+  width: 100%;
+  justify-content: left;
+}
+
+.soullink-desc-heaader h2 {
+  color: azure;
+  width: 20%;
+  text-align: center;
+}
+.soullink-desc-heaader input {
+  color: azure;
+  width: 20%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+}
+
+.new-route-input {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: azure;
+  font-size: 30px;
+  position: fixed;
+  left: 5px;
+  top: 200px;
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-route-input input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -1,8 +1,175 @@
+import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { Pokemon, Route, Soullink } from "../../../types/Pokemon";
+import RouteRow from "./RouteRow";
+import NewRouteInput from "./NewRouteInput";
+import { isOBSBrowser, useQuery } from "../../../types/UsefulFunctions";
+import { BroadcastWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
+import { useNavigate } from "react-router-dom";
+import SoullinkTeamOverlay from "./SoullinkTeamOverlay";
+import { ModEvent } from "../../../types/BackendEvents";
+import SoullinkTeamHeader from "./SoullinkTeamHeader";
+
+let ws: BroadcastWebsocket<Soullink>;
+
 function SoullinkTeam() {
+  const query = useQuery();
+  const id = query.get("id");
+  if (!id) {
+    const nav = useNavigate();
+    nav("/Pokemon/Soullink/Team/Tutorial");
+    return;
+  }
+  const obs = isOBSBrowser();
+  if (obs) {
+    return <SoullinkTeamOverlay />;
+  } else {
+    document.body.className = "noOBS";
+  }
+  const [soullink, setSoullink] = useState<Soullink>({
+    id: id,
+    routes: [],
+    trainers: [
+      {
+        name: "Ash",
+        team: [],
+      },
+      {
+        name: "Misty",
+        team: [],
+      },
+    ],
+  });
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
+  const routes = soullink.routes;
+  const trainers = soullink.trainers;
+
+  // Initialer Pokemon-Populate
+  useEffect(() => {
+    if (id && !ws) {
+      ws = new BroadcastWebsocket<Soullink>(id, setSoullink);
+    }
+
+    const fetchPokemon = async () => {
+      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+      const data = await res.json();
+
+      const mapped: Pokemon[] = data.results.map(
+        (p: any, index: number) => new Pokemon(index + 1 + "", p.name, "", "", "")
+      );
+
+      setAllPokemons(mapped);
+    };
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/pokemon/soullink/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setSoullink(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchPokemon();
+    fetchData();
+  }, []);
+
+  const sendData = (soullinkEvent: Soullink) => {
+    if (!id) {
+      return;
+    }
+    const event = new ModEvent(id, "soullink", soullinkEvent);
+    console.log(event);
+
+    ws.sendEvent(event);
+  };
+
+  // Handler: Pokemon ändern
+  const handlePokemonChange = (index: number, newPkm: Pokemon) => {
+    const newSL = { ...soullink };
+    newSL.trainers.forEach((trainer) => {
+      trainer.team = [];
+    });
+    newSL.routes.forEach((route) => {
+      if (route.name === newPkm.routeName) {
+        route.pokemon[index] = newPkm;
+      }
+      if (route.inTeam) {
+        for (let i = 0; i < newSL.trainers.length; i++) {
+          const trainer = newSL.trainers[i];
+          trainer.team.push(route.pokemon[i]);
+        }
+      }
+    });
+
+    sendData(newSL);
+  };
+
+  // Handler: Route aktiv/inaktiv
+  const toggleRouteDisabled = (routeName: string) => {
+    const newSL = { ...soullink };
+    newSL.routes.forEach((route) => {
+      if (route.name === routeName) {
+        route.disabled = !route.disabled;
+      }
+    });
+    sendData(newSL);
+  };
+
+  // Handler: Route ins Team
+  const toggleRouteInTeam = (routeName: string) => {
+    const newSL = { ...soullink };
+    newSL.routes.forEach((route) => {
+      if (route.name === routeName) {
+        for (let i = 0; i < newSL.trainers.length; i++) {
+          const trainer = newSL.trainers[i];
+          if (route.inTeam) {
+            trainer.team = trainer.team.filter((pkm) => pkm.routeName !== route.name);
+          } else {
+            if (trainer.team.length >= 6) {
+              trainer.team.shift();
+            }
+            trainer.team.push(route.pokemon[i]);
+          }
+        }
+        route.inTeam = !route.inTeam;
+      }
+    });
+    sendData(newSL);
+  };
+
+  const handleTrainerNameChange = (index: number, newName: string) => {
+    const newSL = { ...soullink };
+    newSL.trainers[index].name = newName;
+    sendData(newSL);
+  };
+
+  const addNewRoute = (route: Route) => {
+    const newSL = { ...soullink };
+    newSL.routes.push(route);
+    sendData(newSL);
+  };
+
+  console.log("RELOAD PAGE:", soullink);
+
   return (
-    <div>
-      <h1>Soullink Team</h1>
-    </div>
+    <Container className="soulLinkContainer">
+      <SoullinkTeamHeader
+        initialTrainerNames={soullink.trainers.map((t) => t.name)}
+        onTrainerNameChange={handleTrainerNameChange}
+      />
+      <NewRouteInput onAddRoute={addNewRoute} trainers={trainers} />
+      {routes.map((r: Route) => (
+        <RouteRow
+          key={r.name}
+          route={r}
+          allPokemons={allPokemons}
+          onPokemonChange={handlePokemonChange}
+          onToggleDisabled={toggleRouteDisabled}
+          onToggleTeam={toggleRouteInTeam}
+        />
+      ))}
+    </Container>
   );
 }
 
