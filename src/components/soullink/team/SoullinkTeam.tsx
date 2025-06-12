@@ -44,7 +44,6 @@ function SoullinkTeam() {
   const routes = soullink.routes;
   const trainers = soullink.trainers;
 
-  // Initialer Pokemon-Populate
   useEffect(() => {
     if (id && !ws) {
       ws = new BroadcastWebsocket<Soullink>(id, setSoullink);

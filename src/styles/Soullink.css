@@ -142,3 +142,41 @@
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.soullinkTeamOverlayContainer {
+  min-width: 1280px;
+  min-height: 720px;
+}
+
+.teamCol {
+  min-width: 1280px;
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.teamOverlayPkmnImg {
+  width: 200px;
+  position: relative;
+}
+
+.pkmnBallImg {
+  width: 200px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.soullinkImgDiv {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  padding: 0;
+}
+
+.teamRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
