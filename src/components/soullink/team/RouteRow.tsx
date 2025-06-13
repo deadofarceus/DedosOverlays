@@ -60,7 +60,15 @@ function RouteRow({
             />
           ))}
         </Row>
-        <Button variant="danger" className="deleteRouteButton" onClick={() => onDeleteRoute(route)}>
+        <Button
+          variant="danger"
+          className="deleteRouteButton"
+          onClick={() => {
+            if (confirm("Warning you are about to delete the Route: " + route.name)) {
+              onDeleteRoute(route);
+            }
+          }}
+        >
           X
         </Button>
       </Row>
