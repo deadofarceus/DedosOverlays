@@ -23,8 +23,8 @@ export class Route {
   constructor(name: string, trainer: Trainer[]) {
     this.name = name;
     this.pokemon = [];
-    trainer.forEach((trainer) => {
-      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this.name, trainer.name, ""));
+    trainer.forEach((t) => {
+      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", "Bulbasaur", name, t.name));
     });
   }
 }

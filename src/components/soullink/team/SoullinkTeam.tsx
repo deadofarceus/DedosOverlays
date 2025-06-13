@@ -93,7 +93,7 @@ function SoullinkTeam() {
       return;
     }
     const event = new ModEvent(id, "soullink", soullinkEvent);
-    // console.log(soullinkEvent);
+    console.log(soullinkEvent);
 
     ws.sendEvent(event);
   };
