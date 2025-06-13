@@ -169,16 +169,18 @@ function SoullinkTeam() {
         onTrainerNameChange={handleTrainerNameChange}
       />
       <NewRouteInput onAddRoute={addNewRoute} trainers={trainers} />
-      {routes.map((r: Route) => (
-        <RouteRow
-          key={r.name}
-          route={r}
-          allPokemons={allPokemons}
-          onPokemonChange={handlePokemonChange}
-          onToggleDisabled={toggleRouteDisabled}
-          onToggleTeam={toggleRouteInTeam}
-        />
-      ))}
+      <div className="routeDiv">
+        {routes.map((r: Route) => (
+          <RouteRow
+            key={r.name}
+            route={r}
+            allPokemons={allPokemons}
+            onPokemonChange={handlePokemonChange}
+            onToggleDisabled={toggleRouteDisabled}
+            onToggleTeam={toggleRouteInTeam}
+          />
+        ))}
+      </div>
     </Container>
   );
 }

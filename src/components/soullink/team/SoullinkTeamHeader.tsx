@@ -37,7 +37,7 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
           }
         }}
         style={{
-          marginLeft: "78px",
+          marginLeft: "43px",
         }}
       />
       <input
@@ -50,7 +50,7 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
           }
         }}
         style={{
-          marginLeft: "208px",
+          marginLeft: "146px",
         }}
       />
     </Row>

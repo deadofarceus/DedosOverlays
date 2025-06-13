@@ -42,6 +42,7 @@
 .pokemon-image {
   width: 128px;
   height: 128px;
+  filter: drop-shadow(3px 3px 2px #222);
 }
 
 .pokemon-cell {
@@ -50,16 +51,22 @@
 }
 
 .route-row-container {
-  border: #008b8b 2px solid;
+  border: #05675d 2px solid;
   border-radius: 30px;
-  background-color: rgba(88, 70, 255, 0.243);
+  background-color: #fefcbf6f;
   padding: 10px;
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 10px;
+  width: 940px;
 }
 
 .link-dead {
   filter: grayscale(100%);
+  background-color: #5846ff3e;
+}
+
+.link-inTeam {
+  background-color: rgba(113, 255, 57, 0.562);
 }
 
 .routeInfoCol {
@@ -68,6 +75,7 @@
   font-size: 30px;
   height: 200px;
   justify-content: space-between;
+  filter: drop-shadow(3px 3px 2px #222);
 }
 
 .soulLinkContainer {
@@ -78,8 +86,13 @@
   flex-direction: column;
 }
 
+.routeDiv {
+  margin-top: 50px;
+}
+
 .route-name {
   text-align: center;
+  filter: drop-shadow(3px 3px 2px #222);
 }
 
 .pokemon-name {
@@ -89,11 +102,19 @@
   font-size: 1.5rem;
   border: none;
   background: transparent;
+  filter: drop-shadow(3px 3px 2px #222);
 }
 
 .soullink-desc-heaader {
-  width: 100%;
+  width: 940px;
   justify-content: left;
+  position: fixed;
+  z-index: 1030;
+  border: #008b8b solid 2px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: cadetblue;
+  margin-top: -4px;
 }
 
 .soullink-desc-heaader h2 {
@@ -101,6 +122,7 @@
   width: 20%;
   text-align: center;
 }
+
 .soullink-desc-heaader input {
   color: azure;
   width: 20%;
@@ -116,9 +138,9 @@
   color: azure;
   font-size: 30px;
   position: fixed;
-  left: 5px;
+  left: 40px;
   top: 200px;
-  width: 310px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,6 +181,7 @@
 .teamOverlayPkmnImg {
   width: 200px;
   position: relative;
+  filter: drop-shadow(3px 3px 2px #222);
 }
 
 .pkmnBallImg {

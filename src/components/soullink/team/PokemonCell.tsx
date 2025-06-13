@@ -52,7 +52,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
         <img src={pokemon.image} alt={pokemon.name} className="pokemon-image" />
         <input
           type="text"
-          className="pokemon-name"
+          className="pokemon-name blackOutline"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           onKeyDown={(e) => {
