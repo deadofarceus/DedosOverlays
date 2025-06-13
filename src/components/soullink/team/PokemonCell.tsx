@@ -12,17 +12,20 @@ interface PokemonCellProps {
 function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [nickname, setNickname] = useState<string>(pokemon.name);
+  const [nickname, setNickname] = useState<string>(pokemon.nickName);
 
-  const filteredPokemon = allPokemons.filter((p) =>
-    p.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+  const filteredPokemon = allPokemons.filter(
+    (p) =>
+      p.name.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+      p.nameDE.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
-  const handleSelect = (selected: { id: string; name: string }) => {
+  const handleSelect = (selected: Pokemon) => {
     const newPokemon: Pokemon = new Pokemon(
       selected.id,
       selected.name,
-      selected.name,
+      selected.nameDE,
+      selected.name.charAt(0).toUpperCase() + selected.name.slice(1),
       pokemon.routeName,
       pokemon.trainerName
     );
@@ -35,6 +38,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
     const newPokemon: Pokemon = new Pokemon(
       pokemon.id,
       pokemon.name,
+      pokemon.nameDE,
       nickname,
       pokemon.routeName,
       pokemon.trainerName
@@ -73,7 +77,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
         <ListGroup className="suggestion-list">
           {filteredPokemon.map((p) => (
             <ListGroup.Item key={p.id} action onClick={() => handleSelect(p)}>
-              {p.name}
+              {p.name + "/" + p.nameDE}
             </ListGroup.Item>
           ))}
         </ListGroup>

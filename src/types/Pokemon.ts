@@ -24,7 +24,7 @@ export class Route {
     this.name = name;
     this.pokemon = [];
     trainer.forEach((trainer) => {
-      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this.name, trainer.name));
+      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", this.name, trainer.name, ""));
     });
   }
 }
@@ -37,13 +37,22 @@ export interface Trainer {
 export class Pokemon {
   id: string;
   name: string;
+  nameDE: string;
   nickName: string;
   image: string;
   routeName: string;
   trainerName: string;
-  constructor(id: string, name: string, nickName: string, routeName: string, trainerName: string) {
+  constructor(
+    id: string,
+    name: string,
+    nameDE: string,
+    nickName: string,
+    routeName: string,
+    trainerName: string
+  ) {
     this.id = id;
     this.name = name;
+    this.nameDE = nameDE;
     this.nickName = nickName;
     this.routeName = routeName;
     this.trainerName = trainerName;

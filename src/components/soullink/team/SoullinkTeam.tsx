@@ -50,14 +50,28 @@ function SoullinkTeam() {
     }
 
     const fetchPokemon = async () => {
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
-      const data = await res.json();
+      const response = await fetch("../../pokemon/pokemon_species_names.csv");
+      const text = await response.text();
 
-      const mapped: Pokemon[] = data.results.map(
-        (p: any, index: number) => new Pokemon(index + 1 + "", p.name, "", "", "")
-      );
+      const lines = text.split("\n").slice(1); // Skip header
+      const nameMap: Record<string, { id: string; nameDE?: string; nameEN?: string }> = {};
 
-      setAllPokemons(mapped);
+      for (const line of lines) {
+        const [id, langId, name] = line.split(",", 4).map((v) => v?.trim());
+
+        if (!id || !langId || !name) continue;
+
+        if (!nameMap[id]) nameMap[id] = { id };
+
+        if (langId === "6") nameMap[id].nameDE = name;
+        if (langId === "9") nameMap[id].nameEN = name;
+      }
+
+      const fullList = Object.values(nameMap)
+        .filter((p) => p.nameEN && p.nameDE)
+        .map((p) => new Pokemon(p.id, p.nameEN!, p.nameDE!, "", "", ""));
+
+      setAllPokemons(fullList);
     };
     const fetchData = async () => {
       const res = await fetch(`https://${GLOBALADDRESS}/pokemon/soullink/${id}`);
