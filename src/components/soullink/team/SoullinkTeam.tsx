@@ -92,7 +92,6 @@ function SoullinkTeam() {
       return;
     }
     const event = new ModEvent(id, "soullink", soullinkEvent);
-    console.log(event);
 
     ws.sendEvent(event);
   };
@@ -162,8 +161,6 @@ function SoullinkTeam() {
     newSL.routes.push(route);
     sendData(newSL);
   };
-
-  console.log("RELOAD PAGE:", soullink);
 
   return (
     <Container className="soulLinkContainer">
