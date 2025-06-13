@@ -1,14 +1,7 @@
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Form, InputGroup, ListGroup, Row } from "react-bootstrap";
 import "../styles/Deathcounter.css";
 import { useState } from "react";
+import DedoCopy from "../components/util/DedoCopy";
 
 function Deathcounter() {
   document.body.className = "noOBS";
@@ -32,9 +25,7 @@ function Deathcounter() {
                   placeholder="Enter your ID"
                   value={id}
                   id="dedoKey"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setID(e.target.value)
-                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setID(e.target.value)}
                 />
               </Form.Group>
             </Col>
@@ -48,16 +39,7 @@ function Deathcounter() {
               aria-describedby="basic-addon2"
               className="link"
             />
-            <Button
-              variant="outline-secondary"
-              id="button-addon2"
-              disabled={!id}
-              onClick={() => {
-                navigator.clipboard.writeText(modLink);
-              }}
-            >
-              Copy
-            </Button>
+            <DedoCopy textToCopy={modLink} />
           </InputGroup>
           <h3 className="blackOutline">Generated Overlay Link</h3>
           <InputGroup className="mb-3">
@@ -68,28 +50,16 @@ function Deathcounter() {
               aria-describedby="basic-addon2"
               className="link"
             />
-            <Button
-              variant="outline-secondary"
-              id="button-addon2"
-              disabled={!id}
-              onClick={() => {
-                navigator.clipboard.writeText(overlayLink);
-              }}
-            >
-              Copy
-            </Button>
+            <DedoCopy textToCopy={overlayLink} />
           </InputGroup>
           <Container id="help">
             <h4 className="blackOutline">What to do with the overlay link:</h4>
             <ListGroup numbered>
               <ListGroup.Item>Add a Browser Source in OBS</ListGroup.Item>
+              <ListGroup.Item>Copy and paste the link in the URL field</ListGroup.Item>
               <ListGroup.Item>
-                Copy and paste the link in the URL field
-              </ListGroup.Item>
-              <ListGroup.Item>
-                Set width to 800px and heigth to 800px an resize it the way you
-                want. Most of the time in souls games the top right corner is
-                the way to go.
+                Set width to 800px and heigth to 800px an resize it the way you want. Most of the
+                time in souls games the top right corner is the way to go.
               </ListGroup.Item>
             </ListGroup>
           </Container>
@@ -99,17 +69,16 @@ function Deathcounter() {
             <div className="faq">
               <h4 className="blackOutline">How does it work?</h4>
               <p className="">
-                There is a mod- and overlaylink. The deaths and percentages has
-                to be observed and noted manually by a person with the modlink.
-                Then the deaths are displayed in the overlay.
+                There is a mod- and overlaylink. The deaths and percentages has to be observed and
+                noted manually by a person with the modlink. Then the deaths are displayed in the
+                overlay.
               </p>
             </div>
             <div className="faq">
               <h4 className="blackOutline">How can i reset it?</h4>
               <p className="">
-                If you want to reset it/play a new game. Then you can simply
-                change the ID to a new one. Your old progress is saved in your
-                browser data.
+                If you want to reset it/play a new game. Then you can simply change the ID to a new
+                one. Your old progress is saved in your browser data.
               </p>
             </div>
             <div className="faq">
@@ -124,10 +93,7 @@ function Deathcounter() {
                 {". "}
                 {
                   <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
-                    <img
-                      height="36"
-                      src="https://storage.ko-fi.com/cdn/kofi1.png?v=3"
-                    />
+                    <img height="36" src="https://storage.ko-fi.com/cdn/kofi1.png?v=3" />
                   </a>
                 }
               </p>
