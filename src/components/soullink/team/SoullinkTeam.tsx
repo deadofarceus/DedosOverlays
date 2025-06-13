@@ -161,6 +161,7 @@ function SoullinkTeam() {
   const addNewRoute = (route: Route) => {
     const newSL = { ...soullink };
     newSL.routes.push(route);
+    newSL.routes.sort((a: Route, b: Route) => a.name.localeCompare(b.name));
     sendData(newSL);
   };
 
@@ -179,6 +180,7 @@ function SoullinkTeam() {
     });
     const rIndex = newSL.routes.indexOf(route);
     newSL.routes.splice(rIndex, 1);
+    newSL.routes.sort((a: Route, b: Route) => a.name.localeCompare(b.name));
     sendData(newSL);
   };
 
