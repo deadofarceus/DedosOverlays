@@ -34,6 +34,14 @@ function NewRouteInput({ onAddRoute, trainers }: NewRouteInputProps) {
       <Button variant="success" onClick={handleAddRoute}>
         ADD NEW ROUTE
       </Button>
+      <div className="soullinkInstructions">
+        <h3>Special Instructions</h3>
+        <p>
+          1. Click on the player-names and change them, press Enter and they are saved
+          <br />
+          2. Click on the pokemon-names and change them, press Enter and they are saved
+        </p>
+      </div>
     </Container>
   );
 }

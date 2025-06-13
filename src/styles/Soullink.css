@@ -254,3 +254,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.soullinkInstructions {
+  text-align: center;
+}
+
+.soullinkInstructions p {
+  font-size: 24px;
+}
