@@ -16,6 +16,21 @@ export const OVERLAYS: Overlay[] = [
     url: "EloOverlay",
   },
   {
+    game: "Elden Ring/other Soulslike",
+    imageURL: "/EldenRing.png",
+    hoverImageURL: "/EldenRingHover.png",
+    description:
+      "Shows total and boss death with an nice little progress graph! Its not an overlay for the game (not a mod) but for your stream/when working with OBS. ",
+    url: "Deathcounter",
+  },
+  {
+    game: "Pokémon",
+    imageURL: "/Pokemon.png",
+    hoverImageURL: "/PokemonHover.png",
+    description: "Track your SoulLink (Nuzlock) journey an display up to two Teams of 6 Pokémon",
+    url: "Pokemon/Soullink/team/tutorial",
+  },
+  {
     game: "Mapcover for League of Legends",
     imageURL: "/Mapcover.png",
     hoverImageURL: "/MapcoverHover.png",
@@ -30,13 +45,5 @@ export const OVERLAYS: Overlay[] = [
     description:
       "Your custom screensaver for OBS. You can choose your own custom image or gif and watch it hit the edges of your screen. ",
     url: "ScreensaverTutorial",
-  },
-  {
-    game: "Elden Ring/other Soulslike",
-    imageURL: "/EldenRing.png",
-    hoverImageURL: "/EldenRingHover.png",
-    description:
-      "Shows total and boss death with an nice little progress graph! Its not an overlay for the game (not a mod) but for your stream/when working with OBS. ",
-    url: "Deathcounter",
   },
 ];

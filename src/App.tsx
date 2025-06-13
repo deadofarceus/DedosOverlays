@@ -48,9 +48,9 @@ function App() {
             <Route index element={<Soullink />} />
             <Route path="login" element={<SoullinkLogin />} />
             <Route path="overlay" element={<SoullinkOverlay />} />
-            <Route path="team">
+            <Route path="Team">
               <Route index element={<SoullinkTeam />} />
-              <Route path="tutorial" element={<SoullinkTutorial />} />
+              <Route path="Tutorial" element={<SoullinkTutorial />} />
             </Route>
           </Route>
         </Route>
