@@ -52,7 +52,7 @@ function SoullinkTeamOverlay() {
     <Container className="soullinkTeamOverlayContainer">
       <Col className="teamCol">
         {trainers.map((t) => (
-          <Team key={t.name} team={t.team} routes={routes} />
+          <Team key={t.name} team={t.team} routes={routes} flexRow={true} />
         ))}
       </Col>
     </Container>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import SoullinkTeamOverlay from "./SoullinkTeamOverlay";
 import { ModEvent } from "../../../types/BackendEvents";
 import SoullinkTeamHeader from "./SoullinkTeamHeader";
+import TeamPreview from "./TeamPreview";
 
 let ws: BroadcastWebsocket<Soullink>;
 
@@ -92,6 +93,7 @@ function SoullinkTeam() {
       return;
     }
     const event = new ModEvent(id, "soullink", soullinkEvent);
+    // console.log(soullinkEvent);
 
     ws.sendEvent(event);
   };
@@ -162,6 +164,24 @@ function SoullinkTeam() {
     sendData(newSL);
   };
 
+  const deleteRoute = (route: Route) => {
+    const newSL = { ...soullink };
+    newSL.routes.forEach((r) => {
+      if (r.name === route.name) {
+        for (let i = 0; i < newSL.trainers.length; i++) {
+          const trainer = newSL.trainers[i];
+          if (r.inTeam) {
+            trainer.team = trainer.team.filter((pkm) => pkm.routeName !== r.name);
+          }
+        }
+        r.inTeam = false;
+      }
+    });
+    const rIndex = newSL.routes.indexOf(route);
+    newSL.routes.splice(rIndex, 1);
+    sendData(newSL);
+  };
+
   return (
     <Container className="soulLinkContainer">
       <SoullinkTeamHeader
@@ -169,6 +189,7 @@ function SoullinkTeam() {
         onTrainerNameChange={handleTrainerNameChange}
       />
       <NewRouteInput onAddRoute={addNewRoute} trainers={trainers} />
+      <TeamPreview trainers={trainers} routes={routes} />
       <div className="routeDiv">
         {routes.map((r: Route) => (
           <RouteRow
@@ -178,6 +199,7 @@ function SoullinkTeam() {
             onPokemonChange={handlePokemonChange}
             onToggleDisabled={toggleRouteDisabled}
             onToggleTeam={toggleRouteInTeam}
+            onDeleteRoute={deleteRoute}
           />
         ))}
       </div>

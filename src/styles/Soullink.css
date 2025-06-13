@@ -57,11 +57,14 @@
   padding: 10px;
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 10px;
-  width: 940px;
+  width: 1000px;
 }
 
 .link-dead {
   filter: grayscale(100%);
+}
+
+.link-dead-web {
   background-color: #5846ff3e;
 }
 
@@ -106,7 +109,7 @@
 }
 
 .soullink-desc-heaader {
-  width: 940px;
+  width: 1000px;
   justify-content: left;
   position: fixed;
   z-index: 1030;
@@ -184,8 +187,21 @@
   filter: drop-shadow(3px 3px 2px #222);
 }
 
+.teamOverlayPkmnImg-Preview {
+  width: 100px;
+  position: relative;
+  filter: drop-shadow(3px 3px 2px #222);
+}
+
 .pkmnBallImg {
   width: 200px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.pkmnBallImg-Preview {
+  width: 100px;
   position: absolute;
   left: 0;
   top: 0;
@@ -198,7 +214,42 @@
   padding: 0;
 }
 
+.soullinkImgDiv-Preview {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  padding: 0;
+}
+
 .teamRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.teamCol-Preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100px;
+}
+
+.deleteRouteButton {
+  width: 40px;
+  font-size: 30px;
+  font-family: monospace;
+  font-weight: bold;
+  text-align: center;
+}
+
+.teampreviewCon {
+  position: fixed;
+  width: 260px;
+  height: 700px;
+  right: 50px;
+  top: 80px;
+  /* background-color: #008b8b; */
+  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

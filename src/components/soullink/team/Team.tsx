@@ -1,17 +1,17 @@
-import { Row } from "react-bootstrap";
 import { Pokemon, Route } from "../../../types/Pokemon";
 
 interface TeamProps {
   team: Pokemon[];
   routes: Route[];
+  flexRow: boolean;
 }
 
-function Team({ team, routes }: TeamProps) {
+function Team({ team, routes, flexRow }: TeamProps) {
   const isDisabled = (pokemon: Pokemon) =>
     routes.find((r) => r.name === pokemon.routeName)?.disabled ?? false;
 
   return (
-    <Row className="w-100 teamRow">
+    <div className={`w-100 ${flexRow ? "teamRow" : "teamCol"}`}>
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <div
           key={index}
@@ -21,7 +21,7 @@ function Team({ team, routes }: TeamProps) {
           {team[index] && <img src={team[index].image} alt="" className="teamOverlayPkmnImg" />}
         </div>
       ))}
-    </Row>
+    </div>
   );
 }
 

@@ -8,6 +8,7 @@ interface RouteRowProps {
   onToggleTeam: (routeName: string) => void;
   onToggleDisabled: (routeName: string) => void;
   onPokemonChange: (index: number, newPokemon: Pokemon) => void;
+  onDeleteRoute: (route: Route) => void;
 }
 
 function RouteRow({
@@ -16,12 +17,13 @@ function RouteRow({
   onToggleTeam,
   onToggleDisabled,
   onPokemonChange,
+  onDeleteRoute,
 }: RouteRowProps) {
   const isInTeam = route.inTeam;
   const isDisabled = route.disabled;
   let containerClassName = "route-row-container";
   if (isDisabled) {
-    containerClassName += " link-dead";
+    containerClassName += " link-dead link-dead-web";
   } else if (isInTeam) {
     containerClassName += " link-inTeam";
   }
@@ -58,6 +60,9 @@ function RouteRow({
             />
           ))}
         </Row>
+        <Button variant="danger" className="deleteRouteButton" onClick={() => onDeleteRoute(route)}>
+          X
+        </Button>
       </Row>
     </Container>
   );
