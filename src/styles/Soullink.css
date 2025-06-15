@@ -171,6 +171,8 @@
 .soullinkTeamOverlayContainer {
   min-width: 1280px;
   min-height: 720px;
+  padding: 0;
+  margin: 0;
 }
 
 .teamCol {
