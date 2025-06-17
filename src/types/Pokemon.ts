@@ -13,6 +13,7 @@ export interface Soullink {
   id: string;
   routes: Route[];
   trainers: Trainer[];
+  settings: Settings;
 }
 
 export class Route {
@@ -58,4 +59,10 @@ export class Pokemon {
     this.trainerName = trainerName;
     this.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
   }
+}
+
+export interface Settings {
+  imgType: "png" | "gif";
+  showPokeballs: boolean;
+  showNicknames: boolean;
 }

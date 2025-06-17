@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Pokemon, Route, Soullink } from "../../../types/Pokemon";
+import { Pokemon, Route, Settings, Soullink } from "../../../types/Pokemon";
 import RouteRow from "./RouteRow";
 import NewRouteInput from "./NewRouteInput";
 import { isOBSBrowser, useQuery } from "../../../types/UsefulFunctions";
@@ -40,6 +40,11 @@ function SoullinkTeam() {
         team: [],
       },
     ],
+    settings: {
+      imgType: "png",
+      showPokeballs: true,
+      showNicknames: false,
+    },
   });
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const routes = soullink.routes;
@@ -78,6 +83,13 @@ function SoullinkTeam() {
       const res = await fetch(`https://${GLOBALADDRESS}/pokemon/soullink/${id}`);
       if (res.ok) {
         const data = await res.json();
+        if (!data.data.settings) {
+          data.data.settings = {
+            imgType: "png",
+            showPokeballs: true,
+            showNicknames: false,
+          };
+        }
         setSoullink(data.data);
       } else {
         console.log(res.statusText);
@@ -94,7 +106,6 @@ function SoullinkTeam() {
     }
     const event = new ModEvent(id, "soullink", soullinkEvent);
     console.log(soullinkEvent);
-
     ws.sendEvent(event);
   };
 
@@ -193,14 +204,26 @@ function SoullinkTeam() {
     sendData(newSL);
   };
 
+  const changeSettings = (settings: Settings) => {
+    const newSL = { ...soullink };
+    newSL.settings = settings;
+    sendData(newSL);
+  };
+
   return (
     <Container className="soulLinkContainer">
       <SoullinkTeamHeader
         initialTrainerNames={soullink.trainers.map((t) => t.name)}
         onTrainerNameChange={handleTrainerNameChange}
       />
-      <NewRouteInput onAddRoute={addNewRoute} onReset={fullReset} trainers={trainers} />
-      <TeamPreview trainers={trainers} routes={routes} />
+      <NewRouteInput
+        onAddRoute={addNewRoute}
+        onReset={fullReset}
+        setSettings={changeSettings}
+        trainers={trainers}
+        settings={soullink.settings}
+      />
+      <TeamPreview soullink={soullink} />
       <div className="routeDiv">
         {routes.map((r: Route) => (
           <RouteRow

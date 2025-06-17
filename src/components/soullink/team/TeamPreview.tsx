@@ -1,17 +1,16 @@
 import { Container } from "react-bootstrap";
-import { Route, Trainer } from "../../../types/Pokemon";
+import { Soullink } from "../../../types/Pokemon";
 import TeamP from "./TeamP";
 
 interface TeamPreviewProps {
-  trainers: Trainer[];
-  routes: Route[];
+  soullink: Soullink;
 }
 
-function TeamPreview({ trainers, routes }: TeamPreviewProps) {
+function TeamPreview({ soullink }: TeamPreviewProps) {
   return (
     <Container className="teampreviewCon">
-      {trainers.map((t) => (
-        <TeamP key={t.name} team={t.team} routes={routes} />
+      {soullink.trainers.map((t) => (
+        <TeamP key={t.name} team={t.team} routes={soullink.routes} settings={soullink.settings} />
       ))}
     </Container>
   );

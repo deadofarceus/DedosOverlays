@@ -142,7 +142,7 @@
   font-size: 30px;
   position: fixed;
   left: 40px;
-  top: 200px;
+  top: 100px;
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -184,15 +184,30 @@
 }
 
 .teamOverlayPkmnImg {
-  width: 200px;
   position: relative;
   filter: drop-shadow(3px 3px 2px #222);
 }
 
+.pngPkmnImg {
+  width: 200px;
+}
+
+.gifPkmnImg {
+  min-width: 120px;
+  max-width: 200px;
+}
+
 .teamOverlayPkmnImg-Preview {
-  width: 100px;
   position: relative;
   filter: drop-shadow(3px 3px 2px #222);
+}
+
+.pngPkmnImg-Preview {
+  width: 100px;
+}
+
+.gifPkmnImg-Preview {
+  max-width: 100px;
 }
 
 .pkmnBallImg {
@@ -214,6 +229,9 @@
   height: 200px;
   position: relative;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .soullinkImgDiv-Preview {
@@ -221,6 +239,9 @@
   height: 100px;
   position: relative;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .teamRow {
@@ -268,4 +289,8 @@
 .nuzlockResetButton {
   margin: 20px;
   font-size: 30px;
+}
+
+.SLsettingsCOl .dedo-switch-container {
+  width: 100%;
 }

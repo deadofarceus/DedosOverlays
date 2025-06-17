@@ -26,6 +26,11 @@ function SoullinkTeamOverlay() {
         team: [],
       },
     ],
+    settings: {
+      imgType: "png",
+      showPokeballs: true,
+      showNicknames: false,
+    },
   });
   const routes = soullink.routes;
   const trainers = soullink.trainers;
@@ -52,7 +57,7 @@ function SoullinkTeamOverlay() {
     <Container className="soullinkTeamOverlayContainer">
       <Col className="teamCol">
         {trainers.map((t) => (
-          <Team key={t.name} team={t.team} routes={routes} flexRow={true} />
+          <Team key={t.name} team={t.team} routes={routes} settings={soullink.settings} />
         ))}
       </Col>
     </Container>

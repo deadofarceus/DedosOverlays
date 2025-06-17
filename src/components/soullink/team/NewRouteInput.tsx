@@ -1,14 +1,23 @@
 import { Button, Container } from "react-bootstrap";
-import { Route, Trainer } from "../../../types/Pokemon";
+import { Route, Settings, Trainer } from "../../../types/Pokemon";
 import { useState } from "react";
+import SettingsControl from "./SettingsControl";
 
 interface NewRouteInputProps {
   onAddRoute: (route: Route) => void;
   onReset: () => void;
+  setSettings: (setings: Settings) => void;
   trainers: Trainer[];
+  settings: Settings;
 }
 
-function NewRouteInput({ onAddRoute, onReset, trainers }: NewRouteInputProps) {
+function NewRouteInput({
+  onAddRoute,
+  onReset,
+  setSettings,
+  trainers,
+  settings,
+}: NewRouteInputProps) {
   const [routeName, setRouteName] = useState("");
 
   const handleAddRoute = () => {
@@ -52,6 +61,7 @@ function NewRouteInput({ onAddRoute, onReset, trainers }: NewRouteInputProps) {
           2. Click on the pokemon-names and change them, press Enter and they are saved
         </p>
       </div>
+      <SettingsControl changeSettings={setSettings} settings={settings} />
     </Container>
   );
 }
