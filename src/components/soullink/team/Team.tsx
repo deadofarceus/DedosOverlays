@@ -18,6 +18,14 @@ function Team({ team, routes, settings }: TeamProps) {
     }
   };
 
+  const nickName = (pokemon: Pokemon) => {
+    if (pokemon.nickName === "-----------------") {
+      return pokemon.name;
+    } else {
+      return pokemon.nickName;
+    }
+  };
+
   return (
     <div className={`w-100 teamRow`}>
       {[0, 1, 2, 3, 4, 5].map((index) => (
@@ -36,6 +44,9 @@ function Team({ team, routes, settings }: TeamProps) {
                 "teamOverlayPkmnImg " + (settings.imgType === "png" ? "pngPkmnImg" : "gifPkmnImg")
               }
             />
+          )}
+          {settings.showNicknames && team[index] && (
+            <div className="pkmn-Nickname blackOutline">{nickName(team[index])}</div>
           )}
         </div>
       ))}

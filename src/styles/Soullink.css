@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 .SoullinkContainer {
   margin-top: 60px;
   min-width: 100% !important;
@@ -293,4 +295,28 @@
 
 .SLsettingsCOl .dedo-switch-container {
   width: 100%;
+}
+
+.pkmn-Nickname {
+  font-size: 20px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  color: azure;
+  text-align: center;
+  filter: drop-shadow(3px 3px 2px #222);
+  position: absolute;
+  bottom: 5px;
+}
+
+.pkmn-Nickname-preview {
+  font-size: 15px;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  color: azure;
+  text-align: center;
+  filter: drop-shadow(3px 3px 2px #222);
+  position: absolute;
+  bottom: 5px;
 }
