@@ -25,7 +25,9 @@ export class Route {
     this.name = name;
     this.pokemon = [];
     trainer.forEach((t) => {
-      this.pokemon.push(new Pokemon("1", "Bulbasaur", "Bisasam", "Bulbasaur", name, t.name));
+      this.pokemon.push(
+        new Pokemon("1", "Bulbasaur", "Bisasam", "-----------------", name, t.name)
+      );
     });
   }
 }

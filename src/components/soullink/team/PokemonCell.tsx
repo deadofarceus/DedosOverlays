@@ -25,13 +25,12 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
       selected.id,
       selected.name,
       selected.nameDE,
-      selected.name.charAt(0).toUpperCase() + selected.name.slice(1),
+      pokemon.nickName,
       pokemon.routeName,
       pokemon.trainerName
     );
     setSearchTerm("");
     setShowSuggestions(false);
-    setNickname(selected.name.charAt(0).toUpperCase() + selected.name.slice(1));
     onChange(index, newPokemon);
   };
 
@@ -47,6 +46,8 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
     onChange(index, newPokemon);
   };
 
+  console.log(nickname);
+
   return (
     <div className="pokemon-cell">
       <div className="text-center">
@@ -54,7 +55,11 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
         <input
           type="text"
           className="pokemon-name blackOutline"
-          value={nickname}
+          value={
+            nickname === "-----------------"
+              ? pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+              : nickname
+          }
           onChange={(e) => setNickname(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
