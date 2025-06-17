@@ -4,10 +4,11 @@ import { useState } from "react";
 
 interface NewRouteInputProps {
   onAddRoute: (route: Route) => void;
+  onReset: () => void;
   trainers: Trainer[];
 }
 
-function NewRouteInput({ onAddRoute, trainers }: NewRouteInputProps) {
+function NewRouteInput({ onAddRoute, onReset, trainers }: NewRouteInputProps) {
   const [routeName, setRouteName] = useState("");
 
   const handleAddRoute = () => {
@@ -15,6 +16,12 @@ function NewRouteInput({ onAddRoute, trainers }: NewRouteInputProps) {
     const newRoute = new Route(routeName, trainers);
     onAddRoute(newRoute);
     setRouteName("");
+  };
+
+  const handleReset = () => {
+    if (confirm("Are you sure you want a full reset of the nuzlock?")) {
+      onReset();
+    }
   };
 
   return (
@@ -33,6 +40,9 @@ function NewRouteInput({ onAddRoute, trainers }: NewRouteInputProps) {
       />
       <Button variant="success" onClick={handleAddRoute}>
         ADD NEW ROUTE
+      </Button>
+      <Button variant="danger" onClick={handleReset} className="nuzlockResetButton">
+        FULL RESET
       </Button>
       <div className="soullinkInstructions">
         <h3>Special Instructions</h3>

@@ -184,13 +184,22 @@ function SoullinkTeam() {
     sendData(newSL);
   };
 
+  const fullReset = () => {
+    const newSL = { ...soullink };
+    newSL.routes = [];
+    newSL.trainers.forEach((trainer) => {
+      trainer.team = [];
+    });
+    sendData(newSL);
+  };
+
   return (
     <Container className="soulLinkContainer">
       <SoullinkTeamHeader
         initialTrainerNames={soullink.trainers.map((t) => t.name)}
         onTrainerNameChange={handleTrainerNameChange}
       />
-      <NewRouteInput onAddRoute={addNewRoute} trainers={trainers} />
+      <NewRouteInput onAddRoute={addNewRoute} onReset={fullReset} trainers={trainers} />
       <TeamPreview trainers={trainers} routes={routes} />
       <div className="routeDiv">
         {routes.map((r: Route) => (
