@@ -31,6 +31,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
     );
     setSearchTerm("");
     setShowSuggestions(false);
+    setNickname(selected.name.charAt(0).toUpperCase() + selected.name.slice(1));
     onChange(index, newPokemon);
   };
 
