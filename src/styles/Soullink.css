@@ -192,11 +192,14 @@
 
 .pngPkmnImg {
   width: 200px;
+  height: 200px;
 }
 
 .gifPkmnImg {
   min-width: 140px;
   max-width: 200px;
+  min-height: 140px;
+  max-height: 200px;
 }
 
 .teamOverlayPkmnImg-Preview {
@@ -206,10 +209,12 @@
 
 .pngPkmnImg-Preview {
   width: 100px;
+  height: 100px;
 }
 
 .gifPkmnImg-Preview {
   max-width: 100px;
+  max-height: 100px;
 }
 
 .pkmnBallImg {
