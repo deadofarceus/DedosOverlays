@@ -53,9 +53,9 @@
 }
 
 .route-row-container {
-  border: #05675d 2px solid;
+  border: #05675d 4px solid;
   border-radius: 30px;
-  background-color: #fefcbf6f;
+  background-color: #fefcbfee;
   padding: 10px;
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 10px;
@@ -63,15 +63,15 @@
 }
 
 .link-dead {
-  filter: grayscale(100%);
+  filter: grayscale(100%) !important;
 }
 
 .link-dead-web {
-  background-color: #5846ff3e;
+  background-color: #5846ffee !important;
 }
 
 .link-inTeam {
-  background-color: rgba(113, 255, 57, 0.562);
+  background-color: #71ff39ee !important;
 }
 
 .routeInfoCol {
@@ -92,11 +92,80 @@
 }
 
 .routeDiv {
-  margin-top: 50px;
+  margin-top: 100px;
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.miniRoute {
+  background-color: #def08c;
+  width: 120px;
+  height: 240px;
+
+  border: #05675d 2px solid;
+  border-radius: 30px;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  color: azure;
+  margin: 5px;
 }
 
 .route-name {
   text-align: center;
+  filter: drop-shadow(3px 3px 2px #222);
+}
+
+.mini-route-name {
+  text-align: center;
+  filter: drop-shadow(1px 1px 2px #222);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 96px;
+  padding: 3px;
+}
+
+.mini-pkm-img-div {
+  border: #000000 solid 2px;
+  border-radius: 40%;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstTrainerPkmn {
+  background-color: #00e1ff;
+  margin-bottom: 5px;
+}
+
+.secondTrainerPkmn {
+  background-color: #ffa600;
+}
+
+.mini-pkm-img {
+  filter: drop-shadow(3px 3px 2px #222);
+}
+
+.RouteRowOverlayCon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RouteRowOverlayCon2xdd {
   filter: drop-shadow(3px 3px 2px #222);
 }
 
@@ -111,8 +180,8 @@
 }
 
 .soullink-desc-heaader {
-  width: 1000px;
-  justify-content: left;
+  width: 600px;
+  justify-content: space-around;
   position: fixed;
   z-index: 1030;
   border: #008b8b solid 2px;
@@ -196,10 +265,9 @@
 }
 
 .gifPkmnImg {
-  min-width: 140px;
-  max-width: 200px;
-  min-height: 140px;
-  max-height: 200px;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
 }
 
 .teamOverlayPkmnImg-Preview {
@@ -213,8 +281,9 @@
 }
 
 .gifPkmnImg-Preview {
-  max-width: 100px;
-  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .pkmnBallImg {
@@ -324,4 +393,27 @@
   filter: drop-shadow(3px 3px 2px #222);
   position: absolute;
   bottom: 5px;
+}
+
+.route-Manager {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100vw;
+  height: 100px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(3px 3px 2px #222);
+}
+
+.route-Manager input {
+  padding: 5px;
+  border-radius: 4px;
 }

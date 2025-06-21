@@ -26,7 +26,6 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
 
   return (
     <Row className="centerR soullink-desc-heaader">
-      <h2 style={{ marginLeft: "34px" }}>Route</h2>
       <input
         type="text"
         value={trainerNames[0]}
@@ -36,8 +35,9 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
             onTrainerNameChange(0, trainerNames[0]);
           }
         }}
+        className="blackOutline"
         style={{
-          marginLeft: "43px",
+          color: "#00e1ff",
         }}
       />
       <input
@@ -49,8 +49,9 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
             onTrainerNameChange(1, trainerNames[1]);
           }
         }}
+        className="blackOutline"
         style={{
-          marginLeft: "146px",
+          color: "#ffa600",
         }}
       />
     </Row>

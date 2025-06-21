@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Pokemon, Route, Settings, Soullink } from "../../../types/Pokemon";
-import RouteRow from "./RouteRow";
-import NewRouteInput from "./NewRouteInput";
 import { isOBSBrowser, useQuery } from "../../../types/UsefulFunctions";
 import { BroadcastWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +8,9 @@ import SoullinkTeamOverlay from "./SoullinkTeamOverlay";
 import { ModEvent } from "../../../types/BackendEvents";
 import SoullinkTeamHeader from "./SoullinkTeamHeader";
 import TeamPreview from "./TeamPreview";
+import MiniRoute from "./MiniRoute";
+import SettingsMenu from "./SettingsMenu";
+import RouteManager from "./RouteManager";
 
 let ws: BroadcastWebsocket<Soullink>;
 
@@ -47,7 +48,7 @@ function SoullinkTeam() {
     },
   });
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
-  const routes = soullink.routes;
+  const [filterWord, setFilterWord] = useState<string>("");
   const trainers = soullink.trainers;
 
   useEffect(() => {
@@ -152,7 +153,8 @@ function SoullinkTeam() {
             trainer.team = trainer.team.filter((pkm) => pkm.routeName !== route.name);
           } else {
             if (trainer.team.length >= 6) {
-              trainer.team.shift();
+              const shiftedRName = trainer.team.shift()!.routeName;
+              newSL.routes.find((r) => r.name === shiftedRName)!.inTeam = false;
             }
             trainer.team.push(route.pokemon[i]);
           }
@@ -171,6 +173,9 @@ function SoullinkTeam() {
 
   const addNewRoute = (route: Route) => {
     const newSL = { ...soullink };
+    if (newSL.routes.find((r) => r.name === route.name)) {
+      return;
+    }
     newSL.routes.push(route);
     newSL.routes.sort((a: Route, b: Route) => a.name.localeCompare(b.name));
     sendData(newSL);
@@ -210,23 +215,35 @@ function SoullinkTeam() {
     sendData(newSL);
   };
 
+  const routesFiltered = soullink.routes.filter(
+    (r) =>
+      filterWord === "" ||
+      r.name.toLowerCase().includes(filterWord) ||
+      r.pokemon.some(
+        (p) =>
+          p.name.toLowerCase().includes(filterWord) ||
+          p.nickName.toLowerCase().includes(filterWord) ||
+          p.nameDE.toLowerCase().includes(filterWord)
+      )
+  );
+
   return (
     <Container className="soulLinkContainer">
       <SoullinkTeamHeader
         initialTrainerNames={soullink.trainers.map((t) => t.name)}
         onTrainerNameChange={handleTrainerNameChange}
       />
-      <NewRouteInput
-        onAddRoute={addNewRoute}
+      <SettingsMenu
         onReset={fullReset}
         setSettings={changeSettings}
         trainers={trainers}
         settings={soullink.settings}
       />
+      <RouteManager onAddRoute={addNewRoute} setFilterWord={setFilterWord} trainers={trainers} />
       <TeamPreview soullink={soullink} />
       <div className="routeDiv">
-        {routes.map((r: Route) => (
-          <RouteRow
+        {routesFiltered.map((r: Route) => (
+          <MiniRoute
             key={r.name}
             route={r}
             allPokemons={allPokemons}

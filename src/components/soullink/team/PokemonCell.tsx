@@ -46,8 +46,6 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
     onChange(index, newPokemon);
   };
 
-  console.log(nickname);
-
   return (
     <div className="pokemon-cell">
       <div className="text-center">
