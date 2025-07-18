@@ -24,9 +24,7 @@ export class BraveryService {
   }
 
   loadChamps() {
-    fetch(
-      "https://ddragon.leagueoflegends.com/cdn/15.2.1/data/en_US/champion.json"
-    )
+    fetch("https://ddragon.leagueoflegends.com/cdn/15.14.1/data/en_US/champion.json")
       .then((res) => res.json())
       .then((data) => {
         this.champIconURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/`;
@@ -73,9 +71,7 @@ export class BraveryService {
 
       this.subBadgeUrls = data.data
         .filter((badge: any) => badge.set_id === "subscriber")
-        .flatMap((badge: any) =>
-          badge.versions.map((version: any) => version.image_url_2x)
-        );
+        .flatMap((badge: any) => badge.versions.map((version: any) => version.image_url_2x));
 
       console.log(`${this.subBadgeUrls.length} Subbadge-URLs gefunden.`);
       if (this.subBadgeUrls.length === 0) {
@@ -89,42 +85,27 @@ export class BraveryService {
   }
 
   getBadge(): string {
-    return this.subBadgeUrls[
-      Math.floor(Math.random() * this.subBadgeUrls.length)
-    ];
+    return this.subBadgeUrls[Math.floor(Math.random() * this.subBadgeUrls.length)];
   }
 
   async connectToChat(
     messageDispenser: (message: ChatMessage) => void,
     parties: (partys: number) => void
   ) {
-    const authProvider = new StaticAuthProvider(
-      this.clientID,
-      this.accessToken
-    );
+    const authProvider = new StaticAuthProvider(this.clientID, this.accessToken);
     const chatClient = new ChatClient({
       authProvider,
       channels: [this.broadcaster.name],
     });
     const apiClient = new ApiClient({ authProvider });
-    this.channelBadges = await apiClient.chat.getChannelBadges(
-      this.broadcaster.id
-    );
+    this.channelBadges = await apiClient.chat.getChannelBadges(this.broadcaster.id);
     this.globalBadges = await apiClient.chat.getGlobalBadges();
     chatClient.connect();
     console.log("Connected");
 
     chatClient.onMessage(
-      async (
-        _channel: string,
-        _user: string,
-        _text: string,
-        msg: ChatMessage
-      ) => {
-        if (
-          (msg.text === "!chatbravery" && msg.userInfo.isSubscriber) ||
-          !this.isSubNeeded
-        ) {
+      async (_channel: string, _user: string, _text: string, msg: ChatMessage) => {
+        if ((msg.text === "!chatbravery" && msg.userInfo.isSubscriber) || !this.isSubNeeded) {
           const existingChatter = this.chatters.find(
             (chatter) => chatter.name === msg.userInfo.displayName
           );
