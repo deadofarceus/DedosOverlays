@@ -40,6 +40,11 @@ function AbisZOverlay() {
     : account.championGroups[account.championGroups.length - 1].group;
   fertig = !currentGroup1;
 
+  let gamesPlayed = 0;
+  for (const group of account.championGroups) {
+    gamesPlayed += group.group.champions.reduce((acc, champ) => acc + champ.games, 0);
+  }
+
   return (
     <Container className={fertig ? "fertigAZ" : "AbisZContainer"}>
       <Row className="topROW">
@@ -50,7 +55,7 @@ function AbisZOverlay() {
         />
         <Col className="gamesPlayed">
           <h3>Games</h3>
-          <h1>{account.loses + account.wins}</h1>
+          <h1>{gamesPlayed}</h1>
         </Col>
         <EloD
           eloLP={account.leaguePoints}
@@ -79,8 +84,7 @@ function ChampGroupD({ champions }: LetterGroup) {
 
 function ChampD({ name, won, games }: ChampionAbisZ) {
   const champName = name === "Wukong" ? "MonkeyKing" : name;
-  const imgsrc =
-    name === "null" ? "../../null.png" : `${CHAMPIMG_URL}${champName}.png`;
+  const imgsrc = name === "null" ? "../../null.png" : `${CHAMPIMG_URL}${champName}.png`;
   return (
     <div
       className={"imgdivAZ"}
@@ -109,21 +113,15 @@ function ChampD({ name, won, games }: ChampionAbisZ) {
 
 function EloD({ eloLP, eloDivision, eloRank }: AccountElo) {
   let lpDisplay =
-    eloDivision === "MASTER" ||
-    eloDivision === "GRANDMASTER" ||
-    eloDivision === "CHALLENGER"
+    eloDivision === "MASTER" || eloDivision === "GRANDMASTER" || eloDivision === "CHALLENGER"
       ? eloLP + " LP"
       : eloRank + " " + eloLP + " LP";
-  lpDisplay =
-    !eloDivision || eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
+  lpDisplay = !eloDivision || eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
 
   return (
     <Row className="eloInfoAZ">
       <Col className="ELOAZ d-flex flex-column justify-content-center align-items-center">
-        <img
-          src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`}
-          className="eloimgAZ"
-        />
+        <img src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`} className="eloimgAZ" />
         <p className="eloAndLPAZ">{lpDisplay}</p>
       </Col>
     </Row>
