@@ -8,7 +8,13 @@ function Bottombar() {
   const pathname = location.pathname.toLowerCase();
   const query = useQuery();
   const obsQ = query.get("obs");
-  if (isOBSBrowser() || pathname.indexOf("stream") > -1 || obsQ === "true") {
+
+  if (
+    isOBSBrowser() ||
+    pathname.indexOf("stream") > -1 ||
+    location.pathname.indexOf("Gameshows") > -1 ||
+    obsQ === "true"
+  ) {
     return <></>;
   }
 
@@ -23,20 +29,17 @@ function Bottombar() {
       <Container className="centerR">
         <Row className="w-75">
           <Col className="footer-bottom">
-            Copyright &copy; {new Date().getFullYear()} Dedos Software. All
-            rights reserved <a href="/imprint"> Impressum</a>
+            Copyright &copy; {new Date().getFullYear()} Dedos Software. All rights reserved{" "}
+            <a href="/imprint"> Impressum</a>
             <br />
-            This website does not collect, store, or process any personal data.
-            No cookies are used.
+            This website does not collect, store, or process any personal data. No cookies are used.
             {isRiotGamesRelated && (
               <div>
                 <p>
-                  This Overlay is not endorsed by Riot Games and does not
-                  reflect the views or opinions of Riot Games or anyone
-                  officially involved in producing or managing League of
-                  Legends. League of Legends and Riot Games are trademarks or
-                  registered trademarks of Riot Games, Inc. League of Legends ©
-                  Riot Games, Inc.
+                  This Overlay is not endorsed by Riot Games and does not reflect the views or
+                  opinions of Riot Games or anyone officially involved in producing or managing
+                  League of Legends. League of Legends and Riot Games are trademarks or registered
+                  trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
                 </p>
               </div>
             )}
