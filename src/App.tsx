@@ -30,6 +30,9 @@ import SoullinkLogin from "./components/soullink/SoullinkLogin";
 import SoullinkOverlay from "./components/soullink/SoullinkOverlay";
 import SoullinkTeam from "./components/soullink/team/SoullinkTeam";
 import SoullinkTutorial from "./components/soullink/team/SoullinkTutorial";
+import AIcController from "./components/gameshows/kiKombiniert/AIcController";
+import AIcTeilnehmer from "./components/gameshows/kiKombiniert/AIcTeilnehmer";
+import AIcOverlay from "./components/gameshows/kiKombiniert/AIcOverlay";
 
 function App() {
   return (
@@ -43,6 +46,13 @@ function App() {
         <Route path="AdminControl" element={<AdminControl />} />
         <Route path="Screensaver" element={<GlobalScreensaver />} />
         <Route path="ScreensaverTutorial" element={<ScreensaverTutorial />} />
+        <Route path="Gameshows">
+          <Route path="AICombine">
+            <Route path="admin" element={<AIcController />} />
+            <Route path="teilnehmer" element={<AIcTeilnehmer />} />
+            <Route path="overlay" element={<AIcOverlay />} />
+          </Route>
+        </Route>
         <Route path="Pokemon">
           <Route path="Soullink">
             <Route index element={<Soullink />} />
