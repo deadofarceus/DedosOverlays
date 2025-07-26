@@ -1,0 +1,99 @@
+.AIcController {
+  padding: 0;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.AIcTeamControllerRow {
+  min-width: 400px;
+  max-width: 400px;
+  height: 400px;
+}
+
+.AIcTeamView {
+  color: azure;
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 24px;
+  text-align: center;
+  width: 280px;
+  height: 110px;
+  margin-top: 10px;
+  border: 2px solid #333;
+  background-color: #29153bc3;
+  border-radius: 10px;
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.AIcPointControll {
+  height: 110px;
+  width: 100px;
+  margin-top: 10px;
+  color: azure;
+  font-weight: bold;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+}
+
+.AIcPointbutton {
+  font-size: 22px;
+}
+
+.AIcCombButtons {
+  color: azure;
+  font-weight: bold;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  font-size: 25px;
+  width: 250px;
+  margin: 10px;
+}
+
+.AIcCombinationControll {
+  min-width: 980px;
+  height: 800px;
+}
+
+.AIcCombinationDiv {
+  position: relative;
+  margin-bottom: 100px;
+  filter: drop-shadow(3px 3px 5px #222222b6) drop-shadow(-3px 3px 5px #222222b6)
+    drop-shadow(-3px -3px 5px #222222b6) drop-shadow(3px -3px 5px #222222b6);
+}
+
+.AIcCombinationImage {
+  border: #c20114c4 15px solid;
+  border-radius: 60px;
+  background-color: #0c120cca;
+  width: 300px;
+  height: 300px;
+  position: absolute;
+}
+
+.AIcCombinedImage {
+  border: #c20114c4 15px solid;
+  border-radius: 60px;
+  background-color: #0c120cca;
+  width: 500px;
+  height: 500px;
+}
+
+.ACILEFT {
+  top: 262px;
+  left: -210px;
+}
+
+.ACIRIGHT {
+  top: 262px;
+  right: -210px;
+}
+
+.AIcHidden {
+  filter: grayscale(100%);
+}
+
+.AIcBuzzerQueue {
+  width: 300px;
+  height: 800px;
+  margin: 10px;
+}
