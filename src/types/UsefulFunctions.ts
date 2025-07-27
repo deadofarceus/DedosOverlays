@@ -12,7 +12,7 @@ export function buzzer(id: string, name: string) {
     method: "POST",
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => console.log(data)); // TODO buzzer sound?
 }
 
 export function isOBSBrowser(): boolean {

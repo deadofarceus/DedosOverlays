@@ -4,6 +4,7 @@ import { Game, Team } from "./oldOrUnused/FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
 import { PCEvent } from "./oldOrUnused/PCTurnierTypes";
 import { PokemonEvent } from "./Pokemon";
+import { AICombGameState } from "./gameshows/AICombine";
 
 export const GLOBALADDRESS = "cacedray.ddns.net:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
@@ -17,10 +18,7 @@ export abstract class BaseWebSocket<T> {
   //   pingInterval!: NodeJS.Timeout;
   wsAddress: string;
 
-  constructor(
-    callback: React.Dispatch<React.SetStateAction<T>>,
-    wsAddress: string
-  ) {
+  constructor(callback: React.Dispatch<React.SetStateAction<T>>, wsAddress: string) {
     this.callback = callback;
     this.wsAddress = wsAddress;
     this.ws = new WebSocket(this.wsAddress);
@@ -117,6 +115,42 @@ export class BroadcastWebsocket<T> extends BaseWebSocket<T> {
   }
 }
 
+export class AICombineWebsocket extends BaseWebSocket<AICombGameState> {
+  id: string;
+  clientID: string = "";
+  addBuzzer: (buzzer: string) => void;
+
+  constructor(
+    id: string,
+    callback: React.Dispatch<React.SetStateAction<AICombGameState>>,
+    addBuzzer: (buzzer: string) => void
+  ) {
+    super(callback, `${GLOBALWSADRESS}?id=${id}`);
+    this.id = id;
+    this.addBuzzer = addBuzzer;
+  }
+
+  sendData(data: AICombGameState) {
+    this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", data));
+  }
+
+  handleMessage(event: MessageEvent): void {
+    const message = event.data;
+    if (this.checkUtilityEvent(message)) {
+      return;
+    }
+    const data = JSON.parse(message);
+
+    if (data.type === "BUZZER") {
+      this.addBuzzer(data.data);
+    } else if (data.type === "reachAllWithSameID") {
+      this.callback(data.data);
+    }
+  }
+
+  handleClose = () => {};
+}
+
 export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
   id: string;
   clientID: string = "";
@@ -191,9 +225,7 @@ export class EloWebsocket extends BaseWebSocket<Account> {
     const account = data.data.accounts[0] as Account;
     // log with current time in hh:mm:ss format
 
-    const entry = account.leagueEntrys.find(
-      (entry) => entry.queueId === this.queueId
-    )!;
+    const entry = account.leagueEntrys.find((entry) => entry.queueId === this.queueId)!;
 
     entry.lastMatches = Array.from(
       new Set(entry.lastMatches!.map((obj: Match) => JSON.stringify(obj)))
@@ -226,11 +258,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
   id: string;
   mod: boolean;
 
-  constructor(
-    id: string,
-    callback: React.Dispatch<React.SetStateAction<Player>>,
-    mod: boolean
-  ) {
+  constructor(id: string, callback: React.Dispatch<React.SetStateAction<Player>>, mod: boolean) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
     this.callback = callback;
@@ -248,10 +276,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
 
     const player = data.data.player as Player;
 
-    localStorage.setItem(
-      this.id + "EldenRingDeathcounter",
-      JSON.stringify(player)
-    );
+    localStorage.setItem(this.id + "EldenRingDeathcounter", JSON.stringify(player));
 
     if (!this.mod) {
       this.callback(player);
@@ -259,13 +284,7 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
   };
 
   sendData(player: Player): void {
-    this.sendEvent(
-      new ModEvent(
-        this.id,
-        "reachAllWithSameID",
-        new DeathEvent(this.id, player)
-      )
-    );
+    this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", new DeathEvent(this.id, player)));
   }
 }
 
@@ -354,10 +373,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
 export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
   id: string;
 
-  constructor(
-    id: string,
-    callback: React.Dispatch<React.SetStateAction<AbisZAccount>>
-  ) {
+  constructor(id: string, callback: React.Dispatch<React.SetStateAction<AbisZAccount>>) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
   }
@@ -378,10 +394,7 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
 export class PCTurnierWebsocket extends BaseWebSocket<PCEvent> {
   id: string;
 
-  constructor(
-    id: string,
-    callback: React.Dispatch<React.SetStateAction<PCEvent>>
-  ) {
+  constructor(id: string, callback: React.Dispatch<React.SetStateAction<PCEvent>>) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
   }

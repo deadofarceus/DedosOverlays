@@ -93,7 +93,28 @@
 }
 
 .AIcBuzzerQueue {
-  width: 300px;
-  height: 800px;
+  border: #0e0b10ca 5px solid;
+  border-radius: 10px;
+  min-width: 300px;
+  height: 500px;
   margin: 10px;
+  background-color: #170c28d3;
+  color: azure;
+  font-weight: bold;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+}
+
+.buzzerQTitle {
+  filter: drop-shadow(2px 2px 3px #222);
+}
+
+.AIcBuzzer {
+  border: #33524f 3px solid;
+  filter: drop-shadow(2px 2px 3px #222);
+  border-radius: 40px;
+  min-width: 200px;
+  height: 50px;
+  font-size: 30px;
+  margin: 4px;
 }

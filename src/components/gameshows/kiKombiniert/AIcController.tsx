@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { GameState } from "../../../types/gameshows/AICombine";
+import { AICombGameState } from "../../../types/gameshows/AICombine";
 import { useQuery } from "../../../types/UsefulFunctions";
-import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
+import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "../../../styles/gameshows/AICombine.css";
 import TeamView from "./TeamView";
 import AICombination from "./AICombination";
+import Buzzer from "../../util/Buzzer";
 
-let ws: BroadcastWebsocket<GameState>;
+let ws: AICombineWebsocket;
 
-const STARTGAMESTATE: GameState = {
+const STARTGAMESTATE: AICombGameState = {
   teams: [
     { member: ["test1", "test2"], points: 0 },
     { member: ["test3", "test4"], points: 0 },
@@ -31,17 +32,31 @@ const COMBINATIONS: { left: string; right: string; combined: string }[] = [];
 function AIcController() {
   document.body.className = "noOBS";
   const query = useQuery();
-  const [data, setData] = useState<GameState>(STARTGAMESTATE);
+  const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
+  const [buzzerQueue, setBuzzerQueue] = useState<string[]>([
+    "Player 1",
+    "Player 2",
+    "Player 3",
+    "Player 4",
+    "Player 5",
+    "Player 6",
+  ]);
+
+  const addBuzzer = (buzzer: string) => {
+    if (!buzzerQueue.includes(buzzer)) {
+      setBuzzerQueue([...buzzerQueue, buzzer]);
+    }
+  };
 
   useEffect(() => {
     const id = query.get("id");
 
     if (!ws && id) {
-      ws = new BroadcastWebsocket<GameState>(id, setData);
+      ws = new AICombineWebsocket(id, setData, addBuzzer);
     }
   }, [query]);
 
-  const sendData = (newData: GameState) => {
+  const sendData = (newData: AICombGameState) => {
     if (!ws) return;
     ws.sendData(newData);
   };
@@ -75,7 +90,7 @@ function AIcController() {
       rightShown: false,
       combined: COMBINATIONS[nextPos].combined,
     };
-    //TODO Clear Buzzers
+    setBuzzerQueue([]);
     sendData({ ...data, currentPosition: nextPos, combination: nextCombination });
   };
 
@@ -147,7 +162,12 @@ function AIcController() {
           </Row>
         </Col>
       </Col>
-      {/* <Col className="centerC AIcBuzzerQueue">BUZZER REIHENFOLGE</Col> */}
+      <Col className="centerC AIcBuzzerQueue">
+        <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
+        {buzzerQueue.map((buzzer, index) => (
+          <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} />
+        ))}
+      </Col>
     </Container>
   );
 }

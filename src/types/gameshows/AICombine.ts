@@ -1,4 +1,4 @@
-export interface GameState {
+export interface AICombGameState {
   teams: Team[];
   currentPosition: number;
   combination: Combination;
