@@ -7,6 +7,14 @@ export function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
+export function buzzer(id: string, name: string) {
+  fetch("https://cacedray.ddns.net:8443/buzzer/" + id + "?name=" + name, {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+}
+
 export function isOBSBrowser(): boolean {
   const browserName = navigator.userAgent.toLowerCase();
   return (
