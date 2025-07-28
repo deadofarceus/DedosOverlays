@@ -3,6 +3,7 @@ export interface AICombGameState {
   currentPosition: number;
   combination: Combination;
   buzzerQueue: string[];
+  vdoNinjaLinks: string[];
 }
 
 export interface Team {

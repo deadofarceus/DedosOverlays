@@ -118,3 +118,57 @@
   font-size: 30px;
   margin: 4px;
 }
+
+.AIcVDOLinks {
+  color: azure;
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+.AIcOverlayCon {
+  min-width: 1920px;
+  min-height: 1080px;
+  background: linear-gradient(135deg, #0a2342, #004c7f, #063262, #5229a1);
+  background-size: 100% 100%;
+}
+
+.AIcVDOLinkStream {
+  width: 256px;
+  height: 144px;
+}
+
+.AIcTeilnehmerCon {
+  margin-top: 40px;
+}
+
+.buzzerButton {
+  width: 500px;
+  height: 200px;
+  font-size: 122px;
+  color: azure;
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  background: linear-gradient(180deg, #c20114 0%, #8a0010 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 4px solid #000;
+  border-radius: 40px;
+  transition: transform 0.07s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.07s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  outline: none;
+}
+
+.buzzerButton:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) inset, 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, #8a0010 0%, #c20114 100%);
+}
+
+.buzzerUserInput {
+  width: 400px;
+  height: 50px;
+  font-size: 32px;
+  margin: 5px;
+}
