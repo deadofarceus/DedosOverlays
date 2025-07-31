@@ -8,20 +8,24 @@ function AICombination({ combination }: AICombinationProps) {
   const admin = location.pathname.toLowerCase().indexOf("admin") > -1;
   const visibleLeft = admin || combination.leftShown;
   const visibleRight = admin || combination.rightShown;
-  const imageLeft = admin || visibleLeft ? combination.left : "unknown";
-  const imageRight = admin || visibleRight ? combination.right : "unknown";
+  const imageLeft = admin || visibleLeft ? combination.left : "AIHidden";
+  const imageRight = admin || visibleRight ? combination.right : "AIHidden";
 
   return (
     <div className="AIcCombinationDiv">
       <img
         src={"../../AICombine/" + imageLeft + ".png"}
         alt=""
-        className={"AIcCombinationImage ACILEFT" + (!combination.leftShown ? " AIcHidden" : "")}
+        className={
+          "AIcCombinationImage ACILEFT" + (!combination.leftShown && admin ? " AIcHidden" : "")
+        }
       />
       <img
         src={"../../AICombine/" + imageRight + ".png"}
         alt=""
-        className={"AIcCombinationImage ACIRIGHT" + (!combination.rightShown ? " AIcHidden" : "")}
+        className={
+          "AIcCombinationImage ACIRIGHT" + (!combination.rightShown && admin ? " AIcHidden" : "")
+        }
       />
       <img
         src={"../../AICombine/" + combination.combined + ".png"}

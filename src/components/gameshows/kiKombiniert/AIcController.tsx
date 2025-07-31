@@ -19,19 +19,19 @@ export const STARTGAMESTATE: AICombGameState = {
   ],
   currentPosition: 0,
   combination: {
-    left: "pokeball",
-    right: "pokeball",
+    left: "AIHidden",
+    right: "AIHidden",
     leftShown: false,
     rightShown: false,
-    combined: "pokeball",
+    combined: "AIHidden",
   },
   vdoNinjaLinks: ["", "", "", "", "", ""],
 };
 
 const COMBINATIONS: { left: string; right: string; combined: string }[] = [
-  { left: "pokeball", right: "pokeball", combined: "pokeball" },
+  { left: "AIHidden", right: "AIHidden", combined: "AIHidden" },
   { left: "veigar_greybeard", right: "tolkingandalf", combined: "veigar_greybeard_x_tolkin" },
-  { left: "pokeball", right: "pokeball", combined: "pokeball" },
+  { left: "AIHidden", right: "AIHidden", combined: "AIHidden" },
   { left: "", right: "", combined: "" },
 ];
 
@@ -165,16 +165,16 @@ function AIcController() {
             <Button
               className="AIcCombButtons blackOutline"
               variant="primary"
-              onClick={() => handleGoNext(1)}
+              onClick={() => handleGoNext(-1)}
             >
-              Next Combination
+              Previous Combination
             </Button>
             <Button
               className="AIcCombButtons blackOutline"
               variant="primary"
-              onClick={() => handleGoNext(-1)}
+              onClick={() => handleGoNext(1)}
             >
-              Previous Combination
+              Next Combination
             </Button>
           </Row>
         </Col>
