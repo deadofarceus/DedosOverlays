@@ -12,10 +12,14 @@ import VDOLink from "../../util/VDOLink";
 let ws: AICombineWebsocket;
 
 export const STARTGAMESTATE: AICombGameState = {
+  admin: "Phil",
   teams: [
-    { member: ["test1", "test2"], points: 0 },
-    { member: ["test3", "test4"], points: 0 },
-    { member: ["test5", "test6"], points: 0 },
+    { member: ["langerName", "anderer langer"], points: 0 },
+    { member: ["test1", "test11"], points: 0 },
+    { member: ["test2", "test22"], points: 0 },
+    { member: ["test3", "test33"], points: 0 },
+    { member: ["test4", "test44"], points: 0 },
+    { member: ["test5", "test55"], points: 0 },
   ],
   currentPosition: 0,
   combination: {
@@ -25,7 +29,7 @@ export const STARTGAMESTATE: AICombGameState = {
     rightShown: false,
     combined: "AIHidden",
   },
-  vdoNinjaLinks: ["", "", "", "", "", ""],
+  vdoNinjaLinks: ["", "", "", "", "", "", ""],
 };
 
 const COMBINATIONS: { left: string; right: string; combined: string }[] = [
@@ -40,6 +44,7 @@ function AIcController() {
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
+  const isTeams = query.get("teams") === "true";
 
   useEffect(() => {
     const id = query.get("id");
@@ -111,34 +116,26 @@ function AIcController() {
         <Row className="centerR AIcTeamControllerRow">
           <Col className="centerC w-75 p-0">
             {data.teams.map((team, index) => (
-              <TeamView key={index} team={team} />
-            ))}
-          </Col>
-          <Col className="centerC w-25">
-            {data.teams.map((_team, index) => (
-              <Row key={index} className="centerR AIcPointControll">
-                <Button
-                  className="blackOutline AIcPointbutton"
-                  variant="success"
-                  onClick={() => handlePoints(1, index)}
-                >
-                  +1
-                </Button>
-                <Button
-                  className="blackOutline AIcPointbutton"
-                  variant="danger"
-                  onClick={() => handlePoints(-1, index)}
-                >
-                  -1
-                </Button>
-              </Row>
+              <TeamView key={index} team={team} index={index} handlePoints={handlePoints} />
             ))}
           </Col>
         </Row>
         <Col className="centerC w-100 AIcVDOLinks blackOutline">
           <h3>Set VDONinja Links</h3>
-          {data.vdoNinjaLinks.map((link, index) => (
-            <VDOLink key={index} index={index} link={link} handleChange={handleVDOLinkChange} />
+          <VDOLink
+            name={data.admin}
+            index={data.vdoNinjaLinks.length - 1}
+            link={data.vdoNinjaLinks[data.vdoNinjaLinks.length - 1]}
+            handleChange={handleVDOLinkChange}
+          />
+          {data.vdoNinjaLinks.slice(0, -1).map((link, index) => (
+            <VDOLink
+              key={index}
+              name={isTeams ? data.teams[index % 3].member[index % 2] : data.teams[index].member[0]}
+              index={index}
+              link={link}
+              handleChange={handleVDOLinkChange}
+            />
           ))}
         </Col>
       </Col>

@@ -1,4 +1,5 @@
 export interface AICombGameState {
+  admin: string;
   teams: Team[];
   currentPosition: number;
   combination: Combination;

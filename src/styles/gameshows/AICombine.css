@@ -5,9 +5,8 @@
 }
 
 .AIcTeamControllerRow {
-  min-width: 400px;
-  max-width: 400px;
-  height: 400px;
+  min-width: 500px;
+  max-width: 500px;
 }
 
 .AIcTeamView {
@@ -16,13 +15,14 @@
   font-family: Franklin Gothic Medium, sans-serif;
   font-size: 24px;
   text-align: center;
-  width: 280px;
-  height: 110px;
+  width: 400px;
+  height: 65px;
   margin-top: 10px;
   border: 2px solid #333;
   background-color: #29153bc3;
   border-radius: 10px;
   filter: drop-shadow(2px 2px 2px #222);
+  align-items: center;
 }
 
 .AIcPointControll {
@@ -36,7 +36,10 @@
 }
 
 .AIcPointbutton {
+  width: 60px;
+  height: 45px;
   font-size: 22px;
+  margin: 4px;
 }
 
 .AIcCombButtons {
@@ -130,13 +133,10 @@
 .AIcOverlayCon {
   min-width: 1920px;
   min-height: 1080px;
-  background: linear-gradient(135deg, #0a2342, #004c7f, #063262, #5229a1);
+  background: linear-gradient(135deg, #0a2342, #063262, #0a2342, #5229a1);
   background-size: 100% 100%;
-}
-
-.AIcVDOLinkStream {
-  width: 256px;
-  height: 144px;
+  padding: 0;
+  margin: 0;
 }
 
 .AIcTeilnehmerCon {
@@ -176,4 +176,178 @@
 .clearBuzzer {
   margin-top: auto;
   margin-bottom: 10px;
+}
+
+.AIcVDOStreams {
+  position: absolute;
+  width: 1920px;
+  height: 1080px;
+}
+
+.AIcOverlayImage {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+}
+
+.AIcVDOLinkStream {
+  max-width: 261px;
+  width: 464px;
+  height: 261px;
+  position: absolute;
+  bottom: 107px;
+  overflow: hidden;
+}
+
+.AIcVDOLinkStream > iframe {
+  width: 464px;
+  height: 261px;
+  position: absolute;
+  left: -103px;
+}
+
+.AIcVDOLinkStreamTeams {
+  max-width: 274px;
+  width: 507px;
+  height: 285px;
+  position: absolute;
+  bottom: 96px;
+  overflow: hidden;
+}
+
+.AIcVDOLinkStreamTeams > iframe {
+  width: 507px;
+  height: 285px;
+  position: absolute;
+  left: -114px;
+}
+
+#AIcstream0 {
+  left: 67px;
+}
+
+#AIcstream1 {
+  left: 372px;
+}
+
+#AIcstream2 {
+  left: 677px;
+}
+
+#AIcstream3 {
+  left: 982px;
+}
+
+#AIcstream4 {
+  left: 1287px;
+}
+
+#AIcstream5 {
+  left: 1592px;
+}
+
+#AIcstreamTeams0 {
+  left: 66px;
+}
+
+#AIcstreamTeams1 {
+  left: 348px;
+}
+
+#AIcstreamTeams2 {
+  left: 683px;
+}
+
+#AIcstreamTeams3 {
+  left: 965px;
+}
+
+#AIcstreamTeams4 {
+  left: 1300px;
+}
+
+#AIcstreamTeams5 {
+  left: 1582px;
+}
+
+#AIcStreamAdmin {
+  position: absolute;
+  max-width: 450px;
+  width: 800px;
+  height: 450px;
+  overflow: hidden;
+  left: 1404px;
+  top: 114px;
+}
+
+#AIcStreamAdmin > iframe {
+  width: 800px;
+  height: 450px;
+  position: absolute;
+  left: -175px;
+}
+
+#AIcLeft {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  max-width: 250px;
+  max-height: 250px;
+  overflow: hidden;
+  top: 72px;
+  left: 1016px;
+  rotate: -10deg;
+}
+
+#AIcRight {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  max-width: 250px;
+  max-height: 250px;
+  overflow: hidden;
+  top: 382px;
+  left: 1028px;
+  rotate: 15deg;
+}
+
+#AIcCombined {
+  position: absolute;
+  width: 938px;
+  height: 525px;
+  overflow: hidden;
+  top: 76px;
+  left: 67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#AIcCombined > img {
+  max-width: 938px;
+  height: 525px;
+}
+
+.AIcTeamPointsOverlay {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 60px;
+  color: azure;
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 66px;
+  text-align: center;
+}
+
+.AIcPointsOverlay {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 55px;
+  color: azure;
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 48px;
+  text-align: center;
 }
