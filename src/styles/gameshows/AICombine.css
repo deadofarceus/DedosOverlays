@@ -172,3 +172,8 @@
   font-size: 32px;
   margin: 5px;
 }
+
+.clearBuzzer {
+  margin-top: auto;
+  margin-bottom: 10px;
+}

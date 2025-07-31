@@ -8,11 +8,15 @@ export function useQuery() {
 }
 
 export function buzzer(id: string, name: string) {
-  fetch("https://cacedray.ddns.net:8443/buzzer/" + id + "?name=" + name, {
-    method: "POST",
-  })
+  fetch("https://cacedray.ddns.net:8443/buzzer/" + id + "?name=" + name)
     .then((res) => res.json())
     .then((data) => console.log(data)); // TODO buzzer sound?
+}
+
+export function clearBuzzer(id: string) {
+  fetch("https://cacedray.ddns.net:8443/buzzer/" + id + "?name=CLEARBUZZERQUEUE")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 }
 
 export function isOBSBrowser(): boolean {

@@ -2,7 +2,6 @@ export interface AICombGameState {
   teams: Team[];
   currentPosition: number;
   combination: Combination;
-  buzzerQueue: string[];
   vdoNinjaLinks: string[];
 }
 

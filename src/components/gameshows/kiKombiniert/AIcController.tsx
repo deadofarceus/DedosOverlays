@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { useQuery } from "../../../types/UsefulFunctions";
+import { clearBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "../../../styles/gameshows/AICombine.css";
@@ -25,30 +25,21 @@ export const STARTGAMESTATE: AICombGameState = {
     rightShown: false,
     combined: "pokeball",
   },
-  buzzerQueue: [],
   vdoNinjaLinks: ["", "", "", "", "", ""],
 };
 
-const COMBINATIONS: { left: string; right: string; combined: string }[] = [];
+const COMBINATIONS: { left: string; right: string; combined: string }[] = [
+  { left: "pokeball", right: "pokeball", combined: "pokeball" },
+  { left: "veigar_greybeard", right: "tolkingandalf", combined: "veigar_greybeard_x_tolkin" },
+  { left: "pokeball", right: "pokeball", combined: "pokeball" },
+  { left: "", right: "", combined: "" },
+];
 
 function AIcController() {
   document.body.className = "noOBS";
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
-  const [buzzerQueue, setBuzzerQueue] = useState<string[]>([
-    "Player 1",
-    "Player 2",
-    "Player 3",
-    "Player 4",
-    "Player 5",
-    "Player 6",
-  ]);
-
-  const addBuzzer = (buzzer: string) => {
-    if (!buzzerQueue.includes(buzzer)) {
-      setBuzzerQueue([...buzzerQueue, buzzer]);
-    }
-  };
+  const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
 
   useEffect(() => {
     const id = query.get("id");
@@ -84,7 +75,7 @@ function AIcController() {
   };
 
   const handleGoNext = (increment: number) => {
-    const nextPos = data.currentPosition + (increment % COMBINATIONS.length);
+    const nextPos = (data.currentPosition + increment) % COMBINATIONS.length;
     const nextCombination = {
       left: COMBINATIONS[nextPos].left,
       right: COMBINATIONS[nextPos].right,
@@ -92,7 +83,6 @@ function AIcController() {
       rightShown: false,
       combined: COMBINATIONS[nextPos].combined,
     };
-    setBuzzerQueue([]);
     sendData({ ...data, currentPosition: nextPos, combination: nextCombination });
   };
 
@@ -102,7 +92,18 @@ function AIcController() {
     sendData({ ...data, vdoNinjaLinks: newLinks });
   };
 
-  console.log(data);
+  const addBuzzer = (buzzer: string) => {
+    if (buzzer === "CLEARBUZZERQUEUE") {
+      setBuzzerQueue([]);
+    } else if (!buzzerQueue.includes(buzzer)) {
+      setBuzzerQueue([...buzzerQueue, buzzer]);
+    }
+  };
+
+  const handleClearBuzzer = () => {
+    clearBuzzer(query.get("id")!);
+    setBuzzerQueue([]);
+  };
 
   return (
     <Container className="AIcController centerR">
@@ -183,6 +184,13 @@ function AIcController() {
         {buzzerQueue.map((buzzer, index) => (
           <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} />
         ))}
+        <Button
+          variant="danger"
+          className="clearBuzzer blackOutline"
+          onClick={() => handleClearBuzzer()}
+        >
+          Clear Buzzer
+        </Button>
       </Col>
     </Container>
   );

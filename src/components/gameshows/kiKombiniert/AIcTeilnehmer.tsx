@@ -17,13 +17,17 @@ function AIcTeilnehmer() {
   const [userName, setUserName] = useState<string>("");
 
   const addBuzzer = (buzzer: string) => {
-    if (!buzzerQueue.includes(buzzer)) {
+    console.log(buzzer);
+
+    if (buzzer === "CLEARBUZZERQUEUE") {
+      setBuzzerQueue([]);
+    } else if (!buzzerQueue.includes(buzzer)) {
       setBuzzerQueue([...buzzerQueue, buzzer]);
     }
   };
 
   const handleBuzzer = () => {
-    if (userName !== "") {
+    if (userName !== "" && ws && !buzzerQueue.includes(userName)) {
       const id = query.get("id")!;
       buzzer(id, userName);
     }
@@ -36,17 +40,6 @@ function AIcTeilnehmer() {
       ws = new AICombineWebsocket(id, setData, addBuzzer);
     }
   }, [query]);
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "Space" || e.key === " ") {
-        e.preventDefault();
-        handleBuzzer();
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [buzzerQueue]);
 
   return (
     <Container className="AIcTeilnehmerCon w-100 centerC">

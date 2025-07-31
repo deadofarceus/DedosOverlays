@@ -142,7 +142,7 @@ export class AICombineWebsocket extends BaseWebSocket<AICombGameState> {
     const data = JSON.parse(message);
 
     if (data.type === "BUZZER") {
-      this.addBuzzer(data.data);
+      this.addBuzzer(data.data.name);
     } else if (data.type === "reachAllWithSameID") {
       this.callback(data.data);
     }
