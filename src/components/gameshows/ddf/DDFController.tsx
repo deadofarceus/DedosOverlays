@@ -12,65 +12,81 @@ const STARTGAMESTATE: DDFliegtGameState = {
       name: "Autophil",
       yourTurn: false,
       admin: true,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Kroko",
       admin: false,
       yourTurn: true,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: true,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Kutcher",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Thunny",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Obsess",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Tolkin",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Broeki",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     {
       name: "Karni",
       yourTurn: false,
       admin: false,
+      finalePoints: 0,
+      fontSize: 29,
       lifes: 3,
       invulnerable: false,
-      answers: [true, false],
+      answers: [],
     },
     // {
     //   name: "Faister",
@@ -78,7 +94,7 @@ const STARTGAMESTATE: DDFliegtGameState = {
     //   admin: false,
     //   lifes: 3,
     //   invulnerable: false,
-    //   answers: [true, false],
+    //   answers: [],
     // },
   ],
 };
@@ -117,6 +133,20 @@ function DDFController() {
     handlePlayerChange(index, { ...data.players[index], lifes: newLifes });
   };
 
+  const finalePointsChange = (index: number, value: number) => {
+    const newPlayers = [...data.players];
+    newPlayers[index].finalePoints += value;
+    if (newPlayers[index].finalePoints < 0) newPlayers[index].finalePoints = 0;
+
+    sendData({ ...data, players: newPlayers });
+  };
+
+  const fontSizeChange = (index: number, value: number) => {
+    const newPlayers = [...data.players];
+    newPlayers[index].fontSize = value;
+    sendData({ ...data, players: newPlayers });
+  };
+
   const handleAnswerADD = (index: number, value: boolean) => {
     const newAnswers = [...data.players[index].answers];
     newAnswers.push(value);
@@ -124,7 +154,9 @@ function DDFController() {
     newPlayers[index].answers = newAnswers;
     const playerIndex = newPlayers.findIndex((player) => player.yourTurn);
     newPlayers[playerIndex].yourTurn = false;
-    newPlayers[(playerIndex + 1) % newPlayers.length].yourTurn = true;
+    let increment = newPlayers[(playerIndex + 1) % newPlayers.length].admin ? 2 : 1;
+
+    newPlayers[(playerIndex + increment) % newPlayers.length].yourTurn = true;
     sendData({ ...data, players: newPlayers });
   };
 
@@ -184,35 +216,39 @@ function DDFController() {
             handleNameChange={handleNameChange}
             handleSwitchTurn={handleSwitchTurn}
             handleSwitchSequence={handleSwitchSequence}
+            finalePointsChange={finalePointsChange}
+            fontSizeChange={fontSizeChange}
           />
         ))}
       </div>
       <div className="ddf-controller-question-container">
-        <div className="ddf-controller-question">
+        <div className="ddf-controller-question blackOutline">
           {"Frage geht an: " + data.players[playerTurnIndex].name}
           <br />
-          {/* HIER FRAGE WENN ERWÜNSCHT*/}
+          Hier könnte Frage stehen
         </div>
-        <Button className="ddf-controlButton" variant="secondary" onClick={handleSkipPlayer}>
-          Skip Player
-        </Button>
-        <Button
-          className="ddf-controlButton"
-          variant="success"
-          onClick={() => handleAnswerADD(playerTurnIndex, true)}
-        >
-          RICHTIG
-        </Button>
-        <Button
-          className="ddf-controlButton"
-          variant="danger"
-          onClick={() => handleAnswerADD(playerTurnIndex, false)}
-        >
-          FALSCH
-        </Button>
-        <Button className="ddf-controlButton" variant="warning" onClick={resetAnswers}>
-          RESET Round
-        </Button>
+        <div className="centerR">
+          <Button className="ddf-controlButton" variant="secondary" onClick={handleSkipPlayer}>
+            Skip Player
+          </Button>
+          <Button
+            className="ddf-controlButton"
+            variant="success"
+            onClick={() => handleAnswerADD(playerTurnIndex, true)}
+          >
+            RICHTIG
+          </Button>
+          <Button
+            className="ddf-controlButton"
+            variant="danger"
+            onClick={() => handleAnswerADD(playerTurnIndex, false)}
+          >
+            FALSCH
+          </Button>
+          <Button className="ddf-controlButton" variant="warning" onClick={resetAnswers}>
+            RESET Round
+          </Button>
+        </div>
       </div>
     </div>
   );

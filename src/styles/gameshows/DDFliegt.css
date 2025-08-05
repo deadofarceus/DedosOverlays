@@ -10,10 +10,9 @@
 .ddf-cam-overlay {
   position: absolute;
   background-color: #ff00006d;
-  border: solid 5px #efff10;
+  /* border: solid 5px #efff10; */
 
   font-family: Saira, sans-serif;
-  font-style: italic;
   color: azure;
   font-weight: 900;
 }
@@ -41,7 +40,7 @@
 
 .ddf-cam-overlay-name {
   font-size: 29px;
-  margin-left: -10px;
+  margin-left: -25px;
 
   filter: drop-shadow(2px 2px 2px #222);
 }
@@ -59,6 +58,7 @@
   justify-content: center;
   align-items: center;
   filter: drop-shadow(2px 2px 2px #222);
+  font-size: 36px;
 }
 
 .ddf-cam-overlay-life {
@@ -140,6 +140,10 @@
 
 .ddf-player-control-lifes {
   width: 100px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 40px;
+  color: azure;
+  text-align: center;
 }
 
 .ddf-player-control-life {
@@ -150,6 +154,11 @@
 .ddf-player-control-name {
   font-size: 30px;
   width: 200px;
+}
+
+.ddf-player-control-fontSize {
+  font-size: 20px;
+  width: 50px;
 }
 
 .ddf-controlButton {
@@ -178,4 +187,19 @@
 
 .ddf-player-control-answer {
   width: 30px;
+}
+
+.ddf-controller-question {
+  font-size: 40px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  filter: drop-shadow(2px 2px 2px #222);
+  text-align: center;
+  color: azure;
+}
+
+.ddf-controller-question-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

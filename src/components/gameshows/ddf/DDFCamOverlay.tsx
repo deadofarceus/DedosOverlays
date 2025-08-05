@@ -3,11 +3,12 @@ import { DiscordCamMapping } from "../../../types/gameshows/DiscordConstants";
 
 interface DDFCamOverlayProps {
   player: DDFPlayer;
+  finale: boolean;
   dcCamMapping: DiscordCamMapping;
 }
 
-function DDFCamOverlay({ player, dcCamMapping }: DDFCamOverlayProps) {
-  const invulnerable = player.answers.every((answer) => answer);
+function DDFCamOverlay({ player, finale, dcCamMapping }: DDFCamOverlayProps) {
+  const invulnerable = player.answers.every((answer) => answer) && player.answers.length > 1;
 
   return (
     <div
@@ -20,14 +21,19 @@ function DDFCamOverlay({ player, dcCamMapping }: DDFCamOverlayProps) {
       }}
     >
       <div className="ddf-cam-overlay-name-container">
-        <div className="ddf-cam-overlay-name">{player.name}</div>
+        <div className="ddf-cam-overlay-name" style={{ fontSize: player.fontSize + "px" }}>
+          {player.name}
+        </div>
       </div>
-      {!player.admin && (
+      {!player.admin && !finale && (
         <div className="ddf-cam-overlay-lifes">
           {[...Array(player.lifes)].map((_, _index) => (
             <img className="ddf-cam-overlay-life" src="../../../DDF/heart.png" alt="" />
           ))}
         </div>
+      )}
+      {finale && !player.admin && (
+        <div className="ddf-cam-overlay-lifes">{player.finalePoints}</div>
       )}
 
       {!player.admin && (

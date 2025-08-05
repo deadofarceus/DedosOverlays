@@ -24,11 +24,17 @@ function DDFOverlay() {
   const livingPlayers = data.players.filter((player) => player.lifes > 0 || player.admin);
 
   const dcCamMapping = DISCORDCALLMAPPINGS.get(livingPlayers.length)!;
+  const finale = livingPlayers.filter((player) => player.lifes > 0 && !player.admin).length === 2;
 
   return (
     <div className="ddf-overlay-container">
       {livingPlayers.map((player, index) => (
-        <DDFCamOverlay key={index} player={player} dcCamMapping={dcCamMapping[index]} />
+        <DDFCamOverlay
+          key={index}
+          finale={finale}
+          player={player}
+          dcCamMapping={dcCamMapping[index]}
+        />
       ))}
     </div>
   );

@@ -9,6 +9,8 @@ interface DDFPlayerProps {
   handleNameChange: (index: number, value: string) => void;
   handleSwitchTurn: (index: number) => void;
   handleSwitchSequence: (index: number, newIndex: number) => void;
+  finalePointsChange: (index: number, value: number) => void;
+  fontSizeChange: (index: number, value: number) => void;
 }
 
 function DDFPlayerControl({
@@ -19,6 +21,8 @@ function DDFPlayerControl({
   handleNameChange,
   handleSwitchTurn,
   handleSwitchSequence,
+  finalePointsChange,
+  fontSizeChange,
 }: DDFPlayerProps) {
   const player = players[index];
 
@@ -31,18 +35,31 @@ function DDFPlayerControl({
         value={player.name}
         onChange={(e) => handleNameChange(index, e.target.value)}
       />
+      <input
+        type="number"
+        className="ddf-player-control-fontSize"
+        value={player.fontSize}
+        onChange={(e) => fontSizeChange(index, parseInt(e.target.value))}
+        name=""
+        id="fontSizeDDF"
+      />
       {!player.admin && (
         <div className="ddf-player-control-lifes-container">
-          <div className="ddf-player-control-lifes">
-            {[...Array(player.lifes)].map((_, index) => (
-              <img
-                key={index}
-                className="ddf-player-control-life"
-                src="../../../DDF/heart.png"
-                alt=""
-              />
-            ))}
-          </div>
+          {!finale ? (
+            <div className="ddf-player-control-lifes">
+              {[...Array(player.lifes)].map((_, index) => (
+                <img
+                  key={index}
+                  className="ddf-player-control-life"
+                  src="../../../DDF/heart.png"
+                  alt=""
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="ddf-player-control-lifes">{player.finalePoints}</div>
+          )}
+
           <Button
             className="ddf-controlButton"
             variant="success"
@@ -107,8 +124,12 @@ function DDFPlayerControl({
         <div className="ddf-player-control-finale blackOutline">
           Finale
           <div className="centerR">
-            <Button variant="success">+1</Button>
-            <Button variant="danger">-1</Button>
+            <Button variant="success" onClick={() => finalePointsChange(index, 1)}>
+              +1
+            </Button>
+            <Button variant="danger" onClick={() => finalePointsChange(index, -1)}>
+              -1
+            </Button>
           </div>
         </div>
       )}
