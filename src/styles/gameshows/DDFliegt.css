@@ -1,0 +1,14 @@
+.ddf-overlay-container {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  min-width: 1920px;
+  min-height: 1080px;
+  display: flex;
+}
+
+.ddf-cam-overlay {
+  position: absolute;
+  background-color: #ff00006d;
+  border: solid 3px gold;
+}
