@@ -7,6 +7,8 @@ interface DDFCamOverlayProps {
 }
 
 function DDFCamOverlay({ player, dcCamMapping }: DDFCamOverlayProps) {
+  const invulnerable = player.answers.every((answer) => answer);
+
   return (
     <div
       className={"ddf-cam-overlay " + (player.yourTurn ? "ddfYourTurn" : "")}
@@ -20,21 +22,27 @@ function DDFCamOverlay({ player, dcCamMapping }: DDFCamOverlayProps) {
       <div className="ddf-cam-overlay-name-container">
         <div className="ddf-cam-overlay-name">{player.name}</div>
       </div>
-      <div className="ddf-cam-overlay-lifes">
-        {[...Array(player.lifes)].map((_, _index) => (
-          <img className="ddf-cam-overlay-life" src="../../../DDF/heart.png" alt="" />
-        ))}
-      </div>
-      <div className="ddf-cam-overlay-answers">
-        {player.answers.map((answer, _index) => (
-          <img
-            className="ddf-cam-overlay-answer"
-            src={"../../../DDF/" + (answer ? "rightAnswer.png" : "wrongAnswer.png")}
-            alt=""
-          />
-        ))}
-      </div>
-      {player.invulnerable && (
+      {!player.admin && (
+        <div className="ddf-cam-overlay-lifes">
+          {[...Array(player.lifes)].map((_, _index) => (
+            <img className="ddf-cam-overlay-life" src="../../../DDF/heart.png" alt="" />
+          ))}
+        </div>
+      )}
+
+      {!player.admin && (
+        <div className="ddf-cam-overlay-answers">
+          {player.answers.map((answer, _index) => (
+            <img
+              className="ddf-cam-overlay-answer"
+              src={"../../../DDF/" + (answer ? "rightAnswer.png" : "wrongAnswer.png")}
+              alt=""
+            />
+          ))}
+        </div>
+      )}
+
+      {invulnerable && !player.admin && (
         <div className="ddf-cam-overlay-invulnerable-container">
           <img
             className="ddf-cam-overlay-invulnerable"

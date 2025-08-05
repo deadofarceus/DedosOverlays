@@ -18,6 +18,23 @@ export const DISCORDCALLMAPPINGS: Map<number, DiscordCamMapping[]> = new Map([
     ],
   ],
   [
+    2,
+    [
+      {
+        width: 840,
+        height: 473,
+        xOffset: 117,
+        yOffset: 64,
+      },
+      {
+        width: 840,
+        height: 473,
+        xOffset: 963,
+        yOffset: 64,
+      },
+    ],
+  ],
+  [
     3,
     [
       {

@@ -3,11 +3,10 @@ export interface DDFliegtGameState {
 }
 
 export interface DDFPlayer {
-  index: number;
   admin: boolean;
   yourTurn: boolean;
   name: string;
-  lifes: 0 | 1 | 2 | 3;
+  lifes: number;
   invulnerable: boolean;
   answers: boolean[];
 }
