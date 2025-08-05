@@ -17,7 +17,17 @@ function DDFCamOverlay({ player, dcCamMapping }: DDFCamOverlayProps) {
         left: dcCamMapping.xOffset,
       }}
     >
-      {player.name + " " + player.lifes + player.answers}
+      <div className="ddf-cam-overlay-name">{player.name}</div>
+      <div className="ddf-cam-overlay-lifes">{player.lifes}</div>
+      <div className="ddf-cam-overlay-answers">
+        {player.answers.map((answer, _index) => (
+          <img
+            className="ddf-cam-overlay-answer"
+            src={"../../../DDF/" + answer ? "rightAnswer.png" : "wrongAnswer.png"}
+            alt=""
+          />
+        ))}
+      </div>
     </div>
   );
 }
