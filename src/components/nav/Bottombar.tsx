@@ -12,7 +12,7 @@ function Bottombar() {
   if (
     isOBSBrowser() ||
     pathname.indexOf("stream") > -1 ||
-    location.pathname.indexOf("Gameshows") > -1 ||
+    pathname.indexOf("gameshows") > -1 ||
     obsQ === "true"
   ) {
     return <></>;

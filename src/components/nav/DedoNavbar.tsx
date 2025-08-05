@@ -6,10 +6,11 @@ function DedoNavbar() {
   const location = useLocation();
   const query = useQuery();
   const obsQ = query.get("obs");
+  const pathname = location.pathname.toLowerCase();
   if (
     isOBSBrowser() ||
-    location.pathname.indexOf("Stream") > -1 ||
-    location.pathname.indexOf("Gameshows") > -1 ||
+    pathname.indexOf("stream") > -1 ||
+    pathname.indexOf("gameshows") > -1 ||
     obsQ === "true"
   ) {
     return <></>;
