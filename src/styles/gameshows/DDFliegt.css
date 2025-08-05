@@ -10,5 +10,93 @@
 .ddf-cam-overlay {
   position: absolute;
   background-color: #ff00006d;
-  border: solid 3px gold;
+  border: solid 5px #efff10;
+
+  font-family: Saira, sans-serif;
+  font-style: italic;
+  color: azure;
+  font-weight: 900;
+}
+
+.ddfYourTurn {
+  border: solid 5px #7ee2e8;
+  border-radius: 10px;
+}
+
+.ddf-cam-overlay-name-container {
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+  background-image: url("../../DDF/nameBack.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 160px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.ddf-cam-overlay-name {
+  font-size: 29px;
+  margin-left: -10px;
+  /* padding-left: 0.3em;
+  padding-right: 0.9em; */
+
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.ddf-cam-overlay-lifes {
+  background-image: url("../../DDF/lifeBack.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  width: 160px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.ddf-cam-overlay-life {
+  width: 22%;
+  filter: drop-shadow(2px 2px 2px #222);
+}
+
+.ddf-cam-overlay-answers {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ddf-cam-overlay-answer {
+  width: 6%;
+  filter: drop-shadow(2px 2px 2px #222);
+  margin: 1px;
+}
+
+.ddf-cam-overlay-invulnerable-container {
+  width: 100%;
+  position: absolute;
+  bottom: 5%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ddf-cam-overlay-invulnerable {
+  height: 100%;
+  filter: drop-shadow(2px 2px 2px #222);
 }

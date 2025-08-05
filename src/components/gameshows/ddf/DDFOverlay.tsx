@@ -12,13 +12,17 @@ export const STARTGAMESTATE: DDFliegtGameState = {
     {
       index: 0,
       name: "Kroko",
+      admin: false,
+      yourTurn: false,
       lifes: 3,
-      invulnerable: false,
+      invulnerable: true,
       answers: [true, false],
     },
     {
       index: 1,
       name: "Kutcher",
+      yourTurn: true,
+      admin: false,
       lifes: 3,
       invulnerable: false,
       answers: [true, false],
@@ -26,6 +30,8 @@ export const STARTGAMESTATE: DDFliegtGameState = {
     {
       index: 2,
       name: "Thunny",
+      yourTurn: false,
+      admin: false,
       lifes: 3,
       invulnerable: false,
       answers: [true, false],
@@ -33,27 +39,35 @@ export const STARTGAMESTATE: DDFliegtGameState = {
     {
       index: 3,
       name: "Obsess",
+      yourTurn: false,
+      admin: false,
+      lifes: 3,
+      invulnerable: false,
+      answers: [true, false],
+    },
+    {
+      index: 4,
+      name: "Tolkin",
+      yourTurn: false,
+      admin: false,
+      lifes: 3,
+      invulnerable: false,
+      answers: [true, false],
+    },
+    {
+      index: 5,
+      name: "Broeki",
+      yourTurn: false,
+      admin: false,
       lifes: 3,
       invulnerable: false,
       answers: [true, false],
     },
     // {
-    //   index: 4,
-    //   name: "Tolkin",
-    //   lifes: 3,
-    //   invulnerable: false,
-    //   answers: [true, false],
-    // },
-    // {
-    //   index: 5,
-    //   name: "Broeki",
-    //   lifes: 3,
-    //   invulnerable: false,
-    //   answers: [true, false],
-    // },
-    // {
     //   index: 6,
     //   name: "Karni",
+    //   yourTurn: false,
+    //   admin: false,
     //   lifes: 3,
     //   invulnerable: false,
     //   answers: [true, false],
@@ -61,6 +75,8 @@ export const STARTGAMESTATE: DDFliegtGameState = {
     // {
     //   index: 7,
     //   name: "Autophil",
+    //   yourTurn: false,
+    //   admin: true,
     //   lifes: 3,
     //   invulnerable: false,
     //   answers: [true, false],
@@ -68,6 +84,8 @@ export const STARTGAMESTATE: DDFliegtGameState = {
     // {
     //   index: 8,
     //   name: "Faister",
+    //   yourTurn: false,
+    //   admin: false,
     //   lifes: 3,
     //   invulnerable: false,
     //   answers: [true, false],
@@ -87,15 +105,21 @@ function DDFOverlay() {
     }
   }, [query]);
 
+  const livingPlayers = data.players.filter((player) => player.lifes > 0 || player.admin);
+
   const dcCamMapping = DISCORDCALLMAPPINGS.get(data.players.length)!;
 
-  console.log(data.players.length, dcCamMapping);
+  console.log(livingPlayers.length, dcCamMapping);
 
   return (
     <div className="ddf-overlay-container">
-      {data.players.map((player, index) => (
-        <DDFCamOverlay key={index} player={player} dcCamMapping={dcCamMapping[index]} />
-      ))}
+      {livingPlayers.map((player, index) => {
+        return (
+          !player.admin && (
+            <DDFCamOverlay key={index} player={player} dcCamMapping={dcCamMapping[index]} />
+          )
+        );
+      })}
     </div>
   );
 }
