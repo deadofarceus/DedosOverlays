@@ -147,26 +147,34 @@ function DDFController() {
     sendData({ ...data, players: newPlayers });
   };
 
+  const findNextTurn = (newPlayers: DDFPlayer[]): DDFPlayer => {
+    const playerIndex = newPlayers.findIndex((player) => player.yourTurn);
+    newPlayers[playerIndex].yourTurn = false;
+    let increment = 1;
+    let p = newPlayers[(playerIndex + increment) % newPlayers.length];
+    while (p.admin || p.lifes === 0) {
+      increment++;
+      p = newPlayers[(playerIndex + increment) % newPlayers.length];
+    }
+    return p;
+  };
+
   const handleAnswerADD = (index: number, value: boolean) => {
     const newAnswers = [...data.players[index].answers];
     newAnswers.push(value);
     const newPlayers = [...data.players];
     newPlayers[index].answers = newAnswers;
-    const playerIndex = newPlayers.findIndex((player) => player.yourTurn);
-    newPlayers[playerIndex].yourTurn = false;
-    let increment = newPlayers[(playerIndex + 1) % newPlayers.length].admin ? 2 : 1;
 
-    newPlayers[(playerIndex + increment) % newPlayers.length].yourTurn = true;
+    const p = findNextTurn(newPlayers);
+    p.yourTurn = true;
     sendData({ ...data, players: newPlayers });
   };
 
   const handleSkipPlayer = () => {
     const newPlayers = [...data.players];
-    const playerIndex = newPlayers.findIndex((player) => player.yourTurn);
-    newPlayers[playerIndex].yourTurn = false;
-    let increment = newPlayers[(playerIndex + 1) % newPlayers.length].admin ? 2 : 1;
 
-    newPlayers[(playerIndex + increment) % newPlayers.length].yourTurn = true;
+    const p = findNextTurn(newPlayers);
+    p.yourTurn = true;
     sendData({ ...data, players: newPlayers });
   };
 
