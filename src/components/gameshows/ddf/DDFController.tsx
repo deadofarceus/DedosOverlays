@@ -6,7 +6,7 @@ import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import DDFPlayerControl from "./DDFPlayerControl";
 import { Button } from "react-bootstrap";
 
-const STARTGAMESTATE: DDFliegtGameState = {
+export const STARTGAMESTATE: DDFliegtGameState = {
   players: [
     {
       name: "Autophil",

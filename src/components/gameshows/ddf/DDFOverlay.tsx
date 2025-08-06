@@ -4,14 +4,13 @@ import { useQuery } from "../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import { DISCORDCALLMAPPINGS } from "../../../types/gameshows/DiscordConstants";
 import DDFCamOverlay from "./DDFCamOverlay";
+import { STARTGAMESTATE } from "./DDFController";
 
 let ws: BroadcastWebsocket<DDFliegtGameState>;
 
 function DDFOverlay() {
   const query = useQuery();
-  const [data, setData] = useState<DDFliegtGameState>({
-    players: [],
-  });
+  const [data, setData] = useState<DDFliegtGameState>(STARTGAMESTATE);
 
   useEffect(() => {
     const id = query.get("id");
