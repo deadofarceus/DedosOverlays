@@ -7,11 +7,11 @@
   display: flex;
 }
 
-.ddf-overlay-container-image {
+/* .ddf-overlay-container-image {
   background-image: url("../../DDF/Overlay.png");
   background-repeat: no-repeat;
   background-size: 100%;
-}
+} */
 
 .ddf-cam-overlay {
   position: absolute;
