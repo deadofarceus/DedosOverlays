@@ -6,97 +6,33 @@ import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import DDFPlayerControl from "./DDFPlayerControl";
 import { Button } from "react-bootstrap";
 
+const players: string[] = [
+  "Autophil",
+  "Kroko",
+  "Kutcher",
+  "Thunny",
+  "Obsess",
+  "Tolkin",
+  "Broeki",
+  "Karni",
+  "Faister",
+];
+
 export const STARTGAMESTATE: DDFliegtGameState = {
-  players: [
-    {
-      name: "Autophil",
-      yourTurn: false,
-      admin: true,
+  showTurn: true,
+  players: players.map((player, index) => {
+    return {
+      name: player,
+      yourTurn: index === 0,
+      admin: index === 0,
       finalePoints: 0,
       fontSize: 29,
       lifes: 3,
       invulnerable: false,
+      winner: false,
       answers: [],
-    },
-    {
-      name: "Kroko",
-      admin: false,
-      yourTurn: true,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: true,
-      answers: [],
-    },
-    {
-      name: "Kutcher",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    {
-      name: "Thunny",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    {
-      name: "Obsess",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    {
-      name: "Tolkin",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    {
-      name: "Broeki",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    {
-      name: "Karni",
-      yourTurn: false,
-      admin: false,
-      finalePoints: 0,
-      fontSize: 29,
-      lifes: 3,
-      invulnerable: false,
-      answers: [],
-    },
-    // {
-    //   name: "Faister",
-    //   yourTurn: false,
-    //   admin: false,
-    //   lifes: 3,
-    //   invulnerable: false,
-    //   answers: [],
-    // },
-  ],
+    };
+  }),
 };
 
 let ws: BroadcastWebsocket<DDFliegtGameState>;
@@ -208,6 +144,18 @@ function DDFController() {
     sendData({ ...data, players: newPlayers });
   };
 
+  const crownWinner = () => {
+    const newPlayers = [...data.players];
+    let winner = newPlayers[0];
+    newPlayers.forEach((player) => {
+      if (player.finalePoints > winner.finalePoints) {
+        winner = player;
+      }
+    });
+    winner.winner = true;
+    sendData({ ...data, players: newPlayers });
+  };
+
   const playerTurnIndex = data.players.findIndex((player) => player.yourTurn);
   const finale = data.players.filter((player) => player.lifes > 0 && !player.admin).length === 2;
 
@@ -235,26 +183,38 @@ function DDFController() {
           <br />
           Hier könnte Frage stehen
         </div>
-        <div className="centerR">
-          <Button className="ddf-controlButton" variant="secondary" onClick={handleSkipPlayer}>
-            Skip Player
+        <div className="centerC">
+          <div className="centerR">
+            <Button className="ddf-controlButton" variant="secondary" onClick={handleSkipPlayer}>
+              Skip Player
+            </Button>
+            <Button
+              className="ddf-controlButton"
+              variant="success"
+              onClick={() => handleAnswerADD(playerTurnIndex, true)}
+            >
+              RICHTIG
+            </Button>
+            <Button
+              className="ddf-controlButton"
+              variant="danger"
+              onClick={() => handleAnswerADD(playerTurnIndex, false)}
+            >
+              FALSCH
+            </Button>
+            <Button className="ddf-controlButton" variant="warning" onClick={resetAnswers}>
+              RESET Round
+            </Button>
+          </div>
+          <Button className="ddf-controlButton" variant="warning" onClick={crownWinner}>
+            Crown Winner
           </Button>
           <Button
             className="ddf-controlButton"
-            variant="success"
-            onClick={() => handleAnswerADD(playerTurnIndex, true)}
+            variant="warning"
+            onClick={() => sendData({ ...data, showTurn: !data.showTurn })}
           >
-            RICHTIG
-          </Button>
-          <Button
-            className="ddf-controlButton"
-            variant="danger"
-            onClick={() => handleAnswerADD(playerTurnIndex, false)}
-          >
-            FALSCH
-          </Button>
-          <Button className="ddf-controlButton" variant="warning" onClick={resetAnswers}>
-            RESET Round
+            {data.showTurn ? "Blauer Rahmen aus" : "Zeige Wer am Zug ist"}
           </Button>
         </div>
       </div>

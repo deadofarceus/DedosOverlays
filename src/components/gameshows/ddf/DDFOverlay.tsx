@@ -27,13 +27,17 @@ function DDFOverlay() {
   const phil = !(query.get("noBackground") === "true");
 
   return (
-    <div className={"ddf-overlay-container" + (phil ? " ddf-overlay-container-image" : "")}>
+    <div
+      style={{ marginTop: dcCamMapping.marginTop }}
+      className={"ddf-overlay-container" + (phil ? " ddf-overlay-container-image" : "")}
+    >
       {livingPlayers.map((player, index) => (
         <DDFCamOverlay
           key={index}
           finale={finale}
+          showTurn={data.showTurn}
           player={player}
-          dcCamMapping={dcCamMapping[index]}
+          dcCamMapping={dcCamMapping}
         />
       ))}
     </div>

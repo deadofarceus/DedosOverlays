@@ -4,26 +4,28 @@ import { DiscordCamMapping } from "../../../types/gameshows/DiscordConstants";
 interface DDFCamOverlayProps {
   player: DDFPlayer;
   finale: boolean;
+  showTurn: boolean;
   dcCamMapping: DiscordCamMapping;
 }
 
-function DDFCamOverlay({ player, finale, dcCamMapping }: DDFCamOverlayProps) {
+function DDFCamOverlay({ player, finale, showTurn, dcCamMapping }: DDFCamOverlayProps) {
   const invulnerable = player.answers.every((answer) => answer) && player.answers.length > 1;
 
   return (
     <div
-      className={"ddf-cam-overlay " + (player.yourTurn ? "ddfYourTurn" : "")}
+      className={"ddf-cam-overlay " + (player.yourTurn && showTurn ? "ddfYourTurn" : "")}
       style={{
-        width: dcCamMapping.width,
-        height: dcCamMapping.height,
-        top: dcCamMapping.yOffset,
-        left: dcCamMapping.xOffset,
+        minWidth: dcCamMapping.width,
+        minHeight: dcCamMapping.height,
       }}
     >
       <div className="ddf-cam-overlay-name-container">
         <div className="ddf-cam-overlay-name" style={{ fontSize: player.fontSize + "px" }}>
           {player.name}
         </div>
+        {player.winner && (
+          <img className="ddf-cam-overlay-winner" src="../../../DDF/crown.png" alt="" />
+        )}
       </div>
       {!player.admin && !finale && (
         <div className="ddf-cam-overlay-lifes">

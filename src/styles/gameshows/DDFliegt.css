@@ -1,10 +1,14 @@
 .ddf-overlay-container {
-  position: relative;
   width: 1920px;
   height: 1080px;
   min-width: 1920px;
   min-height: 1080px;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 /* .ddf-overlay-container-image {
@@ -14,19 +18,19 @@
 } */
 
 .ddf-cam-overlay {
-  position: absolute;
+  position: relative;
   /* background-color: #ff00006d; */
-  /* border: solid 5px #efff10; */
-
+  /* border: solid 5px #efff107c; */
+  /* outline: 5px solid #7ee2e8; */
+  border-radius: 8px;
+  margin: 4px;
   font-family: Saira, sans-serif;
   color: azure;
   font-weight: 900;
 }
 
 .ddfYourTurn {
-  /* border: solid 5px #7ee2e8 !important; */
-  outline: 3px solid #7ee2e8;
-  border-radius: 10px;
+  outline: 4px solid #7ee2e8;
 }
 
 .ddf-cam-overlay-name-container {
@@ -85,7 +89,7 @@
 }
 
 .ddf-cam-overlay-answer {
-  width: 6%;
+  width: 32px;
   filter: drop-shadow(2px 2px 2px #222);
   margin: 1px;
 }
@@ -209,4 +213,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.ddf-cam-overlay-winner {
+  position: absolute;
+  width: 170px;
+  right: -30px;
+  top: -50px;
 }
