@@ -7,9 +7,15 @@
   display: flex;
 }
 
+.ddf-overlay-container-image {
+  background-image: url("../../DDF/Overlay.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 .ddf-cam-overlay {
   position: absolute;
-  background-color: #ff00006d;
+  /* background-color: #ff00006d; */
   /* border: solid 5px #efff10; */
 
   font-family: Saira, sans-serif;
@@ -18,7 +24,8 @@
 }
 
 .ddfYourTurn {
-  border: solid 5px #7ee2e8 !important;
+  /* border: solid 5px #7ee2e8 !important; */
+  outline: 3px solid #7ee2e8;
   border-radius: 10px;
 }
 
