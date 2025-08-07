@@ -140,6 +140,7 @@ function DDFController() {
     const newPlayers = [...data.players];
     newPlayers.forEach((player) => {
       player.answers = [];
+      player.winner = false;
     });
     sendData({ ...data, players: newPlayers });
   };
