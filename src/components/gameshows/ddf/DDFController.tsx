@@ -8,14 +8,14 @@ import { Button } from "react-bootstrap";
 
 const players: string[] = [
   "Autophil",
-  "Kroko",
-  "Kutcher",
-  "Thunny",
-  "Obsess",
-  "Tolkin",
   "Broeki",
-  "Karni",
   "Faister",
+  "Karni",
+  "Kroko",
+  "Sola",
+  "Tolkin",
+  "TwoStone",
+  "FILL",
 ];
 
 export const STARTGAMESTATE: DDFliegtGameState = {
@@ -26,7 +26,7 @@ export const STARTGAMESTATE: DDFliegtGameState = {
       yourTurn: index === 0,
       admin: index === 0,
       finalePoints: 0,
-      fontSize: 29,
+      fontSize: index === 7 ? 24 : 29,
       lifes: 3,
       invulnerable: false,
       winner: false,
