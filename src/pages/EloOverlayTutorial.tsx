@@ -10,9 +10,13 @@ import {
   DropdownButton,
   Dropdown,
   Row,
+  Button,
 } from "react-bootstrap";
 import "../styles/EloOverlayTutorial.css";
 import DedoCopy from "../components/util/DedoCopy";
+import { GLOBALADDRESS } from "../types/WebsocketTypes";
+
+const CLIENTID = "2qfavnyzt0csoznyorjcl0w8gm4gw9";
 
 const REGIONS = [
   "EUW1",
@@ -57,6 +61,28 @@ function EloOverlayTutorial() {
 
       setLink(new URL(constructedLink).href);
     }
+
+    const hash = window.location.hash;
+    if (hash) {
+      const token = new URLSearchParams(hash.substring(1)).get("access_token");
+      if (token) {
+        console.log("TOKEN: " + token);
+        window.location.hash = "";
+
+        fetch(`https://${GLOBALADDRESS}/getkey/LeagueOfLegends?token=${token}`)
+          .then((res) => res.text())
+          .then((data) => {
+            console.log(data);
+
+            // setKey(data.key);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        console.log("NO TOKEN");
+      }
+    } else {
+      console.log("NO HASH");
+    }
   }, [key, legacyMode, nav, query, queuetype, summonerName, tag, lang, region]);
 
   const preview = legacyMode ? "../EloOverlay/LegacyELO.png" : "../EloOverlay/StandardELO.png";
@@ -90,16 +116,37 @@ function EloOverlayTutorial() {
               </InputGroup>
               <Row className="w-100">
                 <Form.Group className="w-50">
-                  <Form.Label className="blackOutline">
-                    Key: (if you don't have a key visit <a href="/help">Help</a>)
-                  </Form.Label>
+                  <Form.Label className="blackOutline">Key:</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your Key"
+                    placeholder="Enter your Key or..."
                     value={key}
                     id="dedoKey"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKey(e.target.value)}
                   />
+                  <div className="mt-2">
+                    <Button
+                      className="twitchLoginButton"
+                      href={`https://id.twitch.tv/oauth2/authorize?client_id=${CLIENTID}&redirect_uri=https://${window.location.host}/EloOverlay&response_type=token&scope=user%3Aread%3Aemail`}
+                      aria-label="Login with Twitch"
+                    >
+                      <span className="twitchIcon" aria-hidden>
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3 2H18V12.5L13 17.5H9.5L7 20H5V17.5H1V4L3 2ZM16 11.5V4H5V14H8V16.5L10.5 14H14.5L16 12.5V11.5ZM12.5 5.5H14V10H12.5V5.5ZM9.5 5.5H11V10H9.5V5.5Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      EXPERIMENTAL Login with Twitch
+                    </Button>
+                  </div>
                 </Form.Group>
                 <Form.Group className="w-25 regionSelect">
                   <Form.Label>Region:</Form.Label>

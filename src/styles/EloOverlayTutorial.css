@@ -60,3 +60,26 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.twitchLoginButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #9146ff, #772ce8);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 8px 14px;
+}
+
+.twitchLoginButton:hover,
+.twitchLoginButton:focus {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+.twitchIcon {
+  display: inline-flex;
+}
