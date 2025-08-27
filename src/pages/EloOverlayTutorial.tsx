@@ -85,6 +85,12 @@ function EloOverlayTutorial() {
 
   const preview = legacyMode ? "../EloOverlay/LegacyELO.png" : "../EloOverlay/StandardELO.png";
 
+  let shownLink = "..." + link.substring(link.indexOf(".app") + 4);
+
+  if (summonerName === "" || tag === "" || key === "") {
+    shownLink = "Please fill every field above to generate a link";
+  }
+
   return (
     <Container className="layout">
       <h1 className="blackOutline">Elo Overlay Creator</h1>
@@ -113,11 +119,13 @@ function EloOverlayTutorial() {
                 />
               </InputGroup>
               <Row className="w-100">
-                <Form.Group className="w-50">
-                  <Form.Label className="blackOutline">Key:</Form.Label>
+                <Form.Group className="w-50 login-elo-tut">
+                  <Form.Label className="blackOutline">
+                    Login with Twitch or enter your Key:
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your Key or..."
+                    placeholder="Enter your Key or...↓"
                     value={key}
                     id="dedoKey"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKey(e.target.value)}
@@ -209,7 +217,7 @@ function EloOverlayTutorial() {
             <InputGroup className="mb-3">
               <Form.Control
                 type="text"
-                value={"..." + link.substring(link.indexOf(".app") + 4)}
+                value={shownLink}
                 readOnly
                 aria-describedby="basic-addon2"
                 className="link"
@@ -232,7 +240,11 @@ function EloOverlayTutorial() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   If you want to support me you can do it here:{" "}
-                  <a href="https://paypal.me/deadofarceus" aria-label="PayPal">
+                  <a
+                    style={{ height: "36px" }}
+                    href="https://paypal.me/deadofarceus"
+                    aria-label="PayPal"
+                  >
                     <img
                       height="36"
                       width="36"
@@ -240,7 +252,7 @@ function EloOverlayTutorial() {
                       src="../paypal.png"
                     />
                   </a>{" "}
-                  <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
+                  <a style={{ height: "36px" }} href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
                     <img
                       height="36"
                       width="36"

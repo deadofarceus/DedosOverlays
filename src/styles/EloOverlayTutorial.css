@@ -58,7 +58,7 @@
   height: 94px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .twitchLoginButton {
@@ -82,4 +82,8 @@
 
 .twitchIcon {
   display: inline-flex;
+}
+
+.login-elo-tut {
+  height: 170px;
 }
