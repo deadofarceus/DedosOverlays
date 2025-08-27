@@ -122,7 +122,7 @@ function EloOverlayTutorial() {
                     id="dedoKey"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setKey(e.target.value)}
                   />
-                  {(key === "" || !window.location.hash) && (
+                  {key === "" && (
                     <div className="mt-2">
                       <Button
                         className="twitchLoginButton"
