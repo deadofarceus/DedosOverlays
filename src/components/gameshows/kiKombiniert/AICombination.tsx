@@ -13,25 +13,35 @@ function AICombination({ combination }: AICombinationProps) {
 
   return (
     <div className="AIcCombinationDiv">
-      <img
-        src={"../../AICombine/" + imageLeft + ".png"}
-        alt=""
-        className={
-          "AIcCombinationImage ACILEFT" + (!combination.leftShown && admin ? " AIcHidden" : "")
-        }
-      />
-      <img
-        src={"../../AICombine/" + imageRight + ".png"}
-        alt=""
-        className={
-          "AIcCombinationImage ACIRIGHT" + (!combination.rightShown && admin ? " AIcHidden" : "")
-        }
-      />
-      <img
-        src={"../../AICombine/" + combination.combined + ".png"}
-        alt=""
-        className="AIcCombinedImage"
-      />
+      <div className="AIcCombImgDiv ACICOMB">
+        <img
+          src={"../../AICombine/" + combination.combined + ".png"}
+          alt=""
+          className="AIcCombinedImage"
+        />
+        {admin && <div className="AIcIMGName blackOutline">{combination.combined}</div>}
+      </div>
+      <div className="AIcCombImgDiv ACILEFT" style={!admin ? { left: "-350px", top: "150px" } : {}}>
+        <img
+          src={"../../AICombine/" + imageLeft + ".png"}
+          alt=""
+          className={"AIcCombinationImage " + (!combination.leftShown && admin ? " AIcHidden" : "")}
+        />
+        {admin && <div className="AIcIMGName blackOutline">{imageLeft}</div>}
+      </div>
+      <div
+        className="AIcCombImgDiv ACIRIGHT"
+        style={!admin ? { right: "-350px", top: "150px" } : {}}
+      >
+        <img
+          src={"../../AICombine/" + imageRight + ".png"}
+          alt=""
+          className={
+            "AIcCombinationImage " + (!combination.rightShown && admin ? " AIcHidden" : "")
+          }
+        />
+        {admin && <div className="AIcIMGName blackOutline">{imageRight}</div>}
+      </div>
     </div>
   );
 }

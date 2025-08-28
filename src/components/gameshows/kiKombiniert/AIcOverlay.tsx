@@ -49,8 +49,20 @@ function AIcOverlay() {
           id=""
         />
       </div>
-      <img id="AIcLeft" src={"../../AICombine/" + imageLeft + ".png"} alt="Combination1" />
-      <img id="AIcRight" src={"../../AICombine/" + imageRight + ".png"} alt="Combination2" />
+      <div id="AIcLeft" className="AIcimgOverlayDiv">
+        <img
+          className="AIcimgOverlay"
+          src={"../../AICombine/" + imageLeft + ".png"}
+          alt="Combination1"
+        />
+      </div>
+      <div id="AIcRight" className="AIcimgOverlayDiv">
+        <img
+          className="AIcimgOverlay"
+          src={"../../AICombine/" + imageRight + ".png"}
+          alt="Combination2"
+        />
+      </div>
       <div id="AIcCombined">
         <img src={"../../AICombine/" + data.combination.combined + ".png"} alt="Combination" />
       </div>

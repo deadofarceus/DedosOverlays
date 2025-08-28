@@ -62,32 +62,25 @@
   margin-bottom: 100px;
   filter: drop-shadow(3px 3px 5px #222222b6) drop-shadow(-3px 3px 5px #222222b6)
     drop-shadow(-3px -3px 5px #222222b6) drop-shadow(3px -3px 5px #222222b6);
+  min-width: 500px;
+  height: 450px;
 }
 
 .AIcCombinationImage {
-  border: #c20114c4 15px solid;
-  border-radius: 60px;
-  background-color: #0c120cca;
-  width: 300px;
   height: 300px;
-  position: absolute;
 }
 
 .AIcCombinedImage {
-  border: #c20114c4 15px solid;
-  border-radius: 60px;
-  background-color: #0c120cca;
   width: 500px;
-  height: 500px;
 }
 
 .ACILEFT {
-  top: 262px;
+  top: 312px;
   left: -210px;
 }
 
 .ACIRIGHT {
-  top: 262px;
+  top: 312px;
   right: -210px;
 }
 
@@ -288,27 +281,26 @@
 }
 
 #AIcLeft {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  max-width: 250px;
-  max-height: 250px;
-  overflow: hidden;
   top: 72px;
   left: 1016px;
   rotate: -10deg;
 }
 
 #AIcRight {
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  max-width: 250px;
-  max-height: 250px;
-  overflow: hidden;
   top: 382px;
   left: 1028px;
   rotate: 15deg;
+}
+
+.AIcimgOverlayDiv {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  max-height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #AIcCombined {
@@ -350,4 +342,51 @@
   font-family: Franklin Gothic Medium, sans-serif;
   font-size: 48px;
   text-align: center;
+}
+
+.AIcCombCounter {
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 48px;
+  color: azure;
+  text-align: center;
+}
+
+.AIcIMGName {
+  font-weight: bold;
+  font-family: Franklin Gothic Medium, sans-serif;
+  font-size: 24px;
+  color: azure;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+}
+
+.AIcCombImgDiv {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  border: #c20114c4 15px solid;
+  border-radius: 60px;
+  background-color: #0c120cca;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AIcCombImgDivBIG {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+}
+
+.ACICOMB {
+  width: 500px;
+  height: 500px;
+}
+
+.AIcimgOverlay {
+  height: 250px;
 }

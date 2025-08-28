@@ -34,9 +34,151 @@ export const STARTGAMESTATE: AICombGameState = {
 
 const COMBINATIONS: { left: string; right: string; combined: string }[] = [
   { left: "AIHidden", right: "AIHidden", combined: "AIHidden" },
-  { left: "veigar_greybeard", right: "tolkingandalf", combined: "veigar_greybeard_x_tolkin" },
-  { left: "AIHidden", right: "AIHidden", combined: "AIHidden" },
-  { left: "", right: "", combined: "" },
+  {
+    left: "Maokai_24",
+    right: "Teemo_4",
+    combined: "astronaut_teemo_x_maokai",
+  },
+  {
+    left: "cz7QQqS",
+    right: "DrMundo_0",
+    combined: "obsess_x_mundo",
+  },
+  {
+    left: "Draven_3",
+    right: "solaaaaaa",
+    combined: "sola_x_kommentator_draven",
+  },
+  {
+    left: "noway5",
+    right: "pantheon",
+    combined: "noway_x_bäcker_pantheon",
+  },
+  {
+    left: "AurelionSol_0",
+    right: "Smolder_0",
+    combined: "smolder_x_asol",
+  },
+  {
+    left: "kutcher2",
+    right: "Taric_4",
+    combined: "poolparty_taric_x_kutcher2",
+  },
+  {
+    left: "Lux_0",
+    right: "mahluna",
+    combined: "mahluna_x_lux",
+  },
+  {
+    left: "krokoboss",
+    right: "Sett_0",
+    combined: "krokoboss_x_sett",
+  },
+  {
+    left: "Akshan_0",
+    right: "handofblood2",
+    combined: "hänno_x_akshan",
+  },
+  {
+    left: "Ambessa_0",
+    right: "Annie_0",
+    combined: "Annie_x_Ambessa1",
+  },
+  {
+    left: "Bard_0",
+    right: "kutcher",
+    combined: "kutcher_x_bard",
+  },
+  {
+    left: "Graves_5",
+    right: "tolkinnnn",
+    combined: "tolkin_x_poolparty_graves",
+  },
+  {
+    left: "karni534",
+    right: "Teemo_2",
+    combined: "karni_x_späher_teemo",
+  },
+  {
+    left: "karniiii",
+    right: "Nidalee_3",
+    combined: "karni_x_maid_nida",
+  },
+  {
+    left: "Caitlyn_0",
+    right: "maxim",
+    combined: "maxim_x_caitlyn",
+  },
+  {
+    left: "sarahtonin",
+    right: "Yuumi_0",
+    combined: "sarahtonin_x_yuumi",
+  },
+  {
+    left: "Gragas_0",
+    right: "handofblood1",
+    combined: "hänno_x_gragas",
+  },
+  {
+    left: "Anivia_0",
+    right: "Ashe_0",
+    combined: "Ashe_x_Anivia",
+  },
+  {
+    left: "nida",
+    right: "thunny",
+    combined: "thunny_x_nida",
+  },
+  {
+    left: "johnny1",
+    right: "Shaco_0",
+    combined: "johnny_x_shaco",
+  },
+  {
+    left: "broeki",
+    right: "Neeko_0",
+    combined: "broeki_x_neeko",
+  },
+  {
+    left: "Katarina_0",
+    right: "noway78",
+    combined: "noway_x_katarina",
+  },
+  {
+    left: "Gragas_0_(1)",
+    right: "metashi2",
+    combined: "metashi_x_gragas",
+  },
+  {
+    left: "broeki2323",
+    right: "gangplank",
+    combined: "broeki_x_poolparty_gangplank",
+  },
+  {
+    left: "DrMundo_2",
+    right: "vadda",
+    combined: "vadda_x_mundo",
+  },
+  {
+    left: "sola23",
+    right: "twistedfate",
+    combined: "sola_x_tango_twisted_fate",
+  },
+  {
+    left: "heimer",
+    right: "papaplatte",
+    combined: "papaplatte_x_explodierter_heimerdinger",
+  },
+  {
+    left: "briar",
+    right: "hännno",
+    combined: "hänno_x_briar",
+  },
+  {
+    left: "shacooo",
+    right: "zeniv",
+    combined: "zeniv_x_shaco",
+  },
 ];
 
 function AIcController() {
@@ -141,6 +283,9 @@ function AIcController() {
       </Col>
       <Col className="centerC AIcCombinationControll">
         <AICombination combination={data.combination} />
+        <h1 className="blackOutline AIcCombCounter">{`${data.currentPosition + 1}/${
+          COMBINATIONS.length
+        }`}</h1>
         <Col className="centerC w-100">
           <Row className="w-100 centerR">
             <Button
