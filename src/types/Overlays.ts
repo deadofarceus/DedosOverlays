@@ -27,7 +27,7 @@ export const OVERLAYS: Overlay[] = [
     game: "Pokémon",
     imageURL: "/Pokemon.png",
     hoverImageURL: "/PokemonHover.png",
-    description: "Track your SoulLink (Nuzlock) journey an display up to two Teams of 6 Pokémon",
+    description: "Track your SoulLink (Nuzlocke) journey an display up to two Teams of 6 Pokémon",
     url: "Pokemon/Soullink/team/tutorial",
   },
   {
