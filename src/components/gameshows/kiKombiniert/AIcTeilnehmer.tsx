@@ -4,7 +4,7 @@ import { buzzer, useQuery } from "../../../types/UsefulFunctions";
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { STARTGAMESTATE } from "./AIcController";
 import { Button, Container, Form } from "react-bootstrap";
-import AICombination from "./AICombination";
+import AICombinationOverlay from "./AICombinationOverlay";
 
 let ws: AICombineWebsocket;
 
@@ -43,7 +43,7 @@ function AIcTeilnehmer() {
 
   return (
     <Container className="AIcTeilnehmerCon w-100 centerC">
-      <AICombination combination={data.combination} />
+      <AICombinationOverlay combination={data.combination} />
       {userName && (
         <Button variant="danger" className="buzzerButton blackOutline" onClick={handleBuzzer}>
           BUZZER
