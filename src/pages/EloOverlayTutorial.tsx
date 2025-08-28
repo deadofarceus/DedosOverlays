@@ -119,7 +119,7 @@ function EloOverlayTutorial() {
                 />
               </InputGroup>
               <Row className="w-100">
-                <Form.Group className="w-50 login-elo-tut">
+                <Form.Group className="login-elo-tut">
                   <Form.Label className="blackOutline">
                     Login with Twitch or enter your Key:
                   </Form.Label>
