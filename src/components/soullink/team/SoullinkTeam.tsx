@@ -90,6 +90,7 @@ function SoullinkTeam() {
             imgType: "png",
             showPokeballs: true,
             showNicknames: false,
+            playSoullink: true,
           };
         }
         setSoullink(data.data);
