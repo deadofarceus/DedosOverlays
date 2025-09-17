@@ -1,10 +1,11 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Route, Pokemon } from "../../../types/Pokemon";
+import { Route, Pokemon, Settings } from "../../../types/Pokemon";
 import PokemonCell from "./PokemonCell";
 
 interface RouteRowProps {
   route: Route;
   allPokemons: Pokemon[];
+  settings: Settings;
   onToggleTeam: (routeName: string) => void;
   onToggleDisabled: (routeName: string) => void;
   onPokemonChange: (index: number, newPokemon: Pokemon) => void;
@@ -14,6 +15,7 @@ interface RouteRowProps {
 function RouteRow({
   route,
   allPokemons,
+  settings,
   onToggleTeam,
   onToggleDisabled,
   onPokemonChange,
@@ -27,6 +29,8 @@ function RouteRow({
   } else if (isInTeam) {
     containerClassName += " link-inTeam";
   }
+
+  const pokemon = settings.playSoullink ? route.pokemon : [route.pokemon[0]];
 
   return (
     <Container className={containerClassName}>
@@ -50,7 +54,7 @@ function RouteRow({
 
         {/* Pokemons */}
         <Row className="centerR w-75">
-          {route.pokemon.map((pokemon, index) => (
+          {pokemon.map((pokemon, index) => (
             <PokemonCell
               key={index}
               index={index}

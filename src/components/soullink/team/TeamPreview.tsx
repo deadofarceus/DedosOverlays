@@ -7,9 +7,10 @@ interface TeamPreviewProps {
 }
 
 function TeamPreview({ soullink }: TeamPreviewProps) {
+  const trainers = soullink.settings.playSoullink ? soullink.trainers : [soullink.trainers[0]];
   return (
     <Container className="teampreviewCon">
-      {soullink.trainers.map((t) => (
+      {trainers.map((t) => (
         <TeamP key={t.name} team={t.team} routes={soullink.routes} settings={soullink.settings} />
       ))}
     </Container>

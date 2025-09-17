@@ -114,6 +114,10 @@
   margin: 5px;
 }
 
+.smallRouteCon {
+  height: 150px !important;
+}
+
 .route-name {
   text-align: center;
   filter: drop-shadow(3px 3px 2px #222);

@@ -21,6 +21,11 @@ function SettingsControl({ changeSettings, settings }: SettingsControlProps) {
       <Col className="centerC SLsettingsCOl">
         <h2>Settings</h2>
         <DedoSwitch
+          label={settings.playSoullink ? "play Singleplayer" : "play Soullink"}
+          checked={settings.playSoullink}
+          onChange={(checked) => handleChange("playSoullink", checked)}
+        />
+        <DedoSwitch
           label={settings.imgType === "png" ? "Use GIF Animations" : "Use static PNG"}
           checked={settings.imgType === "gif"}
           onChange={(checked) => handleChange("imgType", checked ? "gif" : "png")}

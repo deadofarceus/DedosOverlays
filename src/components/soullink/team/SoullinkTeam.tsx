@@ -45,6 +45,7 @@ function SoullinkTeam() {
       imgType: "png",
       showPokeballs: true,
       showNicknames: false,
+      playSoullink: true,
     },
   });
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
@@ -232,6 +233,7 @@ function SoullinkTeam() {
       <SoullinkTeamHeader
         initialTrainerNames={soullink.trainers.map((t) => t.name)}
         onTrainerNameChange={handleTrainerNameChange}
+        settings={soullink.settings}
       />
       <SettingsMenu
         onReset={fullReset}
@@ -247,6 +249,7 @@ function SoullinkTeam() {
             key={r.name}
             route={r}
             allPokemons={allPokemons}
+            settings={soullink.settings}
             onPokemonChange={handlePokemonChange}
             onToggleDisabled={toggleRouteDisabled}
             onToggleTeam={toggleRouteInTeam}

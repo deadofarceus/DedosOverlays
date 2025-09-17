@@ -67,4 +67,5 @@ export interface Settings {
   imgType: "png" | "gif";
   showPokeballs: boolean;
   showNicknames: boolean;
+  playSoullink: boolean;
 }

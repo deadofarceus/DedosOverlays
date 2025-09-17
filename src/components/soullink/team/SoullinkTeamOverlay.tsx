@@ -30,10 +30,11 @@ function SoullinkTeamOverlay() {
       imgType: "png",
       showPokeballs: true,
       showNicknames: false,
+      playSoullink: true,
     },
   });
   const routes = soullink.routes;
-  const trainers = soullink.trainers;
+  const trainers = soullink.settings.playSoullink ? soullink.trainers : [soullink.trainers[0]];
   useEffect(() => {
     if (id && !ws) {
       ws = new BroadcastWebsocket<Soullink>(id, setSoullink);
