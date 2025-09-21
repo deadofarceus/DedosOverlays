@@ -67,13 +67,11 @@ function DeathcounterMod() {
 
   const handleBossChange = (boss: Boss | undefined, index: number) => {
     const newBosses = [...player.bosses];
-    let i = index;
     if (boss) {
-      i++;
       newBosses.push(boss);
     }
 
-    sendData({ ...player, bosses: newBosses, currentBoss: i });
+    sendData({ ...player, bosses: newBosses, currentBoss: index });
   };
 
   const handleSecondPhase = () => {
