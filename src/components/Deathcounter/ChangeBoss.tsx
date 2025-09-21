@@ -25,7 +25,7 @@ function ChangeBoss({ player, callback }: ChangeBossProps) {
           id="button-addon2"
           onClick={() => {
             if (!player.bosses.find((b) => b.name === boss) && boss !== "") {
-              callback(new Boss(boss, undefined, false), player.bosses.length - 1);
+              callback(new Boss(boss, undefined, false), player.bosses.length);
             }
           }}
         >
