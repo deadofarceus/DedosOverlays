@@ -4,7 +4,7 @@ import { useState } from "react";
 
 interface ChangeBossProps {
   player: Player;
-  callback: (index: number) => void;
+  callback: (boss: Boss | undefined, index: number) => void;
 }
 
 function ChangeBoss({ player, callback }: ChangeBossProps) {
@@ -25,9 +25,8 @@ function ChangeBoss({ player, callback }: ChangeBossProps) {
           id="button-addon2"
           onClick={() => {
             if (!player.bosses.find((b) => b.name === boss) && boss !== "") {
-              player.bosses.push(new Boss(boss, undefined, false));
+              callback(new Boss(boss, undefined, false), player.bosses.length - 1);
             }
-            callback(player.bosses.length - 1);
           }}
         >
           Create
@@ -42,7 +41,7 @@ function ChangeBoss({ player, callback }: ChangeBossProps) {
                 key={index}
                 className="changeBossItem"
                 onClick={() => {
-                  callback(index);
+                  callback(undefined, index);
                 }}
               >
                 {b.name}

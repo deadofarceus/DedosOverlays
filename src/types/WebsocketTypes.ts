@@ -1,4 +1,4 @@
-import { DeathEvent, FiveVFiveEvent, ModEvent } from "./BackendEvents";
+import { FiveVFiveEvent, ModEvent } from "./BackendEvents";
 import { Player } from "./DeathcounterTypes";
 import { Game, Team } from "./oldOrUnused/FiveVFiveTypes";
 import { AbisZAccount, Account, Match, QUEUETYPES } from "./LeagueTypes";
@@ -274,18 +274,10 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
 
     // console.log(data);
 
-    const player = data.data.player as Player;
+    const player = data.data as Player;
 
-    localStorage.setItem(this.id + "EldenRingDeathcounter", JSON.stringify(player));
-
-    if (!this.mod) {
-      this.callback(player);
-    }
+    this.callback(player);
   };
-
-  sendData(player: Player): void {
-    this.sendEvent(new ModEvent(this.id, "reachAllWithSameID", new DeathEvent(this.id, player)));
-  }
 }
 
 export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {

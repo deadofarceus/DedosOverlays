@@ -4,7 +4,7 @@ import ControlPanel from "./ControlPanel";
 import GraphBox from "./GraphBox";
 import ChangeBoss from "./ChangeBoss";
 import "../../styles/Deathcounter.css";
-import { DEFAULTPLAYER, Player, Settings } from "../../types/DeathcounterTypes";
+import { Boss, DEFAULTPLAYER, Player, Settings } from "../../types/DeathcounterTypes";
 import { useEffect, useState } from "react";
 import { useQuery } from "../../types/UsefulFunctions";
 import { DeathCounterWebsocket, GLOBALADDRESS } from "../../types/WebsocketTypes";
@@ -19,6 +19,8 @@ function DeathcounterMod() {
   const [player, setPlayer] = useState<Player>(DEFAULTPLAYER);
   const query = useQuery();
   const id = query.get("id");
+
+  console.log("PLAYER", player);
 
   useEffect(() => {
     if (!ws && id) {
@@ -59,8 +61,15 @@ function DeathcounterMod() {
     ws.sendEvent(event);
   };
 
-  const handleBossChange = (index: number) => {
-    player.currentBoss = index;
+  const handleBossChange = (boss: Boss | undefined, index: number) => {
+    const newBosses = [...player.bosses];
+    let i = index;
+    if (boss) {
+      i++;
+      newBosses.push(boss);
+    }
+
+    sendData({ ...player, bosses: newBosses, currentBoss: i });
   };
 
   const handleSecondPhase = () => {
@@ -99,7 +108,7 @@ function DeathcounterMod() {
     sendData({ ...player, settings: newSettings });
   };
 
-  console.log(player);
+  // console.log("reload", player);
 
   return (
     <Container className="DeathContainer w-100 centerC">
