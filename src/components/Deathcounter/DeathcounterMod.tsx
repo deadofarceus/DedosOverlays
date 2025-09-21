@@ -45,6 +45,7 @@ function DeathcounterMod() {
         if (savedPlayer) {
           const sPlayer = JSON.parse(savedPlayer) as Player;
           sPlayer.settings = new Settings(5, true, false, false);
+          sPlayer.id = id;
           setPlayer(sPlayer);
         }
       }
