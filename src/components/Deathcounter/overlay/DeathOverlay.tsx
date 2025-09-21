@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Player, DEFAULTPLAYER } from "../../../types/DeathcounterTypes";
 import { useQuery } from "../../../types/UsefulFunctions";
-import { DeathCounterWebsocket } from "../../../types/WebsocketTypes";
+import { DeathCounterWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import GraphOverlay from "./GraphOverlay";
 
 let ws: DeathCounterWebsocket;
@@ -16,16 +16,24 @@ function DeathOverlay() {
     if (!ws && id) {
       ws = new DeathCounterWebsocket(id, setPlayer, false);
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/deathcounter/player/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setPlayer(data.data);
+      } else {
+        console.log("ERROR FETCHING PLAYER: ", res.statusText);
+      }
+    };
+
+    fetchData();
   }, [id, query]);
 
   let total = 0;
   player.bosses.forEach((b) => {
     total += b.deaths.length - 1;
-    if (
-      b.deaths.includes(0) &&
-      b.deaths.length - 1 > 0 &&
-      b.name !== "Other Monsters or Heights"
-    ) {
+    if (b.deaths.includes(0) && b.deaths.length - 1 > 0 && b.name !== "Other Monsters or Heights") {
       total--;
     }
   });
