@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Player, PlayerD } from "../../types/DeathcounterTypes";
+import { Player } from "../../types/DeathcounterTypes";
 
-function ControlPanel({ player, callback }: PlayerD) {
+interface ControlPanelProps {
+  player: Player;
+  callback: () => void;
+  changeDeath: (percentage: number) => void;
+}
+
+function ControlPanel({ player, callback, changeDeath }: ControlPanelProps) {
   const [percentage, setPercentage] = useState<number>(100);
   const current = player.bosses[player.currentBoss];
-  const HPARRAY = current.secondPhase
-    ? [0, 50, 100, 150, 200]
-    : [0, 25, 50, 75, 100];
+  const HPARRAY = current.secondPhase ? [0, 50, 100, 150, 200] : [0, 25, 50, 75, 100];
 
   const maximumHP = current.secondPhase ? 200 : 100;
 
@@ -20,16 +24,7 @@ function ControlPanel({ player, callback }: PlayerD) {
           variant="primary"
           className="w-50 deathbutton"
           onClick={() => {
-            player.bosses[player.currentBoss].deaths.push(percentage);
-            callback(
-              new Player(
-                player.id,
-                player.name,
-                player.bosses,
-                player.currentBoss,
-                player.settings
-              )
-            );
+            changeDeath(percentage);
           }}
         >
           {"New Death " + percentage + "%"}
@@ -38,16 +33,7 @@ function ControlPanel({ player, callback }: PlayerD) {
           className="w-25 deathbutton"
           variant="warning"
           onClick={() => {
-            player.bosses[player.currentBoss].deaths.pop();
-            callback(
-              new Player(
-                player.id,
-                player.name,
-                player.bosses,
-                player.currentBoss,
-                player.settings
-              )
-            );
+            changeDeath(-1);
           }}
         >
           Delete last death
@@ -79,28 +65,10 @@ function ControlPanel({ player, callback }: PlayerD) {
           variant="secondary"
           className="mt-3"
           onClick={() => {
-            current.secondPhase = !current.secondPhase;
-            for (let i = 0; i < current.deaths.length; i++) {
-              if (current.secondPhase) {
-                current.deaths[i] = current.deaths[i] += 100;
-              } else {
-                current.deaths[i] = current.deaths[i] -= 100;
-              }
-            }
-            callback(
-              new Player(
-                player.id,
-                player.name,
-                player.bosses,
-                player.currentBoss,
-                player.settings
-              )
-            );
+            callback();
           }}
         >
-          {!current.secondPhase
-            ? "Enable Second Phase"
-            : "Disable Second Phase"}
+          {!current.secondPhase ? "Enable Second Phase" : "Disable Second Phase"}
         </Button>
       )}
     </Col>

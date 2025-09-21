@@ -10,26 +10,22 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { Player, PlayerD } from "../../types/DeathcounterTypes";
+import { Player } from "../../types/DeathcounterTypes";
 import { linearRegression } from "../../types/ComplexMath";
+import { useState } from "react";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-function GraphBox({ player, callback }: PlayerD) {
+interface GraphBoxProps {
+  player: Player;
+  callback: (attribute: string, value: any) => void;
+}
+
+function GraphBox({ player, callback }: GraphBoxProps) {
+  const [rangeValue, setRangeValue] = useState(5);
   const current = player.bosses[player.currentBoss];
   const personalBest = Math.min(...current.deaths);
-  const linear = linearRegression(
-    [...Array(current.deaths.length).keys()],
-    current.deaths
-  );
+  const linear = linearRegression([...Array(current.deaths.length).keys()], current.deaths);
   //   const personalBests: number[] = [current.deaths[0]];
   //   const progressTries = [];
   //   for (let i = 0; i < current.deaths.length; i++) {
@@ -191,26 +187,18 @@ function GraphBox({ player, callback }: PlayerD) {
           <Col className="w-75">
             <Line className="progressChart" options={options} data={data} />
             <Form.Group className="percentageGroup">
-              <Form.Label className="formlabel">
-                Tries in Overlay: {player.settings.triesInGraph}
-              </Form.Label>
+              <Form.Label className="formlabel">Tries in Overlay: {rangeValue}</Form.Label>
               <Form.Range
                 max={current.deaths.length - 1}
                 min={5}
                 step={1}
                 defaultValue={5}
                 className="percentageSlider"
+                onMouseUp={(event) => {
+                  callback("triesInGraph", parseInt((event.target as any).value));
+                }}
                 onChange={(event) => {
-                  player.settings.triesInGraph = parseInt(event.target.value);
-                  callback(
-                    new Player(
-                      player.id,
-                      player.name,
-                      player.bosses,
-                      player.currentBoss,
-                      player.settings
-                    )
-                  );
+                  setRangeValue(parseInt(event.target.value));
                 }}
               />
             </Form.Group>
@@ -222,16 +210,7 @@ function GraphBox({ player, callback }: PlayerD) {
               label="Show all Tries"
               defaultChecked={true}
               onChange={(event) => {
-                player.settings.showAll = event.target.checked;
-                callback(
-                  new Player(
-                    player.id,
-                    player.name,
-                    player.bosses,
-                    player.currentBoss,
-                    player.settings
-                  )
-                );
+                callback("showAll", event.target.checked);
               }}
             />
             <Form.Check
@@ -240,16 +219,7 @@ function GraphBox({ player, callback }: PlayerD) {
               label="Show Prediction"
               defaultChecked={false}
               onChange={(event) => {
-                player.settings.showPrediction = event.target.checked;
-                callback(
-                  new Player(
-                    player.id,
-                    player.name,
-                    player.bosses,
-                    player.currentBoss,
-                    player.settings
-                  )
-                );
+                callback("showPrediction", event.target.checked);
               }}
             />
             <Form.Check
@@ -258,16 +228,7 @@ function GraphBox({ player, callback }: PlayerD) {
               label="Show Linear Regression"
               defaultChecked={false}
               onChange={(event) => {
-                player.settings.showLinear = event.target.checked;
-                callback(
-                  new Player(
-                    player.id,
-                    player.name,
-                    player.bosses,
-                    player.currentBoss,
-                    player.settings
-                  )
-                );
+                callback("showLinear", event.target.checked);
               }}
             />
           </Col>

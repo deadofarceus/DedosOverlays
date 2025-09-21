@@ -1,16 +1,16 @@
 import { Card, Col } from "react-bootstrap";
-import { PlayerD } from "../../types/DeathcounterTypes";
+import { Player } from "../../types/DeathcounterTypes";
 
-function BossInfo({ player }: PlayerD) {
+interface BossInfoProps {
+  player: Player;
+}
+
+function BossInfo({ player }: BossInfoProps) {
   const current = player.bosses[player.currentBoss];
   let total = 0;
   player.bosses.forEach((b) => {
     total += b.deaths.length - 1;
-    if (
-      b.deaths.includes(0) &&
-      b.deaths.length - 1 > 0 &&
-      b.name !== "Other Monsters or Heights"
-    ) {
+    if (b.deaths.includes(0) && b.deaths.length - 1 > 0 && b.name !== "Other Monsters or Heights") {
       total--;
     }
   });

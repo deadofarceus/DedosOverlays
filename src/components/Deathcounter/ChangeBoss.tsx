@@ -1,15 +1,13 @@
-import {
-  Button,
-  Card,
-  Col,
-  Form,
-  InputGroup,
-  ListGroup,
-} from "react-bootstrap";
-import { Boss, Player, PlayerD } from "../../types/DeathcounterTypes";
+import { Button, Card, Col, Form, InputGroup, ListGroup } from "react-bootstrap";
+import { Boss, Player } from "../../types/DeathcounterTypes";
 import { useState } from "react";
 
-function ChangeBoss({ player, callback }: PlayerD) {
+interface ChangeBossProps {
+  player: Player;
+  callback: (index: number) => void;
+}
+
+function ChangeBoss({ player, callback }: ChangeBossProps) {
   const [boss, setBoss] = useState<string>("");
   return (
     <Col xs={3}>
@@ -20,9 +18,7 @@ function ChangeBoss({ player, callback }: PlayerD) {
           value={boss}
           placeholder="Enter new Boss name"
           aria-describedby="basic-addon2"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setBoss(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBoss(e.target.value)}
         />
         <Button
           variant="success"
@@ -31,16 +27,7 @@ function ChangeBoss({ player, callback }: PlayerD) {
             if (!player.bosses.find((b) => b.name === boss) && boss !== "") {
               player.bosses.push(new Boss(boss, undefined, false));
             }
-            player.currentBoss = player.bosses.length - 1;
-            callback(
-              new Player(
-                player.id,
-                player.name,
-                player.bosses,
-                player.currentBoss,
-                player.settings
-              )
-            );
+            callback(player.bosses.length - 1);
           }}
         >
           Create
@@ -55,16 +42,7 @@ function ChangeBoss({ player, callback }: PlayerD) {
                 key={index}
                 className="changeBossItem"
                 onClick={() => {
-                  player.currentBoss = index;
-                  callback(
-                    new Player(
-                      player.id,
-                      player.name,
-                      player.bosses,
-                      player.currentBoss,
-                      player.settings
-                    )
-                  );
+                  callback(index);
                 }}
               >
                 {b.name}
