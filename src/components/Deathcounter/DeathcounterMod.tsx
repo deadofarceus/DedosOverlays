@@ -16,9 +16,13 @@ const oracle = createOracle();
 
 function DeathcounterMod() {
   document.body.className = "noOBS";
-  const [player, setPlayer] = useState<Player>(DEFAULTPLAYER);
   const query = useQuery();
   const id = query.get("id");
+  if (!id) {
+    return null;
+  }
+
+  const [player, setPlayer] = useState<Player>({ ...DEFAULTPLAYER, id: id });
 
   console.log("PLAYER", player);
 
