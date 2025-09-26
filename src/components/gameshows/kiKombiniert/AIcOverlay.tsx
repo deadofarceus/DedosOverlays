@@ -1,9 +1,9 @@
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { useQuery } from "../../../types/UsefulFunctions";
+import { usePreloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { STARTGAMESTATE } from "./AIcController";
+import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
 import VDOLinkStream from "../../util/VDOLinkStream";
 
 let ws: AICombineWebsocket;
@@ -14,6 +14,14 @@ function AIcOverlay() {
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
 
   const addBuzzer = (_buzzer: string) => {};
+
+  usePreloadImages(
+    COMBINATIONS.map((combination) => combination.left).concat(
+      COMBINATIONS.map((combination) => combination.right).concat(
+        COMBINATIONS.map((combination) => combination.combined)
+      )
+    )
+  );
 
   useEffect(() => {
     const id = query.get("id");

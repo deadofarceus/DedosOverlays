@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export function useQuery() {
@@ -26,4 +26,13 @@ export function isOBSBrowser(): boolean {
     browserName.indexOf("sld") > -1 ||
     browserName.indexOf("electron") > -1
   );
+}
+
+export function usePreloadImages(urls: string[]) {
+  useEffect(() => {
+    urls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, [urls]);
 }

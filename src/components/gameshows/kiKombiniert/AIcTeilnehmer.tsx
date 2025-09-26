@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { buzzer, useQuery } from "../../../types/UsefulFunctions";
+import { buzzer, usePreloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
-import { STARTGAMESTATE } from "./AIcController";
+import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
 import { Button, Container, Form } from "react-bootstrap";
 import AICombinationOverlay from "./AICombinationOverlay";
 
@@ -32,6 +32,14 @@ function AIcTeilnehmer() {
       buzzer(id, userName);
     }
   };
+
+  usePreloadImages(
+    COMBINATIONS.map((combination) => combination.left).concat(
+      COMBINATIONS.map((combination) => combination.right).concat(
+        COMBINATIONS.map((combination) => combination.combined)
+      )
+    )
+  );
 
   useEffect(() => {
     const id = query.get("id");
