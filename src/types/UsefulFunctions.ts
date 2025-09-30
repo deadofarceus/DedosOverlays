@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 export function useQuery() {
@@ -29,10 +29,8 @@ export function isOBSBrowser(): boolean {
 }
 
 export function preloadImages(urls: string[]) {
-  useEffect(() => {
-    urls.forEach((url) => {
-      const img = new Image();
-      img.src = url;
-    });
-  }, [urls]);
+  urls.forEach((url) => {
+    const img = new Image();
+    img.src = url;
+  });
 }
