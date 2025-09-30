@@ -1,6 +1,6 @@
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { usePreloadImages, useQuery } from "../../../types/UsefulFunctions";
+import { preloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
@@ -15,19 +15,18 @@ function AIcOverlay() {
 
   const addBuzzer = (_buzzer: string) => {};
 
-  usePreloadImages(
-    COMBINATIONS.map((combination) => combination.left).concat(
-      COMBINATIONS.map((combination) => combination.right).concat(
-        COMBINATIONS.map((combination) => combination.combined)
-      )
-    )
-  );
-
   useEffect(() => {
     const id = query.get("id");
 
     if (!ws && id) {
       ws = new AICombineWebsocket(id, setData, addBuzzer);
+      preloadImages(
+        COMBINATIONS.map((combination) => combination.left).concat(
+          COMBINATIONS.map((combination) => combination.right).concat(
+            COMBINATIONS.map((combination) => combination.combined)
+          )
+        )
+      );
     }
   }, [query]);
 

@@ -28,7 +28,7 @@ export function isOBSBrowser(): boolean {
   );
 }
 
-export function usePreloadImages(urls: string[]) {
+export function preloadImages(urls: string[]) {
   useEffect(() => {
     urls.forEach((url) => {
       const img = new Image();

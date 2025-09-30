@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { clearBuzzer, usePreloadImages, useQuery } from "../../../types/UsefulFunctions";
+import { clearBuzzer, preloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "../../../styles/gameshows/AICombine.css";
@@ -188,19 +188,19 @@ function AIcController() {
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const isTeams = query.get("teams") === "true";
 
-  usePreloadImages(
-    COMBINATIONS.map((combination) => combination.left).concat(
-      COMBINATIONS.map((combination) => combination.right).concat(
-        COMBINATIONS.map((combination) => combination.combined)
-      )
-    )
-  );
-
   useEffect(() => {
     const id = query.get("id");
 
     if (!ws && id) {
       ws = new AICombineWebsocket(id, setData, addBuzzer);
+
+      preloadImages(
+        COMBINATIONS.map((combination) => combination.left).concat(
+          COMBINATIONS.map((combination) => combination.right).concat(
+            COMBINATIONS.map((combination) => combination.combined)
+          )
+        )
+      );
     }
   }, [query]);
 
