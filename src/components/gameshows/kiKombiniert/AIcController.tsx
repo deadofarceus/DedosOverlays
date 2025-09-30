@@ -195,9 +195,9 @@ function AIcController() {
       ws = new AICombineWebsocket(id, setData, addBuzzer);
 
       preloadImages(
-        COMBINATIONS.map((combination) => combination.left).concat(
-          COMBINATIONS.map((combination) => combination.right).concat(
-            COMBINATIONS.map((combination) => combination.combined)
+        COMBINATIONS.map((combination) => "../../AICombine/" + combination.left + ".png").concat(
+          COMBINATIONS.map((combination) => "../../AICombine/" + combination.right + ".png").concat(
+            COMBINATIONS.map((combination) => "../../AICombine/" + combination.combined + ".png")
           )
         )
       );
