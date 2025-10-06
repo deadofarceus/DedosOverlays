@@ -64,6 +64,7 @@ function AbisZOverlay() {
           lpDiff={0}
           gmBorder={0}
           challBorder={0}
+          name={account.name}
         />
       </Row>
     </Container>
