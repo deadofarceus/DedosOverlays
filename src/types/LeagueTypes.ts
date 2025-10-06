@@ -53,13 +53,7 @@ export class Match {
   win: boolean;
   id: string;
   mvp: boolean;
-  constructor(
-    id: string,
-    championName: string,
-    championID: number,
-    win: boolean,
-    mvp: boolean
-  ) {
+  constructor(id: string, championName: string, championID: number, win: boolean, mvp: boolean) {
     this.id = id;
     this.championName = championName;
     this.championID = championID;
@@ -88,6 +82,7 @@ export interface AccountElo {
   lpDiff: number;
   gmBorder: number;
   challBorder: number;
+  name: string;
 }
 
 export interface QueueType {
@@ -156,8 +151,7 @@ export const TESTABISZ: AbisZAccount = {
   name: "Broeki",
   accountId: "oUj4gYU5Uq_0xqYfXlS8YYA9TH2xAZ3bbuSFsWcHQ3ug7FU",
   id: "HK-WoPpnryGSFUs8Xu00gWX8Tjxhx6IobbwK_rgKlPjYB9M",
-  puuid:
-    "gZCeXcnhYZHdIAudO3ZThGiKjhMKBobSRrHRDBUGY7BTbnWYqt3xqP6buQNqmMRZMt-FPF0wqE_YdQ",
+  puuid: "gZCeXcnhYZHdIAudO3ZThGiKjhMKBobSRrHRDBUGY7BTbnWYqt3xqP6buQNqmMRZMt-FPF0wqE_YdQ",
   championGroups: [
     {
       letter: "A",
@@ -573,8 +567,7 @@ export const DEFAULTABISZ: AbisZAccount = {
   name: "Broeki",
   accountId: "oUj4gYU5Uq_0xqYfXlS8YYA9TH2xAZ3bbuSFsWcHQ3ug7FU",
   id: "HK-WoPpnryGSFUs8Xu00gWX8Tjxhx6IobbwK_rgKlPjYB9M",
-  puuid:
-    "gZCeXcnhYZHdIAudO3ZThGiKjhMKBobSRrHRDBUGY7BTbnWYqt3xqP6buQNqmMRZMt-FPF0wqE_YdQ",
+  puuid: "gZCeXcnhYZHdIAudO3ZThGiKjhMKBobSRrHRDBUGY7BTbnWYqt3xqP6buQNqmMRZMt-FPF0wqE_YdQ",
   championGroups: [
     {
       letter: "A",
