@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import EloInfo from "../components/league/EloInfo";
 import Matchhistory from "../components/league/Matchhistory";
+import Newspaper from "../components/news/Newspaper";
 
 let ws: EloWebsocket;
 
@@ -64,6 +65,8 @@ function EloOverlay() {
     (entry) => entry.queueId === QUEUETYPES.get(queueType!)!.queueId
   )!;
 
+  const isPhilly = playerInfo.name === "Philly Westside";
+
   return (
     <Container
       className="d-flex flex-column justify-content-center align-items-center eloOverlayContainer"
@@ -78,6 +81,7 @@ function EloOverlay() {
         challBorder={entry.challBorder}
       />
       <Matchhistory entry={entry} />
+      {isPhilly && <Newspaper />}
     </Container>
   );
 }
