@@ -82,7 +82,6 @@ export interface AccountElo {
   lpDiff: number;
   gmBorder: number;
   challBorder: number;
-  name: string;
 }
 
 export interface QueueType {

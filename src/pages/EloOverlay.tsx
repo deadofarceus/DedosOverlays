@@ -76,7 +76,6 @@ function EloOverlay() {
         lpDiff={entry.combinedLP - entry.lpStart}
         gmBorder={entry.gmBorder}
         challBorder={entry.challBorder}
-        name={playerInfo.name}
       />
       <Matchhistory entry={entry} />
     </Container>
