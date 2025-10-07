@@ -21,7 +21,7 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: scrollLeft 700s linear infinite;
+  animation: scrollLeft 1000s linear infinite;
   padding-left: 100%;
 }
 
