@@ -12,13 +12,13 @@
 
 .news-content {
   display: inline-block;
-  font-family: "Impact", "Arial Black", sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 900;
-  font-size: 36px;
+  font-size: 48px;
   color: #fff;
   text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000,
     0px 0px 10px rgba(0, 0, 0, 0.8);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   white-space: nowrap;
   animation: scrollLeft 700s linear infinite;
