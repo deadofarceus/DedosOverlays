@@ -1,0 +1,212 @@
+.powerpicks-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.powerpicks-login h1,
+.powerpicks-container h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.powerpicks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.powerpicks-selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 320px;
+  color: azure;
+  margin: 20px;
+}
+
+.powerpicks-selected-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+}
+
+.powerpick {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  background: linear-gradient(135deg, #9b79be, #7c5aa0);
+  border: 3px solid #463250;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.powerpick img {
+  margin: 5%;
+  clip-path: circle(46% at 50% 50%);
+}
+
+.powerpick h4 {
+  font-family: "Roboto Mono", monospace;
+}
+
+.powerpick-select {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.powerpick-select-filter {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #0c0c0c;
+  font-size: 30px;
+  width: 260px;
+  margin: 10px;
+}
+
+.powerpick-select-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.powerpick-select-item {
+  /* box-shadow: 0 8px 12px rgba(0, 0, 0, 1); */
+  display: flex;
+  cursor: pointer;
+  margin: 5px;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 134px;
+  height: 134px;
+  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+  border-radius: 10px;
+  border: #463250 3px solid;
+}
+
+.powerpick-select-item:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
+  transform: translateY(-4px);
+  border: #cf90f1 3px solid;
+}
+
+.powerpick-select-item-img {
+  clip-path: circle(69% at 50% 50%);
+}
+
+.powerpick-selected {
+  position: relative;
+  border: #ff2b2b 3px solid;
+}
+
+.powerpick-selected::after {
+  background: #ff27274d;
+  border-radius: 10px;
+  content: "";
+  top: -3px;
+  left: -3px;
+  position: absolute;
+  width: 134px;
+  height: 134px;
+}
+
+.powerpick-button {
+  margin: 10px;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid #6f5494;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c5aa0, #9b79be);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.powerpick-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.05);
+}
+
+.powerpick-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  filter: brightness(0.98);
+}
+
+.powerpick-vote-button {
+  border: 1px solid #649454;
+  color: #ffffff;
+  background: linear-gradient(135deg, #67a05a, #7bbe79);
+}
+
+.powerpick-voteStop-button {
+  border: 1px solid #945454;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c04b4b, #ca4343);
+}
+
+.powerpicks-vote-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.powerpicks-winner-con {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+
+.powerpicks-winner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 40%;
+  background: linear-gradient(135deg, #6fb4cf, #3a958a);
+  border-radius: 50px;
+  border: #181338 6px solid;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
+}

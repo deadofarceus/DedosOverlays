@@ -35,6 +35,7 @@ import AIcTeilnehmer from "./components/gameshows/kiKombiniert/AIcTeilnehmer";
 import AIcOverlay from "./components/gameshows/kiKombiniert/AIcOverlay";
 import DDFOverlay from "./components/gameshows/ddf/DDFOverlay";
 import DDFController from "./components/gameshows/ddf/DDFController";
+import Powerpicks from "./pages/Powerpicks";
 
 function App() {
   return (
@@ -99,6 +100,7 @@ function App() {
         <Route path="Stream">
           <Route path="randomChar" element={<RandomCharGen />} />
           <Route path="VTuber" element={<VTuber />} />
+          <Route path="Powerpicks" element={<Powerpicks />} />
         </Route>
       </Route>
 
