@@ -19,7 +19,7 @@ function DedoNavbar() {
   return (
     <Navbar bg="dark" data-bs-theme="dark" className="bg-body-tertiary fixed-top">
       <Container>
-        <Navbar.Brand href="/">Dedos Overlays</Navbar.Brand>
+        <Navbar.Brand href="/">Arceus Overlays</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/help">Help</Nav.Link>
