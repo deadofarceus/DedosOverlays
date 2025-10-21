@@ -40,7 +40,7 @@ function Powerpicks() {
         window.location.hash = "";
 
         powerpickService = new PowerpickService(CLIENTID, token, handleVote);
-        console.log(powerpickService); //TODO
+        // console.log(powerpickService);
 
         setToken(token);
       } else {
@@ -51,7 +51,7 @@ function Powerpicks() {
     }
   }, []);
 
-  if (token === "1") {
+  if (token === "") {
     return <Login clientID={CLIENTID} />;
   }
 
@@ -69,22 +69,21 @@ function Powerpicks() {
                   (voteTime ? "powerpick-voteStop-button" : "powerpick-vote-button")
                 }
                 onClick={() => {
-                  // powerpickService.startVoting(picks); TODO
+                  powerpickService.startVoting(picks);
                   setVoteTime((prev) => !prev);
                 }}
               >
                 {voteTime ? "Stop Voting" : "Start Voting"}
               </button>
-              {!voteTime &&
-                picks.some((p) => p.votes > -1) && ( // TODO to 0
-                  <button
-                    className="powerpick-button"
-                    // onClick={() => setWinner(powerpickService.chooseWinner())} TODO
-                    onClick={() => setWinner("GEWINNER_0815")}
-                  >
-                    Roll Winner
-                  </button>
-                )}
+              {!voteTime && picks.some((p) => p.votes > 0) && (
+                <button
+                  className="powerpick-button"
+                  onClick={() => setWinner(powerpickService.chooseWinner())}
+                  // onClick={() => setWinner("GEWINNER_0815")}
+                >
+                  Roll Winner
+                </button>
+              )}
             </div>
             <h2>Selected Champions:</h2>
           </div>
