@@ -76,12 +76,12 @@ export class PowerpickService {
   }
 
   chooseWinner() {
-    // const winnerpick = this.powerpicks.reduce((prev, current) =>
-    //   prev.votes > current.votes ? prev : current
-    // );
+    const winnerpick = this.powerpicks.reduce((prev, current) =>
+      prev.votes > current.votes ? prev : current
+    );
 
-    // const winner = winnerpick.voters[Math.floor(Math.random() * winnerpick.voters.length)];
-    const winner = "GEWINNER_0815";
+    const winner = winnerpick.voters[Math.floor(Math.random() * winnerpick.voters.length)];
+    // const winner = "GEWINNER_0815";
     return winner;
   }
 
