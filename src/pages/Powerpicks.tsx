@@ -58,7 +58,14 @@ function Powerpicks() {
   return (
     <div className="powerpicks-container">
       {winner !== "" && <Winner winner={winner} handleClose={() => setWinner("")} />}
-      <h1>Powerpicks</h1>
+      <div className="powerpicks-header">
+        <img
+          src={"https://www.intel.com/content/dam/logos/intel-header-logo.svg"}
+          alt="Intel"
+          className="intel-logo"
+        />
+        <h1>- Powerpicks</h1>
+      </div>
       <div className="powerpicks-selected">
         {picks.length !== 0 && (
           <div className="powerpicks-vote-controls">

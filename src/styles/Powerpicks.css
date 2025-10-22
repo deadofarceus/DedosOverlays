@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Press+Start+2P&display=swap");
+
 .powerpicks-login {
   display: flex;
   flex-direction: column;
@@ -6,18 +8,32 @@
   margin-top: 200px;
 }
 
+.powerpicks-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.intel-logo {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0px 2px 4px rgba(0, 104, 181, 0.3));
+}
+
 .powerpicks-login h1,
 .powerpicks-container h1 {
-  font-size: 3.5rem;
+  font-size: 3.8rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+  background: linear-gradient(135deg, #71c1ff, #5ba0ee, #71c1ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: 2px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px #0092f380;
+  filter: drop-shadow(0px 2px 2px #ffffff10);
+  font-family: "Intel One Mono", monospace;
 }
 
 .powerpicks-container {
@@ -55,8 +71,8 @@
   justify-content: center;
   align-items: center;
   width: 200px;
-  background: linear-gradient(135deg, #9b79be, #7c5aa0);
-  border: 3px solid #463250;
+  background: linear-gradient(135deg, #4a90e2, #0068b5);
+  border: 3px solid #00477d;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
@@ -108,13 +124,13 @@
   overflow: hidden;
   transition: all 0.1s ease-in-out;
   border-radius: 10px;
-  border: #463250 3px solid;
+  border: #0068b5 3px solid;
 }
 
 .powerpick-select-item:hover {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
   transform: translateY(-4px);
-  border: #cf90f1 3px solid;
+  border: #42adff 3px solid;
 }
 
 .powerpick-select-item-img {
@@ -141,27 +157,28 @@
   margin: 10px;
   padding: 0.85rem 1.75rem;
   border-radius: 9999px;
-  border: 1px solid #6f5494;
+  border: 1px solid #0068b5;
   color: #ffffff;
-  background: linear-gradient(135deg, #7c5aa0, #9b79be);
+  background: linear-gradient(135deg, #0068b5, #4a90e2);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 104, 181, 0.3);
   transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .powerpick-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 30px #0068b580;
   filter: brightness(1.05);
 }
 
 .powerpick-button:active {
   transform: translateY(0);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 18px #0068b566;
   filter: brightness(0.98);
+  background: linear-gradient(135deg, #004a8f, #2d6bb3);
 }
 
 .powerpick-vote-button {
@@ -205,8 +222,20 @@
   align-items: center;
   width: 40%;
   height: 40%;
-  background: linear-gradient(135deg, #6fb4cf, #3a958a);
+  color: #ffffff;
+  background: linear-gradient(135deg, #0068b5, #4a90e2);
   border-radius: 50px;
-  border: #181338 6px solid;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
+  border: #ffffff 6px solid;
+  box-shadow: 0 8px 12px rgba(0, 104, 181, 0.5);
+}
+
+.powerpicks-winner h1 {
+  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 4px #0000006e;
+  letter-spacing: 2px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 1rem;
 }
