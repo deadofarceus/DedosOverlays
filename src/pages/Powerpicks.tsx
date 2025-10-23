@@ -14,7 +14,7 @@ function Powerpicks() {
   const [token, setToken] = useState<string>("");
   const [picks, setPicks] = useState<Pick[]>([]);
   const [voteTime, setVoteTime] = useState<boolean>(false);
-  const [winner, setWinner] = useState<string>("deadofarceus");
+  const [winner, setWinner] = useState<string>("");
 
   const handleSelect = (champion: string) => {
     setPicks((prevPicks) => [...prevPicks, { champion, votes: 0, voters: [] }]);
