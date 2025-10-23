@@ -230,11 +230,11 @@
 }
 
 .powerpicks-winner h1 {
-  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+  background: linear-gradient(135deg, #fffadd, #fffef6, #fffadd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 2px 2px 4px #0000006e;
+  text-shadow: 2px 2px 4px #00000031;
   letter-spacing: 2px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-bottom: 1rem;

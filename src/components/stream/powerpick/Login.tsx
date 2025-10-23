@@ -3,14 +3,7 @@ import { Button } from "react-bootstrap";
 function Login({ clientID }: { clientID: string }) {
   return (
     <div className="powerpicks-login">
-      <div className="powerpicks-header">
-        <img
-          src={"https://www.intel.com/content/dam/logos/intel-header-logo.svg"}
-          alt="Intel"
-          className="intel-logo"
-        />
-        <h1>Powerpicks - Login to start</h1>
-      </div>
+      <h1>intel - Powerpicks - Login to start</h1>
       <Button
         className="twitchLoginButton"
         href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientID}&redirect_uri=https://${window.location.host}/Stream/Powerpicks&response_type=token&scope=chat:read`}

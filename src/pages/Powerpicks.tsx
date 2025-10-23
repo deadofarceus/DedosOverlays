@@ -14,7 +14,7 @@ function Powerpicks() {
   const [token, setToken] = useState<string>("");
   const [picks, setPicks] = useState<Pick[]>([]);
   const [voteTime, setVoteTime] = useState<boolean>(false);
-  const [winner, setWinner] = useState<string>("");
+  const [winner, setWinner] = useState<string>("deadofarceus");
 
   const handleSelect = (champion: string) => {
     setPicks((prevPicks) => [...prevPicks, { champion, votes: 0, voters: [] }]);
@@ -58,14 +58,7 @@ function Powerpicks() {
   return (
     <div className="powerpicks-container">
       {winner !== "" && <Winner winner={winner} handleClose={() => setWinner("")} />}
-      <div className="powerpicks-header">
-        <img
-          src={"https://www.intel.com/content/dam/logos/intel-header-logo.svg"}
-          alt="Intel"
-          className="intel-logo"
-        />
-        <h1>- Powerpicks</h1>
-      </div>
+      <h1>intel - Powerpicks</h1>
       <div className="powerpicks-selected">
         {picks.length !== 0 && (
           <div className="powerpicks-vote-controls">
