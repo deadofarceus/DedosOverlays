@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const randint = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+const randint = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 function randomAngle() {
   const minAngle = 30;
@@ -65,16 +64,12 @@ const Screensaver: React.FC<DVDLogoProps> = ({
   const changeColor = () => {
     if (randomizeColor) {
       setColor(`hue-rotate(${randint(0, 360)}deg)`);
-      setBorderColor(
-        `rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`
-      );
+      setBorderColor(`rgb(${randint(0, 255)}, ${randint(0, 255)}, ${randint(0, 255)})`);
     }
   };
 
   useEffect(() => {
-    const imageElement = document.getElementById(
-      "dvd-logo"
-    ) as HTMLImageElement;
+    const imageElement = document.getElementById("dvd-logo") as HTMLImageElement;
 
     if (!imageElement) return;
 
@@ -84,25 +79,13 @@ const Screensaver: React.FC<DVDLogoProps> = ({
         const newY = prev.y + speed * direction[1];
         if (newX <= minX || newX >= maxX) {
           const directionIndex =
-            newX <= minX
-              ? direction[1] >= 0
-                ? 1
-                : 0
-              : direction[1] >= 0
-              ? 3
-              : 2;
+            newX <= minX ? (direction[1] >= 0 ? 1 : 0) : direction[1] >= 0 ? 3 : 2;
           setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
         if (newY <= minY || newY >= maxY) {
           const directionIndex =
-            newY <= minY
-              ? direction[0] >= 0
-                ? 1
-                : 3
-              : direction[0] >= 0
-              ? 0
-              : 2;
+            newY <= minY ? (direction[0] >= 0 ? 1 : 3) : direction[0] >= 0 ? 0 : 2;
           setDirection(calculateNewDirection(directionIndex));
           changeColor();
         }
@@ -117,6 +100,7 @@ const Screensaver: React.FC<DVDLogoProps> = ({
     <img
       id="dvd-logo"
       src={logoSrc}
+      alt="Floating screensaver logo"
       style={{
         filter: color,
         left: `${position.x}px`,

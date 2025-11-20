@@ -13,14 +13,7 @@ const iconSize = 130;
 const flameSize = 195;
 const iconSizeArray = [[0], [4, 0], [4, 2, 0], [3, 2, 1, 0], [4, 3, 2, 1, 0]];
 
-function Champion({
-  mvp,
-  index,
-  championName,
-  win,
-  length,
-  isNew,
-}: ChampionMatchHistory) {
+function Champion({ mvp, index, championName, win, length, isNew }: ChampionMatchHistory) {
   const championRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,20 +38,14 @@ function Champion({
   //     ? `../../champs/Fiddlesticks.png`
   //     : `../../champs/${championName}.png`;
   return (
-    <div
-      ref={championRef}
-      className="imgdiv"
-      style={{ paddingLeft: 0, paddingRight: 0 }}
-    >
+    <div ref={championRef} className="imgdiv" style={{ paddingLeft: 0, paddingRight: 0 }}>
       {mvp && (
         <img
           src={`../../flames.png`}
           alt="Overlay Image"
           className="flamesOverlayIMG"
           style={{
-            width: `${
-              flameSize - iconSizeArray[length - 1][index] * iconScale * 2
-            }px`,
+            width: `${flameSize - iconSizeArray[length - 1][index] * iconScale * 2}px`,
             top: `${-70 + iconSizeArray[length - 1][index] * 9}px`,
             right: `${-37 + iconSizeArray[length - 1][index] * 5}px`,
           }}
@@ -66,7 +53,7 @@ function Champion({
       )}
       <img
         src={imgsrc}
-        alt=""
+        alt={`${championName === "null" ? "Unknown champion" : championName} portrait`}
         className="profileImg"
         style={{
           width: `${iconSize - iconSizeArray[length - 1][index] * iconScale}px`,

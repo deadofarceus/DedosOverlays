@@ -34,12 +34,12 @@ function Team({ team, routes, settings }: TeamProps) {
           className={`soullinkImgDiv ${team[index] && isDisabled(team[index]) ? "link-dead" : ""}`}
         >
           {settings.showPokeballs && (
-            <img src="../../pokemon/pokeball.png" alt="" className="pkmnBallImg" />
+            <img src="../../pokemon/pokeball.png" alt="Pokeball icon" className="pkmnBallImg" />
           )}
           {team[index] && (
             <img
               src={imgSrc(team[index])}
-              alt=""
+              alt={`${team[index]?.name ?? "Pokemon"} sprite`}
               className={
                 "teamOverlayPkmnImg " + (settings.imgType === "png" ? "pngPkmnImg" : "gifPkmnImg")
               }

@@ -83,7 +83,7 @@ function PowerpickSelect({
             <img
               className="powerpick-select-item-img"
               src={CHAMPIMG_URL + champion.id + ".png"}
-              alt=""
+              alt={`${champion.name ?? champion.id} portrait`}
             />
           </div>
         ))}

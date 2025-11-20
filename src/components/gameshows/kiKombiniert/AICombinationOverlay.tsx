@@ -10,13 +10,18 @@ function AICombinationOverlay({ combination }: AICombinationProps) {
   const visibleRight = admin || combination.rightShown;
   const imageLeft = admin || visibleLeft ? combination.left : "AIHidden";
   const imageRight = admin || visibleRight ? combination.right : "AIHidden";
+  const leftAlt = visibleLeft ? `${combination.left} ingredient` : "Hidden ingredient placeholder";
+  const combinedAlt = `${combination.combined} combination result`;
+  const rightAlt = visibleRight
+    ? `${combination.right} ingredient`
+    : "Hidden ingredient placeholder";
 
   return (
     <div className="AIcTNCon">
       <div className="AIcTNimgDiv">
         <img
           src={"../../AICombine/" + imageLeft + ".png"}
-          alt=""
+          alt={leftAlt}
           className={
             "AIcCombinationImage AIcTNimg " + (!combination.leftShown && admin ? " AIcHidden" : "")
           }
@@ -25,14 +30,14 @@ function AICombinationOverlay({ combination }: AICombinationProps) {
       <div className="AIcTNimgDiv AIcTNimgDivCombined">
         <img
           src={"../../AICombine/" + combination.combined + ".png"}
-          alt=""
+          alt={combinedAlt}
           className="AIcTNimgCombined"
         />
       </div>
       <div className="AIcTNimgDiv">
         <img
           src={"../../AICombine/" + imageRight + ".png"}
-          alt=""
+          alt={rightAlt}
           className={
             "AIcCombinationImage AIcTNimg " + (!combination.rightShown && admin ? " AIcHidden" : "")
           }

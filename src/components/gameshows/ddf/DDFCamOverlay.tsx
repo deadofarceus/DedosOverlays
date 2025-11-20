@@ -24,13 +24,17 @@ function DDFCamOverlay({ player, finale, showTurn, dcCamMapping }: DDFCamOverlay
           {player.name}
         </div>
         {player.winner && (
-          <img className="ddf-cam-overlay-winner" src="../../../DDF/crown.png" alt="" />
+          <img className="ddf-cam-overlay-winner" src="../../../DDF/crown.png" alt="Winner crown" />
         )}
       </div>
       {!player.admin && !finale && (
         <div className="ddf-cam-overlay-lifes">
           {[...Array(player.lifes)].map((_, _index) => (
-            <img className="ddf-cam-overlay-life" src="../../../DDF/heart.png" alt="" />
+            <img
+              className="ddf-cam-overlay-life"
+              src="../../../DDF/heart.png"
+              alt="Life heart icon"
+            />
           ))}
         </div>
       )}
@@ -44,7 +48,7 @@ function DDFCamOverlay({ player, finale, showTurn, dcCamMapping }: DDFCamOverlay
             <img
               className="ddf-cam-overlay-answer"
               src={"../../../DDF/" + (answer ? "rightAnswer.png" : "wrongAnswer.png")}
-              alt=""
+              alt={answer ? "Correct answer badge" : "Wrong answer badge"}
             />
           ))}
         </div>
@@ -55,7 +59,7 @@ function DDFCamOverlay({ player, finale, showTurn, dcCamMapping }: DDFCamOverlay
           <img
             className="ddf-cam-overlay-invulnerable"
             src="../../../DDF/invulnerable.png"
-            alt=""
+            alt="Invulnerable status icon"
           />
         </div>
       )}

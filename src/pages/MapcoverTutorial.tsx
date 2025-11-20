@@ -1,11 +1,4 @@
-import {
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Form, InputGroup, ListGroup, Row } from "react-bootstrap";
 import "../styles/MapCover.css";
 import { useCallback, useRef, useState } from "react";
 import Screensaver from "../components/mapcover/Screensaver";
@@ -48,20 +41,14 @@ function MapcoverTutorial() {
           <Form className="mb-3 w-75 centerC blackOutline">
             <Form.Group className="mb-3">
               <Form.Label>Minimap-Skala: {settings.size}</Form.Label>
-              <p>
-                {
-                  "You can find your size under settings -> interface -> minimap scale."
-                }
-              </p>
+              <p>{"You can find your size under settings -> interface -> minimap scale."}</p>
               <input
                 type="range"
                 className="dedo-range"
                 min={0}
                 max={100}
                 value={settings.size}
-                onChange={(e) =>
-                  updateSetting("size", parseInt(e.target.value))
-                }
+                onChange={(e) => updateSetting("size", parseInt(e.target.value))}
               ></input>
             </Form.Group>
 
@@ -89,9 +76,7 @@ function MapcoverTutorial() {
                 type="range"
                 className="dedo-range"
                 value={settings.speed}
-                onChange={(e) =>
-                  updateSetting("speed", parseFloat(e.target.value))
-                }
+                onChange={(e) => updateSetting("speed", parseFloat(e.target.value))}
                 min={0}
                 max={2}
                 step={0.1}
@@ -114,12 +99,10 @@ function MapcoverTutorial() {
             <h4 className="blackOutline">What to do with the mapcover:</h4>
             <ListGroup numbered>
               <ListGroup.Item>Add a Browser Source in OBS</ListGroup.Item>
+              <ListGroup.Item>Copy and paste the link in the URL field</ListGroup.Item>
               <ListGroup.Item>
-                Copy and paste the link in the URL field
-              </ListGroup.Item>
-              <ListGroup.Item>
-                Set width to 1920px and heigth to 1080px. The Mapcover should
-                already have the correct size.
+                Set width to 1920px and heigth to 1080px. The Mapcover should already have the
+                correct size.
               </ListGroup.Item>
             </ListGroup>
           </Container>
@@ -128,7 +111,7 @@ function MapcoverTutorial() {
           <img
             ref={imgRef}
             src={mapName}
-            alt=""
+            alt="Map cover preview"
             id="mapcover"
             className="mapCoverImg mapBorder"
             style={{ width: `${calcSize}%` }}

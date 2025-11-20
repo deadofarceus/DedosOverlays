@@ -52,7 +52,7 @@ function DDFPlayerControl({
                   key={index}
                   className="ddf-player-control-life"
                   src="../../../DDF/heart.png"
-                  alt=""
+                  alt="Life heart icon"
                 />
               ))}
             </div>
@@ -89,14 +89,14 @@ function DDFPlayerControl({
                   key={_index}
                   className="ddf-player-control-answer"
                   src="../../../DDF/rightAnswer.png"
-                  alt=""
+                  alt="Correct answer badge"
                 />
               ) : (
                 <img
                   key={_index}
                   className="ddf-player-control-answer"
                   src="../../../DDF/wrongAnswer.png"
-                  alt=""
+                  alt="Wrong answer badge"
                 />
               )
             )}

@@ -10,10 +10,7 @@ function RandomCharGen() {
 
   const handleClick = () => {
     const randomRotation =
-      rotation +
-      Math.floor(
-        Math.floor(Math.random() * 2 * 360) + 360 * 3 + Math.random() * 361
-      );
+      rotation + Math.floor(Math.floor(Math.random() * 2 * 360) + 360 * 3 + Math.random() * 361);
     console.log(randomRotation);
 
     setRotation(randomRotation);
@@ -21,12 +18,12 @@ function RandomCharGen() {
 
   return (
     <Container className="w-100 h-100 randomCharCont">
-      <img className="randomIMG foundation" src={foundation} alt="" />
+      <img className="randomIMG foundation" src={foundation} alt="Character wheel foundation" />
       <img
         onClick={handleClick}
         className="randomIMG"
         src={spinner}
-        alt=""
+        alt="Random character spinner"
         style={{
           transform: `rotate(${rotation}deg)`,
           transition: "transform 5s",

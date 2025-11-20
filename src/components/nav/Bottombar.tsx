@@ -30,7 +30,10 @@ function Bottombar() {
         <Row className="w-75">
           <Col className="footer-bottom">
             Copyright &copy; {new Date().getFullYear()} Dedos Software. All rights reserved{" "}
-            <a href="/imprint"> Impressum</a>
+            <a className="footer-link" href="/imprint">
+              {" "}
+              Impressum
+            </a>
             <br />
             This website does not collect, store, or process any personal data. No cookies are used.
             {isRiotGamesRelated && (

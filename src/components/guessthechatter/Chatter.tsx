@@ -26,13 +26,12 @@ function ChatterComp({ chatter, onGuess }: ChatterD) {
   const [isSubHovered, setIsSubHovered] = useState(false);
   const [isNotSubHovered, setIsNotSubHovered] = useState(false);
 
-  const start =
-    chatter.name === "Start" ? "Guess To Start" : `Is this user a subscriber?`;
+  const start = chatter.name === "Start" ? "Guess To Start" : `Is this user a subscriber?`;
   return (
     <Container className="chatter centerC w-100">
       <h2>{start}</h2>
       <div className="twitch-chat-message centerR">
-        <img className="sub-icon" src={chatter.subIcon} />
+        <img className="sub-icon" src={chatter.subIcon} alt="Subscriber badge" />
         <span className="chatter-name" style={{ color: color }}>
           {chatter.name}:
         </span>
@@ -41,7 +40,7 @@ function ChatterComp({ chatter, onGuess }: ChatterD) {
         </span>
         <img
           src="https://static-cdn.jtvnw.net/emoticons/v2/305954156/default/dark/2.0"
-          alt=""
+          alt="Twitch emote"
         />
       </div>
       <Row className="w-100" md={3}>
@@ -54,7 +53,10 @@ function ChatterComp({ chatter, onGuess }: ChatterD) {
           onMouseEnter={() => setIsSubHovered(true)}
           onMouseLeave={() => setIsSubHovered(false)}
         >
-          <img src={isSubHovered ? "../Sub.webp" : "../Sub.png"} alt="" />
+          <img
+            src={isSubHovered ? "../Sub.webp" : "../Sub.png"}
+            alt="Subscriber guess button icon"
+          />
           SUB
         </button>
         <button
@@ -66,7 +68,10 @@ function ChatterComp({ chatter, onGuess }: ChatterD) {
           onMouseEnter={() => setIsNotSubHovered(true)}
           onMouseLeave={() => setIsNotSubHovered(false)}
         >
-          <img src={isNotSubHovered ? "../Pleb.webp" : "../Pleb.png"} alt="" />
+          <img
+            src={isNotSubHovered ? "../Pleb.webp" : "../Pleb.png"}
+            alt="Non-subscriber guess button icon"
+          />
           PLEB
         </button>
       </Row>

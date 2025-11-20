@@ -9,7 +9,7 @@ interface PowerpickProps {
 function Powerpick({ pick, voting }: PowerpickProps) {
   return (
     <div className="powerpick">
-      <img src={CHAMPIMG_URL + pick.champion + ".png"} alt="" />
+      <img src={CHAMPIMG_URL + pick.champion + ".png"} alt={`${pick.champion} portrait`} />
       <h2 className="blackOutline">{pick.champion}</h2>
       <h4>{"Votes: " + (voting ? "XXX" : pick.votes)}</h4>
     </div>

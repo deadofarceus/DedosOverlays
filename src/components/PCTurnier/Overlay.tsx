@@ -1,11 +1,7 @@
 import { Col, Container } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../../types/UsefulFunctions";
 import { useState, useEffect } from "react";
-import {
-  PCEvent,
-  BLANKDATA,
-  PCPlayer,
-} from "../../types/oldOrUnused/PCTurnierTypes";
+import { PCEvent, BLANKDATA, PCPlayer } from "../../types/oldOrUnused/PCTurnierTypes";
 import { PCTurnierWebsocket } from "../../types/WebsocketTypes";
 import PlayerDisplay from "./PlayerDisplay";
 import madGaming from "../../assets/MADGAMING.png";
@@ -37,7 +33,7 @@ function Overlay() {
   return (
     <Container className="PCOverlay">
       <div className="headlene centerC">
-        <img className="madgaming" src={madGaming} alt="" />
+        <img className="madgaming" src={madGaming} alt="MADGaming logo" />
         {/* <span className="rankingD">RANKING</span> */}
         <div className="descriptionD w-100 d-flex justify-content-between align-items-center">
           <span className="textMitRand">Rang</span>
@@ -47,12 +43,7 @@ function Overlay() {
 
       <Col className={"statsContainer textMitRand " + scroll}>
         {data.contenders.map((player: PCPlayer, index: number) => (
-          <PlayerDisplay
-            key={index}
-            points={player.points}
-            name={player.name}
-            rank={index + 1}
-          />
+          <PlayerDisplay key={index} points={player.points} name={player.name} rank={index + 1} />
         ))}
       </Col>
     </Container>

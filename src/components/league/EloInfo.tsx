@@ -56,13 +56,18 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff, gmBorder, challBorder }:
   }
   const query = useQuery();
   const legacy = query.get("legacy") === "true" ? "L" : "";
+  const divisionLabel = eloDivision ? eloDivision : "UNRANKED";
   const today = query.get("lang") === "en" ? "Today:" : "Heute:";
   //   const prideflag = getPrideFlag(eloLP);d
 
   return (
     <div className="eloInfo">
       <div className="ELO centerC eloAndLP">
-        <img src={`../../${eloDivision + legacy}.png`} className="eloimg" />
+        <img
+          src={`../../${eloDivision + legacy}.png`}
+          className="eloimg"
+          alt={`${divisionLabel}${legacy ? " legacy" : ""} emblem`}
+        />
         {/* <p className={"currentLP  pride " + prideflag}>{lpDisplay}</p> */}
         <p className={"currentLP blackOutline eloLPValue"}>{lpDisplay}</p>
         {/* {lpDisplay !== "UNRANKED" && (

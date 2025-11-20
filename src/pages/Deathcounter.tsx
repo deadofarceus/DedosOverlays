@@ -93,7 +93,11 @@ function Deathcounter() {
                 {". "}
                 {
                   <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
-                    <img height="36" src="https://storage.ko-fi.com/cdn/kofi1.png?v=3" />
+                    <img
+                      height="36"
+                      src="https://storage.ko-fi.com/cdn/kofi1.png?v=3"
+                      alt="Ko-fi logo"
+                    />
                   </a>
                 }
               </p>

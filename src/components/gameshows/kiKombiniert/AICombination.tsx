@@ -10,13 +10,18 @@ function AICombination({ combination }: AICombinationProps) {
   const visibleRight = admin || combination.rightShown;
   const imageLeft = admin || visibleLeft ? combination.left : "AIHidden";
   const imageRight = admin || visibleRight ? combination.right : "AIHidden";
+  const combinedAlt = `${combination.combined} combination result`;
+  const leftAlt = visibleLeft ? `${combination.left} ingredient` : "Hidden ingredient placeholder";
+  const rightAlt = visibleRight
+    ? `${combination.right} ingredient`
+    : "Hidden ingredient placeholder";
 
   return (
     <div className="AIcCombinationDiv">
       <div className="AIcCombImgDiv ACICOMB">
         <img
           src={"../../AICombine/" + combination.combined + ".png"}
-          alt=""
+          alt={combinedAlt}
           className="AIcCombinedImage"
         />
         {admin && <div className="AIcIMGName blackOutline">{combination.combined}</div>}
@@ -24,7 +29,7 @@ function AICombination({ combination }: AICombinationProps) {
       <div className="AIcCombImgDiv ACILEFT" style={!admin ? { left: "-350px", top: "150px" } : {}}>
         <img
           src={"../../AICombine/" + imageLeft + ".png"}
-          alt=""
+          alt={leftAlt}
           className={"AIcCombinationImage " + (!combination.leftShown && admin ? " AIcHidden" : "")}
         />
         {admin && <div className="AIcIMGName blackOutline">{imageLeft}</div>}
@@ -35,7 +40,7 @@ function AICombination({ combination }: AICombinationProps) {
       >
         <img
           src={"../../AICombine/" + imageRight + ".png"}
-          alt=""
+          alt={rightAlt}
           className={
             "AIcCombinationImage " + (!combination.rightShown && admin ? " AIcHidden" : "")
           }

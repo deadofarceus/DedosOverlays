@@ -39,6 +39,9 @@ function AIcOverlay() {
   const pointsClass = isTeams ? "AIcTeamPointsOverlay" : "AIcPointsOverlay";
   const leftOffset = isTeams ? 303 : 157;
   const leftIncrement = isTeams ? 617 : 305;
+  const overlayAlt = isTeams
+    ? "AI Combine teams overlay frame"
+    : "AI Combine singleplayer overlay frame";
 
   return (
     <Container className="AIcOverlayCon">
@@ -74,7 +77,7 @@ function AIcOverlay() {
         <img src={"../../AICombine/" + data.combination.combined + ".png"} alt="Combination" />
       </div>
 
-      <img src={"../../AICombine/" + overlayImage} alt="" className="AIcOverlayImage" />
+      <img src={"../../AICombine/" + overlayImage} alt={overlayAlt} className="AIcOverlayImage" />
       <div className="AIcVDOStreams">
         {data.teams.map((team, index) => (
           <div

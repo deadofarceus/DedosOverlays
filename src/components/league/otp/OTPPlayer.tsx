@@ -2,14 +2,7 @@ import { Col } from "react-bootstrap";
 import { OTPPlayerProps } from "../../../types/OTPTypes";
 import { CHAMPIMG_URL } from "../../../types/Constants";
 
-function OTPPlayer({
-  index,
-  lp,
-  tier,
-  rank,
-  summonerName,
-  rang,
-}: OTPPlayerProps) {
+function OTPPlayer({ index, lp, tier, rank, summonerName, rang }: OTPPlayerProps) {
   const iconSrc =
     summonerName === "Fat Houdini"
       ? "../Karma.png"
@@ -32,7 +25,7 @@ function OTPPlayer({
       <div className="optIconDiv" style={{ width: index * 50 + 240 + "px" }}>
         <img src={iconSrc} alt="ICON" className="otpProfileImg" />
         {index === 2 && <div className={"otpRand"}></div>}
-        {index === 2 && <img className="otpCrown" src="../crown.png" />}
+        {index === 2 && <img className="otpCrown" src="../crown.png" alt="Top placement crown" />}
         <h2
           className="otpRank"
           style={{

@@ -250,6 +250,7 @@ function EloOverlayTutorial() {
                       width="36"
                       style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
                       src="../paypal.png"
+                      alt="PayPal logo"
                     />
                   </a>{" "}
                   <a style={{ height: "36px" }} href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
@@ -258,6 +259,7 @@ function EloOverlayTutorial() {
                       width="36"
                       style={{ filter: "drop-shadow(2px 2px 1px #222)" }}
                       src="https://cdn.prod.website-files.com/5c14e387dab576fe667689cf/61e1116779fc0a9bd5bdbcc7_Frame%206.png"
+                      alt="Ko-fi logo"
                     />
                   </a>{" "}
                 </ListGroup.Item>
@@ -265,7 +267,7 @@ function EloOverlayTutorial() {
             </Container>
           </Col>
         </div>
-        <img src={preview} alt="" className="previewELO" />
+        <img src={preview} alt="Elo overlay preview" className="previewELO" />
       </Row>
     </Container>
   );

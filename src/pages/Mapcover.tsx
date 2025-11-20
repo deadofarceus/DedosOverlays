@@ -47,7 +47,7 @@ function Mapcover() {
       <img
         ref={imgRef}
         src={mapName}
-        alt=""
+        alt="Map cover overlay"
         className="mapCoverImg"
         style={{ width: `${calcSize}%` }}
       />
@@ -58,7 +58,7 @@ function Mapcover() {
           randomizeColor={true}
           speed={speed}
           containerRect={imgRef.current}
-          calcSize={calcSize*0.01}
+          calcSize={calcSize * 0.01}
         />
       )}
     </Container>

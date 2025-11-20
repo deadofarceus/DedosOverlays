@@ -85,6 +85,7 @@ function ChampGroupD({ champions }: LetterGroup) {
 function ChampD({ name, won, games }: ChampionAbisZ) {
   const champName = name === "Wukong" ? "MonkeyKing" : name;
   const imgsrc = name === "null" ? "../../null.png" : `${CHAMPIMG_URL}${champName}.png`;
+  const displayName = name === "null" ? "Unknown champion" : name;
   return (
     <div
       className={"imgdivAZ"}
@@ -95,7 +96,7 @@ function ChampD({ name, won, games }: ChampionAbisZ) {
     >
       <img
         src={imgsrc}
-        alt=""
+        alt={`${displayName} portrait`}
         className={`champImg ${!won ? "champLoseAZ" : ""}`}
         style={{
           width: `120px`,
@@ -121,7 +122,11 @@ function EloD({ eloLP, eloDivision, eloRank }: AccountElo) {
   return (
     <Row className="eloInfoAZ centerR">
       <Col className="ELOAZ d-flex flex-column justify-content-center align-items-center">
-        <img src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`} className="eloimgAZ" />
+        <img
+          src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`}
+          className="eloimgAZ"
+          alt={`${eloDivision ? eloDivision : "UNRANKED"} emblem`}
+        />
         <p className="eloAndLPAZ">{lpDisplay}</p>
       </Col>
     </Row>

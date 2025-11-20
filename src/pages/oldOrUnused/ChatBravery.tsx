@@ -139,7 +139,7 @@ function GuessTheChatter() {
                 {champURL && (
                   <>
                     <h3>Chosen Champion:</h3>
-                    <img src={champURL} alt="" className="" />
+                    <img src={champURL} alt="Selected champion portrait" className="" />
                   </>
                 )}
               </div>

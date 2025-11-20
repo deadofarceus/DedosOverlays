@@ -24,7 +24,7 @@ function DedoNavbar() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/help">Help</Nav.Link>
           <a href="https://ko-fi.com/Q5Q5ZTNQB" target="_blank">
-            <img height="36" src="https://storage.ko-fi.com/cdn/kofi1.png?v=3" />
+            <img height="36" src="https://storage.ko-fi.com/cdn/kofi1.png?v=3" alt="Ko-fi logo" />
           </a>
           {/* <Nav.Link href="/about">About</Nav.Link> */}
         </Nav>

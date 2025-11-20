@@ -17,39 +17,27 @@ export interface MemberProps {
 
 function Member({ elo, today, icon, matchhistory, place }: MemberProps) {
   const placeColor =
-    place === 1
-      ? "#ffd90077"
-      : place === 2
-      ? "#c0c0c077"
-      : place === 3
-      ? "#a3593777"
-      : "#00000034";
+    place === 1 ? "#ffd90077" : place === 2 ? "#c0c0c077" : place === 3 ? "#a3593777" : "#00000034";
   const vorzeichen = today >= 0 ? "+" : "";
   const lpDisplay = elo.lp + " LP";
   const lptoday = "(" + vorzeichen + today + "LP)";
-  const isApex =
-    elo.tier === "MASTER" ||
-    elo.tier === "GRANDMASTER" ||
-    elo.tier === "CHALLENGER";
+  const isApex = elo.tier === "MASTER" || elo.tier === "GRANDMASTER" || elo.tier === "CHALLENGER";
 
   return (
     <Row className="climber climber-container">
       <div className="GCmhDiv centerR">
         {matchhistory.map((mh, index) => (
-          <h1
-            key={index}
-            className={mh ? "wonGC blackOutline" : "loseGC blackOutline"}
-          >
+          <h1 key={index} className={mh ? "wonGC blackOutline" : "loseGC blackOutline"}>
             I
           </h1>
         ))}
       </div>
 
       <div className="GCiconDiv" style={{ backgroundColor: placeColor }}>
-        <img src={icon} alt="" className="climber-image" />
+        <img src={icon} alt="Summoner icon" className="climber-image" />
       </div>
       <div className="GCeloDIV">
-        <img src={"../" + elo.tier + ".png"} alt="" className="tier-image" />
+        <img src={"../" + elo.tier + ".png"} alt={`${elo.tier} emblem`} className="tier-image" />
         {!isApex && <p className="GCeloLP blackOutline">{elo.rank}</p>}
       </div>
       <h1 className="GClpDisplay blackOutline">{lpDisplay}</h1>

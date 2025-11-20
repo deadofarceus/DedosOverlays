@@ -36,12 +36,16 @@ function TeamP({ team, routes, settings }: TeamProps) {
           }`}
         >
           {settings.showPokeballs && (
-            <img src="../../pokemon/pokeball.png" alt="" className="pkmnBallImg-Preview" />
+            <img
+              src="../../pokemon/pokeball.png"
+              alt="Pokeball icon"
+              className="pkmnBallImg-Preview"
+            />
           )}
           {team[index] && (
             <img
               src={imgSrc(team[index])}
-              alt=""
+              alt={`${team[index]?.name ?? "Pokemon"} sprite`}
               className={
                 "teamOverlayPkmnImg-Preview " +
                 (settings.imgType === "png" ? "pngPkmnImg-Preview" : "gifPkmnImg-Preview")
