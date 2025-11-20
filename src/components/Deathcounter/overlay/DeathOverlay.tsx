@@ -51,7 +51,7 @@ function DeathOverlay() {
     <Container className="deathOverlayCon">
       <Col className="centerC">
         {longestWord < 11 && (
-          <Row className="w-100">
+          <Row className="centerR w-100">
             <span className="numOfDeaths blackOutline">💀 Total: {total}</span>
             <span className="numOfDeaths blackOutline">
               💀 {current.name}: {bossDeaths}
