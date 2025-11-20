@@ -69,6 +69,7 @@ function App() {
           <Route path="nodeathrun" element={<NoDeathRun />} />
         </Route>
 
+        <Route path="/errorpage" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Suspense>

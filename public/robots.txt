@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Allow: /help
+Allow: /screensaver/tutorial
+Allow: /elooverlay
+Allow: /mapcover
+Allow: /deathcounter
+Allow: /pokemon/soullink/team/tutorial
+
+Disallow: /pokemon
+Disallow: /admincontrol
+Disallow: /errorpage
+Disallow: /imprint
+Disallow: /stream
+Disallow: /gameshows
+Disallow: /imprint
+
+Sitemap: https://arceus-overlays.netlify.app/sitemap.xml
