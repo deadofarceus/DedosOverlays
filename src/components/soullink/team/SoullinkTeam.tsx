@@ -11,6 +11,7 @@ import TeamPreview from "./TeamPreview";
 import MiniRoute from "./MiniRoute";
 import SettingsMenu from "./SettingsMenu";
 import RouteManager from "./RouteManager";
+import "../../../styles/Soullink.css";
 
 let ws: BroadcastWebsocket<Soullink>;
 

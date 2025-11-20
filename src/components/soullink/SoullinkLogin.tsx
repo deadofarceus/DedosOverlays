@@ -1,4 +1,6 @@
 import { Button, Container } from "react-bootstrap";
+import "../../styles/Soullink.css";
+
 const CLIENTID = "d8m29lejdzp24m8t4ahp7z7xxmlhe5";
 
 function SoullinkLogin() {

@@ -1,45 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
-
 .HelpContainer {
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
-    margin-top: 60px;
-    text-shadow: 1px 1px 0 #000,
-        -1px 1px 0 #000,
-        1px -1px 0 #000,
-        -1px -1px 0 #000,
-        0px 1px 0 #000,
-        0px -1px 0 #000,
-        -1px 0px 0 #000,
-        1px 0px 0 #000,
-        2px 2px 0 #000,
-        -2px 2px 0 #000,
-        2px -2px 0 #000,
-        -2px -2px 0 #000,
-        0px 2px 0 #000,
-        0px -2px 0 #000,
-        -2px 0px 0 #000,
-        2px 0px 0 #000,
-        1px 2px 0 #000,
-        -1px 2px 0 #000,
-        1px -2px 0 #000,
-        -1px -2px 0 #000,
-        2px 1px 0 #000,
-        -2px 1px 0 #000,
-        2px -1px 0 #000,
-        -2px -1px 0 #000;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  margin-top: 60px;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000,
+    0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000,
+    2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000,
+    2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
 }
 
 .answers {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 .faq {
-    margin: 5%;
-    padding: 25px;
-    background-color: rgba(72, 72, 144, 0.483);
-    border-radius: 20px;
-    box-shadow: 7px 7px 3px #222;
+  margin: 5%;
+  padding: 25px;
+  background-color: rgba(72, 72, 144, 0.483);
+  border-radius: 20px;
+  box-shadow: 7px 7px 3px #222;
 }

@@ -1,107 +1,77 @@
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./styles/util.css";
 import "./styles/PrideStyles.css";
+import "./styles/Help.css";
+
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.css";
-import EloOverlay from "./pages/EloOverlay";
-import EloOverlayTutorial from "./pages/EloOverlayTutorial";
-import Home from "./pages/Home";
-import ErrorPage from "./ErrorPage";
-import AbisZOverlay from "./pages/AbisZOverlay";
-import Help from "./pages/Help";
-import RandomCharGen from "./pages/RandomCharGen";
-import Deathcounter from "./pages/Deathcounter";
-import DeathOverlay from "./components/Deathcounter/overlay/DeathOverlay";
-import DeathcounterMod from "./components/Deathcounter/DeathcounterMod";
-import PercentageOverlay from "./components/Deathcounter/overlay/PercentageOverlay";
-import AdminControl from "./pages/AdminControl";
-import Impressum from "./pages/Impressum";
-import Mapcover from "./pages/Mapcover";
-import MapcoverTutorial from "./pages/MapcoverTutorial";
-import GlobalScreensaver from "./pages/GlobalScreensaver";
-import ScreensaverTutorial from "./pages/ScreensaverTutorial";
-import GuessTheSub from "./pages/GuessTheSub";
-import VTuber from "./pages/VTuber";
-import NoDeathRun from "./pages/NoDeathRun";
-import TeamElo from "./pages/TeamElo";
-import Soullink from "./components/soullink/Soullink";
-import SoullinkLogin from "./components/soullink/SoullinkLogin";
-import SoullinkOverlay from "./components/soullink/SoullinkOverlay";
-import SoullinkTeam from "./components/soullink/team/SoullinkTeam";
-import SoullinkTutorial from "./components/soullink/team/SoullinkTutorial";
-import AIcController from "./components/gameshows/kiKombiniert/AIcController";
-import AIcTeilnehmer from "./components/gameshows/kiKombiniert/AIcTeilnehmer";
-import AIcOverlay from "./components/gameshows/kiKombiniert/AIcOverlay";
-import DDFOverlay from "./components/gameshows/ddf/DDFOverlay";
-import DDFController from "./components/gameshows/ddf/DDFController";
-import Powerpicks from "./pages/Powerpicks";
+import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
+
+import { deathcounterRoutes } from "./routes/deathcounter.routes";
+import { pokemonRoutes } from "./routes/pokemon.routes";
+import { gameshowRoutes } from "./routes/gameshows.routes";
+import { streamRoutes } from "./routes/stream.routes";
+
+const Home = lazy(() => import("./pages/Home"));
+const ErrorPage = lazy(() => import("./ErrorPage"));
+const Help = lazy(() => import("./pages/Help"));
+const Impressum = lazy(() => import("./pages/Impressum"));
+const AdminControl = lazy(() => import("./pages/AdminControl"));
+
+const GlobalScreensaver = lazy(() => import("./pages/GlobalScreensaver"));
+const ScreensaverTutorial = lazy(() => import("./pages/ScreensaverTutorial"));
+
+const Mapcover = lazy(() => import("./pages/Mapcover"));
+const MapcoverTutorial = lazy(() => import("./pages/MapcoverTutorial"));
+
+const AbisZOverlay = lazy(() => import("./pages/AbisZOverlay"));
+const NoDeathRun = lazy(() => import("./pages/NoDeathRun"));
+const GuessTheSub = lazy(() => import("./pages/GuessTheSub"));
+const TeamElo = lazy(() => import("./pages/TeamElo"));
+
+const EloOverlay = lazy(() => import("./pages/EloOverlay"));
+const EloOverlayTutorial = lazy(() => import("./pages/EloOverlayTutorial"));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/">
-        <Route index element={<Home />} />
-        <Route path="errorpage" element={<ErrorPage />} />
-        {/* <Route path="about" element={<About />} /> */}
-        <Route path="help" element={<Help />} />
-        <Route path="imprint" element={<Impressum />} />
-        <Route path="AdminControl" element={<AdminControl />} />
-        <Route path="Screensaver" element={<GlobalScreensaver />} />
-        <Route path="ScreensaverTutorial" element={<ScreensaverTutorial />} />
-        <Route path="Gameshows">
-          <Route path="ddf">
-            <Route path="admin" element={<DDFController />} />
-            <Route path="overlay" element={<DDFOverlay />} />
-          </Route>
-          <Route path="AICombine">
-            <Route path="admin" element={<AIcController />} />
-            <Route path="teilnehmer" element={<AIcTeilnehmer />} />
-            <Route path="overlay" element={<AIcOverlay />} />
-          </Route>
-        </Route>
-        <Route path="Pokemon">
-          <Route path="Soullink">
-            <Route index element={<Soullink />} />
-            <Route path="login" element={<SoullinkLogin />} />
-            <Route path="overlay" element={<SoullinkOverlay />} />
-            <Route path="Team">
-              <Route index element={<SoullinkTeam />} />
-              <Route path="Tutorial" element={<SoullinkTutorial />} />
-            </Route>
-          </Route>
-        </Route>
-        <Route path="DeathCounter">
-          <Route index element={<Deathcounter />} />
-          <Route path="mod" element={<DeathcounterMod />} />
-          <Route path="overlay" element={<DeathOverlay />} />
-          <Route path="hpoverlay" element={<PercentageOverlay />} />
-        </Route>
-        <Route path="EloOverlay">
-          <Route index element={<EloOverlayTutorial />} />
-          <Route path=":queueType" element={<EloOverlay />} />
-        </Route>
-        <Route path="AbisZ">
-          <Route path=":accountName" element={<AbisZOverlay />} />
-        </Route>
-        <Route path="TeamElo">
-          <Route path=":team" element={<TeamElo />} />
-        </Route>
-        <Route path="mapcover">
-          <Route index element={<MapcoverTutorial />} />
-          <Route path=":game" element={<Mapcover />} />
-        </Route>
-        <Route path="GuessTheSub" element={<GuessTheSub />} />
-        <Route path="NoDeathRun" element={<NoDeathRun />} />
-        <Route path="Stream">
-          <Route path="randomChar" element={<RandomCharGen />} />
-          <Route path="VTuber" element={<VTuber />} />
-          <Route path="Powerpicks" element={<Powerpicks />} />
-        </Route>
-      </Route>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
 
-      <Route path="*" element={<ErrorPage />} />
-    </Routes>
+          <Route path="help" element={<Help />} />
+          <Route path="imprint" element={<Impressum />} />
+          <Route path="admincontrol" element={<AdminControl />} />
+
+          <Route path="screensaver" element={<GlobalScreensaver />} />
+          <Route path="screensaver/tutorial" element={<ScreensaverTutorial />} />
+
+          {gameshowRoutes()}
+          {pokemonRoutes()}
+          {deathcounterRoutes()}
+          {streamRoutes()}
+
+          <Route path="abisz/:accountName" element={<AbisZOverlay />} />
+          <Route path="teamelo/:team" element={<TeamElo />} />
+
+          <Route path="elooverlay">
+            <Route index element={<EloOverlayTutorial />} />
+            <Route path=":queuetype" element={<EloOverlay />} />
+          </Route>
+
+          <Route path="mapcover">
+            <Route index element={<MapcoverTutorial />} />
+            <Route path=":game" element={<Mapcover />} />
+          </Route>
+
+          <Route path="guessthesub" element={<GuessTheSub />} />
+          <Route path="nodeathrun" element={<NoDeathRun />} />
+        </Route>
+
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 

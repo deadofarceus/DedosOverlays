@@ -22,7 +22,7 @@ function EloOverlay() {
   const [playerInfo, setPlayerInfo] = useState<Account>(DEFAULTELOOVERLAY as Account);
 
   const nav = useNavigate();
-  const { queueType } = useParams();
+  const { queuetype } = useParams();
 
   useEffect(() => {
     const summonerName = query.get("name");
@@ -33,13 +33,13 @@ function EloOverlay() {
       summonerName === null ||
       tag === null ||
       key === null ||
-      (queueType !== "soloduo" && queueType !== "flex")
+      (queuetype !== "soloduo" && queuetype !== "flex")
     ) {
       // Redirect to error page if any of the parameters is missing
       nav("/EloOverlay");
     } else {
       if (!ws) {
-        ws = new EloWebsocket(summonerName, tag, key, queueType, region, setPlayerInfo);
+        ws = new EloWebsocket(summonerName, tag, key, queuetype, region, setPlayerInfo);
         // fetch("https://127.0.0.1:2999/liveclientdata/allgamedata", {
         //   method: "HEAD",
         //   mode: "no-cors",
@@ -55,10 +55,10 @@ function EloOverlay() {
         //   });
       }
     }
-  }, [nav, query, queueType]);
+  }, [nav, query, queuetype]);
 
   const entry = playerInfo.leagueEntrys.find(
-    (entry) => entry.queueId === QUEUETYPES.get(queueType!)!.queueId
+    (entry) => entry.queueId === QUEUETYPES.get(queuetype!)!.queueId
   )!;
 
   // const isPhilly = playerInfo.name === "Philly Westside";

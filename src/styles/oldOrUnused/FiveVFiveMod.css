@@ -1,53 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
-
 .FiveVFiveContainer {
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
 }
 
 .gameplayed {
-    border: 5px solid azure;
-    border-radius: 10px;
-    margin: 20px;
-    width: fit-content;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  border: 5px solid azure;
+  border-radius: 10px;
+  margin: 20px;
+  width: fit-content;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .gameplayed .input-group,
 h1 {
-    margin: 5px;
+  margin: 5px;
 }
 
 .gamename,
 .chooseGame {
-    padding: 10px;
+  padding: 10px;
 }
 
 .gamestanding {
-    text-align: center;
-    width: 75px;
+  text-align: center;
+  width: 75px;
 }
 
 .formstanding,
 .allGames,
 .FiveVFiveContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pointsRow {
-    width: 400px;
+  width: 400px;
 }
 
 .pointsInput {
-    margin: 20px;
+  margin: 20px;
 }
 
 .gamePointsInput {
-    width: 220px;
+  width: 220px;
 }

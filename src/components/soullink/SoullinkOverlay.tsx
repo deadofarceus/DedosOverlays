@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { PokemonEvent, PokemonInfos } from "../../types/Pokemon";
 import { BroadcastWebsocket } from "../../types/WebsocketTypes";
 import { useQuery } from "../../types/UsefulFunctions";
+import "../../styles/Soullink.css";
 
 let ws: BroadcastWebsocket<PokemonEvent>;
 const pokemonInfos: PokemonInfos = {
