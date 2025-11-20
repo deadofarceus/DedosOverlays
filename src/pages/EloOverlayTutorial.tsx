@@ -94,7 +94,7 @@ function EloOverlayTutorial() {
   return (
     <Container className="layout">
       <h1 className="blackOutline">Elo Overlay Creator</h1>
-      <Row className="w-100">
+      <Row className="centerR w-100">
         <div className="centerC w-50">
           <Form id="userInputs" className="centerC">
             <Col className="centerC">
@@ -118,7 +118,7 @@ function EloOverlayTutorial() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTag(e.target.value)}
                 />
               </InputGroup>
-              <Row className="w-100">
+              <Row className="centerR w-100">
                 <Form.Group className="login-elo-tut">
                   <Form.Label className="blackOutline">
                     Login with Twitch or enter your Key:
@@ -171,7 +171,7 @@ function EloOverlayTutorial() {
                 </Form.Group>
               </Row>
             </Col>
-            <Row className="centerR noWrap">
+            <Row className="centerR noWrap w-50">
               <Form.Group>
                 <Form.Label className="blackOutline">Queue Type:</Form.Label>
                 <DropdownButton

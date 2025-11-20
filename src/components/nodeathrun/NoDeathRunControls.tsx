@@ -61,9 +61,7 @@ function NoDeathRunControls({ games, callback }: NoDeathRunControlsProps) {
 
   const gameDone = () => {
     const updatedGames = [...games];
-    const currentGameIndex = updatedGames.findIndex(
-      (game) => game.status === "PLAYING"
-    );
+    const currentGameIndex = updatedGames.findIndex((game) => game.status === "PLAYING");
     if (currentGameIndex !== -1) {
       updatedGames[currentGameIndex].status = "FINISHED";
       if (currentGameIndex < updatedGames.length - 1) {
@@ -102,14 +100,14 @@ function NoDeathRunControls({ games, callback }: NoDeathRunControlsProps) {
       <Container className="centerR nodeathrunControls">
         <Col>
           <GameList games={games} moveGame={moveGame} useGame={useGame} />
-          <Row className="">
+          <div>
             <Button className="w-25 m-3" onClick={randomizeOrder}>
               Zufällige Reihenfolge
             </Button>
             <Button className="w-25" variant="success" onClick={gameDone}>
               {`Game ${currentGame?.name} DONE!`}
             </Button>
-          </Row>
+          </div>
         </Col>
       </Container>
     </DndProvider>

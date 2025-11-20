@@ -1,4 +1,3 @@
-import { Row, Col } from "react-bootstrap";
 import { AccountElo } from "../../types/LeagueTypes";
 import { useQuery } from "../../types/UsefulFunctions";
 import { useRef, useEffect, useState } from "react";
@@ -61,29 +60,29 @@ function EloInfo({ eloLP, eloDivision, eloRank, lpDiff, gmBorder, challBorder }:
   //   const prideflag = getPrideFlag(eloLP);d
 
   return (
-    <Row className="eloInfo">
-      <Col className="ELO centerC">
-        <img src={`../../${eloDivision + legacy}.png`} className="eloimg eloAndLP" />
-        {/* <p className={"currentLP eloAndLP pride " + prideflag}>{lpDisplay}</p> */}
-        <p className={"currentLP eloAndLP blackOutline eloLPValue"}>{lpDisplay}</p>
+    <div className="eloInfo">
+      <div className="ELO centerC eloAndLP">
+        <img src={`../../${eloDivision + legacy}.png`} className="eloimg" />
+        {/* <p className={"currentLP  pride " + prideflag}>{lpDisplay}</p> */}
+        <p className={"currentLP blackOutline eloLPValue"}>{lpDisplay}</p>
         {/* {lpDisplay !== "UNRANKED" && (
-          <p className="fatOutline currentLP eloAndLP prideshadow">
+          <p className="fatOutline currentLP  prideshadow">
             {lpDisplay}
           </p>
         )} */}
-      </Col>
-      <Col className="ELO text-center">
+      </div>
+      <div className="ELO">
         {border ? (
-          <p className="leagueborder blackOutline">{border}</p>
+          <div className="leagueborder blackOutline">{border}</div>
         ) : (
           <div className="spacer"></div>
         )}
-        <p className="lpDiff blackOutline">{today}</p>
-        <p className="lpDiff blackOutline" style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}>
+        <div className="lpDiff blackOutline">{today}</div>
+        <div className="lpDiff blackOutline" style={{ color: lpDiff >= 0 ? "#6eff57" : "#FF6565" }}>
           {lpToday}
-        </p>
-      </Col>
-    </Row>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -115,10 +115,10 @@ function DeathcounterMod() {
 
   return (
     <Container className="DeathContainer w-100 centerC">
-      <Row className="w-100">
+      <Row className="centerR w-100">
         <ChangeBoss player={player} callback={handleBossChange} />
         <Col className="align-items-baseline" xs={9}>
-          <Row className="w-75">
+          <Row className="centerR w-75">
             <BossInfo player={player} />
             <ControlPanel
               player={player}
@@ -126,7 +126,7 @@ function DeathcounterMod() {
               changeDeath={handleNewDeath}
             />
           </Row>
-          <Row className="mt-3 w-100">
+          <Row className="centerR mt-3 w-100">
             <GraphBox player={player} callback={handleSettingsChange} />
           </Row>
         </Col>

@@ -1,13 +1,13 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useRef, useState } from "react";
-import { Chatter } from "../types/GuessTheSubTypes";
 import "../styles/GuessTheChatter.css";
-import { BraveryService } from "../service/BraveryService";
 import { ChatMessage } from "@twurple/chat";
 import "../styles/ChatBravery.css";
-import { ChatMessageComp } from "../components/twitch/ChatBravery/ChatMessageComp";
-import DedoSwitch from "../components/util/DedoSwitch";
-import DedoCopy from "../components/util/DedoCopy";
+import DedoCopy from "../../components/util/DedoCopy";
+import DedoSwitch from "../../components/util/DedoSwitch";
+import { BraveryService } from "../../service/BraveryService";
+import { Chatter } from "../../types/GuessTheSubTypes";
+import { ChatMessageComp } from "../../components/twitch/ChatBravery/ChatMessageComp";
 
 const CLIENTID = "2qu2j6vzku0fad8z9ee5lohdc0iwm1";
 const dummyChatter = new Chatter(
@@ -68,9 +68,7 @@ function GuessTheChatter() {
 
   useEffect(() => {
     if (chatMessages.length > 0) {
-      const champ = braveryService.checkChamps(
-        chatMessages[chatMessages.length - 1]
-      );
+      const champ = braveryService.checkChamps(chatMessages[chatMessages.length - 1]);
       if (champ) {
         setChampURL(champ);
       }
@@ -128,11 +126,7 @@ function GuessTheChatter() {
                     <div className="w-100 h-100 messageCon">
                       <Col className="messages">
                         {chatMessages.map((msg, index) => (
-                          <ChatMessageComp
-                            key={index}
-                            message={msg}
-                            chatter={currentChatter}
-                          />
+                          <ChatMessageComp key={index} message={msg} chatter={currentChatter} />
                         ))}
                         <div ref={chatMessagesEndRef} />{" "}
                         {/* Referenz für das Ende der Nachrichten */}

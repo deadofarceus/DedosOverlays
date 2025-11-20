@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./styles/util.css";
 import "./styles/PrideStyles.css";
+import "bootstrap/dist/css/bootstrap-grid.css";
+import "bootstrap/dist/css/bootstrap.css";
 import EloOverlay from "./pages/EloOverlay";
 import EloOverlayTutorial from "./pages/EloOverlayTutorial";
 import Home from "./pages/Home";
@@ -20,8 +22,6 @@ import MapcoverTutorial from "./pages/MapcoverTutorial";
 import GlobalScreensaver from "./pages/GlobalScreensaver";
 import ScreensaverTutorial from "./pages/ScreensaverTutorial";
 import GuessTheSub from "./pages/GuessTheSub";
-import ChatBravery from "./pages/ChatBravery";
-import OTPRace from "./pages/OTPRace";
 import VTuber from "./pages/VTuber";
 import NoDeathRun from "./pages/NoDeathRun";
 import TeamElo from "./pages/TeamElo";
@@ -84,9 +84,6 @@ function App() {
         <Route path="AbisZ">
           <Route path=":accountName" element={<AbisZOverlay />} />
         </Route>
-        <Route path="OTPRace">
-          <Route path=":accountName" element={<OTPRace />} />
-        </Route>
         <Route path="TeamElo">
           <Route path=":team" element={<TeamElo />} />
         </Route>
@@ -95,7 +92,6 @@ function App() {
           <Route path=":game" element={<Mapcover />} />
         </Route>
         <Route path="GuessTheSub" element={<GuessTheSub />} />
-        <Route path="ChatBravery" element={<ChatBravery />} />
         <Route path="NoDeathRun" element={<NoDeathRun />} />
         <Route path="Stream">
           <Route path="randomChar" element={<RandomCharGen />} />

@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { Account, DEFAULTELOOVERLAY, QUEUETYPES } from "../types/LeagueTypes";
 import { useNavigate, useParams } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap-grid.css";
-import "bootstrap/dist/css/bootstrap.css";
 import "../styles/EloOverlay.css";
 import { EloWebsocket } from "../types/WebsocketTypes";
-import { Container } from "react-bootstrap";
 import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import EloInfo from "../components/league/EloInfo";
 import Matchhistory from "../components/league/Matchhistory";
@@ -67,10 +64,7 @@ function EloOverlay() {
   // const isPhilly = playerInfo.name === "Philly Westside";
 
   return (
-    <Container
-      className="d-flex flex-column justify-content-center align-items-center eloOverlayContainer"
-      style={{ width: "1140px" }}
-    >
+    <div className="eloOverlayContainer">
       <EloInfo
         eloLP={entry.leaguePoints}
         eloDivision={entry.tier}
@@ -81,7 +75,7 @@ function EloOverlay() {
       />
       <Matchhistory entry={entry} />
       {/* {isPhilly && <Newspaper />} */}
-    </Container>
+    </div>
   );
 }
 

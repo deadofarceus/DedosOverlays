@@ -1,161 +1,127 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap");
 
 .AbisZContainer {
-    width: 1160px;
-    padding: 0;
-    margin: 0;
-    color: azure;
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
-    filter: drop-shadow(4px 4px 3px #222);
-    text-shadow: 1px 1px 0 #000,
-        -1px 1px 0 #000,
-        1px -1px 0 #000,
-        -1px -1px 0 #000,
-        0px 1px 0 #000,
-        0px -1px 0 #000,
-        -1px 0px 0 #000,
-        1px 0px 0 #000,
-        2px 2px 0 #000,
-        -2px 2px 0 #000,
-        2px -2px 0 #000,
-        -2px -2px 0 #000,
-        0px 2px 0 #000,
-        0px -2px 0 #000,
-        -2px 0px 0 #000,
-        2px 0px 0 #000,
-        1px 2px 0 #000,
-        -1px 2px 0 #000,
-        1px -2px 0 #000,
-        -1px -2px 0 #000,
-        2px 1px 0 #000,
-        -2px 1px 0 #000,
-        2px -1px 0 #000,
-        -2px -1px 0 #000;
-    display: flex;
-    justify-content: center;
+  width: 1160px;
+  padding: 0;
+  margin: 0;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(4px 4px 3px #222);
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000,
+    0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000,
+    2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000,
+    2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  display: flex;
+  justify-content: center;
 }
 
 .fertigAZ {
-    width: 1160px;
-    padding: 0;
-    margin: 0;
-    color: rgb(255, 226, 59);
-    font-weight: bold;
-    font-family: 'Signika', sans-serif;
-    text-align: center;
-    filter: drop-shadow(4px 4px 3px #222);
-    text-shadow: 1px 1px 0 #000,
-        -1px 1px 0 #000,
-        1px -1px 0 #000,
-        -1px -1px 0 #000,
-        0px 1px 0 #000,
-        0px -1px 0 #000,
-        -1px 0px 0 #000,
-        1px 0px 0 #000,
-        2px 2px 0 #000,
-        -2px 2px 0 #000,
-        2px -2px 0 #000,
-        -2px -2px 0 #000,
-        0px 2px 0 #000,
-        0px -2px 0 #000,
-        -2px 0px 0 #000,
-        2px 0px 0 #000,
-        1px 2px 0 #000,
-        -1px 2px 0 #000,
-        1px -2px 0 #000,
-        -1px -2px 0 #000,
-        2px 1px 0 #000,
-        -2px 1px 0 #000,
-        2px -1px 0 #000,
-        -2px -1px 0 #000;
-    display: flex;
-    justify-content: center;
+  width: 1160px;
+  padding: 0;
+  margin: 0;
+  color: rgb(255, 226, 59);
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(4px 4px 3px #222);
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000, 0px 1px 0 #000,
+    0px -1px 0 #000, -1px 0px 0 #000, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000,
+    2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000,
+    2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  display: flex;
+  justify-content: center;
 }
 
 .topROW {
-    width: 1160px;
-    height: 500px;
-    align-content: flex-start;
+  width: 1160px;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
 }
 
 .azChampCol,
 .azChampRow {
-    width: 650px;
-    max-width: 650px;
+  width: 650px;
+  max-width: 650px;
 }
 
 .champImg {
-    width: 120px;
-    border-radius: 50%;
-    clip-path: circle(46% at 50% 50%);
+  width: 120px;
+  border-radius: 50%;
+  clip-path: circle(46% at 50% 50%);
 }
 
 .imgdivAZ {
-    display: flex;
-    filter: drop-shadow(4px 4px 3px #222);
-    width: 120px;
+  display: flex;
+  filter: drop-shadow(4px 4px 3px #222);
+  width: 120px;
 }
 
 .champLoseAZ {
-    filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 .overlayIMGAZ {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 116px;
-    height: 116px;
-    border: 5px solid #00d924;
-    border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 116px;
+  height: 116px;
+  border: 5px solid #00d924;
+  border-radius: 50%;
 }
 
 .eloInfoAZ {
-    width: 400px;
+  width: 400px;
 }
 
 .ELOAZ {
-    width: 400px;
+  width: 400px;
 }
 
 .eloimgAZ {
-    width: 300px;
+  width: 300px;
 }
 
 .eloAndLPAZ {
-    font-size: 5em;
-    margin-top: -80px;
+  font-size: 5em;
+  margin-top: -80px;
 }
 
 .gamesPlayed {
-    max-width: 130px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  max-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gamesPlayed h1 {
-    font-size: 6em;
-    margin-top: -30px;
-    filter: drop-shadow(4px 4px 3px #222);
+  font-size: 6em;
+  margin-top: -30px;
+  filter: drop-shadow(4px 4px 3px #222);
 }
 
 .overlayIMGAZLose {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 116px;
-    height: 116px;
-    /* border: 5px solid #00d924;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 116px;
+  height: 116px;
+  /* border: 5px solid #00d924;
     border-radius: 50%; */
 }
 
 .numOfWins {
-    position: absolute;
-    bottom: -3px;
-    right: 24px;
-    font-size: 3em;
-    margin: -13px;
+  position: absolute;
+  bottom: -3px;
+  right: 24px;
+  font-size: 3em;
+  margin: -13px;
 }

@@ -73,7 +73,7 @@ function AbisZOverlay() {
 function ChampGroupD({ champions }: LetterGroup) {
   return (
     <Col className="azChampCol">
-      <Row className="azChampRow">
+      <Row className="azChampRow centerR">
         {champions.map((champ) => (
           <ChampD name={champ.name} won={champ.won} games={champ.games} />
         ))}
@@ -119,7 +119,7 @@ function EloD({ eloLP, eloDivision, eloRank }: AccountElo) {
   lpDisplay = !eloDivision || eloDivision === "UNRANKED" ? "UNRANKED" : lpDisplay;
 
   return (
-    <Row className="eloInfoAZ">
+    <Row className="eloInfoAZ centerR">
       <Col className="ELOAZ d-flex flex-column justify-content-center align-items-center">
         <img src={`../../${eloDivision ? eloDivision : "UNRANKED"}.png`} className="eloimgAZ" />
         <p className="eloAndLPAZ">{lpDisplay}</p>

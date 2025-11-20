@@ -1,4 +1,3 @@
-import { Row } from "react-bootstrap";
 import Champion from "./ChampionEO";
 import { MatchhistoryD } from "../../types/LeagueTypes";
 import { useState, useRef, useEffect } from "react";
@@ -16,7 +15,7 @@ function Matchhistory({ entry }: MatchhistoryD) {
   }, [entry]);
 
   return (
-    <Row className="matchhistory" md="auto">
+    <div className="matchhistory">
       {matches.map((match, index) => (
         <Champion
           key={match.id}
@@ -26,12 +25,11 @@ function Matchhistory({ entry }: MatchhistoryD) {
           win={match.win}
           length={matches.length}
           isNew={
-            index === matches.length - 1 &&
-            match.id !== previousEntry.current?.lastMatches[0]?.id
+            index === matches.length - 1 && match.id !== previousEntry.current?.lastMatches[0]?.id
           }
         />
       ))}
-    </Row>
+    </div>
   );
 }
 
