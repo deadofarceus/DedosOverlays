@@ -10,6 +10,7 @@
 }
 
 .AIcTeamView {
+  position: relative;
   color: azure;
   font-weight: bold;
   font-family: Franklin Gothic Medium, sans-serif;
@@ -21,8 +22,8 @@
   border: 2px solid #333;
   background-color: #29153bc3;
   border-radius: 10px;
-  filter: drop-shadow(2px 2px 2px #222);
   align-items: center;
+  justify-content: space-between;
 }
 
 .AIcPointControll {
@@ -421,4 +422,15 @@
 
 .AIcTNimgCombined {
   height: 500px;
+}
+
+.AIC-memberSettings {
+  position: absolute;
+  left: 420px;
+  z-index: 9999;
+  background-color: #0a2342;
+}
+
+.AIc-member {
+  width: 180px;
 }

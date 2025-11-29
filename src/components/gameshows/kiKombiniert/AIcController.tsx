@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AICombGameState } from "../../../types/gameshows/AICombine";
+import { AICombGameState, Team } from "../../../types/gameshows/AICombine";
 import { clearBuzzer, preloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { AICombineWebsocket } from "../../../types/WebsocketTypes";
 import { Button, Col, Container, Row } from "react-bootstrap";
@@ -7,19 +7,67 @@ import "../../../styles/gameshows/AICombine.css";
 import TeamView from "./TeamView";
 import AICombination from "./AICombination";
 import Buzzer from "../../util/Buzzer";
-import VDOLink from "../../util/VDOLink";
 
 let ws: AICombineWebsocket;
 
 export const STARTGAMESTATE: AICombGameState = {
-  admin: "Phil",
   teams: [
-    { member: ["langerName", "anderer langer"], points: 0 },
-    { member: ["test1", "test11"], points: 0 },
-    { member: ["test2", "test22"], points: 0 },
-    { member: ["test3", "test33"], points: 0 },
-    { member: ["test4", "test44"], points: 0 },
-    { member: ["test5", "test55"], points: 0 },
+    {
+      member: [
+        { name: "Autophil", vdoNinjaLink: "" },
+        { name: "null", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: true,
+    },
+    {
+      member: [
+        { name: "1", vdoNinjaLink: "" },
+        { name: "team1", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
+    {
+      member: [
+        { name: "2", vdoNinjaLink: "" },
+        { name: "team2", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
+    {
+      member: [
+        { name: "3", vdoNinjaLink: "" },
+        { name: "team3", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
+    {
+      member: [
+        { name: "4", vdoNinjaLink: "" },
+        { name: "team4", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
+    {
+      member: [
+        { name: "5", vdoNinjaLink: "" },
+        { name: "team5", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
+    {
+      member: [
+        { name: "6", vdoNinjaLink: "" },
+        { name: "team6", vdoNinjaLink: "" },
+      ],
+      points: 0,
+      admin: false,
+    },
   ],
   currentPosition: 0,
   combination: {
@@ -29,7 +77,6 @@ export const STARTGAMESTATE: AICombGameState = {
     rightShown: false,
     combined: "AIHidden",
   },
-  vdoNinjaLinks: ["", "", "", "", "", "", ""],
 };
 
 export const COMBINATIONS: { left: string; right: string; combined: string }[] = [
@@ -191,7 +238,6 @@ function AIcController() {
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
-  const isTeams = query.get("teams") === "true";
 
   useEffect(() => {
     const id = query.get("id");
@@ -214,9 +260,9 @@ function AIcController() {
     ws.sendData(newData);
   };
 
-  const handlePoints = (points: number, index: number) => {
+  const handleChange = (team: Team, index: number) => {
     const newTeams = [...data.teams];
-    newTeams[index].points += points;
+    newTeams[index] = team;
     sendData({ ...data, teams: newTeams });
   };
 
@@ -246,12 +292,6 @@ function AIcController() {
     sendData({ ...data, currentPosition: nextPos, combination: nextCombination });
   };
 
-  const handleVDOLinkChange = (index: number, link: string) => {
-    const newLinks = [...data.vdoNinjaLinks];
-    newLinks[index] = link;
-    sendData({ ...data, vdoNinjaLinks: newLinks });
-  };
-
   const addBuzzer = (buzzer: string) => {
     if (buzzer === "CLEARBUZZERQUEUE") {
       setBuzzerQueue([]);
@@ -271,28 +311,10 @@ function AIcController() {
         <Row className="centerR AIcTeamControllerRow">
           <Col className="centerC w-75 p-0">
             {data.teams.map((team, index) => (
-              <TeamView key={index} team={team} index={index} handlePoints={handlePoints} />
+              <TeamView key={index} team={team} index={index} handleChange={handleChange} />
             ))}
           </Col>
         </Row>
-        <Col className="centerC w-100 AIcVDOLinks blackOutline">
-          <h3>Set VDONinja Links</h3>
-          <VDOLink
-            name={data.admin}
-            index={data.vdoNinjaLinks.length - 1}
-            link={data.vdoNinjaLinks[data.vdoNinjaLinks.length - 1]}
-            handleChange={handleVDOLinkChange}
-          />
-          {data.vdoNinjaLinks.slice(0, -1).map((link, index) => (
-            <VDOLink
-              key={index}
-              name={isTeams ? data.teams[index % 3].member[index % 2] : data.teams[index].member[0]}
-              index={index}
-              link={link}
-              handleChange={handleVDOLinkChange}
-            />
-          ))}
-        </Col>
       </Col>
       <Col className="centerC AIcCombinationControll">
         <AICombination combination={data.combination} />

@@ -43,18 +43,26 @@ function AIcOverlay() {
     ? "AI Combine teams overlay frame"
     : "AI Combine singleplayer overlay frame";
 
+  const links: string[] = [];
+  data.teams.slice(1, data.teams.length).forEach((t) => {
+    links.push(t.member[0].vdoNinjaLink);
+    if (isTeams) {
+      links.push(t.member[1].vdoNinjaLink);
+    }
+  });
+
   return (
     <Container className="AIcOverlayCon">
       <div className="AIcVDOStreams">
-        {[0, 1, 2, 3, 4, 5].map((index) => (
-          <div className={streamsClass} id={streamIDs + index}>
-            <VDOLinkStream key={index} link={data.vdoNinjaLinks[index]} className={""} id={""} />
+        {links.map((vdolink, index) => (
+          <div key={index} className={streamsClass} id={streamIDs + index}>
+            <VDOLinkStream link={vdolink} className={""} id={""} />
           </div>
         ))}
       </div>
       <div id="AIcStreamAdmin">
         <VDOLinkStream
-          link={data.vdoNinjaLinks[data.vdoNinjaLinks.length - 1]}
+          link={data.teams.filter((t) => t.admin)[0].member[0].vdoNinjaLink}
           className=""
           id=""
         />
