@@ -293,11 +293,14 @@ function AIcController() {
   };
 
   const addBuzzer = (buzzer: string) => {
-    if (buzzer === "CLEARBUZZERQUEUE") {
-      setBuzzerQueue([]);
-    } else if (!buzzerQueue.includes(buzzer)) {
-      setBuzzerQueue([...buzzerQueue, buzzer]);
-    }
+    setBuzzerQueue((prevQueue) => {
+      if (buzzer === "CLEARBUZZERQUEUE") {
+        return [];
+      } else if (!prevQueue.includes(buzzer)) {
+        return [...prevQueue, buzzer];
+      }
+      return prevQueue;
+    });
   };
 
   const handleClearBuzzer = () => {
@@ -358,9 +361,11 @@ function AIcController() {
       </Col>
       <Col className="centerC AIcBuzzerQueue">
         <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
-        {buzzerQueue.map((buzzer, index) => (
-          <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} />
-        ))}
+        <div className="buzzerQueueScroll">
+          {buzzerQueue.map((buzzer, index) => (
+            <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} />
+          ))}
+        </div>
         <Button
           variant="danger"
           className="clearBuzzer blackOutline"
