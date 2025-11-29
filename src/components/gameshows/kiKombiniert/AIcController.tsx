@@ -15,7 +15,7 @@ export const STARTGAMESTATE: AICombGameState = {
     {
       member: [
         { name: "Autophil", vdoNinjaLink: "" },
-        { name: "null", vdoNinjaLink: "" },
+        { name: "", vdoNinjaLink: "" },
       ],
       points: 0,
       admin: true,
