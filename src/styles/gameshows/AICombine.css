@@ -297,13 +297,13 @@
 #AIcLeft {
   top: 72px;
   left: 1016px;
-  rotate: -10deg;
+  transform: rotate(-10deg);
 }
 
 #AIcRight {
   top: 382px;
   left: 1028px;
-  rotate: 15deg;
+  transform: rotate(15deg);
 }
 
 .AIcimgOverlayDiv {
