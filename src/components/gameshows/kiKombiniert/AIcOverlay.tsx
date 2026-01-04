@@ -45,10 +45,16 @@ function AIcOverlay() {
 
   const links: string[] = [];
   data.teams.slice(1, data.teams.length).forEach((t) => {
-    links.push(t.member[0].vdoNinjaLink);
-    if (isTeams) {
-      links.push(t.member[1].vdoNinjaLink);
+    if (links.length !== 6) {
+      links.push(t.member[0].vdoNinjaLink);
+      if (isTeams) {
+        links.push(t.member[1].vdoNinjaLink);
+      }
     }
+  });
+  const points: number[] = [];
+  data.teams.forEach((t) => {
+    if (!t.admin) points.push(t.points);
   });
 
   return (
@@ -87,13 +93,13 @@ function AIcOverlay() {
 
       <img src={"../../AICombine/" + overlayImage} alt={overlayAlt} className="AIcOverlayImage" />
       <div className="AIcVDOStreams">
-        {data.teams.map((team, index) => (
+        {points.map((point, index) => (
           <div
             key={index}
             className={pointsClass + " blackOutline"}
             style={{ left: leftOffset + leftIncrement * index + "px" }}
           >
-            {team.points}
+            {point}
           </div>
         ))}
       </div>
