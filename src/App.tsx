@@ -12,6 +12,7 @@ import { deathcounterRoutes } from "./routes/deathcounter.routes";
 import { pokemonRoutes } from "./routes/pokemon.routes";
 import { gameshowRoutes } from "./routes/gameshows.routes";
 import { streamRoutes } from "./routes/stream.routes";
+import FillToMaster from "./pages/FillToMaster";
 
 const Home = lazy(() => import("./pages/Home"));
 const ErrorPage = lazy(() => import("./ErrorPage"));
@@ -52,6 +53,7 @@ function App() {
           {deathcounterRoutes()}
           {streamRoutes()}
 
+          <Route path="filltomaster/:accountName" element={<FillToMaster />} />
           <Route path="abisz/:accountName" element={<AbisZOverlay />} />
           <Route path="teamelo/:team" element={<TeamElo />} />
 
