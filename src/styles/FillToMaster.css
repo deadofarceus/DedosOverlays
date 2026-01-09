@@ -1,0 +1,37 @@
+.fillToMaster-container {
+  width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: azure;
+  font-weight: bold;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  filter: drop-shadow(2px 2px 1px #222);
+}
+
+.fillToMaster-positions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fillToMaster-position {
+}
+
+.fillToMaster-icon {
+}
+
+.fillToMaster-info {
+  font-size: 22px;
+}
+
+.fillToMaster-WL {
+}
+
+.fillToMaster-LP {
+}
