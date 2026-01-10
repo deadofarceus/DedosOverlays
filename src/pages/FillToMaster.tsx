@@ -19,11 +19,11 @@ interface Position {
 let ws: BroadcastWebsocket<FTMAccount>;
 
 const StandardPositions: Position[] = [
-  { name: "Top", played: 0, wins: 0, losses: 0, lpGained: 0 },
-  { name: "Jungle", played: 0, wins: 0, losses: 0, lpGained: 0 },
-  { name: "Mid", played: 0, wins: 0, losses: 0, lpGained: 0 },
-  { name: "Bot", played: 0, wins: 0, losses: 0, lpGained: 0 },
-  { name: "Support", played: 0, wins: 0, losses: 0, lpGained: 0 },
+  { name: "TOP", played: 0, wins: 0, losses: 0, lpGained: 0 },
+  { name: "JUNGLE", played: 0, wins: 0, losses: 0, lpGained: 0 },
+  { name: "MIDDLE", played: 0, wins: 0, losses: 0, lpGained: 0 },
+  { name: "BOTTOM", played: 0, wins: 0, losses: 0, lpGained: 0 },
+  { name: "UTILITY", played: 0, wins: 0, losses: 0, lpGained: 0 },
 ];
 const DefaultAccount: FTMAccount = {
   name: "default",
