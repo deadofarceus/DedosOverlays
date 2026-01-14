@@ -308,6 +308,8 @@ function AIcController() {
     setBuzzerQueue([]);
   };
 
+  const nextCombination = COMBINATIONS[(data.currentPosition + 1) % COMBINATIONS.length];
+
   return (
     <Container className="AIcController centerR">
       <Col className="centerC w-100">
@@ -321,6 +323,14 @@ function AIcController() {
       </Col>
       <Col className="centerC AIcCombinationControll">
         <AICombination combination={data.combination} />
+        <div className="AIcNextComb">
+          <h1 className="blackOutline">{`Next Combination: ${nextCombination.combined}`}</h1>
+          <img
+            src={"../../AICombine/" + nextCombination.combined + ".png"}
+            alt={nextCombination.combined}
+            className="AIcCombinedImage"
+          />
+        </div>
         <h1 className="blackOutline AIcCombCounter">{`${data.currentPosition + 1}/${
           COMBINATIONS.length
         }`}</h1>
