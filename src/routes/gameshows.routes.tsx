@@ -8,6 +8,10 @@ const AIcController = lazy(() => import("../components/gameshows/kiKombiniert/AI
 const AIcTeilnehmer = lazy(() => import("../components/gameshows/kiKombiniert/AIcTeilnehmer"));
 const AIcOverlay = lazy(() => import("../components/gameshows/kiKombiniert/AIcOverlay"));
 
+const JepoardyController = lazy(() => import("../components/gameshows/jepoardy/JepoardyController"));
+const JepoardyTeilnehmer = lazy(() => import("../components/gameshows/jepoardy/JepoardyTeilnehmer"));
+const JepoardyOverlay = lazy(() => import("../components/gameshows/jepoardy/JepoardyOverlay"));
+
 export function gameshowRoutes() {
   return (
     <Route path="gameshows">
@@ -20,6 +24,11 @@ export function gameshowRoutes() {
         <Route path="admin" element={<AIcController />} />
         <Route path="teilnehmer" element={<AIcTeilnehmer />} />
         <Route path="overlay" element={<AIcOverlay />} />
+      </Route>
+      <Route path="jepoardy">
+        <Route path="admin" element={<JepoardyController />} />
+        <Route path="teilnehmer" element={<JepoardyTeilnehmer />} />
+        <Route path="overlay" element={<JepoardyOverlay />} />
       </Route>
     </Route>
   );
