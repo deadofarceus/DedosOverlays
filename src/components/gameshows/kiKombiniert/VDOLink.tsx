@@ -5,20 +5,18 @@ import { Member } from "../../../types/gameshows/AICombine";
 interface VDOLinkProps {
   index: number;
   member: Member;
-  handleChange: (index: number, link: string, name: string) => void;
+  handleChange: (index: number, name: string) => void;
 }
 
 function VDOLink({ index, member, handleChange }: VDOLinkProps) {
-  const [linkState, setLinkState] = useState<string>(member.vdoNinjaLink);
   const [nameState, setNameState] = useState<string>(member.name);
 
   useEffect(() => {
-    setLinkState(member.vdoNinjaLink);
     setNameState(member.name);
-  }, [member.vdoNinjaLink, member.name]);
+  }, [member.name]);
 
   const handleSave = () => {
-    handleChange(index, linkState, nameState);
+    handleChange(index, nameState);
   };
 
   return (
@@ -33,15 +31,6 @@ function VDOLink({ index, member, handleChange }: VDOLinkProps) {
           value={nameState}
           onChange={(e) => setNameState(e.target.value)}
           placeholder="Enter name"
-        />
-      </div>
-      <div className="mb-3">
-        <Form.Label>VDO Ninja Link:</Form.Label>
-        <Form.Control
-          type="text"
-          value={linkState}
-          onChange={(e) => setLinkState(e.target.value)}
-          placeholder="Enter VDO Ninja link"
         />
       </div>
       <div className="d-flex gap-2">

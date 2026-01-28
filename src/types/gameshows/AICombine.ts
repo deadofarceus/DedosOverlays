@@ -1,18 +1,18 @@
 export interface AICombGameState {
+  admin: string;
   teams: Team[];
   currentPosition: number;
   combination: Combination;
+  password: string;
 }
 
 export interface Team {
   member: Member[];
   points: number;
-  admin: boolean;
 }
 
 export interface Member {
   name: string;
-  vdoNinjaLink: string;
 }
 
 export interface Combination {

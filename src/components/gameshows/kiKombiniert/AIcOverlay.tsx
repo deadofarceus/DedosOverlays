@@ -1,12 +1,12 @@
-import { AICombineWebsocket } from "../../../types/WebsocketTypes";
+import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
-import { preloadImages, useQuery } from "../../../types/UsefulFunctions";
+import { getVDONinjaLink, preloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
 import VDOLinkStream from "../../util/VDOLinkStream";
 
-let ws: AICombineWebsocket;
+let ws: GameshowWebsocket<AICombGameState>;
 
 function AIcOverlay() {
   const query = useQuery();
@@ -14,12 +14,11 @@ function AIcOverlay() {
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
 
   const addBuzzer = (_buzzer: string) => {};
+  const id = query.get("id");
 
   useEffect(() => {
-    const id = query.get("id");
-
-    if (!ws && id) {
-      ws = new AICombineWebsocket(id, setData, addBuzzer);
+    if (id && !ws) {
+      ws = new GameshowWebsocket<AICombGameState>(id, setData, addBuzzer);
       preloadImages(
         COMBINATIONS.map((combination) => "../../AICombine/" + combination.left + ".png").concat(
           COMBINATIONS.map((combination) => "../../AICombine/" + combination.right + ".png").concat(
@@ -28,6 +27,18 @@ function AIcOverlay() {
         )
       );
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchData();
   }, [query]);
 
   const imageLeft = data.combination.leftShown ? data.combination.left : "AIHidden";
@@ -44,17 +55,13 @@ function AIcOverlay() {
     : "AI Combine singleplayer overlay frame";
 
   const links: string[] = [];
-  data.teams.slice(1, data.teams.length).forEach((t) => {
+  data.teams.forEach((t) => {
     if (links.length !== 6) {
-      links.push(t.member[0].vdoNinjaLink);
+      links.push(getVDONinjaLink(id!, t.member[0].name, data.password));
       if (isTeams) {
-        links.push(t.member[1].vdoNinjaLink);
+        links.push(getVDONinjaLink(id!, t.member[0].name, data.password));
       }
     }
-  });
-  const points: number[] = [];
-  data.teams.forEach((t) => {
-    if (!t.admin) points.push(t.points);
   });
 
   return (
@@ -67,11 +74,7 @@ function AIcOverlay() {
         ))}
       </div>
       <div id="AIcStreamAdmin">
-        <VDOLinkStream
-          link={data.teams.filter((t) => t.admin)[0].member[0].vdoNinjaLink}
-          className=""
-          id=""
-        />
+        <VDOLinkStream link={getVDONinjaLink(id!, data.admin, data.password)} className="" id="" />
       </div>
       <div id="AIcLeft" className="AIcimgOverlayDiv">
         <img
@@ -93,13 +96,13 @@ function AIcOverlay() {
 
       <img src={"../../AICombine/" + overlayImage} alt={overlayAlt} className="AIcOverlayImage" />
       <div className="AIcVDOStreams">
-        {points.map((point, index) => (
+        {data.teams.map((team, index) => (
           <div
             key={index}
             className={pointsClass + " blackOutline"}
             style={{ left: leftOffset + leftIncrement * index + "px" }}
           >
-            {point}
+            {team.points}
           </div>
         ))}
       </div>

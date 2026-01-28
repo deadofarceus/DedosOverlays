@@ -17,8 +17,8 @@ function TeamView({ team, index, handleChange }: TeamProps) {
 
   const members = isTeams ? team.member.map((m) => m.name).join(" & ") : team.member[0].name;
 
-  const handleSettingsChange = (memberIndex: number, link: string, name: string) => {
-    const cm: Member = { name: name, vdoNinjaLink: link };
+  const handleSettingsChange = (memberIndex: number, name: string) => {
+    const cm: Member = { name: name };
     const newMember = [...team.member];
     newMember[memberIndex] = cm;
 
@@ -31,33 +31,38 @@ function TeamView({ team, index, handleChange }: TeamProps) {
     setIsSettingsOpen(false);
   };
 
+  console.log(isSettingsOpen);
+
   return (
     <Container className="AIcTeamView centerR blackOutline">
       <div className="AIc-member">
-        {members} {!team.admin ? ` {${team.points}}` : ""}
+        {members} {` {${team.points}}`}
       </div>
-      {!team.admin && (
-        <>
-          <Button onClick={() => handlePoints(1)} variant="success" className="AIcPointbutton">
-            +1
-          </Button>
-          <Button onClick={() => handlePoints(-1)} variant="danger" className="AIcPointbutton">
-            -1
-          </Button>
-        </>
-      )}
+      <>
+        <Button onClick={() => handlePoints(1)} variant="success" className="AIcPointbutton">
+          +1
+        </Button>
+        <Button onClick={() => handlePoints(-1)} variant="danger" className="AIcPointbutton">
+          -1
+        </Button>
+      </>
 
       <Button onClick={() => setIsSettingsOpen(true)} variant="secondary" title="Settings">
         ⚙️
       </Button>
       {isSettingsOpen && (
         <>
-          {isTeams && !team.admin ? (
+          {isTeams ? (
             team.member.map((m, mIndex) => (
               <VDOLink key={mIndex} index={mIndex} member={m} handleChange={handleSettingsChange} />
             ))
           ) : (
-            <VDOLink index={0} member={team.member[0]} handleChange={handleSettingsChange} />
+            <VDOLink
+              key={0}
+              index={0}
+              member={team.member[0]}
+              handleChange={handleSettingsChange}
+            />
           )}
         </>
       )}

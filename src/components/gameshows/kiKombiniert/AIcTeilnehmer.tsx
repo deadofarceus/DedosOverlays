@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { AICombGameState } from "../../../types/gameshows/AICombine";
 import { buzzer, preloadImages, useQuery } from "../../../types/UsefulFunctions";
-import { AICombineWebsocket } from "../../../types/WebsocketTypes";
+import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Col, Container } from "react-bootstrap";
 import AICombinationOverlay from "./AICombinationOverlay";
+import Buzzer from "../../util/Buzzer";
 
-let ws: AICombineWebsocket;
+let ws: GameshowWebsocket<AICombGameState>;
 
 function AIcTeilnehmer() {
   document.body.className = "noOBS";
@@ -14,16 +15,20 @@ function AIcTeilnehmer() {
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
-  const [userName, setUserName] = useState<string>("");
+  const userName = query.get("name") ?? "";
 
   const addBuzzer = (buzzer: string) => {
-    console.log(buzzer);
-
-    if (buzzer === "CLEARBUZZERQUEUE") {
-      setBuzzerQueue([]);
-    } else if (!buzzerQueue.includes(buzzer)) {
-      setBuzzerQueue([...buzzerQueue, buzzer]);
-    }
+    setBuzzerQueue((prevQueue) => {
+      if (buzzer === "CLEARBUZZERQUEUE") {
+        return [];
+      } else if (buzzer.startsWith("CLEAR_")) {
+        const toRemove = buzzer.split("_")[1];
+        return prevQueue.filter((b) => b !== toRemove);
+      } else if (!prevQueue.includes(buzzer)) {
+        return [...prevQueue, buzzer];
+      }
+      return prevQueue;
+    });
   };
 
   const handleBuzzer = () => {
@@ -35,9 +40,8 @@ function AIcTeilnehmer() {
 
   useEffect(() => {
     const id = query.get("id");
-
-    if (!ws && id) {
-      ws = new AICombineWebsocket(id, setData, addBuzzer);
+    if (id && !ws) {
+      ws = new GameshowWebsocket<AICombGameState>(id, setData, addBuzzer);
       preloadImages(
         COMBINATIONS.map((combination) => "../../AICombine/" + combination.left + ".png").concat(
           COMBINATIONS.map((combination) => "../../AICombine/" + combination.right + ".png").concat(
@@ -46,23 +50,38 @@ function AIcTeilnehmer() {
         )
       );
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchData();
   }, [query]);
 
   return (
     <Container className="AIcTeilnehmerCon w-100 centerC">
+      <h1 className="blackOutline AICUsername">{userName}</h1>
       <AICombinationOverlay combination={data.combination} />
       {userName && (
         <Button variant="danger" className="buzzerButton blackOutline" onClick={handleBuzzer}>
           BUZZER
         </Button>
       )}
-      <Form.Control
-        type="text"
-        placeholder="Enter your user name"
-        value={userName}
-        className="buzzerUserInput"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)}
-      />
+      {/** Buzzer sound einstellen können mit schieberegler */}
+      <Col className="centerC AIcBuzzerQueue teilnehmerBuzzerQueue">
+        <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
+        <div className="buzzerQueueScroll teilnehmerBuzzerQueueScroll">
+          {buzzerQueue.map((buzzer, index) => (
+            <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} clear={() => {}} />
+          ))}
+        </div>
+      </Col>
     </Container>
   );
 }

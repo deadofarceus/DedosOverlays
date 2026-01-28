@@ -61,8 +61,7 @@
 .AIcCombinationDiv {
   position: relative;
   margin-bottom: 100px;
-  filter: drop-shadow(3px 3px 5px #222222b6) drop-shadow(-3px 3px 5px #222222b6)
-    drop-shadow(-3px -3px 5px #222222b6) drop-shadow(3px -3px 5px #222222b6);
+  filter: drop-shadow(3px 3px 5px #222222b6) drop-shadow(-3px 3px 5px #222222b6) drop-shadow(-3px -3px 5px #222222b6) drop-shadow(3px -3px 5px #222222b6);
   min-width: 500px;
   height: 450px;
 }
@@ -206,7 +205,7 @@
   overflow: hidden;
 }
 
-.AIcVDOLinkStream > iframe {
+.AIcVDOLinkStream>iframe {
   width: 464px;
   height: 261px;
   position: absolute;
@@ -222,7 +221,7 @@
   overflow: hidden;
 }
 
-.AIcVDOLinkStreamTeams > iframe {
+.AIcVDOLinkStreamTeams>iframe {
   width: 507px;
   height: 285px;
   position: absolute;
@@ -287,7 +286,7 @@
   top: 114px;
 }
 
-#AIcStreamAdmin > iframe {
+#AIcStreamAdmin>iframe {
   width: 800px;
   height: 450px;
   position: absolute;
@@ -329,7 +328,7 @@
   align-items: center;
 }
 
-#AIcCombined > img {
+#AIcCombined>img {
   max-width: 938px;
   height: 525px;
 }
@@ -469,4 +468,31 @@
 
 .AIcNextComb img {
   width: 180px;
+}
+
+.teilnehmerBuzzerQueue {
+  position: absolute;
+  bottom: 4px;
+  right: 140px;
+  height: 320px;
+}
+
+.teilnehmerBuzzerQueueScroll {
+  min-height: 270px;
+  max-height: 270px;
+}
+
+.AICUsername {
+  color: azure;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 50px;
+}
+
+.passwordChanging {
+  color: #be0606 !important;
+
+}
+
+.passwordSaved {
+  color: #099610;
 }

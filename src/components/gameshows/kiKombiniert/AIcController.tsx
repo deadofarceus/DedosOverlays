@@ -1,72 +1,47 @@
 import { useEffect, useState } from "react";
 import { AICombGameState, Team } from "../../../types/gameshows/AICombine";
-import { clearBuzzer, preloadImages, useQuery } from "../../../types/UsefulFunctions";
-import { AICombineWebsocket } from "../../../types/WebsocketTypes";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import {
+  clearBuzzer,
+  clearOneBuzzer,
+  preloadImages,
+  useQuery,
+} from "../../../types/UsefulFunctions";
+import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "../../../styles/gameshows/AICombine.css";
 import TeamView from "./TeamView";
 import AICombination from "./AICombination";
 import Buzzer from "../../util/Buzzer";
 
-let ws: AICombineWebsocket;
+let ws: GameshowWebsocket<AICombGameState>;
 
 export const STARTGAMESTATE: AICombGameState = {
+  admin: "Autophil",
+  password: "",
   teams: [
     {
-      member: [
-        { name: "Autophil", vdoNinjaLink: "" },
-        { name: "", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: true,
     },
     {
-      member: [
-        { name: "1", vdoNinjaLink: "" },
-        { name: "team1", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: false,
     },
     {
-      member: [
-        { name: "2", vdoNinjaLink: "" },
-        { name: "team2", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: false,
     },
     {
-      member: [
-        { name: "3", vdoNinjaLink: "" },
-        { name: "team3", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: false,
     },
     {
-      member: [
-        { name: "4", vdoNinjaLink: "" },
-        { name: "team4", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: false,
     },
     {
-      member: [
-        { name: "5", vdoNinjaLink: "" },
-        { name: "team5", vdoNinjaLink: "" },
-      ],
+      member: [{ name: "Name1" }, { name: "Name2" }],
       points: 0,
-      admin: false,
-    },
-    {
-      member: [
-        { name: "6", vdoNinjaLink: "" },
-        { name: "team6", vdoNinjaLink: "" },
-      ],
-      points: 0,
-      admin: false,
     },
   ],
   currentPosition: 0,
@@ -238,13 +213,12 @@ function AIcController() {
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
+  const [password, setPassword] = useState<string>("");
 
   useEffect(() => {
     const id = query.get("id");
-
-    if (!ws && id) {
-      ws = new AICombineWebsocket(id, setData, addBuzzer);
-
+    if (id && !ws) {
+      ws = new GameshowWebsocket<AICombGameState>(id, setData, addBuzzer);
       preloadImages(
         COMBINATIONS.map((combination) => "../../AICombine/" + combination.left + ".png").concat(
           COMBINATIONS.map((combination) => "../../AICombine/" + combination.right + ".png").concat(
@@ -253,6 +227,18 @@ function AIcController() {
         )
       );
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchData();
   }, [query]);
 
   const sendData = (newData: AICombGameState) => {
@@ -296,6 +282,9 @@ function AIcController() {
     setBuzzerQueue((prevQueue) => {
       if (buzzer === "CLEARBUZZERQUEUE") {
         return [];
+      } else if (buzzer.startsWith("CLEAR_")) {
+        const toRemove = buzzer.split("_")[1];
+        return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         return [...prevQueue, buzzer];
       }
@@ -308,13 +297,38 @@ function AIcController() {
     setBuzzerQueue([]);
   };
 
+  const handleClearOneBuzzer = (buzzer: string) => {
+    clearOneBuzzer(query.get("id")!, buzzer);
+  };
+
   const nextCombination = COMBINATIONS[(data.currentPosition + 1) % COMBINATIONS.length];
+
+  console.log(data);
 
   return (
     <Container className="AIcController centerR">
       <Col className="centerC w-100">
         <Row className="centerR AIcTeamControllerRow">
           <Col className="centerC w-75 p-0">
+            <Form.Control
+              type="text"
+              placeholder="Room password"
+              value={password}
+              className={
+                "buzzerUserInput " +
+                (password !== data.password ? "passwordChanging" : "passwordSaved")
+              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(e.target.value);
+              }}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                if (e.key === "Enter") {
+                  (e.target as HTMLInputElement).blur();
+                  sendData({ ...data, password: password });
+                }
+              }}
+            />
+
             {data.teams.map((team, index) => (
               <TeamView key={index} team={team} index={index} handleChange={handleChange} />
             ))}
@@ -373,7 +387,14 @@ function AIcController() {
         <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
         <div className="buzzerQueueScroll">
           {buzzerQueue.map((buzzer, index) => (
-            <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} />
+            <div>
+              <Buzzer
+                key={index}
+                queueSlot={index + 1}
+                buzzer={buzzer}
+                clear={handleClearOneBuzzer}
+              />
+            </div>
           ))}
         </div>
         <Button
