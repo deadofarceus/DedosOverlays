@@ -59,10 +59,11 @@ function AIcOverlay() {
     if (links.length !== 6) {
       links.push(getVDONinjaLink(id!, t.member[0].name, data.password));
       if (isTeams) {
-        links.push(getVDONinjaLink(id!, t.member[0].name, data.password));
+        links.push(getVDONinjaLink(id!, t.member[1].name, data.password));
       }
     }
   });
+  console.log(links);
 
   return (
     <Container className="AIcOverlayCon">
