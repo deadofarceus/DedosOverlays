@@ -8,6 +8,7 @@ import AICombinationOverlay from "./AICombinationOverlay";
 import Buzzer from "../../util/Buzzer";
 
 let ws: GameshowWebsocket<AICombGameState>;
+const audio = new Audio("../../sounds/Buzzer.mp3");
 
 function AIcTeilnehmer() {
   document.body.className = "noOBS";
@@ -28,7 +29,7 @@ function AIcTeilnehmer() {
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         if (prevQueue.length === 0) {
-          const audio = new Audio("../../sounds/Buzzer.mp3");
+          audio.volume = Math.min(1, Math.max(0, volume / 100));
           audio.play();
         }
         return [...prevQueue, buzzer];

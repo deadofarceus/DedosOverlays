@@ -248,10 +248,6 @@ function AIcController() {
     fetchData();
   }, [query]);
 
-  useEffect(() => {
-    audio.volume = Math.min(1, Math.max(0, volume / 100));
-  }, [volume]);
-
   const sendData = (newData: AICombGameState) => {
     if (!ws) return;
     ws.sendData(newData);
@@ -298,7 +294,7 @@ function AIcController() {
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         if (prevQueue.length === 0) {
-          audio.volume = volume / 100;
+          audio.volume = Math.min(1, Math.max(0, volume / 100));
           audio.play();
         }
         return [...prevQueue, buzzer];
