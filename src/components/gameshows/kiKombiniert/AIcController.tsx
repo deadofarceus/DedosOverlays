@@ -14,6 +14,7 @@ import AICombination from "./AICombination";
 import Buzzer from "../../util/Buzzer";
 
 let ws: GameshowWebsocket<AICombGameState>;
+const audio = new Audio("../../sounds/Buzzer.mp3");
 
 export const STARTGAMESTATE: AICombGameState = {
   admin: "Autophil",
@@ -219,6 +220,7 @@ function AIcController() {
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const [password, setPassword] = useState<string>("");
+  const [volume, setVolume] = useState<number>(10);
 
   useEffect(() => {
     const id = query.get("id");
@@ -245,6 +247,10 @@ function AIcController() {
 
     fetchData();
   }, [query]);
+
+  useEffect(() => {
+    audio.volume = Math.min(1, Math.max(0, volume / 100));
+  }, [volume]);
 
   const sendData = (newData: AICombGameState) => {
     if (!ws) return;
@@ -291,6 +297,10 @@ function AIcController() {
         const toRemove = buzzer.split("_")[1];
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
+        if (prevQueue.length === 0) {
+          audio.volume = volume / 100;
+          audio.play();
+        }
         return [...prevQueue, buzzer];
       }
       return prevQueue;
@@ -307,6 +317,7 @@ function AIcController() {
   };
 
   const nextCombination = COMBINATIONS[(data.currentPosition + 1) % COMBINATIONS.length];
+  console.log(volume);
 
   return (
     <Container className="AIcController centerR">
@@ -408,6 +419,19 @@ function AIcController() {
           Clear Buzzer
         </Button>
       </Col>
+      <div className="buzzerSoundSlider">
+        <span aria-label="Sound" title="Sound">
+          🔊
+        </span>
+        <Form.Range
+          min={0}
+          max={100}
+          step={1}
+          value={volume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolume(Number(e.target.value))}
+          aria-label="Buzzer Lautstärke"
+        />
+      </div>
     </Container>
   );
 }

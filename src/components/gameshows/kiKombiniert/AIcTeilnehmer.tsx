@@ -3,7 +3,7 @@ import { AICombGameState } from "../../../types/gameshows/AICombine";
 import { buzzer, preloadImages, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { COMBINATIONS, STARTGAMESTATE } from "./AIcController";
-import { Button, Col, Container } from "react-bootstrap";
+import { Button, Col, Container, Form } from "react-bootstrap";
 import AICombinationOverlay from "./AICombinationOverlay";
 import Buzzer from "../../util/Buzzer";
 
@@ -15,6 +15,8 @@ function AIcTeilnehmer() {
   const query = useQuery();
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
+  const [volume, setVolume] = useState<number>(10);
+
   const userName = query.get("name") ?? "";
 
   const addBuzzer = (buzzer: string) => {
@@ -25,6 +27,10 @@ function AIcTeilnehmer() {
         const toRemove = buzzer.split("_")[1];
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
+        if (prevQueue.length === 0) {
+          const audio = new Audio("../../sounds/Buzzer.mp3");
+          audio.play();
+        }
         return [...prevQueue, buzzer];
       }
       return prevQueue;
@@ -73,7 +79,6 @@ function AIcTeilnehmer() {
           BUZZER
         </Button>
       )}
-      {/** Buzzer sound einstellen können mit schieberegler */}
       <Col className="centerC AIcBuzzerQueue teilnehmerBuzzerQueue">
         <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
         <div className="buzzerQueueScroll teilnehmerBuzzerQueueScroll">
@@ -82,6 +87,19 @@ function AIcTeilnehmer() {
           ))}
         </div>
       </Col>
+      <div className="buzzerSoundSlider">
+        <span aria-label="Sound" title="Sound">
+          🔊
+        </span>
+        <Form.Range
+          min={0}
+          max={100}
+          step={1}
+          value={volume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolume(Number(e.target.value))}
+          aria-label="Buzzer Lautstärke"
+        />
+      </div>
     </Container>
   );
 }

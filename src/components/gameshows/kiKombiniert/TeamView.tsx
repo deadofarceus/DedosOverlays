@@ -31,8 +31,6 @@ function TeamView({ team, index, handleChange }: TeamProps) {
     setIsSettingsOpen(false);
   };
 
-  console.log(isSettingsOpen);
-
   return (
     <Container className="AIcTeamView centerR blackOutline">
       <div className="AIc-member">
