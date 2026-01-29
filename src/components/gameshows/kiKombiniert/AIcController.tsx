@@ -235,10 +235,6 @@ function AIcController() {
       );
     }
 
-    useEffect(() => {
-      audio.volume = Math.min(1, Math.max(0, volume / 100));
-    }, [volume]);
-
     const fetchData = async () => {
       const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
       if (res.ok) {
@@ -251,6 +247,10 @@ function AIcController() {
 
     fetchData();
   }, [query]);
+
+  useEffect(() => {
+    audio.volume = Math.min(1, Math.max(0, volume / 100));
+  }, [volume]);
 
   const sendData = (newData: AICombGameState) => {
     if (!ws) return;
@@ -316,7 +316,6 @@ function AIcController() {
   };
 
   const nextCombination = COMBINATIONS[(data.currentPosition + 1) % COMBINATIONS.length];
-  console.log(volume);
 
   return (
     <Container className="AIcController centerR">
