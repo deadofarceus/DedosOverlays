@@ -29,7 +29,6 @@ function AIcTeilnehmer() {
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         if (prevQueue.length === 0) {
-          audio.volume = Math.min(1, Math.max(0, volume / 100));
           audio.play();
         }
         return [...prevQueue, buzzer];
@@ -70,6 +69,10 @@ function AIcTeilnehmer() {
 
     fetchData();
   }, [query]);
+
+  useEffect(() => {
+    audio.volume = Math.min(1, Math.max(0, volume / 100));
+  }, [volume]);
 
   return (
     <Container className="AIcTeilnehmerCon w-100 centerC">

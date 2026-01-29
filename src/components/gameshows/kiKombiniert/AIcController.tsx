@@ -235,6 +235,10 @@ function AIcController() {
       );
     }
 
+    useEffect(() => {
+      audio.volume = Math.min(1, Math.max(0, volume / 100));
+    }, [volume]);
+
     const fetchData = async () => {
       const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
       if (res.ok) {
@@ -294,7 +298,6 @@ function AIcController() {
         return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         if (prevQueue.length === 0) {
-          audio.volume = Math.min(1, Math.max(0, volume / 100));
           audio.play();
         }
         return [...prevQueue, buzzer];
