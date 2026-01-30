@@ -183,9 +183,9 @@ export const COMBINATIONS: { left: string; right: string; combined: string }[] =
     combined: "Autophil_Milio",
   },
   {
-    left: "Niekbeats_Lee_Sin",
+    left: "Muay_Thai_Lee_Sin",
     right: "Niekbeats3",
-    combined: "Muay_Thai_Lee_Sin",
+    combined: "Niekbeats_Lee_Sin",
   },
   {
     left: "Taric",
