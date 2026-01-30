@@ -516,3 +516,15 @@
   font-size: 18px;
   line-height: 18px;
 }
+
+.AIcBuzzeredDiv {
+  position: absolute;
+  max-width: 274px;
+  width: 507px;
+  height: 285px;
+  overflow: hidden;
+}
+
+.AICbuzzered {
+  background: radial-gradient(circle, #ff242406 0%, #a8060606 70%, #b1000056 100%);
+}

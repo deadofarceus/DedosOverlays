@@ -12,8 +12,8 @@ function AIcOverlay() {
   const query = useQuery();
   const isTeams = query.get("teams") === "true";
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
+  const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
 
-  const addBuzzer = (_buzzer: string) => {};
   const id = query.get("id");
 
   useEffect(() => {
@@ -41,6 +41,20 @@ function AIcOverlay() {
     fetchData();
   }, [query]);
 
+  const addBuzzer = (buzzer: string) => {
+    setBuzzerQueue((prevQueue) => {
+      if (buzzer === "CLEARBUZZERQUEUE") {
+        return [];
+      } else if (buzzer.startsWith("CLEAR_")) {
+        const toRemove = buzzer.split("_")[1];
+        return prevQueue.filter((b) => b !== toRemove);
+      } else if (!prevQueue.includes(buzzer)) {
+        return [...prevQueue, buzzer];
+      }
+      return prevQueue;
+    });
+  };
+
   const imageLeft = data.combination.leftShown ? data.combination.left : "AIHidden";
   const imageRight = data.combination.rightShown ? data.combination.right : "AIHidden";
 
@@ -54,23 +68,31 @@ function AIcOverlay() {
     ? "AI Combine teams overlay frame"
     : "AI Combine singleplayer overlay frame";
 
-  const links: string[] = [];
+  const links: { link: string; name: string }[] = [];
   data.teams.forEach((t) => {
     if (links.length !== 6) {
-      links.push(getVDONinjaLink(id!, t.member[0].name, data.password));
+      links.push({
+        link: getVDONinjaLink(id!, t.member[0].name, data.password),
+        name: t.member[0].name,
+      });
       if (isTeams) {
-        links.push(getVDONinjaLink(id!, t.member[1].name, data.password));
+        links.push({
+          link: getVDONinjaLink(id!, t.member[1].name, data.password),
+          name: t.member[1].name,
+        });
       }
     }
   });
-  console.log(links);
 
   return (
     <Container className="AIcOverlayCon">
       <div className="AIcVDOStreams">
         {links.map((vdolink, index) => (
           <div key={index} className={streamsClass} id={streamIDs + index}>
-            <VDOLinkStream link={vdolink} className={""} id={""} />
+            <VDOLinkStream link={vdolink.link} className={""} id={""} />
+            <div
+              className={"AIcBuzzeredDiv" + (buzzerQueue[0] === vdolink.name ? " AICbuzzered" : "")}
+            />
           </div>
         ))}
       </div>
