@@ -7,9 +7,11 @@ import { PokemonEvent } from "./Pokemon";
 import { AICombGameState } from "./gameshows/AICombine";
 
 export const GLOBALADDRESS = "cacedray.ddns.net:8443";
+// export const GLOBALADDRESS = "localhost:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
 // const GLOBALWSADRESS = "wss://dedosserver.deno.dev";
 const GLOBALWSADRESS = "wss://" + GLOBALADDRESS;
+// const GLOBALWSADRESS = "ws://" + GLOBALADDRESS;
 // const GLOBALWSADRESS = "ws://localhost:3000";
 
 export abstract class BaseWebSocket<T> {
