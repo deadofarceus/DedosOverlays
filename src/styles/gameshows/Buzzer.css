@@ -154,3 +154,21 @@ button {
     text-align: center;
     width: 100px;
 }
+
+.buzzer-containerTeil {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.AIcBuzzer {
+    border: #33524f 3px solid;
+    filter: drop-shadow(2px 2px 3px #222);
+    border-radius: 40px;
+    width: 280px;
+    max-height: 200px;
+    font-size: 30px;
+    margin: 4px;
+    overflow-wrap: anywhere;
+}
