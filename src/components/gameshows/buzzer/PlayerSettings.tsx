@@ -28,7 +28,7 @@ function PlayerSettings({ id, player, handleChangePlayer, handleRemovePlayer }: 
           +1
         </Button>
         <Button
-          onClick={() => handleChangePlayer(id, { ...player, points: player.points + 1 })}
+          onClick={() => handleChangePlayer(id, { ...player, points: player.points - 1 })}
           variant="danger"
         >
           -1
