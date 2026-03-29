@@ -3,6 +3,7 @@ export interface JepoardyGameState {
   players: JepoardyPlayer[];
   board: Board;
   buzzerQueue: string[];
+  password: string;
 }
 
 export interface JepoardyAdmin {
@@ -51,6 +52,7 @@ export interface JepoardyQuestionProps {
 }
 
 export const TESTGamestate: JepoardyGameState = {
+  password: "test",
   admin: {
     name: "Autphil",
     vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",

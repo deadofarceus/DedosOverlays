@@ -48,8 +48,9 @@
 
 .jp-category-name p {
     color: #E6D8B9;
-    font-size: 37px;
+    font-size: 36px;
     rotate: -3deg;
+    text-align: center;
     word-wrap: normal;
 }
 
@@ -76,6 +77,7 @@
     color: #DBAF51;
     margin: 0;
     letter-spacing: 2px;
+    text-align: center;
 }
 
 .jp-Active {
@@ -125,4 +127,85 @@
 
 .jp-Corrupted p {
     color: #F10000;
+}
+
+.jp-overlay {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    overflow: hidden;
+    background-color: #040b2d;
+}
+
+.jp-overlay .jp-board {
+    position: absolute;
+    right: 75px;
+    top: 75px
+}
+
+.jp-VDOStreams {
+    position: absolute;
+    bottom: 117px;
+    width: 1771px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    left: 74px;
+}
+
+.jp-VDOLinkStreamDiv {
+    width: 400px;
+    height: 225px;
+}
+
+.jp-VDOLinkStream {
+    width: 400px;
+    height: 225px;
+}
+
+.jp-StreamAdmin {
+    position: absolute;
+    width: 480px;
+    height: 270px;
+    left: 30px;
+    top: 75px;
+}
+
+.jp-StreamAdmin iframe {
+    width: 480px;
+    height: 270px;
+}
+
+.jp-boardCutout {
+    position: absolute;
+    overflow: hidden;
+}
+
+.jp-playerPointsDiv {
+    position: absolute;
+    bottom: 60px;
+    width: 1771px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    left: 74px;
+}
+
+.jp-playerPoints {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jp-playerPoints div {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 32px;
+    color: #E6D8B9;
+    text-align: center;
+    margin: 5px;
 }
