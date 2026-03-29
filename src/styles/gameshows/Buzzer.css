@@ -172,3 +172,9 @@ button {
     margin: 4px;
     overflow-wrap: anywhere;
 }
+
+.buzzer-playerInfos {
+    color: azure;
+    font-weight: bold;
+    font-size: 40px;
+}

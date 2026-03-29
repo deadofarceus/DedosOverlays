@@ -79,6 +79,9 @@ function BuzzerTeilnehmer() {
           <Button variant="danger" className="buzzerButton blackOutline" onClick={handleBuzzer}>
             BUZZER
           </Button>
+          {/* {data.players.map((player, index) => (
+            <PlayerInfos key={index} player={player} />
+          ))} */}
         </div>
       )}
       <Col className="centerC buzzer-queue">
