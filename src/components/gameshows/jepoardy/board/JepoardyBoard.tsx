@@ -4,14 +4,24 @@ import JepoardyQuestion from "./JepoardyQuestion";
 
 function JepoardyBoard({ gamestate }: JepoardyGameProps) {
   if (gamestate.board.state === "START") {
-    return <h1>START</h1>;
+    return (
+      <div className="jp-board">
+        {gamestate.board.categories.map((cat, index) => (
+          <JepoardyCategory key={index} category={cat} />
+        ))}
+      </div>
+    );
   }
   if (gamestate.board.state === "QUESTION") {
-    return <JepoardyQuestion question={gamestate.board.question} />;
+    return (
+      <div className="jp-board">
+        <JepoardyQuestion question={gamestate.board.question} />
+      </div>
+    );
   }
   if (gamestate.board.state === "BOARD") {
     return (
-      <div>
+      <div className="jp-board">
         {gamestate.board.categories.map((cat, index) => (
           <JepoardyCategory key={index} category={cat} />
         ))}

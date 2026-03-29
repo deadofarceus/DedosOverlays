@@ -1,0 +1,128 @@
+.jp-controller {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: azure;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.jp-board {
+    width: 1314px !important;
+    height: 608px !important;
+    border-radius: 10px;
+    background-color: #040b2d;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    font-family: "Inter";
+    font-weight: bold;
+}
+
+.jp-category {
+    width: 258px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.jp-cat-default {
+    filter: grayscale(0%);
+}
+
+.jp-cat-forced {
+    filter: grayscale(100%);
+}
+
+.jp-category-name {
+    width: 258px;
+    height: 125px;
+    background-color: #0F1D62;
+    margin-bottom: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.jp-category-name p {
+    color: #E6D8B9;
+    font-size: 37px;
+    rotate: -3deg;
+    word-wrap: normal;
+}
+
+.jp-category-questions {
+    width: 258px;
+    height: 473px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jp-category-question {
+    width: 258px;
+    height: 90px;
+    background-color: #0F1D62;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.jp-category-question p {
+    font-size: 50px;
+    color: #DBAF51;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.jp-Active {
+    background-color: #0F1D62;
+    color: #DBAF51;
+}
+
+.jp-Taunt {
+    background-image: url("../../jepoardy/taunt.png");
+    width: 260px;
+}
+
+.jp-Windfury {
+    background-image: url("../../jepoardy/windfury.png");
+}
+
+.jp-Gold {
+    background-image: url("../../jepoardy/gold.png");
+    color: #78560D;
+    width: 255px;
+}
+
+.jp-Gold p {
+    color: #78560D;
+}
+
+.jp-Inactive {
+    background-color: #030821f2;
+}
+
+.jp-Inactive p {
+    color: #2a2a2a;
+}
+
+.jp-Safezone {
+    border: solid 5px #00FE61a1;
+}
+
+.jp-Safezone p {
+    color: #0CCE79;
+}
+
+.jp-Corrupted {
+    border: solid 3px #780606;
+    background-color: #290303;
+}
+
+.jp-Corrupted p {
+    color: #F10000;
+}

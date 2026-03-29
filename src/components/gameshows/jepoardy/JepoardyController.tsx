@@ -11,6 +11,7 @@ import BuzzerQueue from "./BuzzerQueue";
 let ws: GameshowWebsocket<JepoardyGameState>;
 
 function JepoardyController() {
+  document.body.className = "noOBS";
   const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
 

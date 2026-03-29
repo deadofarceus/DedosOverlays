@@ -26,13 +26,15 @@ export interface Board {
 
 export interface Category {
   name: string;
-  questions: Question[];
+  extra: "default" | "forced";
+  questions: Question[][];
 }
 
 export interface Question {
   category: string;
   points: number;
   type: "AUDIO" | "IMAGE" | "TEXT" | "VIDEO";
+  extra: "Active" | "Taunt" | "Windfury" | "Gold" | "Inactive" | "Safezone" | "Corrupted";
   question: string;
   answertype: "VIDEO" | "TEXT";
   answer: string;
@@ -86,70 +88,334 @@ export const TESTGamestate: JepoardyGameState = {
   board: {
     categories: [
       {
-        name: "Random",
+        name: "RANDOM",
+        extra: "default",
         questions: [
-          {
-            category: "Random",
-            points: 100,
-            type: "TEXT",
-            question: "Wie viele Finger zeige ich?",
-            answertype: "TEXT",
-            answer: "5",
-            finished: false,
-          },
-          {
-            category: "Random",
-            points: 200,
-            type: "TEXT",
-            question: "Wie viele Finger zeige ich?",
-            answertype: "TEXT",
-            answer: "5",
-            finished: false,
-          },
-          {
-            category: "Random",
-            points: 300,
-            type: "TEXT",
-            question: "Wie viele Finger zeige ich?",
-            answertype: "TEXT",
-            answer: "5",
-            finished: false,
-          },
-          {
-            category: "Random",
-            points: 400,
-            type: "TEXT",
-            question: "Wie viele Finger zeige ich?",
-            answertype: "TEXT",
-            answer: "5",
-            finished: false,
-          },
-          {
-            category: "Random",
-            points: 500,
-            type: "TEXT",
-            question: "Wie viele Finger zeige ich?",
-            answertype: "TEXT",
-            answer: "5",
-            finished: false,
-          },
+          [
+            {
+              category: "Random",
+              points: 100,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Random",
+              points: 200,
+              type: "TEXT",
+              extra: "Corrupted",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Random",
+              points: 300,
+              type: "TEXT",
+              extra: "Gold",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Random",
+              points: 400,
+              type: "TEXT",
+              extra: "Inactive",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Random",
+              points: 500,
+              type: "TEXT",
+              extra: "Safezone",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
         ],
       },
       {
-        name: "Erkennen",
-        questions: [],
+        name: "LOL MEMES FÜR PROFIS",
+        extra: "default",
+        questions: [
+          [
+            {
+              category: "Erkennen",
+              points: 100,
+              type: "TEXT",
+              extra: "Taunt",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 200,
+              type: "TEXT",
+              extra: "Windfury",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 300,
+              type: "TEXT",
+              extra: "Gold",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 400,
+              type: "TEXT",
+              extra: "Inactive",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 500,
+              type: "TEXT",
+              extra: "Safezone",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+        ],
       },
       {
-        name: "Champion",
-        questions: [],
+        name: "CHAMPION",
+        extra: "forced",
+        questions: [
+          [
+            {
+              category: "Erkennen",
+              points: 100,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 200,
+              type: "TEXT",
+              extra: "Windfury",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 300,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 400,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 500,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+        ],
       },
       {
-        name: "Trivia",
-        questions: [],
+        name: "DINGE DIE PHIL MAG",
+        extra: "default",
+        questions: [
+          [
+            {
+              category: "Erkennen",
+              points: 100,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 200,
+              type: "TEXT",
+              extra: "Windfury",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 300,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 400,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 500,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+        ],
       },
       {
-        name: "Kategorie",
-        questions: [],
+        name: "KATEGORIE",
+        extra: "default",
+        questions: [
+          [
+            {
+              category: "Erkennen",
+              points: 100,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 200,
+              type: "TEXT",
+              extra: "Windfury",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 300,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 400,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+          [
+            {
+              category: "Erkennen",
+              points: 500,
+              type: "TEXT",
+              extra: "Active",
+              question: "Wie viele Finger zeige ich?",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+            },
+          ],
+        ],
       },
     ],
     state: "START",
@@ -157,6 +423,7 @@ export const TESTGamestate: JepoardyGameState = {
       category: "Random",
       points: 100,
       type: "TEXT",
+      extra: "Active",
       question: "Wie viele Finger zeige ich?",
       answertype: "TEXT",
       answer: "5",
