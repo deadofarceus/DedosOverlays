@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { DDFliegtGameState } from "../../../types/gameshows/DDFliegt";
 import { useQuery } from "../../../types/UsefulFunctions";
-import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
+import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { DISCORDCALLMAPPINGS } from "../../../types/gameshows/DiscordConstants";
 import DDFCamOverlay from "./DDFCamOverlay";
 import { STARTGAMESTATE } from "./DDFController";
 
-let ws: BroadcastWebsocket<DDFliegtGameState>;
+let ws: GameshowWebsocket<DDFliegtGameState>;
 
 function DDFOverlay() {
   const query = useQuery();
@@ -16,8 +16,20 @@ function DDFOverlay() {
     const id = query.get("id");
 
     if (!ws && id) {
-      ws = new BroadcastWebsocket<DDFliegtGameState>(id, setData);
+      ws = new GameshowWebsocket<DDFliegtGameState>(id, setData, () => {});
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchData();
   }, [query]);
 
   const livingPlayers = data.players.filter((player) => player.lifes > 0 || player.admin);

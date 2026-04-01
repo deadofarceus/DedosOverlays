@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../../../styles/gameshows/DDFliegt.css";
 import { DDFliegtGameState, DDFPlayer } from "../../../types/gameshows/DDFliegt";
 import { useQuery } from "../../../types/UsefulFunctions";
-import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
+import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import DDFPlayerControl from "./DDFPlayerControl";
 import { Button } from "react-bootstrap";
 
@@ -35,7 +35,7 @@ export const STARTGAMESTATE: DDFliegtGameState = {
   }),
 };
 
-let ws: BroadcastWebsocket<DDFliegtGameState>;
+let ws: GameshowWebsocket<DDFliegtGameState>;
 
 function DDFController() {
   document.body.className = "noOBS";
@@ -52,8 +52,20 @@ function DDFController() {
     const id = query.get("id");
 
     if (!ws && id) {
-      ws = new BroadcastWebsocket<DDFliegtGameState>(id, setData);
+      ws = new GameshowWebsocket<DDFliegtGameState>(id, setData, () => {});
     }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        setData(data.data);
+      } else {
+        console.log(res.statusText);
+      }
+    };
+
+    fetchData();
   }, [query]);
 
   const handlePlayerChange = (index: number, value: DDFPlayer) => {
