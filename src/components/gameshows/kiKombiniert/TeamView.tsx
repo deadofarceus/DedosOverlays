@@ -52,13 +52,18 @@ function TeamView({ team, index, handleChange }: TeamProps) {
         <>
           {isTeams ? (
             team.member.map((m, mIndex) => (
-              <VDOLink key={mIndex} index={mIndex} member={m} handleChange={handleSettingsChange} />
+              <VDOLink
+                key={mIndex}
+                index={mIndex}
+                name={m.name}
+                handleChange={handleSettingsChange}
+              />
             ))
           ) : (
             <VDOLink
               key={0}
               index={0}
-              member={team.member[0]}
+              name={team.member[0].name}
               handleChange={handleSettingsChange}
             />
           )}

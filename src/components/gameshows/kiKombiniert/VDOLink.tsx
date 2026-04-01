@@ -1,19 +1,18 @@
 import { Button, Form, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { Member } from "../../../types/gameshows/AICombine";
 
 interface VDOLinkProps {
   index: number;
-  member: Member;
+  name: string;
   handleChange: (index: number, name: string) => void;
 }
 
-function VDOLink({ index, member, handleChange }: VDOLinkProps) {
-  const [nameState, setNameState] = useState<string>(member.name);
+function VDOLink({ index, name, handleChange }: VDOLinkProps) {
+  const [nameState, setNameState] = useState<string>(name);
 
   useEffect(() => {
-    setNameState(member.name);
-  }, [member.name]);
+    setNameState(name);
+  }, [name]);
 
   const handleSave = () => {
     handleChange(index, nameState);

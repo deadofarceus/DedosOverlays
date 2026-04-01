@@ -209,3 +209,12 @@
     text-align: center;
     margin: 5px;
 }
+
+.jp-buzzerQueue {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    min-width: 286px !important;
+    height: 500px !important;
+    margin: 5px !important;
+}
