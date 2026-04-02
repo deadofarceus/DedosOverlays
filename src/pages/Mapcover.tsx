@@ -3,6 +3,7 @@ import { isOBSBrowser, useQuery } from "../types/UsefulFunctions";
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Screensaver from "../components/mapcover/Screensaver";
+import "../styles/MapCover.css";
 
 function Mapcover() {
   const obs = isOBSBrowser();
