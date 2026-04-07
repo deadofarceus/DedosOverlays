@@ -3,7 +3,7 @@ import "../../../styles/gameshows/Jepoardy.css";
 import UserControls from "./admin/UserControls";
 import JepoardyBoard from "./board/JepoardyBoard";
 import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
-import { clearBuzzer, useQuery } from "../../../types/UsefulFunctions";
+import { clearBuzzer, clearOneBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import BoardControls from "./board/Boardcontrols";
 import BuzzerQueue from "./BuzzerQueue";
@@ -46,6 +46,9 @@ function JepoardyController() {
     setBuzzerQueue((prevQueue) => {
       if (buzzer === "CLEARBUZZERQUEUE") {
         return [];
+      } else if (buzzer.startsWith("CLEAR_")) {
+        const toRemove = buzzer.split("_")[1];
+        return prevQueue.filter((b) => b !== toRemove);
       } else if (!prevQueue.includes(buzzer)) {
         return [...prevQueue, buzzer];
       }
@@ -58,12 +61,20 @@ function JepoardyController() {
     setBuzzerQueue([]);
   };
 
+  const handleClearOneBuzzer = (buzzer: string) => {
+    clearOneBuzzer(query.get("id")!, buzzer);
+  };
+
   return (
     <div className="jp-controller">
-      <JepoardyBoard gamestate={gamestate} sendState={sendState} />
-      <BoardControls gamestate={gamestate} sendState={sendState} />
-      <BuzzerQueue clearBuzzer={handleClearBuzzer} buzzerQueue={buzzerQueue} />
-      <UserControls gamestate={gamestate} sendState={sendState} />
+      <JepoardyBoard gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <BoardControls gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <BuzzerQueue
+        clearBuzzer={handleClearBuzzer}
+        buzzerQueue={buzzerQueue}
+        clearOneBuzzer={handleClearOneBuzzer}
+      />
+      <UserControls gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
     </div>
   );
 }

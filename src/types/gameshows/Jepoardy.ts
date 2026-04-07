@@ -39,16 +39,20 @@ export interface Question {
   question: string;
   answertype: "VIDEO" | "TEXT";
   answer: string;
+  state: "PAUSED" | "INVISIBLE" | "ACTIVE";
   finished: boolean;
 }
 
 export interface JepoardyGameProps {
   gamestate: JepoardyGameState;
   sendState: (newState: JepoardyGameState) => void;
+  buzzerQueue: string[];
 }
 
 export interface JepoardyQuestionProps {
   question: Question;
+  sendState: (newState: JepoardyGameState) => void;
+  gamestate: JepoardyGameState;
 }
 
 export const TESTGamestate: JepoardyGameState = {
@@ -101,6 +105,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
+              state: "INVISIBLE",
               answer: "5",
               finished: false,
             },
@@ -109,11 +114,12 @@ export const TESTGamestate: JepoardyGameState = {
             {
               category: "Random",
               points: 200,
-              type: "TEXT",
+              type: "AUDIO",
               extra: "Corrupted",
-              question: "Wie viele Finger zeige ich?",
+              question: "Sona_Original_Laugh_0.ogg",
               answertype: "TEXT",
-              answer: "5",
+              state: "INVISIBLE",
+              answer: "Sona",
               finished: false,
             },
           ],
@@ -121,11 +127,12 @@ export const TESTGamestate: JepoardyGameState = {
             {
               category: "Random",
               points: 300,
-              type: "TEXT",
+              type: "VIDEO",
               extra: "Gold",
-              question: "Wie viele Finger zeige ich?",
+              question: "autophil_nocturne.mp4",
               answertype: "TEXT",
-              answer: "5",
+              state: "INVISIBLE",
+              answer: "Nocturne",
               finished: false,
             },
           ],
@@ -133,11 +140,12 @@ export const TESTGamestate: JepoardyGameState = {
             {
               category: "Random",
               points: 400,
-              type: "TEXT",
-              extra: "Inactive",
-              question: "Wie viele Finger zeige ich?",
+              type: "IMAGE",
+              extra: "Active",
+              question: "Aatrox.jpg",
               answertype: "TEXT",
-              answer: "5",
+              state: "INVISIBLE",
+              answer: "Aatrox",
               finished: false,
             },
           ],
@@ -149,6 +157,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Safezone",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
+              state: "INVISIBLE",
               answer: "5",
               finished: false,
             },
@@ -164,6 +173,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 100,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Taunt",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -176,6 +186,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 200,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -188,6 +199,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 300,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Gold",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -200,6 +212,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 400,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Inactive",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -212,6 +225,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 500,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Safezone",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -230,6 +244,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 100,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -242,6 +257,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 200,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -254,6 +270,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 300,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -266,6 +283,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 400,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -278,6 +296,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 500,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -296,6 +315,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 100,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -308,6 +328,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 200,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -320,6 +341,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 300,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -332,6 +354,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 400,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -344,6 +367,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 500,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -362,6 +386,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 100,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -374,6 +399,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 200,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -386,6 +412,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 300,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -398,6 +425,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 400,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -410,6 +438,7 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Erkennen",
               points: 500,
               type: "TEXT",
+              state: "INVISIBLE",
               extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
@@ -425,6 +454,7 @@ export const TESTGamestate: JepoardyGameState = {
       category: "Random",
       points: 100,
       type: "TEXT",
+      state: "INVISIBLE",
       extra: "Active",
       question: "Wie viele Finger zeige ich?",
       answertype: "TEXT",

@@ -58,7 +58,7 @@ function JepoardyOverlay() {
 
   return (
     <div className="jp-overlay">
-      <JepoardyBoard gamestate={gamestate} sendState={setGamestate} />
+      <JepoardyBoard gamestate={gamestate} sendState={setGamestate} buzzerQueue={buzzerQueue} />
       <div className="jp-VDOStreams">
         {links.map((vdolink, index) => (
           <div key={index} className={"jp-VDOLinkStreamDiv"} id={""}>

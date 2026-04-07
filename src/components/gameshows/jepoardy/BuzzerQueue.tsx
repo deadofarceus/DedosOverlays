@@ -1,24 +1,30 @@
-import { Col } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import Buzzer from "../../util/Buzzer";
 import "../../../styles/gameshows/Buzzer.css";
 
 interface BuzzerQueueProps {
   buzzerQueue: string[];
   clearBuzzer: () => void;
+  clearOneBuzzer: (buzzer: string) => void;
 }
 
-function BuzzerQueue({ buzzerQueue, clearBuzzer }: BuzzerQueueProps) {
-  console.log(buzzerQueue, clearBuzzer);
+function BuzzerQueue({ buzzerQueue, clearBuzzer, clearOneBuzzer }: BuzzerQueueProps) {
+  const admin = window.location.href.includes("admin");
 
   return (
     <Col className="centerC buzzer-queue jp-buzzerQueue">
       <h1 className="buzzerQTitle blackOutline">BuzzerQueue</h1>
-      <div className="buzzerQueueScroll">
+      <div className="jp-buzzerQueueScroll">
         {buzzerQueue.map((buzzer, index) => (
-          <div>
-            <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} clear={() => {}} />
+          <div className="jp-buzzer">
+            <Buzzer key={index} queueSlot={index + 1} buzzer={buzzer} clear={clearOneBuzzer} />
           </div>
         ))}
+        {admin && (
+          <Button variant="danger" className="jp-clearBuzzer" onClick={() => clearBuzzer()}>
+            Clear Buzzer
+          </Button>
+        )}
       </div>
     </Col>
   );

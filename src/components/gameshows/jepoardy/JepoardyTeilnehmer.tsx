@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../../../styles/gameshows/Jepoardy.css";
 import { ModEvent } from "../../../types/BackendEvents";
 import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
-import { clearBuzzer, useQuery } from "../../../types/UsefulFunctions";
+import { clearBuzzer, clearOneBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import JepoardyBoard from "./board/JepoardyBoard";
 import BuzzerQueue from "./BuzzerQueue";
@@ -58,10 +58,18 @@ function JepoardyTeilnehmer() {
     setBuzzerQueue([]);
   };
 
+  const handleClearOneBuzzer = (buzzer: string) => {
+    clearOneBuzzer(query.get("id")!, buzzer);
+  };
+
   return (
     <div className="jp-controller">
-      <JepoardyBoard gamestate={gamestate} sendState={sendState} />
-      <BuzzerQueue buzzerQueue={buzzerQueue} clearBuzzer={handleClearBuzzer} />
+      <JepoardyBoard gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <BuzzerQueue
+        buzzerQueue={buzzerQueue}
+        clearBuzzer={handleClearBuzzer}
+        clearOneBuzzer={handleClearOneBuzzer}
+      />
     </div>
   );
 }

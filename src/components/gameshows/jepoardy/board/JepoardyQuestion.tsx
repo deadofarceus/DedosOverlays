@@ -1,17 +1,30 @@
 import { JepoardyQuestionProps } from "../../../../types/gameshows/Jepoardy";
-import Audio from "./question/Audio";
 import Text from "./question/Text";
-import Image from "./question/Image";
-import Video from "./question/Video";
+import AudioQuestion from "./question/AudioQuestion";
+import VideoQuestion from "./question/VideoQuestion";
+import ImageQuestion from "./question/ImageQuestion";
 
-function JepoardyQuestion({ question }: JepoardyQuestionProps) {
+function JepoardyQuestion({ question, gamestate, sendState }: JepoardyQuestionProps) {
   return (
-    <div>
-      <div>{question.category + " " + question.points}</div>
-      {question.type === "AUDIO" && <Audio question={question} />}
-      {question.type === "TEXT" && <Text question={question} />}
-      {question.type === "IMAGE" && <Image question={question} />}
-      {question.type === "VIDEO" && <Video question={question} />}
+    <div className="jp-question">
+      <div className="jp-question-title">{question.category + " " + question.points}</div>
+
+      <div className="jp-question-container">
+        {question.type === "AUDIO" && (
+          <AudioQuestion question={question} sendState={sendState} gamestate={gamestate} />
+        )}
+        {question.type === "TEXT" && (
+          <Text question={question} sendState={sendState} gamestate={gamestate} />
+        )}
+        {question.type === "IMAGE" && (
+          <ImageQuestion question={question} sendState={sendState} gamestate={gamestate} />
+        )}
+        {question.type === "VIDEO" && (
+          <VideoQuestion question={question} sendState={sendState} gamestate={gamestate} />
+        )}
+      </div>
+
+      {question.finished && <div className="jp-question-answer">{question.answer}</div>}
     </div>
   );
 }

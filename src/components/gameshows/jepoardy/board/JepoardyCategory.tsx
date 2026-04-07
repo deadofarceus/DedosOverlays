@@ -1,10 +1,13 @@
-import { Category } from "../../../../types/gameshows/Jepoardy";
+import { Category, JepoardyGameState } from "../../../../types/gameshows/Jepoardy";
+import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 
 interface CategoryProps {
   category: Category;
+  sendState: (newState: JepoardyGameState) => void;
+  gamestate: JepoardyGameState;
 }
 
-function JepoardyCategory({ category }: CategoryProps) {
+function JepoardyCategory({ category, sendState, gamestate }: CategoryProps) {
   return (
     <div className={"jp-category " + "jp-cat-" + category.extra}>
       <div className="jp-category-name">
@@ -12,9 +15,12 @@ function JepoardyCategory({ category }: CategoryProps) {
       </div>
       <div className="jp-category-questions">
         {category.questions.map((q, index) => (
-          <div className={"jp-category-question " + "jp-" + q[0].extra} key={index}>
-            <p>{q[0].points}</p>
-          </div>
+          <JepoardyBoardQuestion
+            key={index}
+            questions={q}
+            gamestate={gamestate}
+            sendState={sendState}
+          />
         ))}
       </div>
     </div>
