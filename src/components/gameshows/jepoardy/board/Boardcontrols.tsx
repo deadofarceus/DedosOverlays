@@ -1,5 +1,9 @@
 import { Button } from "react-bootstrap";
-import { JepoardyGameProps, JepoardyGameState } from "../../../../types/gameshows/Jepoardy";
+import {
+  JepoardyGameProps,
+  JepoardyGameState,
+  Question,
+} from "../../../../types/gameshows/Jepoardy";
 import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import { useEffect, useState } from "react";
 import { useQuery } from "../../../../types/UsefulFunctions";
@@ -81,16 +85,33 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
     const newGamestate = { ...gamestate };
     const buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (buzzedPlayer) {
-      buzzedPlayer.points -= question.points;
+      if (question.extra !== "Safezone") {
+        buzzedPlayer.points -= question.points;
+      }
       sendState(newGamestate);
     }
+  };
+
+  const calculatePoints = (quest: Question): number => {
+    let points = 0;
+    switch (quest.extra) {
+      case "Corrupted":
+        points += 500 + quest.points;
+        break;
+      case "Gold":
+        points += 2 * quest.points;
+        break;
+      default:
+        break;
+    }
+    return points;
   };
 
   const handleRichtigeAntwort = () => {
     let newGamestate = { ...gamestate };
     const buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (buzzedPlayer) {
-      buzzedPlayer.points += question.points;
+      buzzedPlayer.points += calculatePoints(question);
       newGamestate.board.question.state = "ACTIVE";
       newGamestate.board.question.finished = true;
       newGamestate = finishSpecificQuestion(newGamestate, question.question);
