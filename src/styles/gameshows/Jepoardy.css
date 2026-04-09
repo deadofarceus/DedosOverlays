@@ -97,6 +97,15 @@
     width: 260px;
 }
 
+.jp-Taunted {
+    cursor: not-allowed;
+}
+
+.jp-Taunted:Hover {
+    transform: none !important;
+    transition: none !important;
+}
+
 .jp-Windfury {
     background-image: url("../../jepoardy/windfury.png");
 }

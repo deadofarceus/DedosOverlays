@@ -10,12 +10,20 @@ import { useQuery } from "../../../../types/UsefulFunctions";
 
 let ws: BroadcastWebsocket<string>;
 
-function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps) {
+function BoardControls({
+  gamestate,
+  sendState,
+  buzzerQueue,
+  clearBuzzer,
+  clearOneBuzzer,
+}: JepoardyGameProps) {
   const query = useQuery();
   const id = query.get("id");
   if (!id) {
     return <></>;
   }
+
+  const question = gamestate.currentQuestion;
 
   const [startStopSignal, setStartStopSignal] = useState<string>("");
 
@@ -35,7 +43,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
       (prevFirstRef.current === undefined && buzzerQueue.length > 0)
     ) {
       const newGamestate = { ...gamestate };
-      const q = newGamestate.board.question;
+      const q = newGamestate.currentQuestion;
       q.state = "INVISIBLE";
       const sent = "STOP";
       ws.sendData(sent);
@@ -44,29 +52,42 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
     prevFirstRef.current = first;
   }, [buzzerQueue]);
 
-  const question = gamestate.board.question;
-
   const finishSpecificQuestion = (
     gamestate: JepoardyGameState,
-    question: string
+    questionID: number
   ): JepoardyGameState => {
     const newGamestate = { ...gamestate };
-    newGamestate.board.categories.forEach((cat) => {
+    newGamestate.currentBoard.categories.forEach((cat) => {
       cat.questions.forEach((quest) => {
         quest.forEach((q) => {
-          if (q.question === question) {
+          if (q.id === questionID) {
             quest[0].finished = true;
           }
         });
       });
     });
+
+    if (question.extra !== "Windfury") {
+      newGamestate.currentPlayer = (newGamestate.currentPlayer + 1) % newGamestate.players.length;
+    }
+
+    if (newGamestate.currentBoard.extra === "forced") {
+      newGamestate.currentBoard.categories.forEach((cat) => {
+        if (question.category === cat.name) {
+          cat.extra = "forced";
+        } else {
+          cat.extra = "default";
+        }
+      });
+    }
+
     return newGamestate;
   };
 
   const handleShowQuestion = () => {
     const newGamestate = { ...gamestate };
 
-    const q = newGamestate.board.question;
+    const q = newGamestate.currentQuestion;
     q.state = q.state === "ACTIVE" ? "INVISIBLE" : "ACTIVE";
 
     console.log(startStopSignal);
@@ -83,13 +104,17 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
 
   const handleFalscheAntwort = () => {
     const newGamestate = { ...gamestate };
-    const buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
-    if (buzzedPlayer) {
-      if (question.extra !== "Safezone") {
-        buzzedPlayer.points -= question.points;
-      }
-      sendState(newGamestate);
+    let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
+    if (!buzzedPlayer) {
+      buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
+    } else {
+      clearOneBuzzer(buzzerQueue[0]);
     }
+
+    if (question.extra !== "Safezone") {
+      buzzedPlayer.points -= question.points;
+    }
+    sendState(newGamestate);
   };
 
   const calculatePoints = (quest: Question): number => {
@@ -109,27 +134,36 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
 
   const handleRichtigeAntwort = () => {
     let newGamestate = { ...gamestate };
-    const buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
-    if (buzzedPlayer) {
-      buzzedPlayer.points += calculatePoints(question);
-      newGamestate.board.question.state = "ACTIVE";
-      newGamestate.board.question.finished = true;
-      newGamestate = finishSpecificQuestion(newGamestate, question.question);
-      sendState(newGamestate);
+    let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
+    if (!buzzedPlayer) {
+      buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
+    } else {
+      clearBuzzer();
     }
+    buzzedPlayer.points += calculatePoints(question);
+    newGamestate.currentQuestion.state = "ACTIVE";
+    newGamestate.currentQuestion.finished = true;
+    newGamestate = finishSpecificQuestion(newGamestate, question.id);
+    sendState(newGamestate);
   };
 
   const handleFinishQuestion = () => {
     let newGamestate = { ...gamestate };
-    newGamestate.board.question.state = "ACTIVE";
-    newGamestate.board.question.finished = true;
-    newGamestate = finishSpecificQuestion(newGamestate, question.question);
+    newGamestate.currentQuestion.state = "ACTIVE";
+    newGamestate.currentQuestion.finished = true;
+    newGamestate = finishSpecificQuestion(newGamestate, question.id);
     sendState(newGamestate);
   };
 
   const handleBackToBoard = () => {
     const newGamestate = { ...gamestate };
-    newGamestate.board.state = "BOARD";
+    newGamestate.state = "BOARD";
+    sendState(newGamestate);
+  };
+
+  const handleNextPlayer = () => {
+    const newGamestate = { ...gamestate };
+    newGamestate.currentPlayer = (newGamestate.currentPlayer + 1) % newGamestate.players.length;
     sendState(newGamestate);
   };
 
@@ -138,12 +172,14 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
     frageAufdecken = question.state === "ACTIVE" ? "Wiedergabe pausieren" : "Wiedergabe starten";
   }
 
+  let wechsel = "Wechsel zu Board " + (gamestate.currentBoard.id === 1 ? 2 : 1);
+
   return (
     <div className="jp-boardControls centerC">
       <div className="centerR"></div>
       <Button variant="danger">AKTION ZURÜCK</Button>
       <Button variant="warning">AKTION VORWÄRTS</Button>
-      {gamestate.board.state === "QUESTION" && (
+      {gamestate.state === "QUESTION" && (
         <>
           <Button variant="primary" onClick={handleShowQuestion}>
             {frageAufdecken}
@@ -170,7 +206,15 @@ function BoardControls({ gamestate, sendState, buzzerQueue }: JepoardyGameProps)
         </>
       )}
 
-      {gamestate.board.state === "BOARD" && <Button variant="danger">Wechsel zu Board 2</Button>}
+      {gamestate.state === "BOARD" && (
+        <>
+          <Button variant="secondary" onClick={handleNextPlayer}>
+            Nächster ist am Zug
+          </Button>
+          <Button variant="success">Dreh das RAD!</Button>
+          <Button variant="danger">{wechsel}</Button>
+        </>
+      )}
     </div>
   );
 }

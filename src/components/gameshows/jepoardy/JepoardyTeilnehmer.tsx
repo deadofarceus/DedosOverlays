@@ -64,7 +64,13 @@ function JepoardyTeilnehmer() {
 
   return (
     <div className="jp-controller">
-      <JepoardyBoard gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <JepoardyBoard
+        gamestate={gamestate}
+        sendState={sendState}
+        buzzerQueue={buzzerQueue}
+        clearBuzzer={() => {}}
+        clearOneBuzzer={() => {}}
+      />
       <BuzzerQueue
         buzzerQueue={buzzerQueue}
         clearBuzzer={handleClearBuzzer}

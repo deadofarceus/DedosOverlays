@@ -67,14 +67,32 @@ function JepoardyController() {
 
   return (
     <div className="jp-controller">
-      <JepoardyBoard gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
-      <BoardControls gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <JepoardyBoard
+        gamestate={gamestate}
+        sendState={sendState}
+        buzzerQueue={buzzerQueue}
+        clearBuzzer={handleClearBuzzer}
+        clearOneBuzzer={handleClearOneBuzzer}
+      />
+      <BoardControls
+        gamestate={gamestate}
+        sendState={sendState}
+        buzzerQueue={buzzerQueue}
+        clearBuzzer={handleClearBuzzer}
+        clearOneBuzzer={handleClearOneBuzzer}
+      />
       <BuzzerQueue
         clearBuzzer={handleClearBuzzer}
         buzzerQueue={buzzerQueue}
         clearOneBuzzer={handleClearOneBuzzer}
       />
-      <UserControls gamestate={gamestate} sendState={sendState} buzzerQueue={buzzerQueue} />
+      <UserControls
+        gamestate={gamestate}
+        sendState={sendState}
+        buzzerQueue={buzzerQueue}
+        clearBuzzer={handleClearBuzzer}
+        clearOneBuzzer={handleClearOneBuzzer}
+      />
     </div>
   );
 }

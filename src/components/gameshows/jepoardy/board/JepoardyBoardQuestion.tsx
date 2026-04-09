@@ -13,16 +13,24 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
   }
 
   const handleOnClick = () => {
+    if (
+      questions[0].extra !== "Taunt" &&
+      gamestate.currentBoard.categories.some((cat) =>
+        cat.questions.some((q) => q[0].extra === "Taunt")
+      )
+    ) {
+      return;
+    }
     if (questions[0].finished || admin === "") {
       return;
     }
     const newGamestate = { ...gamestate };
-    newGamestate.board.state = "QUESTION";
+    newGamestate.state = "QUESTION";
     let question: Question = questions[0];
     if (questions.length > 1) {
       question = questions[Math.floor(Math.random() * questions.length)]; //TODO animation
     }
-    newGamestate.board.question = question;
+    newGamestate.currentQuestion = question;
     sendState(newGamestate);
   };
 
@@ -31,6 +39,15 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     classname += "jp-Inactive";
   } else {
     classname += "jp-" + questions[0].extra;
+  }
+
+  if (
+    questions[0].extra !== "Taunt" &&
+    gamestate.currentBoard.categories.some((cat) =>
+      cat.questions.some((q) => q[0].extra === "Taunt")
+    )
+  ) {
+    classname += " jp-Taunted";
   }
 
   return (

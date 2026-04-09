@@ -3,10 +3,10 @@ import JepoardyCategory from "./JepoardyCategory";
 import JepoardyQuestion from "./JepoardyQuestion";
 
 function JepoardyBoard({ gamestate, sendState }: JepoardyGameProps) {
-  if (gamestate.board.state === "START") {
+  if (gamestate.state === "START") {
     return (
       <div className="jp-board">
-        {gamestate.board.categories.map((cat, index) => (
+        {gamestate.currentBoard.categories.map((cat, index) => (
           <JepoardyCategory
             key={index}
             category={cat}
@@ -17,21 +17,21 @@ function JepoardyBoard({ gamestate, sendState }: JepoardyGameProps) {
       </div>
     );
   }
-  if (gamestate.board.state === "QUESTION") {
+  if (gamestate.state === "QUESTION") {
     return (
       <div className="jp-board">
         <JepoardyQuestion
-          question={gamestate.board.question}
+          question={gamestate.currentQuestion}
           gamestate={gamestate}
           sendState={sendState}
         />
       </div>
     );
   }
-  if (gamestate.board.state === "BOARD") {
+  if (gamestate.state === "BOARD") {
     return (
       <div className="jp-board">
-        {gamestate.board.categories.map((cat, index) => (
+        {gamestate.currentBoard.categories.map((cat, index) => (
           <JepoardyCategory
             key={index}
             category={cat}

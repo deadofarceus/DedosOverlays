@@ -1,9 +1,13 @@
 export interface JepoardyGameState {
   admin: JepoardyAdmin;
   players: JepoardyPlayer[];
-  board: Board;
+  boards: Board[];
+  currentBoard: Board;
+  currentQuestion: Question;
+  currentPlayer: number;
   buzzerQueue: string[];
   password: string;
+  state: "START" | "BOARD" | "QUESTION";
 }
 
 export interface JepoardyAdmin {
@@ -20,9 +24,9 @@ export interface JepoardyPlayer {
 }
 
 export interface Board {
+  id: number;
   categories: Category[];
-  state: "START" | "BOARD" | "QUESTION";
-  question: Question;
+  extra: "default" | "forced";
 }
 
 export interface Category {
@@ -32,6 +36,7 @@ export interface Category {
 }
 
 export interface Question {
+  id: number;
   category: string;
   points: number;
   type: "AUDIO" | "IMAGE" | "TEXT" | "VIDEO";
@@ -46,6 +51,8 @@ export interface Question {
 export interface JepoardyGameProps {
   gamestate: JepoardyGameState;
   sendState: (newState: JepoardyGameState) => void;
+  clearBuzzer: () => void;
+  clearOneBuzzer: (buzzer: string) => void;
   buzzerQueue: string[];
 }
 
@@ -61,6 +68,7 @@ export const TESTGamestate: JepoardyGameState = {
     name: "Autphil",
     vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
   },
+  currentPlayer: -1,
   players: [
     {
       name: "Krokoboss",
@@ -91,7 +99,10 @@ export const TESTGamestate: JepoardyGameState = {
       buzzed: false,
     },
   ],
-  board: {
+  state: "START",
+  currentBoard: {
+    id: 1,
+    extra: "default",
     categories: [
       {
         name: "RANDOM",
@@ -99,6 +110,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
+              id: 1,
               category: "Random",
               points: 100,
               type: "TEXT",
@@ -112,6 +124,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 2,
               category: "Random",
               points: 200,
               type: "AUDIO",
@@ -125,6 +138,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 2,
               category: "Random",
               points: 300,
               type: "VIDEO",
@@ -138,6 +152,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 3,
               category: "Random",
               points: 400,
               type: "IMAGE",
@@ -151,6 +166,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 4,
               category: "Random",
               points: 500,
               type: "TEXT",
@@ -170,6 +186,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
+              id: 5,
               category: "Erkennen",
               points: 100,
               type: "TEXT",
@@ -183,6 +200,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 6,
               category: "Erkennen",
               points: 200,
               type: "TEXT",
@@ -196,6 +214,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 7,
               category: "Erkennen",
               points: 300,
               type: "TEXT",
@@ -209,6 +228,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 8,
               category: "Erkennen",
               points: 400,
               type: "TEXT",
@@ -222,6 +242,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 9,
               category: "Erkennen",
               points: 500,
               type: "TEXT",
@@ -241,6 +262,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
+              id: 10,
               category: "Erkennen",
               points: 100,
               type: "TEXT",
@@ -254,6 +276,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 11,
               category: "Erkennen",
               points: 200,
               type: "TEXT",
@@ -267,6 +290,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 12,
               category: "Erkennen",
               points: 300,
               type: "TEXT",
@@ -280,6 +304,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 13,
               category: "Erkennen",
               points: 400,
               type: "TEXT",
@@ -293,6 +318,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 14,
               category: "Erkennen",
               points: 500,
               type: "TEXT",
@@ -312,6 +338,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
+              id: 15,
               category: "Erkennen",
               points: 100,
               type: "TEXT",
@@ -325,6 +352,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 16,
               category: "Erkennen",
               points: 200,
               type: "TEXT",
@@ -338,6 +366,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 17,
               category: "Erkennen",
               points: 300,
               type: "TEXT",
@@ -351,6 +380,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 18,
               category: "Erkennen",
               points: 400,
               type: "TEXT",
@@ -364,6 +394,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 19,
               category: "Erkennen",
               points: 500,
               type: "TEXT",
@@ -383,6 +414,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
+              id: 20,
               category: "Erkennen",
               points: 100,
               type: "TEXT",
@@ -396,6 +428,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 21,
               category: "Erkennen",
               points: 200,
               type: "TEXT",
@@ -409,6 +442,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 22,
               category: "Erkennen",
               points: 300,
               type: "TEXT",
@@ -422,6 +456,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 23,
               category: "Erkennen",
               points: 400,
               type: "TEXT",
@@ -435,6 +470,7 @@ export const TESTGamestate: JepoardyGameState = {
           ],
           [
             {
+              id: 24,
               category: "Erkennen",
               points: 500,
               type: "TEXT",
@@ -449,18 +485,792 @@ export const TESTGamestate: JepoardyGameState = {
         ],
       },
     ],
-    state: "START",
-    question: {
-      category: "Random",
-      points: 100,
-      type: "TEXT",
-      state: "INVISIBLE",
-      extra: "Active",
-      question: "Wie viele Finger zeige ich?",
-      answertype: "TEXT",
-      answer: "5",
-      finished: false,
-    },
   },
+  currentQuestion: {
+    id: 1,
+    category: "Random",
+    points: 100,
+    type: "TEXT",
+    state: "INVISIBLE",
+    extra: "Active",
+    question: "Wie viele Finger zeige ich?",
+    answertype: "TEXT",
+    answer: "5",
+    finished: false,
+  },
+  boards: [
+    {
+      id: 1,
+      extra: "default",
+      categories: [
+        {
+          name: "RANDOM",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 1,
+                category: "Random",
+                points: 100,
+                type: "TEXT",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 2,
+                category: "Random",
+                points: 200,
+                type: "AUDIO",
+                extra: "Corrupted",
+                question: "Sona_Original_Laugh_0.ogg",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Sona",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 2,
+                category: "Random",
+                points: 300,
+                type: "VIDEO",
+                extra: "Gold",
+                question: "autophil_nocturne.mp4",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Nocturne",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 3,
+                category: "Random",
+                points: 400,
+                type: "IMAGE",
+                extra: "Active",
+                question: "Aatrox.jpg",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Aatrox",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 4,
+                category: "Random",
+                points: 500,
+                type: "TEXT",
+                extra: "Safezone",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "LOL MEMES FÜR PROFIS",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 5,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Taunt",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 6,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 7,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Gold",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 8,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Inactive",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 9,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Safezone",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "CHAMPION",
+          extra: "forced",
+          questions: [
+            [
+              {
+                id: 10,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 11,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 12,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 13,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 14,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "DINGE DIE PHIL MAG",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 15,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 16,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 17,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 18,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 19,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "KATEGORIE",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 20,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 21,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 22,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 23,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 24,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+      ],
+    },
+    {
+      id: 2,
+      extra: "default",
+      categories: [
+        {
+          name: "RANDOM",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 1,
+                category: "Random",
+                points: 100,
+                type: "TEXT",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 2,
+                category: "Random",
+                points: 200,
+                type: "AUDIO",
+                extra: "Corrupted",
+                question: "Sona_Original_Laugh_0.ogg",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Sona",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 2,
+                category: "Random",
+                points: 300,
+                type: "VIDEO",
+                extra: "Gold",
+                question: "autophil_nocturne.mp4",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Nocturne",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 3,
+                category: "Random",
+                points: 400,
+                type: "IMAGE",
+                extra: "Active",
+                question: "Aatrox.jpg",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "Aatrox",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 4,
+                category: "Random",
+                points: 500,
+                type: "TEXT",
+                extra: "Safezone",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                state: "INVISIBLE",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "LOL MEMES FÜR PROFIS",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 5,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Taunt",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 6,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 7,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Gold",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 8,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Inactive",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 9,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Safezone",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "CHAMPION",
+          extra: "forced",
+          questions: [
+            [
+              {
+                id: 10,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 11,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 12,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 13,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 14,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "DINGE DIE PHIL MAG",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 15,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 16,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 17,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 18,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 19,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+        {
+          name: "KATEGORIE",
+          extra: "default",
+          questions: [
+            [
+              {
+                id: 20,
+                category: "Erkennen",
+                points: 100,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 21,
+                category: "Erkennen",
+                points: 200,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Windfury",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 22,
+                category: "Erkennen",
+                points: 300,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 23,
+                category: "Erkennen",
+                points: 400,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+            [
+              {
+                id: 24,
+                category: "Erkennen",
+                points: 500,
+                type: "TEXT",
+                state: "INVISIBLE",
+                extra: "Active",
+                question: "Wie viele Finger zeige ich?",
+                answertype: "TEXT",
+                answer: "5",
+                finished: false,
+              },
+            ],
+          ],
+        },
+      ],
+    },
+  ],
   buzzerQueue: ["Krokoboss", "Kutcher", "Broeki", "TwoStone"],
 };
