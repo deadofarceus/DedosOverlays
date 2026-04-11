@@ -425,10 +425,6 @@
     }
 }
 
-.jp-RadDrehtSich {
-    /* transform: 8s cubic-bezier(.25, .5, .25, 1); */
-}
-
 .jp-RadOverlay {
     position: absolute;
     top: 0;
