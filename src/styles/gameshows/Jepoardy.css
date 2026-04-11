@@ -250,32 +250,80 @@
 }
 
 .jp-question {
+    position: absolute;
+    /* left: 207px;
+    top: 104px; */
     font-family: "Inter";
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    backdrop-filter: blur(5px);
 }
 
 .jp-question-title {
-    margin: 20px;
+    margin: 25px;
     letter-spacing: 2px;
-    font-size: 50px;
-    color: #E6D8B9;
+    font-size: 22px;
+    color: #DBAF51;
     text-align: center;
 }
 
 .jp-question-container {
-    width: 80%;
-    height: 60%;
+    position: relative;
+    width: 900px;
+    height: 400px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #0F1D62;
+    border: 10px #852185 solid;
+    border-radius: 40px;
+}
+
+.jp-question-container .jp-category-question {
+    background-color: #20359B;
+    box-shadow: 5px 5px 15px 5px #111;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: scale(0.7);
+}
+
+.jp-question-container .jp-Inactive p {
+    color: #DBAF51 !important;
+}
+
+.jp-question-randomizer {
+    width: 90%;
+    height: 50%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.jp-randomThings {
+    border: 12px solid #3E90FA;
+    background-color: #20359B;
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 4px red solid;
+    transition: border-color 0.08s ease-out;
+}
+
+.jp-randomThings.jp-randomThings--tick-active {
+    border-color: #4ade80;
+    box-shadow: 0 0 18px rgba(74, 222, 128, 0.45);
 }
 
 .jp-question-text {
@@ -316,7 +364,7 @@
 
 .jp-question-video {
     width: 100%;
-    height: 100%;
+    height: 280px;
 }
 
 .jp-question-video video {
@@ -326,7 +374,7 @@
 
 .jp-question-image {
     width: 100%;
-    height: 100%;
+    height: 280px;
 }
 
 .jp-question-image img {

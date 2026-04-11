@@ -12,11 +12,6 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     admin = "jp-adminQuestion ";
   }
 
-  console.log(
-    questions[0].category,
-    gamestate.currentBoard.categories.flatMap((cat) => cat.name)
-  );
-
   const category = gamestate.currentBoard.categories.find(
     (cat) => questions[0].category === cat.name
   );
@@ -38,12 +33,16 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
       return;
     }
     const newGamestate = { ...gamestate };
-    newGamestate.state = "QUESTION";
-    let question: Question = questions[0];
     if (questions.length > 1) {
-      question = questions[Math.floor(Math.random() * questions.length)]; //TODO animation
+      newGamestate.state = "RANDOMQUESTION";
+      newGamestate.currentRandomQuestions = questions;
+      console.log(newGamestate.currentRandomQuestions);
+    } else {
+      newGamestate.state = "QUESTION";
+      newGamestate.currentQuestion = questions[0];
+      console.log(newGamestate.currentQuestion);
     }
-    newGamestate.currentQuestion = question;
+
     sendState(newGamestate);
   };
 
@@ -53,8 +52,6 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
   } else {
     classname += "jp-" + questions[0].extra;
   }
-
-  console.log(category);
 
   if (
     (questions[0].extra !== "Taunt" &&

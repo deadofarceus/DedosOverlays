@@ -1,6 +1,6 @@
-import { JepoardyQuestionProps } from "../../../../../types/gameshows/Jepoardy";
+import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 
-function ImageQuestion({ question }: JepoardyQuestionProps) {
+function ImageQuestion({ question }: JepoardySingleQuestionProps) {
   console.log(question);
 
   return (

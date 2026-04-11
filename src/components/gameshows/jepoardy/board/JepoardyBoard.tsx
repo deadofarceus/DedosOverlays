@@ -4,6 +4,7 @@ import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import JepoardyCategory from "./JepoardyCategory";
 import JepoardyQuestion from "./JepoardyQuestion";
 import { useQuery } from "../../../../types/UsefulFunctions";
+import JepoardyRandomQuestion from "./JepoardyRandomQuestion";
 
 let ws: BroadcastWebsocket<string>;
 
@@ -53,9 +54,36 @@ function JepoardyBoard({ gamestate, sendState }: JepoardyGameProps) {
       </div>
     );
   }
+  if (gamestate.state === "RANDOMQUESTION") {
+    return (
+      <div className="jp-board">
+        {gamestate.currentBoard.categories.map((cat, index) => (
+          <JepoardyCategory
+            key={index}
+            category={cat}
+            gamestate={gamestate}
+            sendState={sendState}
+          />
+        ))}
+        <JepoardyRandomQuestion
+          questions={gamestate.currentRandomQuestions}
+          gamestate={gamestate}
+          sendState={sendState}
+        />
+      </div>
+    );
+  }
   if (gamestate.state === "QUESTION") {
     return (
       <div className="jp-board">
+        {gamestate.currentBoard.categories.map((cat, index) => (
+          <JepoardyCategory
+            key={index}
+            category={cat}
+            gamestate={gamestate}
+            sendState={sendState}
+          />
+        ))}
         <JepoardyQuestion
           question={gamestate.currentQuestion}
           gamestate={gamestate}
@@ -69,10 +97,8 @@ function JepoardyBoard({ gamestate, sendState }: JepoardyGameProps) {
       transform: `rotate(${rotation}deg)`,
       transition: isSpinning ? "transform 8s cubic-bezier(.25,.5,.25,1)" : "none",
     };
-    console.log(radDrehen, radDrehen.split("_")[1], radDrehenStyle);
-
     return (
-      <div className={"jp-board " + (gamestate.currentBoard.extra === "DREHDASRAD" ? "" : "")}>
+      <div className="jp-board">
         {gamestate.currentBoard.categories.map((cat, index) => (
           <JepoardyCategory
             key={index}

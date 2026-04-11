@@ -1,6 +1,6 @@
-import { JepoardyQuestionProps } from "../../../../../types/gameshows/Jepoardy";
+import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 
-function Text({ question }: JepoardyQuestionProps) {
+function Text({ question }: JepoardySingleQuestionProps) {
   return (
     <div className={"jp-question-text " + "jp-question-" + question.state}>{question.question}</div>
   );

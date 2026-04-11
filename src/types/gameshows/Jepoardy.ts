@@ -5,9 +5,10 @@ export interface JepoardyGameState {
   currentBoard: Board;
   currentQuestion: Question;
   currentPlayer: number;
+  currentRandomQuestions: Question[];
   buzzerQueue: string[];
   password: string;
-  state: "START" | "BOARD" | "QUESTION";
+  state: "START" | "BOARD" | "QUESTION" | "RANDOMQUESTION";
 }
 
 export interface JepoardyAdmin {
@@ -46,6 +47,7 @@ export interface Question {
   answer: string;
   state: "PAUSED" | "INVISIBLE" | "ACTIVE";
   finished: boolean;
+  info?: string;
 }
 
 export interface JepoardyGameProps {
@@ -57,6 +59,12 @@ export interface JepoardyGameProps {
 }
 
 export interface JepoardyQuestionProps {
+  questions: Question[];
+  sendState: (newState: JepoardyGameState) => void;
+  gamestate: JepoardyGameState;
+}
+
+export interface JepoardySingleQuestionProps {
   question: Question;
   sendState: (newState: JepoardyGameState) => void;
   gamestate: JepoardyGameState;
@@ -102,7 +110,7 @@ export const TESTGamestate: JepoardyGameState = {
   state: "BOARD",
   currentBoard: {
     id: 1,
-    extra: "DREHDASRAD",
+    extra: "default",
     categories: [
       {
         name: "RANDOM",
@@ -339,15 +347,68 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 15,
-              category: "Erkennen",
+              category: "DINGE DIE PHIL MAG",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "Brust",
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              info: "Brust",
+            },
+            {
+              id: 15,
+              category: "DINGE DIE PHIL MAG",
+              points: 100,
+              type: "TEXT",
+              state: "INVISIBLE",
+              extra: "Active",
+              question: "Augen",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+              info: "Augen",
+            },
+            {
+              id: 15,
+              category: "DINGE DIE PHIL MAG",
+              points: 100,
+              type: "TEXT",
+              state: "INVISIBLE",
+              extra: "Active",
+              question: "Lippen",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+              info: "Lippen",
+            },
+            {
+              id: 15,
+              category: "DINGE DIE PHIL MAG",
+              points: 100,
+              type: "TEXT",
+              state: "INVISIBLE",
+              extra: "Active",
+              question: "Hand",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+              info: "Hand",
+            },
+            {
+              id: 15,
+              category: "DINGE DIE PHIL MAG",
+              points: 100,
+              type: "TEXT",
+              state: "INVISIBLE",
+              extra: "Active",
+              question: "Irgendwas",
+              answertype: "TEXT",
+              answer: "5",
+              finished: false,
+              info: "Irgendwas",
             },
           ],
           [
@@ -486,6 +547,20 @@ export const TESTGamestate: JepoardyGameState = {
       },
     ],
   },
+  currentRandomQuestions: [
+    {
+      id: 5,
+      category: "Erkennen",
+      points: 100,
+      type: "TEXT",
+      state: "ACTIVE",
+      extra: "Active",
+      question: "Wie viele Finger zeige ich?",
+      answertype: "TEXT",
+      answer: "5",
+      finished: true,
+    },
+  ],
   currentQuestion: {
     id: 5,
     category: "Erkennen",

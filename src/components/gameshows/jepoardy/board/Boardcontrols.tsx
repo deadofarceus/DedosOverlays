@@ -28,6 +28,7 @@ function BoardControls({
   const question = gamestate.currentQuestion;
 
   const [startStopSignal, setStartStopSignal] = useState<string>("");
+  const [randomInt, setRandomInt] = useState(0);
 
   useEffect(() => {
     if (!ws) {
@@ -227,6 +228,23 @@ function BoardControls({
     sendState(newGamestate);
   };
 
+  const handleRandomQuestion = () => {
+    if (startStopSignal.startsWith("STARTRANDOM")) {
+      const newGamestate = { ...gamestate };
+      newGamestate.state = "QUESTION";
+      newGamestate.currentQuestion =
+        newGamestate.currentRandomQuestions[
+          (randomInt - 1) % newGamestate.currentRandomQuestions.length
+        ];
+      sendState(newGamestate);
+    } else {
+      const length = gamestate.currentRandomQuestions.length;
+      const ticks = Math.random() * length + length * 5;
+      setRandomInt(Math.floor(ticks));
+      ws.sendData("STARTRANDOM_" + Math.floor(ticks));
+    }
+  };
+
   let frageAufdecken = question.state === "ACTIVE" ? "Frage verstecken" : "Frage aufdecken";
   if (question.type === "AUDIO" || question.type === "VIDEO") {
     frageAufdecken = question.state === "ACTIVE" ? "Wiedergabe pausieren" : "Wiedergabe starten";
@@ -250,6 +268,11 @@ function BoardControls({
   let drehDasRad = "Lass das RAD erscheinen";
   if (gamestate.currentBoard.extra === "DREHDASRAD") {
     drehDasRad = "Dreh das RAD!";
+  }
+
+  let randomQuestion = "Ziehe Zufällige Kategorie";
+  if (startStopSignal.startsWith("STARTRANDOM")) {
+    randomQuestion = "Zur Frage Wechseln";
   }
 
   return (
@@ -281,6 +304,13 @@ function BoardControls({
           </Button>{" "}
           {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
           <div>{"Antwort: " + question.answer}</div>
+        </>
+      )}
+      {gamestate.state === "RANDOMQUESTION" && (
+        <>
+          <Button variant="success" onClick={handleRandomQuestion}>
+            {randomQuestion}
+          </Button>
         </>
       )}
 

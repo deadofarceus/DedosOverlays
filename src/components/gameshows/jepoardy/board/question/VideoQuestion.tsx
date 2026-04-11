@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { JepoardyQuestionProps } from "../../../../../types/gameshows/Jepoardy";
+import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 import { useQuery } from "../../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../../types/WebsocketTypes";
 
 let ws: BroadcastWebsocket<string>;
 
-function VideoQuestion({ question }: JepoardyQuestionProps) {
+function VideoQuestion({ question }: JepoardySingleQuestionProps) {
   const query = useQuery();
   const id = query.get("id");
   const videoRef = useRef<HTMLVideoElement | null>(null);

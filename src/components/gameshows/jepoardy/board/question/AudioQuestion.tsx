@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { JepoardyQuestionProps } from "../../../../../types/gameshows/Jepoardy";
+import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 import { useQuery } from "../../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../../types/WebsocketTypes";
 
 let ws: BroadcastWebsocket<string>;
 
-function AudioQuestion({ question }: JepoardyQuestionProps) {
+function AudioQuestion({ question }: JepoardySingleQuestionProps) {
   const query = useQuery();
   const id = query.get("id");
   const audioRef = useRef<HTMLAudioElement | null>(null);
