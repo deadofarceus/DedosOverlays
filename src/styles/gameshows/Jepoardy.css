@@ -14,6 +14,7 @@
 }
 
 .jp-board {
+    position: relative;
     width: 1314px !important;
     height: 608px !important;
     border-radius: 10px;
@@ -98,7 +99,7 @@
 }
 
 .jp-Taunted {
-    cursor: not-allowed;
+    cursor: not-allowed !important;
 }
 
 .jp-Taunted:Hover {
@@ -376,4 +377,74 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.jp-RadContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1314px;
+    height: 608px;
+    border-radius: 10px;
+    backdrop-filter: blur(7px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter";
+    font-weight: bold;
+}
+
+.jp-Rad {
+    position: absolute;
+    top: 0;
+    left: 353px;
+    width: 608px;
+    height: 608px;
+    z-index: 1;
+}
+
+.jp-Radkommt {
+    transform-origin: center center;
+    animation: spiralIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes spiralIn {
+    0% {
+        transform: scale(0) rotate(-540deg);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.jp-RadDrehtSich {
+    /* transform: 8s cubic-bezier(.25, .5, .25, 1); */
+}
+
+.jp-RadOverlay {
+    position: absolute;
+    top: 0;
+    left: 353px;
+    width: 608px;
+    height: 608px;
+    z-index: 9999;
+}
+
+.jp-RadOverlayHidden {
+    display: none;
+}
+
+.jp-RadMarkierung {
+    position: absolute;
+    top: 276px;
+    left: 900px;
+    z-index: 11;
 }

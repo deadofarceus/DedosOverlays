@@ -26,7 +26,7 @@ export interface JepoardyPlayer {
 export interface Board {
   id: number;
   categories: Category[];
-  extra: "default" | "forced";
+  extra: "default" | "forced" | "DREHDASRAD"; // das ist so cheaten haha this is going to backfire 100%
 }
 
 export interface Category {
@@ -65,10 +65,10 @@ export interface JepoardyQuestionProps {
 export const TESTGamestate: JepoardyGameState = {
   password: "test",
   admin: {
-    name: "Autphil",
+    name: "Autophil",
     vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
   },
-  currentPlayer: -1,
+  currentPlayer: 1,
   players: [
     {
       name: "Krokoboss",
@@ -99,10 +99,10 @@ export const TESTGamestate: JepoardyGameState = {
       buzzed: false,
     },
   ],
-  state: "START",
+  state: "BOARD",
   currentBoard: {
     id: 1,
-    extra: "default",
+    extra: "DREHDASRAD",
     categories: [
       {
         name: "RANDOM",
@@ -119,7 +119,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "5",
-              finished: false,
+              finished: true,
             },
           ],
           [
@@ -128,12 +128,12 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Random",
               points: 200,
               type: "AUDIO",
-              extra: "Corrupted",
+              extra: "Active",
               question: "Sona_Original_Laugh_0.ogg",
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "Sona",
-              finished: false,
+              finished: true,
             },
           ],
           [
@@ -142,12 +142,12 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Random",
               points: 300,
               type: "VIDEO",
-              extra: "Gold",
+              extra: "Active",
               question: "autophil_nocturne.mp4",
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "Nocturne",
-              finished: false,
+              finished: true,
             },
           ],
           [
@@ -161,7 +161,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "Aatrox",
-              finished: false,
+              finished: true,
             },
           ],
           [
@@ -170,12 +170,12 @@ export const TESTGamestate: JepoardyGameState = {
               category: "Random",
               points: 500,
               type: "TEXT",
-              extra: "Safezone",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "5",
-              finished: false,
+              finished: true,
             },
           ],
         ],
@@ -187,25 +187,25 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 5,
-              category: "Erkennen",
+              category: "LOL MEMES FÜR PROFIS",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Taunt",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
-              finished: false,
+              finished: true,
             },
           ],
           [
             {
               id: 6,
-              category: "Erkennen",
+              category: "LOL MEMES FÜR PROFIS",
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -215,11 +215,11 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 7,
-              category: "Erkennen",
+              category: "LOL MEMES FÜR PROFIS",
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Gold",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -229,11 +229,11 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 8,
-              category: "Erkennen",
+              category: "LOL MEMES FÜR PROFIS",
               points: 400,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Inactive",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -243,11 +243,11 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 9,
-              category: "Erkennen",
+              category: "LOL MEMES FÜR PROFIS",
               points: 500,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Safezone",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -263,7 +263,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 10,
-              category: "Erkennen",
+              category: "CHAMPION",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
@@ -277,11 +277,11 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 11,
-              category: "Erkennen",
+              category: "CHAMPION",
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -291,7 +291,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 12,
-              category: "Erkennen",
+              category: "CHAMPION",
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
@@ -305,7 +305,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 13,
-              category: "Erkennen",
+              category: "CHAMPION",
               points: 400,
               type: "TEXT",
               state: "INVISIBLE",
@@ -319,7 +319,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 14,
-              category: "Erkennen",
+              category: "CHAMPION",
               points: 500,
               type: "TEXT",
               state: "INVISIBLE",
@@ -357,7 +357,7 @@ export const TESTGamestate: JepoardyGameState = {
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -433,7 +433,7 @@ export const TESTGamestate: JepoardyGameState = {
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -487,20 +487,20 @@ export const TESTGamestate: JepoardyGameState = {
     ],
   },
   currentQuestion: {
-    id: 1,
-    category: "Random",
+    id: 5,
+    category: "Erkennen",
     points: 100,
     type: "TEXT",
-    state: "INVISIBLE",
+    state: "ACTIVE",
     extra: "Active",
     question: "Wie viele Finger zeige ich?",
     answertype: "TEXT",
     answer: "5",
-    finished: false,
+    finished: true,
   },
   boards: [
     {
-      id: 1,
+      id: 0,
       extra: "default",
       categories: [
         {
@@ -594,7 +594,7 @@ export const TESTGamestate: JepoardyGameState = {
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
-                finished: false,
+                finished: true,
               },
             ],
             [
@@ -886,7 +886,7 @@ export const TESTGamestate: JepoardyGameState = {
       ],
     },
     {
-      id: 2,
+      id: 1,
       extra: "default",
       categories: [
         {
@@ -913,7 +913,7 @@ export const TESTGamestate: JepoardyGameState = {
                 category: "Random",
                 points: 200,
                 type: "AUDIO",
-                extra: "Corrupted",
+                extra: "Active",
                 question: "Sona_Original_Laugh_0.ogg",
                 answertype: "TEXT",
                 state: "INVISIBLE",
@@ -927,7 +927,7 @@ export const TESTGamestate: JepoardyGameState = {
                 category: "Random",
                 points: 300,
                 type: "VIDEO",
-                extra: "Gold",
+                extra: "Active",
                 question: "autophil_nocturne.mp4",
                 answertype: "TEXT",
                 state: "INVISIBLE",
@@ -955,7 +955,7 @@ export const TESTGamestate: JepoardyGameState = {
                 category: "Random",
                 points: 500,
                 type: "TEXT",
-                extra: "Safezone",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 state: "INVISIBLE",
@@ -976,7 +976,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 100,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Taunt",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -990,7 +990,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Windfury",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1004,7 +1004,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 300,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Gold",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1018,7 +1018,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 400,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Inactive",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1032,7 +1032,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 500,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Safezone",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1066,7 +1066,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Windfury",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1142,7 +1142,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Windfury",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",
@@ -1218,7 +1218,7 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
-                extra: "Windfury",
+                extra: "Active",
                 question: "Wie viele Finger zeige ich?",
                 answertype: "TEXT",
                 answer: "5",

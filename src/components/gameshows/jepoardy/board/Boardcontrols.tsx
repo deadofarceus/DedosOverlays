@@ -23,6 +23,8 @@ function BoardControls({
     return <></>;
   }
 
+  console.log(gamestate);
+
   const question = gamestate.currentQuestion;
 
   const [startStopSignal, setStartStopSignal] = useState<string>("");
@@ -167,12 +169,88 @@ function BoardControls({
     sendState(newGamestate);
   };
 
+  const handleDrehDasRad = () => {
+    const newGamestate = { ...gamestate };
+    if (gamestate.currentBoard.extra === "DREHDASRAD") {
+      const randomSpin = Math.random() * 360;
+      const spinDegree = 10 * 360 + randomSpin;
+
+      let calcExtra = calculateExtra(randomSpin);
+
+      let boardExtra = "default";
+      let extra: "Windfury" | "Active" | "Taunt" | "Gold" | "Inactive" | "Safezone" | "Corrupted";
+      if (calcExtra === "forced") {
+        boardExtra = "forced";
+        extra = "Active";
+      } else {
+        extra = calcExtra;
+      }
+
+      console.log(spinDegree, calcExtra, extra, boardExtra);
+
+      ws.sendData("DREHDASRAD_" + spinDegree);
+
+      setTimeout(() => {
+        // oder mit einem Button??????
+        if (boardExtra === "forced") {
+          newGamestate.currentBoard.extra = "forced";
+        } else {
+          newGamestate.currentBoard.extra = "default";
+
+          const allQuestionsArr = newGamestate.currentBoard.categories.flatMap(
+            (cat) => cat.questions
+          );
+
+          const top5 = [...allQuestionsArr].sort((a, b) => b[0].points - a[0].points).slice(0, 5);
+
+          const candidates = allQuestionsArr.filter((q) => !q[0].finished && !top5.includes(q));
+          shuffle(candidates)
+            .slice(0, 5)
+            .forEach((q) => {
+              q.forEach((qdd: Question) => (qdd.extra = extra));
+            });
+          console.log(candidates);
+        }
+        sendState(newGamestate);
+      }, 8000); // TODO change
+    } else {
+      newGamestate.currentBoard.extra = "DREHDASRAD";
+      sendState(newGamestate);
+    }
+  };
+
+  const handleChangeBoard = () => {
+    const newGamestate = { ...gamestate };
+    newGamestate.state = "BOARD";
+    newGamestate.boards[newGamestate.currentBoard.id] = newGamestate.currentBoard;
+    newGamestate.currentBoard = newGamestate.boards[newGamestate.currentBoard.id === 0 ? 1 : 0];
+    sendState(newGamestate);
+  };
+
   let frageAufdecken = question.state === "ACTIVE" ? "Frage verstecken" : "Frage aufdecken";
   if (question.type === "AUDIO" || question.type === "VIDEO") {
     frageAufdecken = question.state === "ACTIVE" ? "Wiedergabe pausieren" : "Wiedergabe starten";
   }
 
-  let wechsel = "Wechsel zu Board " + (gamestate.currentBoard.id === 1 ? 2 : 1);
+  let wechsel = "Wechsel zu Board " + (gamestate.currentBoard.id === 0 ? 2 : 1);
+
+  let allQuestions = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).flat();
+
+  const finishedQuestionsCount = allQuestions.filter((q) => q.finished).length;
+  const alreadySpinned =
+    allQuestions.filter((q) => !(q.extra === "Active" || q.extra === "Inactive")).length > 0 ||
+    gamestate.currentBoard.extra === "forced";
+
+  const radDrehAble =
+    gamestate.state === "BOARD" &&
+    gamestate.currentBoard.id === 1 &&
+    finishedQuestionsCount >= 4 &&
+    !alreadySpinned;
+
+  let drehDasRad = "Lass das RAD erscheinen";
+  if (gamestate.currentBoard.extra === "DREHDASRAD") {
+    drehDasRad = "Dreh das RAD!";
+  }
 
   return (
     <div className="jp-boardControls centerC">
@@ -211,12 +289,53 @@ function BoardControls({
           <Button variant="secondary" onClick={handleNextPlayer}>
             Nächster ist am Zug
           </Button>
-          <Button variant="success">Dreh das RAD!</Button>
-          <Button variant="danger">{wechsel}</Button>
+          <Button variant="danger" onClick={handleChangeBoard}>
+            {wechsel}
+          </Button>
         </>
+      )}
+      {radDrehAble && (
+        <Button variant="success" onClick={handleDrehDasRad}>
+          {drehDasRad}
+        </Button>
       )}
     </div>
   );
+}
+
+function shuffle(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function calculateExtra(
+  spin: number
+): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
+  if (spin < 30) {
+    return "Gold";
+  }
+  if (spin < 90) {
+    return "Taunt";
+  }
+  if (spin < 150) {
+    return "forced";
+  }
+  if (spin < 210) {
+    return "Corrupted";
+  }
+  if (spin < 270) {
+    return "Safezone";
+  }
+  if (spin < 330) {
+    return "Windfury";
+  }
+  if (spin < 360) {
+    return "Gold";
+  }
+  return "forced";
 }
 
 export default BoardControls;

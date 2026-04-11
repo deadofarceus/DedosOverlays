@@ -12,13 +12,26 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     admin = "jp-adminQuestion ";
   }
 
+  console.log(
+    questions[0].category,
+    gamestate.currentBoard.categories.flatMap((cat) => cat.name)
+  );
+
+  const category = gamestate.currentBoard.categories.find(
+    (cat) => questions[0].category === cat.name
+  );
+
   const handleOnClick = () => {
     if (
       questions[0].extra !== "Taunt" &&
       gamestate.currentBoard.categories.some((cat) =>
-        cat.questions.some((q) => q[0].extra === "Taunt")
+        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished)
       )
     ) {
+      return;
+    }
+
+    if (category?.extra === "forced") {
       return;
     }
     if (questions[0].finished || admin === "") {
@@ -41,11 +54,14 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     classname += "jp-" + questions[0].extra;
   }
 
+  console.log(category);
+
   if (
-    questions[0].extra !== "Taunt" &&
-    gamestate.currentBoard.categories.some((cat) =>
-      cat.questions.some((q) => q[0].extra === "Taunt")
-    )
+    (questions[0].extra !== "Taunt" &&
+      gamestate.currentBoard.categories.some((cat) =>
+        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished)
+      )) ||
+    category?.extra === "forced"
   ) {
     classname += " jp-Taunted";
   }
