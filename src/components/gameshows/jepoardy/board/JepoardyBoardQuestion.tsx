@@ -29,6 +29,14 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     if (category?.extra === "forced") {
       return;
     }
+    if (
+      gamestate.currentQuestion.extra === "Windfury" &&
+      questions[0].extra === "Windfury" &&
+      gamestate.currentQuestion.buzzedPlayers[0].name ===
+        gamestate.players[gamestate.currentPlayer].name
+    ) {
+      return;
+    }
     if (questions[0].finished || admin === "") {
       return;
     }
@@ -59,6 +67,15 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
         cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished)
       )) ||
     category?.extra === "forced"
+  ) {
+    classname += " jp-Taunted";
+  }
+
+  if (
+    gamestate.currentQuestion.extra === "Windfury" &&
+    questions[0].extra === "Windfury" &&
+    gamestate.currentQuestion.buzzedPlayers[0].name ===
+      gamestate.players[gamestate.currentPlayer].name
   ) {
     classname += " jp-Taunted";
   }

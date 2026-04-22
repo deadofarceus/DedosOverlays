@@ -47,6 +47,7 @@ export interface Question {
   answer: string;
   state: "PAUSED" | "INVISIBLE" | "ACTIVE";
   finished: boolean;
+  buzzedPlayers: JepoardyPlayer[];
   info?: string;
 }
 
@@ -128,6 +129,7 @@ export const TESTGamestate: JepoardyGameState = {
               state: "INVISIBLE",
               answer: "5",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -142,6 +144,7 @@ export const TESTGamestate: JepoardyGameState = {
               state: "INVISIBLE",
               answer: "Sona",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -156,6 +159,7 @@ export const TESTGamestate: JepoardyGameState = {
               state: "INVISIBLE",
               answer: "Nocturne",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -170,6 +174,7 @@ export const TESTGamestate: JepoardyGameState = {
               state: "INVISIBLE",
               answer: "Aatrox",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -184,6 +189,7 @@ export const TESTGamestate: JepoardyGameState = {
               state: "INVISIBLE",
               answer: "5",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
         ],
@@ -204,6 +210,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: true,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -213,11 +220,12 @@ export const TESTGamestate: JepoardyGameState = {
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Active",
+              extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -227,11 +235,12 @@ export const TESTGamestate: JepoardyGameState = {
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Active",
+              extra: "Windfury",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -246,6 +255,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -260,6 +270,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
         ],
@@ -280,6 +291,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -294,6 +306,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -308,6 +321,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -322,6 +336,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -336,6 +351,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
         ],
@@ -356,6 +372,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
               info: "Brust",
             },
             {
@@ -369,6 +386,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
               info: "Augen",
             },
             {
@@ -382,6 +400,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
               info: "Lippen",
             },
             {
@@ -395,6 +414,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
               info: "Hand",
             },
             {
@@ -408,6 +428,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
               info: "Irgendwas",
             },
           ],
@@ -423,6 +444,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -437,6 +459,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -451,6 +474,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -465,6 +489,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
         ],
@@ -485,6 +510,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -499,6 +525,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -513,6 +540,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -527,6 +555,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
           [
@@ -541,6 +570,7 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               answer: "5",
               finished: false,
+              buzzedPlayers: [],
             },
           ],
         ],
@@ -559,19 +589,21 @@ export const TESTGamestate: JepoardyGameState = {
       answertype: "TEXT",
       answer: "5",
       finished: true,
+      buzzedPlayers: [],
     },
   ],
   currentQuestion: {
-    id: 5,
-    category: "Erkennen",
+    id: -1,
+    category: "START",
     points: 100,
     type: "TEXT",
     state: "ACTIVE",
     extra: "Active",
-    question: "Wie viele Finger zeige ich?",
+    question: "STARTFRAGE",
     answertype: "TEXT",
-    answer: "5",
+    answer: "START",
     finished: true,
+    buzzedPlayers: [],
   },
   boards: [
     {
@@ -594,6 +626,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -608,6 +641,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Sona",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -622,6 +656,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Nocturne",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -636,6 +671,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Aatrox",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -650,6 +686,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -670,6 +707,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: true,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -684,6 +722,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -698,6 +737,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -712,6 +752,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -726,6 +767,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -746,6 +788,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -760,6 +803,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -774,6 +818,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -788,6 +833,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -802,6 +848,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -822,6 +869,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -836,6 +884,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -850,6 +899,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -864,6 +914,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -878,6 +929,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -898,6 +950,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -912,6 +965,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -926,6 +980,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -940,6 +995,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -954,6 +1010,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -980,6 +1037,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -994,6 +1052,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Sona",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1008,6 +1067,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Nocturne",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1022,6 +1082,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "Aatrox",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1036,6 +1097,7 @@ export const TESTGamestate: JepoardyGameState = {
                 state: "INVISIBLE",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -1056,6 +1118,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1070,6 +1133,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1084,6 +1148,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1098,6 +1163,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1112,6 +1178,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -1132,6 +1199,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1146,6 +1214,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1160,6 +1229,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1174,6 +1244,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1188,6 +1259,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -1208,6 +1280,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1222,6 +1295,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1236,6 +1310,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1250,6 +1325,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1264,6 +1340,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],
@@ -1284,6 +1361,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1298,6 +1376,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1312,6 +1391,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1326,6 +1406,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
             [
@@ -1340,6 +1421,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answertype: "TEXT",
                 answer: "5",
                 finished: false,
+                buzzedPlayers: [],
               },
             ],
           ],

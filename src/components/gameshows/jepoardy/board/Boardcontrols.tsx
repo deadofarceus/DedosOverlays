@@ -10,20 +10,12 @@ import { useQuery } from "../../../../types/UsefulFunctions";
 
 let ws: BroadcastWebsocket<string>;
 
-function BoardControls({
-  gamestate,
-  sendState,
-  buzzerQueue,
-  clearBuzzer,
-  clearOneBuzzer,
-}: JepoardyGameProps) {
+function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: JepoardyGameProps) {
   const query = useQuery();
   const id = query.get("id");
   if (!id) {
     return <></>;
   }
-
-  console.log(gamestate);
 
   const question = gamestate.currentQuestion;
 
@@ -42,8 +34,9 @@ function BoardControls({
 
     const first = buzzerQueue[0];
     if (
-      (prevFirstRef.current !== undefined && prevFirstRef.current !== first) ||
-      (prevFirstRef.current === undefined && buzzerQueue.length > 0)
+      ((prevFirstRef.current !== undefined && prevFirstRef.current !== first) ||
+        (prevFirstRef.current === undefined && buzzerQueue.length > 0)) &&
+      !question.finished
     ) {
       const newGamestate = { ...gamestate };
       const q = newGamestate.currentQuestion;
@@ -60,6 +53,8 @@ function BoardControls({
     questionID: number
   ): JepoardyGameState => {
     const newGamestate = { ...gamestate };
+    newGamestate.currentQuestion.state = "ACTIVE";
+    newGamestate.currentQuestion.finished = true;
     newGamestate.currentBoard.categories.forEach((cat) => {
       cat.questions.forEach((quest) => {
         quest.forEach((q) => {
@@ -69,10 +64,6 @@ function BoardControls({
         });
       });
     });
-
-    if (question.extra !== "Windfury") {
-      newGamestate.currentPlayer = (newGamestate.currentPlayer + 1) % newGamestate.players.length;
-    }
 
     if (newGamestate.currentBoard.extra === "forced") {
       newGamestate.currentBoard.categories.forEach((cat) => {
@@ -111,12 +102,14 @@ function BoardControls({
     if (!buzzedPlayer) {
       buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
     } else {
-      clearOneBuzzer(buzzerQueue[0]);
+      clearBuzzer();
     }
 
     if (question.extra !== "Safezone") {
-      buzzedPlayer.points -= question.points;
+      buzzedPlayer.points -= question.points / 2;
     }
+    newGamestate.currentQuestion.buzzedPlayers.push(buzzedPlayer);
+
     sendState(newGamestate);
   };
 
@@ -130,6 +123,7 @@ function BoardControls({
         points += 2 * quest.points;
         break;
       default:
+        points += quest.points;
         break;
     }
     return points;
@@ -143,17 +137,21 @@ function BoardControls({
     } else {
       clearBuzzer();
     }
+    newGamestate.currentQuestion.buzzedPlayers.push(buzzedPlayer);
     buzzedPlayer.points += calculatePoints(question);
-    newGamestate.currentQuestion.state = "ACTIVE";
-    newGamestate.currentQuestion.finished = true;
     newGamestate = finishSpecificQuestion(newGamestate, question.id);
     sendState(newGamestate);
   };
 
   const handleFinishQuestion = () => {
     let newGamestate = { ...gamestate };
-    newGamestate.currentQuestion.state = "ACTIVE";
-    newGamestate.currentQuestion.finished = true;
+    let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
+    if (!buzzedPlayer) {
+      buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
+    } else {
+      clearBuzzer();
+    }
+    newGamestate.currentQuestion.buzzedPlayers.push(buzzedPlayer);
     newGamestate = finishSpecificQuestion(newGamestate, question.id);
     sendState(newGamestate);
   };
@@ -161,6 +159,9 @@ function BoardControls({
   const handleBackToBoard = () => {
     const newGamestate = { ...gamestate };
     newGamestate.state = "BOARD";
+    if (question.extra !== "Windfury") {
+      newGamestate.currentPlayer = (newGamestate.currentPlayer + 1) % newGamestate.players.length;
+    }
     sendState(newGamestate);
   };
 
@@ -275,11 +276,17 @@ function BoardControls({
     randomQuestion = "Zur Frage Wechseln";
   }
 
+  const currentPlayer =
+    buzzerQueue.length === 0
+      ? gamestate.players[gamestate.currentPlayer]
+      : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
+
   return (
-    <div className="jp-boardControls centerC">
-      <div className="centerR"></div>
-      <Button variant="danger">AKTION ZURÜCK</Button>
-      <Button variant="warning">AKTION VORWÄRTS</Button>
+    <div className="jp-boardControls centerR">
+      <div className="centerC">
+        <Button variant="danger">AKTION ZURÜCK</Button>
+        <Button variant="warning">AKTION VORWÄRTS</Button>
+      </div>
       {gamestate.state === "QUESTION" && (
         <>
           <Button variant="primary" onClick={handleShowQuestion}>
@@ -290,20 +297,31 @@ function BoardControls({
               Nochmal von Vorne
             </Button>
           )}
-          <Button variant="danger" onClick={handleFalscheAntwort}>
-            Falsche Antwort
-          </Button>{" "}
-          <Button variant="success" onClick={handleRichtigeAntwort}>
-            Richtige Antwort
-          </Button>{" "}
-          <Button variant="danger" onClick={handleFinishQuestion}>
-            Keiner kann beantworten
-          </Button>{" "}
-          <Button variant="warning" onClick={handleBackToBoard}>
-            Zurück zum Board
-          </Button>{" "}
-          {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
-          <div>{"Antwort: " + question.answer}</div>
+          {!question.finished &&
+            (buzzerQueue.length > 0 || question.buzzedPlayers.length === 0) && (
+              <div className="centerC">
+                <Button variant="danger" onClick={handleFalscheAntwort}>
+                  Falsche Antwort von {currentPlayer.name}
+                </Button>{" "}
+                <Button variant="success" onClick={handleRichtigeAntwort}>
+                  Richtige Antwort von {currentPlayer.name}
+                </Button>{" "}
+              </div>
+            )}
+          <div className="centerC">
+            {!question.finished && (
+              <Button variant="danger" onClick={handleFinishQuestion}>
+                Keiner kann beantworten
+              </Button>
+            )}{" "}
+            <Button variant="warning" onClick={handleBackToBoard}>
+              Zurück zum Board
+            </Button>{" "}
+          </div>
+          <div className="centerC">
+            {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
+            <div className="jp-answer">{"Antwort: " + question.answer}</div>
+          </div>
         </>
       )}
       {gamestate.state === "RANDOMQUESTION" && (

@@ -6,7 +6,6 @@ import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoa
 import { clearBuzzer, clearOneBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import BoardControls from "./board/Boardcontrols";
-import BuzzerQueue from "./BuzzerQueue";
 
 let ws: GameshowWebsocket<JepoardyGameState>;
 
@@ -35,7 +34,7 @@ function JepoardyController() {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, []);
 
   const sendState = (newState: JepoardyGameState) => {
@@ -65,6 +64,11 @@ function JepoardyController() {
     clearOneBuzzer(query.get("id")!, buzzer);
   };
 
+  const currentPlayer =
+    buzzerQueue.length === 0
+      ? gamestate.players[gamestate.currentPlayer]
+      : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
+
   return (
     <div className="jp-controller">
       <JepoardyBoard
@@ -74,6 +78,19 @@ function JepoardyController() {
         clearBuzzer={handleClearBuzzer}
         clearOneBuzzer={handleClearOneBuzzer}
       />
+      <div className="centerR jp-playerPointsTNDiv">
+        {gamestate.players.map((player, index) => (
+          <div
+            key={index}
+            className={
+              "jp-playerPointsTN " + (player.name === currentPlayer.name ? "jp-ichbindran" : "")
+            }
+          >
+            <div>{player.name.toUpperCase()}</div>
+            <div>{player.points}</div>
+          </div>
+        ))}
+      </div>
       <BoardControls
         gamestate={gamestate}
         sendState={sendState}
@@ -81,11 +98,11 @@ function JepoardyController() {
         clearBuzzer={handleClearBuzzer}
         clearOneBuzzer={handleClearOneBuzzer}
       />
-      <BuzzerQueue
+      {/* <BuzzerQueue
         clearBuzzer={handleClearBuzzer}
         buzzerQueue={buzzerQueue}
         clearOneBuzzer={handleClearOneBuzzer}
-      />
+      /> */}
       <UserControls
         gamestate={gamestate}
         sendState={sendState}
