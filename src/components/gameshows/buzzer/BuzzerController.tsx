@@ -6,6 +6,7 @@ import "../../../styles/gameshows/Buzzer.css";
 import { BuzzerGameState, Player } from "../../../types/gameshows/Buzzer";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import PlayerSettings from "./PlayerSettings";
+import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
 let ws: GameshowWebsocket<BuzzerGameState>;
 const audio = new Audio("../../sounds/Buzzer.mp3");
@@ -20,7 +21,7 @@ function BuzzerController() {
   const query = useQuery();
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const [data, setData] = useState<BuzzerGameState>(STARTGAMESTATE);
-  const [volume, setVolume] = useState<number>(10);
+  const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
   useEffect(() => {
     const id = query.get("id");
@@ -42,8 +43,8 @@ function BuzzerController() {
   }, [query]);
 
   useEffect(() => {
-    audio.volume = Math.min(1, Math.max(0, volume / 100));
-  }, [volume]);
+    audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
+  }, [buzzerVolume]);
 
   const addBuzzer = (buzzer: string) => {
     setBuzzerQueue((prevQueue) => {
@@ -140,8 +141,10 @@ function BuzzerController() {
           min={0}
           max={100}
           step={1}
-          value={volume}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolume(Number(e.target.value))}
+          value={buzzerVolume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBuzzerVolume(Number(e.target.value))
+          }
           aria-label="Buzzer Lautstärke"
         />
       </div>

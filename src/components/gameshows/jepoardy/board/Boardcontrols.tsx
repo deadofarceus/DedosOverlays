@@ -19,7 +19,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Jepoa
 
   const question = gamestate.currentQuestion;
 
-  const [startStopSignal, setStartStopSignal] = useState<string>("");
+  const [startStopSignal, setStartStopSignal] = useState<string>("FIRST");
   const [randomInt, setRandomInt] = useState(0);
 
   useEffect(() => {
@@ -82,10 +82,13 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Jepoa
     const newGamestate = { ...gamestate };
 
     const q = newGamestate.currentQuestion;
+
+    console.log(q);
+
     q.state = q.state === "ACTIVE" ? "INVISIBLE" : "ACTIVE";
 
-    console.log(startStopSignal);
     const sent = q.state === "ACTIVE" ? "START" : "STOP";
+    console.log(sent);
 
     ws.sendData(sent);
 

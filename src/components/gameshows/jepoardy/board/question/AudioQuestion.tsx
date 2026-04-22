@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
+import { useAudioSettings } from "../../../../../context/AudioSettingsContext";
 import { useQuery } from "../../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../../types/WebsocketTypes";
-
-let ws: BroadcastWebsocket<string>;
 
 function AudioQuestion({ question }: JepoardySingleQuestionProps) {
   const query = useQuery();
   const id = query.get("id");
+  const { buzzerVolume } = useAudioSettings();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const wsRef = useRef<BroadcastWebsocket<string> | null>(null);
   const [startStopSignal, setStartStopSignal] = useState<string>("");
   const [progress, setProgress] = useState(0);
 
@@ -17,14 +18,17 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
   }
 
   useEffect(() => {
-    if (!ws) {
-      ws = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
-    }
+    wsRef.current = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
+
+    return () => {
+      wsRef.current = null;
+    };
   }, [id]);
 
   useEffect(() => {
     const src = `/jepoardy/audio/${encodeURIComponent(question.question)}`;
     const audio = new Audio(src);
+    audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
     audioRef.current = audio;
 
     const updateProgress = () => {
@@ -48,7 +52,33 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
       audioRef.current = null;
       setProgress(0);
     };
-  }, [question.question]);
+  }, [question.question]); // ?????????????????????????? TODO
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
+  }, [buzzerVolume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (startStopSignal !== "START") return;
+
+    const tryPlay = () => {
+      void audio.play();
+    };
+
+    // If the audio isn't ready yet, wait for it once.
+    if (audio.readyState < 3) {
+      audio.addEventListener("canplay", tryPlay, { once: true });
+      return () => {
+        audio.removeEventListener("canplay", tryPlay);
+      };
+    }
+
+    tryPlay();
+  }, [startStopSignal, question.question]);
 
   useEffect(() => {
     const audio = audioRef.current;

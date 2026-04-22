@@ -6,6 +6,8 @@ import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoa
 import { clearBuzzer, clearOneBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import BoardControls from "./board/Boardcontrols";
+import { Form } from "react-bootstrap";
+import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
 let ws: GameshowWebsocket<JepoardyGameState>;
 
@@ -13,6 +15,7 @@ function JepoardyController() {
   document.body.className = "noOBS";
   const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
+  const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
   const query = useQuery();
   const id = query.get("id");
@@ -34,7 +37,7 @@ function JepoardyController() {
       }
     };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   const sendState = (newState: JepoardyGameState) => {
@@ -110,6 +113,22 @@ function JepoardyController() {
         clearBuzzer={handleClearBuzzer}
         clearOneBuzzer={handleClearOneBuzzer}
       />
+      <div className="buzzerSoundSlider">
+        {/** das auch bei controller ALLE SOUNDS mit der selben Lautstärke */}
+        <span aria-label="Sound" title="Sound">
+          🔊
+        </span>
+        <Form.Range
+          min={0}
+          max={100}
+          step={1}
+          value={buzzerVolume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBuzzerVolume(Number(e.target.value))
+          }
+          aria-label="Buzzer Lautstärke"
+        />
+      </div>
     </div>
   );
 }

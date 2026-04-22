@@ -6,6 +6,7 @@ import { buzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import JepoardyBoard from "./board/JepoardyBoard";
 import { Button, Form } from "react-bootstrap";
+import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
 let ws: GameshowWebsocket<JepoardyGameState>;
 const audio = new Audio("../../sounds/Buzzer.mp3");
@@ -14,7 +15,7 @@ function JepoardyTeilnehmer() {
   document.body.className = "noOBS";
   const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
-  const [volume, setVolume] = useState<number>(10);
+  const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
   const query = useQuery();
   const id = query.get("id");
@@ -42,8 +43,8 @@ function JepoardyTeilnehmer() {
   }, []);
 
   useEffect(() => {
-    audio.volume = Math.min(1, Math.max(0, volume / 100));
-  }, [volume]);
+    audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
+  }, [buzzerVolume]);
 
   const sendState = (newState: JepoardyGameState) => {
     const event = new ModEvent(id, "persistantdata", newState);
@@ -56,6 +57,9 @@ function JepoardyTeilnehmer() {
       if (buzzer === "CLEARBUZZERQUEUE") {
         return [];
       } else if (!prevQueue.includes(buzzer)) {
+        if (prevQueue.length === 0) {
+          audio.play();
+        }
         return [...prevQueue, buzzer];
       }
       return prevQueue;
@@ -147,8 +151,10 @@ function JepoardyTeilnehmer() {
           min={0}
           max={100}
           step={1}
-          value={volume}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolume(Number(e.target.value))}
+          value={buzzerVolume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBuzzerVolume(Number(e.target.value))
+          }
           aria-label="Buzzer Lautstärke"
         />
       </div>

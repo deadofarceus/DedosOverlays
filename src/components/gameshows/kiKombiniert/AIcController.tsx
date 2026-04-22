@@ -12,6 +12,7 @@ import "../../../styles/gameshows/AICombine.css";
 import TeamView from "./TeamView";
 import AICombination from "./AICombination";
 import Buzzer from "../../util/Buzzer";
+import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
 let ws: GameshowWebsocket<AICombGameState>;
 const audio = new Audio("../../sounds/Buzzer.mp3");
@@ -220,7 +221,7 @@ function AIcController() {
   const [data, setData] = useState<AICombGameState>(STARTGAMESTATE);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const [password, setPassword] = useState<string>("");
-  const [volume, setVolume] = useState<number>(10);
+  const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
   useEffect(() => {
     const id = query.get("id");
@@ -249,8 +250,8 @@ function AIcController() {
   }, [query]);
 
   useEffect(() => {
-    audio.volume = Math.min(1, Math.max(0, volume / 100));
-  }, [volume]);
+    audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
+  }, [buzzerVolume]);
 
   const sendData = (newData: AICombGameState) => {
     if (!ws) return;
@@ -425,8 +426,10 @@ function AIcController() {
           min={0}
           max={100}
           step={1}
-          value={volume}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVolume(Number(e.target.value))}
+          value={buzzerVolume}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setBuzzerVolume(Number(e.target.value))
+          }
           aria-label="Buzzer Lautstärke"
         />
       </div>
