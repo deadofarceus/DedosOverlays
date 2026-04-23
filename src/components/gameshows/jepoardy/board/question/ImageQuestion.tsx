@@ -1,8 +1,6 @@
 import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 
 function ImageQuestion({ question }: JepoardySingleQuestionProps) {
-  console.log(question);
-
   return (
     <div
       className={
