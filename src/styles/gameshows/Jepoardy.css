@@ -347,11 +347,45 @@
 }
 
 .jp-question-audio-bar {
-    height: 18px;
-    border-radius: 4px;
-    background: rgba(230, 216, 185, 0.2);
-    border: 2px solid rgba(230, 216, 185, 0.5);
-    overflow: hidden;
+    margin-top: 30px;
+    height: 220px;
+    border-radius: 80px;
+    background: #b7b7b7;
+    border: 5px solid #64615a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    /* overflow: hidden; */
+}
+
+.jp-question-audio-speaker {
+    width: 200px;
+    height: 200px;
+}
+
+.jp-question-audio-eq {
+    margin-right: 30px;
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.jp-question-audio-eq-bar {
+    width: 15px;
+    border-radius: 999px;
+    background: #0f1d62;
+    opacity: 0.95;
+    transition: background-color 0.15s linear, opacity 0.15s linear;
+}
+
+.jp-question-audio-eq-bar.jp-question-audio-eq-bar--filled {
+    background: #22c55e;
+    opacity: 1;
 }
 
 .jp-question-audio-bar-fill {

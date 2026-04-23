@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepoardy";
 import { useAudioSettings } from "../../../../../context/AudioSettingsContext";
 import { useQuery } from "../../../../../types/UsefulFunctions";
@@ -12,6 +12,9 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
   const wsRef = useRef<BroadcastWebsocket<string> | null>(null);
   const [startStopSignal, setStartStopSignal] = useState<string>("");
   const [progress, setProgress] = useState(0);
+  const bars = useMemo(() => {
+    return Array.from({ length: 20 }, () => 30 + Math.round(Math.random() * 120));
+  }, [question.question]);
 
   if (!id) {
     return <></>;
@@ -52,7 +55,7 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
       audioRef.current = null;
       setProgress(0);
     };
-  }, [question.question]); // ?????????????????????????? TODO
+  }, [question.question]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -98,12 +101,18 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
   }, [startStopSignal]);
 
   const pct = Math.round(progress * 100);
+  const filledBars = Math.max(0, Math.min(bars.length, Math.floor(progress * bars.length)));
 
   return (
     <div className="jp-question-audio">
-      <div className="jp-question-audio-label" aria-hidden="true">
+      {
+        //**
+        // hier das coole einfügen idee Spotify verlinkungs dingens */
+      }
+
+      {/* <div className="jp-question-audio-label" aria-hidden="true">
         Audio — {pct}%
-      </div>
+      </div> */}
       <div
         className="jp-question-audio-bar"
         role="progressbar"
@@ -111,7 +120,20 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="jp-question-audio-bar-fill" style={{ width: `${pct}%` }} />
+        <img src="../../../jepoardy/Speaker.png" className="jp-question-audio-speaker" alt="" />
+        <div className="jp-question-audio-eq" aria-hidden="true">
+          {bars.map((h, i) => (
+            <span
+              key={i}
+              className={
+                "jp-question-audio-eq-bar " +
+                (i < filledBars ? "jp-question-audio-eq-bar--filled" : "")
+              }
+              style={{ height: `${h}px` }}
+            />
+          ))}
+        </div>
+        {/* <div className="jp-question-audio-bar-fill" style={{ width: `${pct}%` }} /> */}
       </div>
     </div>
   );
