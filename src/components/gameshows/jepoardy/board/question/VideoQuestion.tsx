@@ -3,12 +3,11 @@ import { JepoardySingleQuestionProps } from "../../../../../types/gameshows/Jepo
 import { useQuery } from "../../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../../types/WebsocketTypes";
 
-let ws: BroadcastWebsocket<string>;
-
 function VideoQuestion({ question }: JepoardySingleQuestionProps) {
   const query = useQuery();
   const id = query.get("id");
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const wsRef = useRef<BroadcastWebsocket<string> | null>(null);
   const [startStopSignal, setStartStopSignal] = useState<string>("");
 
   if (!id) {
@@ -16,9 +15,11 @@ function VideoQuestion({ question }: JepoardySingleQuestionProps) {
   }
 
   useEffect(() => {
-    if (!ws) {
-      ws = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
-    }
+    wsRef.current = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
+
+    return () => {
+      wsRef.current = null;
+    };
   }, [id]);
 
   useEffect(() => {

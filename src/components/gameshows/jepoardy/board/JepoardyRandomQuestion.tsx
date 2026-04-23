@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { JepoardyQuestionProps, Question } from "../../../../types/gameshows/Jepoardy";
 import { useQuery } from "../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 
-let ws: BroadcastWebsocket<string>;
-
 // Only Animation class no Logic
 function JepoardyRandomQuestion({ questions, gamestate, sendState }: JepoardyQuestionProps) {
   const query = useQuery();
   const id = query.get("id");
+  if (!id) {
+    return <></>;
+  }
+  const wsRef = useRef<BroadcastWebsocket<string> | null>(null);
 
   const [startStopSignal, setStartStopSignal] = useState<string>("WAITING");
   const [tickActiveIndex, setTickActiveIndex] = useState(0);
@@ -17,9 +19,14 @@ function JepoardyRandomQuestion({ questions, gamestate, sendState }: JepoardyQue
   const needRandomQuestion = questions.length > 1;
 
   useEffect(() => {
-    if (!ws && needRandomQuestion) {
-      ws = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
+    if (!needRandomQuestion) {
+      return;
     }
+    wsRef.current = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
+
+    return () => {
+      wsRef.current = null;
+    };
   }, [id]);
 
   useEffect(() => {
