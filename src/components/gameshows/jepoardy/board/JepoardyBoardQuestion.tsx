@@ -1,4 +1,5 @@
 import { JepoardyGameState, Question } from "../../../../types/gameshows/Jepoardy";
+import { useQuery } from "../../../../types/UsefulFunctions";
 
 interface JepoardyBoardQuestionProps {
   questions: Question[];
@@ -8,7 +9,9 @@ interface JepoardyBoardQuestionProps {
 
 function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoardQuestionProps) {
   let admin = "";
-  if (window.location.href.includes("admin") && !questions[0].finished) {
+  const query = useQuery();
+  const player = gamestate.players.find((p) => p.name === query.get("name"));
+  if ((player?.gmJoker === 0 || window.location.href.includes("admin")) && !questions[0].finished) {
     admin = "jp-adminQuestion ";
   }
 
@@ -44,12 +47,27 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     if (questions.length > 1) {
       newGamestate.state = "RANDOMQUESTION";
       newGamestate.currentRandomQuestions = questions;
-      console.log(newGamestate.currentRandomQuestions);
+      // console.log(newGamestate.currentRandomQuestions);
     } else {
       newGamestate.state = "QUESTION";
       newGamestate.currentQuestion = questions[0];
-      console.log(newGamestate.currentQuestion);
+      // console.log(newGamestate.currentQuestion);
     }
+
+    if (player) {
+      newGamestate.players.forEach((p) => {
+        if (p.name === player.name) {
+          p.gmJoker = -1;
+        }
+      });
+    }
+
+    newGamestate.players.forEach((p) => {
+      if (p.gmJoker > -1) {
+        p.gmJoker = 1;
+      }
+    });
+    console.log(newGamestate.players);
 
     sendState(newGamestate);
   };

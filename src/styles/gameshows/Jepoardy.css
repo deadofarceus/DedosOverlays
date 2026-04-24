@@ -604,11 +604,28 @@
     border: #b04040 5px solid;
     border-radius: 10px;
     background-color: #0F1D62;
+    transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
 
 .jp-ichbindran {
     border: #00ff1e 5px solid;
     text-decoration: underline;
+}
+
+.jp-playerPointsTN-noYouSelect {
+    cursor: pointer;
+    border-color: #12C45A;
+    box-shadow: 0 0 0 2px rgba(18, 196, 90, 0.35), 0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+.jp-playerPointsTN-noYouSelect:hover {
+    transform: scale(1.02);
+    filter: brightness(1.08);
+}
+
+.jp-playerPointsTN-noYouSelect:active {
+    transform: scale(0.99);
+    filter: brightness(0.98);
 }
 
 .jp-playerPointsTNDiv {
@@ -654,4 +671,107 @@
 
 .jp-answer {
     color: #00ff1e;
+}
+
+.jp-joker-div {
+    position: absolute;
+    right: 5px;
+    top: 300px;
+    width: 290px;
+    height: 340px;
+    background-color: #3e0838;
+    border: #180516 5px solid;
+    border-radius: 10px;
+}
+
+.jp-joker-grid {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.jp-joker-card {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+    transform: translateZ(0);
+    transition: transform 120ms ease, filter 120ms ease, opacity 120ms ease;
+}
+
+.jp-joker-card:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    filter: grayscale(0.1) brightness(0.85);
+}
+
+.jp-joker-card:not(:disabled):hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+    border: #009135 2px solid;
+    border-radius: 20px;
+}
+
+.jp-joker-card:not(:disabled):active {
+    transform: scale(0.99);
+    filter: brightness(0.98);
+}
+
+.jp-joker-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jp-joker-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+    color: #0F1D62;
+    flex: 0 0 auto;
+}
+
+.jp-joker-title {
+    font-weight: 900;
+    font-size: 30px;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.jp-joker-subtitle {
+    margin-left: 46px;
+    margin-top: 2px;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    opacity: 0.95;
+}
+
+/* Colors matching the screenshot */
+.jp-joker-yoink .jp-joker-title,
+.jp-joker-yoink .jp-joker-subtitle {
+    color: #F4C542;
+}
+
+.jp-joker-noyou .jp-joker-title,
+.jp-joker-noyou .jp-joker-subtitle {
+    color: #12C45A;
+}
+
+.jp-joker-gamemaster .jp-joker-title,
+.jp-joker-gamemaster .jp-joker-subtitle {
+    color: #4B86FF;
 }

@@ -14,6 +14,7 @@ const audio = new Audio("../../sounds/Buzzer.mp3");
 function JepoardyTeilnehmer() {
   document.body.className = "noOBS";
   const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
+  const [noYouClicked, setNoYouClicked] = useState<boolean>(false);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
@@ -39,7 +40,7 @@ function JepoardyTeilnehmer() {
       }
     };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   useEffect(() => {
@@ -82,6 +83,51 @@ function JepoardyTeilnehmer() {
     buzzerQueue.length === 0 &&
     question.state === "ACTIVE";
 
+  const canUseYoinkJoker =
+    currentPlayer.name !== playerName &&
+    player.yoinkJoker &&
+    question.buzzedPlayers.length === 0 &&
+    buzzerQueue.length === 0 &&
+    gamestate.state === "QUESTION";
+  const canUseNoYouJoker =
+    gamestate.players[gamestate.currentPlayer].name === playerName &&
+    player.noYouJoker &&
+    question.buzzedPlayers.length === 0 &&
+    buzzerQueue.length === 0 &&
+    gamestate.state === "QUESTION";
+  const canUseGamemasterJoker =
+    currentPlayer.name !== playerName && player.gmJoker === 1 && gamestate.state === "BOARD";
+
+  const handleYoinkJoker = () => {
+    if (!canUseYoinkJoker) return;
+    const id = query.get("id")!;
+    const newGamestate = { ...gamestate };
+    newGamestate.players.forEach((p) => {
+      if (p.name === playerName) {
+        p.yoinkJoker = false;
+      }
+    });
+    sendState(newGamestate);
+    buzzer(id, playerName);
+  };
+
+  const handleNoYouJoker = () => {
+    if (!canUseNoYouJoker) return;
+    setNoYouClicked(!noYouClicked);
+  };
+
+  const handleGamemasterJoker = () => {
+    if (!canUseGamemasterJoker) return;
+    const newGamestate = { ...gamestate };
+    newGamestate.players.forEach((p) => {
+      if (p.name === playerName) {
+        p.gmJoker = 0;
+      }
+    });
+
+    sendState(newGamestate);
+  };
+
   const handleBuzzer = () => {
     if (!buzzerShowing) {
       return;
@@ -93,6 +139,22 @@ function JepoardyTeilnehmer() {
 
     const id = query.get("id")!;
     buzzer(id, playerName);
+  };
+
+  const handleNameNoYou = (name: string) => {
+    if (!noYouClicked) return;
+    if (name === playerName) {
+      return;
+    }
+    setNoYouClicked(false);
+    const newGamestate = { ...gamestate };
+    newGamestate.players.forEach((p) => {
+      if (p.name === playerName) {
+        p.noYouJoker = false;
+      }
+    });
+    sendState(newGamestate);
+    buzzer(id, name);
   };
 
   return (
@@ -117,15 +179,64 @@ function JepoardyTeilnehmer() {
         {gamestate.players.map((player, index) => (
           <div
             key={index}
+            onClick={() => handleNameNoYou(player.name)}
             className={
-              "jp-playerPointsTN " + (player.name === currentPlayer.name ? "jp-ichbindran" : "")
+              "jp-playerPointsTN " +
+              (player.name === currentPlayer.name ? "jp-ichbindran" : "") +
+              (noYouClicked ? " jp-playerPointsTN-noYouSelect" : "")
             }
-            id={""}
           >
             <div>{player.name.toUpperCase()}</div>
             <div>{player.points}</div>
           </div>
         ))}
+      </div>
+
+      <div className="jp-joker-div centerC">
+        <div className="jp-joker-grid">
+          <button
+            type="button"
+            className="jp-joker-card jp-joker-yoink"
+            onClick={handleYoinkJoker}
+            disabled={!canUseYoinkJoker}
+            aria-disabled={!canUseYoinkJoker}
+          >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_Yoink.png" alt="" />
+              <div className="jp-joker-title">YOINK</div>
+            </div>
+            <div className="jp-joker-subtitle">KLAUE DIE FRAGE EINES MITSPIELERS</div>
+          </button>
+
+          <button
+            type="button"
+            className="jp-joker-card jp-joker-noyou"
+            onClick={handleNoYouJoker}
+            disabled={!canUseNoYouJoker}
+            aria-disabled={!canUseNoYouJoker}
+          >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_NoYou.png" alt="" />
+
+              <div className="jp-joker-title">NO YOU</div>
+            </div>
+            <div className="jp-joker-subtitle">EINE FRAGE WIRD WEITERGEGEBEN</div>
+          </button>
+
+          <button
+            type="button"
+            className="jp-joker-card jp-joker-gamemaster"
+            onClick={handleGamemasterJoker}
+            disabled={!canUseGamemasterJoker}
+            aria-disabled={!canUseGamemasterJoker}
+          >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_Gamemaster.png" alt="" />
+              <div className="jp-joker-title">GAMEMASTER</div>
+            </div>
+            <div className="jp-joker-subtitle">WÄHLE DIE FRAGE FÜR EINEN MITSPIELER AUS</div>
+          </button>
+        </div>
       </div>
 
       {buzzerShowing && (

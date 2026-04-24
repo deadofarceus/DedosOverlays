@@ -22,6 +22,9 @@ export interface JepoardyPlayer {
   vdoNinjaLink: string;
   turn: boolean;
   buzzed: boolean;
+  yoinkJoker: boolean;
+  noYouJoker: boolean;
+  gmJoker: number;
 }
 
 export interface Board {
@@ -85,6 +88,9 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
+      yoinkJoker: true,
+      noYouJoker: true,
+      gmJoker: 1,
     },
     {
       name: "Kutcher",
@@ -92,6 +98,9 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
+      yoinkJoker: true,
+      noYouJoker: true,
+      gmJoker: 1,
     },
     {
       name: "Broeki",
@@ -99,6 +108,9 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
+      yoinkJoker: true,
+      noYouJoker: true,
+      gmJoker: 1,
     },
     {
       name: "TwoStone",
@@ -106,6 +118,9 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
+      yoinkJoker: true,
+      noYouJoker: true,
+      gmJoker: 1,
     },
   ],
   state: "BOARD",
