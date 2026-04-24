@@ -114,13 +114,13 @@ export const TESTGamestate: JepoardyGameState = {
     extra: "default",
     categories: [
       {
-        name: "RANDOM",
+        name: "Wie viel ist das Wert?",
         extra: "default",
         questions: [
           [
             {
               id: 1,
-              category: "Random",
+              category: "Wie viel ist das Wert?",
               points: 100,
               type: "TEXT",
               extra: "Active",
@@ -135,7 +135,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 2,
-              category: "Random",
+              category: "Wie viel ist das Wert?",
               points: 200,
               type: "AUDIO",
               extra: "Active",
@@ -150,7 +150,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 2,
-              category: "Random",
+              category: "Wie viel ist das Wert?",
               points: 300,
               type: "VIDEO",
               extra: "Active",
@@ -165,7 +165,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 3,
-              category: "Random",
+              category: "Wie viel ist das Wert?",
               points: 400,
               type: "IMAGE",
               extra: "Active",
@@ -180,7 +180,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 4,
-              category: "Random",
+              category: "Wie viel ist das Wert?",
               points: 500,
               type: "TEXT",
               extra: "Active",
@@ -188,20 +188,20 @@ export const TESTGamestate: JepoardyGameState = {
               answertype: "TEXT",
               state: "INVISIBLE",
               answer: "5",
-              finished: true,
+              finished: false,
               buzzedPlayers: [],
             },
           ],
         ],
       },
       {
-        name: "LOL MEMES FÜR PROFIS",
+        name: "Community",
         extra: "default",
         questions: [
           [
             {
               id: 5,
-              category: "LOL MEMES FÜR PROFIS",
+              category: "Community",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
@@ -209,18 +209,18 @@ export const TESTGamestate: JepoardyGameState = {
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
-              finished: true,
+              finished: false,
               buzzedPlayers: [],
             },
           ],
           [
             {
               id: 6,
-              category: "LOL MEMES FÜR PROFIS",
+              category: "Community",
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -231,11 +231,11 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 7,
-              category: "LOL MEMES FÜR PROFIS",
+              category: "Community",
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
-              extra: "Windfury",
+              extra: "Active",
               question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
@@ -246,7 +246,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 8,
-              category: "LOL MEMES FÜR PROFIS",
+              category: "Community",
               points: 400,
               type: "TEXT",
               state: "INVISIBLE",
@@ -261,7 +261,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 9,
-              category: "LOL MEMES FÜR PROFIS",
+              category: "Community",
               points: 500,
               type: "TEXT",
               state: "INVISIBLE",
@@ -276,13 +276,13 @@ export const TESTGamestate: JepoardyGameState = {
         ],
       },
       {
-        name: "CHAMPION",
-        extra: "forced",
+        name: "Streamers Liebling",
+        extra: "default",
         questions: [
           [
             {
               id: 10,
-              category: "CHAMPION",
+              category: "Streamers Liebling",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
@@ -297,7 +297,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 11,
-              category: "CHAMPION",
+              category: "Streamers Liebling",
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
@@ -312,7 +312,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 12,
-              category: "CHAMPION",
+              category: "Streamers Liebling",
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
@@ -327,7 +327,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 13,
-              category: "CHAMPION",
+              category: "Streamers Liebling",
               points: 400,
               type: "TEXT",
               state: "INVISIBLE",
@@ -342,7 +342,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 14,
-              category: "CHAMPION",
+              category: "Streamers Liebling",
               points: 500,
               type: "TEXT",
               state: "INVISIBLE",
@@ -357,85 +357,28 @@ export const TESTGamestate: JepoardyGameState = {
         ],
       },
       {
-        name: "DINGE DIE PHIL MAG",
+        name: "Imposter",
         extra: "default",
         questions: [
           [
             {
               id: 15,
-              category: "DINGE DIE PHIL MAG",
+              category: "Imposter",
               points: 100,
               type: "TEXT",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Brust",
+              question: "Wie viele Finger zeige ich?",
               answertype: "TEXT",
               answer: "5",
               finished: false,
               buzzedPlayers: [],
-              info: "Brust",
-            },
-            {
-              id: 15,
-              category: "DINGE DIE PHIL MAG",
-              points: 100,
-              type: "TEXT",
-              state: "INVISIBLE",
-              extra: "Active",
-              question: "Augen",
-              answertype: "TEXT",
-              answer: "5",
-              finished: false,
-              buzzedPlayers: [],
-              info: "Augen",
-            },
-            {
-              id: 15,
-              category: "DINGE DIE PHIL MAG",
-              points: 100,
-              type: "TEXT",
-              state: "INVISIBLE",
-              extra: "Active",
-              question: "Lippen",
-              answertype: "TEXT",
-              answer: "5",
-              finished: false,
-              buzzedPlayers: [],
-              info: "Lippen",
-            },
-            {
-              id: 15,
-              category: "DINGE DIE PHIL MAG",
-              points: 100,
-              type: "TEXT",
-              state: "INVISIBLE",
-              extra: "Active",
-              question: "Hand",
-              answertype: "TEXT",
-              answer: "5",
-              finished: false,
-              buzzedPlayers: [],
-              info: "Hand",
-            },
-            {
-              id: 15,
-              category: "DINGE DIE PHIL MAG",
-              points: 100,
-              type: "TEXT",
-              state: "INVISIBLE",
-              extra: "Active",
-              question: "Irgendwas",
-              answertype: "TEXT",
-              answer: "5",
-              finished: false,
-              buzzedPlayers: [],
-              info: "Irgendwas",
             },
           ],
           [
             {
               id: 16,
-              category: "Erkennen",
+              category: "Imposter",
               points: 200,
               type: "TEXT",
               state: "INVISIBLE",
@@ -450,7 +393,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 17,
-              category: "Erkennen",
+              category: "Imposter",
               points: 300,
               type: "TEXT",
               state: "INVISIBLE",
@@ -465,7 +408,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 18,
-              category: "Erkennen",
+              category: "Imposter",
               points: 400,
               type: "TEXT",
               state: "INVISIBLE",
@@ -480,7 +423,7 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 19,
-              category: "Erkennen",
+              category: "Imposter",
               points: 500,
               type: "TEXT",
               state: "INVISIBLE",
@@ -495,20 +438,20 @@ export const TESTGamestate: JepoardyGameState = {
         ],
       },
       {
-        name: "KATEGORIE",
+        name: "Sound Themes",
         extra: "default",
         questions: [
           [
             {
               id: 20,
-              category: "Erkennen",
-              points: 100,
-              type: "TEXT",
+              category: "Sound Themes",
+              points: 200,
+              type: "AUDIO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "Kaisa.mp3",
               answertype: "TEXT",
-              answer: "5",
+              answer: "Kai'sa",
               finished: false,
               buzzedPlayers: [],
             },
@@ -516,14 +459,14 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 21,
-              category: "Erkennen",
-              points: 200,
-              type: "TEXT",
+              category: "Sound Themes",
+              points: 400,
+              type: "AUDIO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "NunuWillump.mp3",
               answertype: "TEXT",
-              answer: "5",
+              answer: "Nunu & Willump",
               finished: false,
               buzzedPlayers: [],
             },
@@ -531,14 +474,14 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 22,
-              category: "Erkennen",
-              points: 300,
-              type: "TEXT",
+              category: "Sound Themes",
+              points: 600,
+              type: "AUDIO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "MorgKayle.mp3",
               answertype: "TEXT",
-              answer: "5",
+              answer: "Morgana & Kayle",
               finished: false,
               buzzedPlayers: [],
             },
@@ -546,14 +489,14 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 23,
-              category: "Erkennen",
-              points: 400,
-              type: "TEXT",
+              category: "Sound Themes",
+              points: 800,
+              type: "AUDIO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "XayahRakan.mp3",
               answertype: "TEXT",
-              answer: "5",
+              answer: "Xayah & Rakan",
               finished: false,
               buzzedPlayers: [],
             },
@@ -561,14 +504,14 @@ export const TESTGamestate: JepoardyGameState = {
           [
             {
               id: 24,
-              category: "Erkennen",
-              points: 500,
-              type: "TEXT",
+              category: "Sound Themes",
+              points: 1000,
+              type: "AUDIO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Wie viele Finger zeige ich?",
+              question: "Skarner.mp3",
               answertype: "TEXT",
-              answer: "5",
+              answer: "Skarner",
               finished: false,
               buzzedPlayers: [],
             },
@@ -1321,13 +1264,13 @@ export const TESTGamestate: JepoardyGameState = {
       extra: "default",
       categories: [
         {
-          name: "RANDOM",
+          name: "Wie viel ist das Wert?",
           extra: "default",
           questions: [
             [
               {
                 id: 1,
-                category: "Random",
+                category: "Wie viel ist das Wert?",
                 points: 100,
                 type: "TEXT",
                 extra: "Active",
@@ -1342,7 +1285,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 2,
-                category: "Random",
+                category: "Wie viel ist das Wert?",
                 points: 200,
                 type: "AUDIO",
                 extra: "Active",
@@ -1357,7 +1300,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 2,
-                category: "Random",
+                category: "Wie viel ist das Wert?",
                 points: 300,
                 type: "VIDEO",
                 extra: "Active",
@@ -1372,7 +1315,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 3,
-                category: "Random",
+                category: "Wie viel ist das Wert?",
                 points: 400,
                 type: "IMAGE",
                 extra: "Active",
@@ -1387,7 +1330,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 4,
-                category: "Random",
+                category: "Wie viel ist das Wert?",
                 points: 500,
                 type: "TEXT",
                 extra: "Active",
@@ -1402,13 +1345,13 @@ export const TESTGamestate: JepoardyGameState = {
           ],
         },
         {
-          name: "LOL MEMES FÜR PROFIS",
+          name: "Community",
           extra: "default",
           questions: [
             [
               {
                 id: 5,
-                category: "Erkennen",
+                category: "Community",
                 points: 100,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1423,7 +1366,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 6,
-                category: "Erkennen",
+                category: "Community",
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1438,7 +1381,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 7,
-                category: "Erkennen",
+                category: "Community",
                 points: 300,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1453,7 +1396,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 8,
-                category: "Erkennen",
+                category: "Community",
                 points: 400,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1468,7 +1411,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 9,
-                category: "Erkennen",
+                category: "Community",
                 points: 500,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1483,13 +1426,13 @@ export const TESTGamestate: JepoardyGameState = {
           ],
         },
         {
-          name: "CHAMPION",
-          extra: "forced",
+          name: "Streamers Liebling",
+          extra: "default",
           questions: [
             [
               {
                 id: 10,
-                category: "Erkennen",
+                category: "Streamers Liebling",
                 points: 100,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1504,7 +1447,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 11,
-                category: "Erkennen",
+                category: "Streamers Liebling",
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1519,7 +1462,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 12,
-                category: "Erkennen",
+                category: "Streamers Liebling",
                 points: 300,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1534,7 +1477,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 13,
-                category: "Erkennen",
+                category: "Streamers Liebling",
                 points: 400,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1549,7 +1492,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 14,
-                category: "Erkennen",
+                category: "Streamers Liebling",
                 points: 500,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1564,13 +1507,13 @@ export const TESTGamestate: JepoardyGameState = {
           ],
         },
         {
-          name: "DINGE DIE PHIL MAG",
+          name: "Imposter",
           extra: "default",
           questions: [
             [
               {
                 id: 15,
-                category: "Erkennen",
+                category: "Imposter",
                 points: 100,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1585,7 +1528,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 16,
-                category: "Erkennen",
+                category: "Imposter",
                 points: 200,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1600,7 +1543,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 17,
-                category: "Erkennen",
+                category: "Imposter",
                 points: 300,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1615,7 +1558,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 18,
-                category: "Erkennen",
+                category: "Imposter",
                 points: 400,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1630,7 +1573,7 @@ export const TESTGamestate: JepoardyGameState = {
             [
               {
                 id: 19,
-                category: "Erkennen",
+                category: "Imposter",
                 points: 500,
                 type: "TEXT",
                 state: "INVISIBLE",
@@ -1650,7 +1593,7 @@ export const TESTGamestate: JepoardyGameState = {
           questions: [
             [
               {
-                id: 10,
+                id: 20,
                 category: "Sound Themes",
                 points: 200,
                 type: "AUDIO",
@@ -1665,7 +1608,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 11,
+                id: 21,
                 category: "Sound Themes",
                 points: 400,
                 type: "AUDIO",
@@ -1680,7 +1623,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 12,
+                id: 22,
                 category: "Sound Themes",
                 points: 600,
                 type: "AUDIO",
@@ -1695,7 +1638,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 13,
+                id: 23,
                 category: "Sound Themes",
                 points: 800,
                 type: "AUDIO",
@@ -1710,7 +1653,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 14,
+                id: 24,
                 category: "Sound Themes",
                 points: 1000,
                 type: "AUDIO",

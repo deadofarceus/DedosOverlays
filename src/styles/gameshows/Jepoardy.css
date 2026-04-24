@@ -265,9 +265,9 @@
 }
 
 .jp-question-title {
-    margin: 25px;
+    margin: 20px;
     letter-spacing: 2px;
-    font-size: 22px;
+    font-size: 26px;
     color: #DBAF51;
     text-align: center;
 }
@@ -348,7 +348,7 @@
 
 .jp-question-audio-bar {
     margin-top: 30px;
-    height: 220px;
+    height: 180px;
     border-radius: 80px;
     background: #b7b7b7;
     border: 5px solid #64615a;
@@ -360,8 +360,10 @@
 }
 
 .jp-question-audio-speaker {
-    width: 200px;
-    height: 200px;
+    margin-left: 40px;
+    width: 150px;
+    height: 150px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .jp-question-audio-eq {
@@ -378,14 +380,18 @@
 .jp-question-audio-eq-bar {
     width: 15px;
     border-radius: 999px;
-    background: #0f1d62;
+    background: #2c2c2c;
     opacity: 0.95;
     transition: background-color 0.15s linear, opacity 0.15s linear;
+    /*  schatten*/
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+
 }
 
 .jp-question-audio-eq-bar.jp-question-audio-eq-bar--filled {
-    background: #22c55e;
-    opacity: 1;
+    /* background: #22c55e; */
+    background: #009135;
+    /* opacity: 1; */
 }
 
 .jp-question-audio-bar-fill {
