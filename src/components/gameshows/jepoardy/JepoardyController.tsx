@@ -37,7 +37,7 @@ function JepoardyController() {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, []);
 
   const sendState = (newState: JepoardyGameState) => {

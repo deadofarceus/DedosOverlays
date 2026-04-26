@@ -40,7 +40,7 @@ function JepoardyTeilnehmer() {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, []);
 
   useEffect(() => {
