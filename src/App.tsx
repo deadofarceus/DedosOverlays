@@ -30,6 +30,7 @@ const AbisZOverlay = lazy(() => import("./pages/AbisZOverlay"));
 const NoDeathRun = lazy(() => import("./pages/NoDeathRun"));
 const GuessTheSub = lazy(() => import("./pages/GuessTheSub"));
 const TeamElo = lazy(() => import("./pages/TeamElo"));
+const TeamVSTeam = lazy(() => import("./pages/TeamVSTeam"));
 
 const EloOverlay = lazy(() => import("./pages/EloOverlay"));
 const EloOverlayTutorial = lazy(() => import("./pages/EloOverlayTutorial"));
@@ -56,6 +57,7 @@ function App() {
           <Route path="filltomaster/:accountName" element={<FillToMaster />} />
           <Route path="abisz/:accountName" element={<AbisZOverlay />} />
           <Route path="teamelo/:team" element={<TeamElo />} />
+          <Route path="zweivsnno" element={<TeamVSTeam />} />
 
           <Route path="elooverlay">
             <Route index element={<EloOverlayTutorial />} />
