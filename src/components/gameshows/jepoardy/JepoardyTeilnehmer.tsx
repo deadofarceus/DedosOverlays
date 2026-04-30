@@ -3,7 +3,7 @@ import "../../../styles/gameshows/Jepoardy.css";
 import { ModEvent } from "../../../types/BackendEvents";
 import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
 import { buzzer, useQuery } from "../../../types/UsefulFunctions";
-import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
+import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import JepoardyBoard from "./board/JepoardyBoard";
 import { Button, Form } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
@@ -30,17 +30,17 @@ function JepoardyTeilnehmer() {
       ws = new GameshowWebsocket<JepoardyGameState>(id, setGamestate, addBuzzer);
     }
 
-    const fetchData = async () => {
-      const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
-      if (res.ok) {
-        const data = await res.json();
-        setGamestate(data.data);
-      } else {
-        console.log(res.statusText);
-      }
-    };
+    // const fetchData = async () => {
+    //   const res = await fetch(`https://${GLOBALADDRESS}/persistantdata/${id}`);
+    //   if (res.ok) {
+    //     const data = await res.json();
+    //     setGamestate(data.data);
+    //   } else {
+    //     console.log(res.statusText);
+    //   }
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   useEffect(() => {
