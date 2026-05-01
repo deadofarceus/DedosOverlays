@@ -29,7 +29,7 @@ function Role({ role, zweiMember, nnoMember }: RoleProps) {
             src={zweiMember.icon}
             alt={zweiMember.streamer ?? "ZWEI"}
           />
-          <img className="tvt-TierImg" src={`../../${zweiMember.elo.tier}.png`} alt="" />
+          {/* <img className="tvt-TierImg" src={`../../${zweiMember.elo.tier}.png`} alt="" /> */}
         </div>
       </div>
 
@@ -40,7 +40,7 @@ function Role({ role, zweiMember, nnoMember }: RoleProps) {
       <div className="tvt-side tvt-side--right">
         <div className={`tvt-avatar tvt-avatar--${nState}`}>
           <img className="tvt-avatarImg" src={nnoMember.icon} alt={nnoMember.streamer ?? "NNO"} />
-          <img className="tvt-TierImg" src={`../../${nnoMember.elo.tier}.png`} alt="" />
+          {/* <img className="tvt-TierImg" src={`../../${nnoMember.elo.tier}.png`} alt="" /> */}
         </div>
         <div className="tvt-lp">{typeof nRealLP === "number" ? `${nRealLP} LP` : "--"}</div>
       </div>
