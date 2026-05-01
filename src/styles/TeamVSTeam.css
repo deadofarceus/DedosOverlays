@@ -7,7 +7,7 @@
 }
 
 .tvt-container {
-    width: 600px;
+    width: 700px;
     min-height: 600px;
     display: flex;
     flex-direction: column;
@@ -104,7 +104,7 @@
 }
 
 .tvt-side {
-    width: 220px;
+    width: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,6 +122,8 @@
 }
 
 .tvt-lp {
+    margin-left: 8px;
+    margin-right: 8px;
     font-size: 33px;
     width: 124px;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
@@ -133,6 +135,7 @@
     border-radius: 18px;
     background: rgba(0, 0, 0, 0.28);
     border: 1px solid rgba(255, 255, 255, 0.14); */
+    width: 80px;
     display: grid;
     place-items: center;
 }
@@ -144,6 +147,7 @@
 }
 
 .tvt-avatar {
+    position: relative;
     width: 68px;
     height: 68px;
     border-radius: 18px;
@@ -174,6 +178,15 @@
     height: 100%;
     border-radius: 14px;
     object-fit: cover;
+}
+
+.tvt-TierImg {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border-radius: 14px;
+    object-fit: cover;
+    z-index: -1;
 }
 
 .tvt-avatarFallback {

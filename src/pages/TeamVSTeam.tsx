@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { MemberProps } from "../components/league/TeamElo/Member";
 import "../styles/TeamVSTeam.css";
 import { Account } from "../types/LeagueTypes";
 import { GLOBALADDRESS } from "../types/WebsocketTypes";
@@ -7,24 +6,41 @@ import Role from "../components/league/TeamVSTeam/Role";
 
 const ROLES = ["GMJgl", "GMMid", "GMBot", "GMSupp"];
 
-function TeamVSTeam() {
-  const [zwei, setZwei] = useState<MemberProps[]>([]);
-  const [nno, setNNO] = useState<MemberProps[]>([]);
+interface Elo {
+  rank: string;
+  tier: string;
+  lp: number;
+}
 
-  const fetchTeam = async (team: string): Promise<MemberProps[]> => {
+export interface TVTMemberProps {
+  elo: Elo;
+  today: number;
+  icon: string;
+  matchhistory: boolean[];
+  place: number;
+  streamer: string;
+  combinedLP: number;
+}
+
+function TeamVSTeam() {
+  const [zwei, setZwei] = useState<TVTMemberProps[]>([]);
+  const [nno, setNNO] = useState<TVTMemberProps[]>([]);
+
+  const fetchTeam = async (team: string): Promise<TVTMemberProps[]> => {
     try {
       const response = await fetch("https://" + GLOBALADDRESS + "/lol/TeamElo/" + team);
       const data = await response.json();
 
       console.log(data);
 
-      const membersData: MemberProps[] = data.members.map((member: Account, index: number) => ({
+      const membersData: TVTMemberProps[] = data.members.map((member: Account, index: number) => ({
         streamer: member.name,
         elo: {
           rank: member.leagueEntrys[0].rank,
           tier: member.leagueEntrys[0].tier,
           lp: member.leagueEntrys[0].leaguePoints,
         },
+        combinedLP: member.leagueEntrys[0].combinedLP,
         today: member.leagueEntrys[0].combinedLP - member.leagueEntrys[0].lpStart,
         matchhistory: member.leagueEntrys[0].lastMatches.map((game) => game.win).slice(-5),
         icon: `../teams/${team}/${member.name}.png`,
@@ -44,8 +60,6 @@ function TeamVSTeam() {
   };
 
   useEffect(() => {
-    console.log("????");
-
     fetchAllPlayers();
     setInterval(fetchAllPlayers, 30000);
   }, []);
