@@ -1,16 +1,28 @@
 import { Button } from "react-bootstrap";
-import {
-  JepoardyGameProps,
-  JepoardyGameState,
-  Question,
-} from "../../../../types/gameshows/Jepoardy";
+import { JepoardyGame, JepoardyGameState, Question } from "../../../../types/gameshows/Jepoardy";
 import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import { useEffect, useState } from "react";
 import { useQuery } from "../../../../types/UsefulFunctions";
 
 let ws: BroadcastWebsocket<string>;
 
-function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: JepoardyGameProps) {
+interface BoardControlsProps {
+  gamestate: JepoardyGameState;
+  game: JepoardyGame;
+  sendState: (newState: JepoardyGameState) => void;
+  sendGame: (newState: JepoardyGame) => void;
+  buzzerQueue: string[];
+  clearBuzzer: () => void;
+}
+
+function BoardControls({
+  game,
+  gamestate,
+  sendState,
+  buzzerQueue,
+  clearBuzzer,
+  sendGame,
+}: BoardControlsProps) {
   const query = useQuery();
   const id = query.get("id");
   if (!id) {
@@ -232,6 +244,17 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Jepoa
     sendState(newGamestate);
   };
 
+  const moveState = (delta: number) => {
+    const newGame = { ...game };
+    newGame.currentState += delta;
+    if (newGame.currentState < 0) {
+      newGame.currentState = 0;
+    } else if (newGame.currentState >= newGame.states.length) {
+      newGame.currentState = newGame.states.length - 1;
+    }
+    sendGame(newGame);
+  };
+
   const handleRandomQuestion = () => {
     if (startStopSignal.startsWith("STARTRANDOM")) {
       const newGamestate = { ...gamestate };
@@ -287,8 +310,12 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Jepoa
   return (
     <div className="jp-boardControls centerR">
       <div className="centerC">
-        <Button variant="danger">AKTION ZURÜCK</Button>
-        <Button variant="warning">AKTION VORWÄRTS</Button>
+        <Button variant="danger" onClick={() => moveState(-1)}>
+          AKTION ZURÜCK
+        </Button>
+        <Button variant="warning" onClick={() => moveState(1)}>
+          AKTION VORWÄRTS
+        </Button>
       </div>
       {gamestate.state === "QUESTION" && (
         <>

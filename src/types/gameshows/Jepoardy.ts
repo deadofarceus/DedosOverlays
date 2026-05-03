@@ -1,3 +1,8 @@
+export interface JepoardyGame {
+  currentState: number;
+  states: JepoardyGameState[];
+}
+
 export interface JepoardyGameState {
   admin: JepoardyAdmin;
   players: JepoardyPlayer[];

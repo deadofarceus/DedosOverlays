@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import "../../../styles/gameshows/Jepoardy.css";
 import UserControls from "./admin/UserControls";
 import JepoardyBoard from "./board/JepoardyBoard";
-import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
+import { JepoardyGame, JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
 import { clearBuzzer, clearOneBuzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import BoardControls from "./board/Boardcontrols";
 import { Form } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
-let ws: GameshowWebsocket<JepoardyGameState>;
+let ws: GameshowWebsocket<JepoardyGame>;
 
 function JepoardyController() {
   document.body.className = "noOBS";
-  const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
+  const [gamestate, setGamestate] = useState<JepoardyGame>({
+    currentState: 0,
+    states: [TESTGamestate],
+  });
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
@@ -24,7 +27,7 @@ function JepoardyController() {
   }
   useEffect(() => {
     if (id && !ws) {
-      ws = new GameshowWebsocket<JepoardyGameState>(id, setGamestate, addBuzzer);
+      ws = new GameshowWebsocket<JepoardyGame>(id, setGamestate, addBuzzer);
     }
 
     // const fetchData = async () => {
@@ -40,9 +43,20 @@ function JepoardyController() {
     // fetchData();
   }, []);
 
+  const currentGamestate = gamestate.states[gamestate.currentState];
+
   const sendState = (newState: JepoardyGameState) => {
+    const newGame = { ...gamestate };
+    newGame.states[newGame.currentState + 1] = newState;
+    newGame.currentState++;
+    ws.sendData(newGame);
+  };
+
+  const sendGame = (newState: JepoardyGame) => {
     ws.sendData(newState);
   };
+
+  console.log(gamestate);
 
   const addBuzzer = (buzzer: string) => {
     setBuzzerQueue((prevQueue) => {
@@ -69,20 +83,20 @@ function JepoardyController() {
 
   const currentPlayer =
     buzzerQueue.length === 0
-      ? gamestate.players[gamestate.currentPlayer]
-      : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
+      ? currentGamestate.players[currentGamestate.currentPlayer]
+      : currentGamestate.players.find((p) => p.name === buzzerQueue[0])!;
 
   return (
     <div className="jp-controller">
       <JepoardyBoard
-        gamestate={gamestate}
+        gamestate={currentGamestate}
         sendState={sendState}
         buzzerQueue={buzzerQueue}
         clearBuzzer={handleClearBuzzer}
         clearOneBuzzer={handleClearOneBuzzer}
       />
       <div className="centerR jp-playerPointsTNDiv">
-        {gamestate.players.map((player, index) => (
+        {currentGamestate.players.map((player, index) => (
           <div
             key={index}
             className={
@@ -95,11 +109,12 @@ function JepoardyController() {
         ))}
       </div>
       <BoardControls
-        gamestate={gamestate}
+        game={gamestate}
+        sendGame={sendGame}
+        gamestate={currentGamestate}
         sendState={sendState}
         buzzerQueue={buzzerQueue}
         clearBuzzer={handleClearBuzzer}
-        clearOneBuzzer={handleClearOneBuzzer}
       />
       {/* <BuzzerQueue
         clearBuzzer={handleClearBuzzer}
@@ -107,7 +122,7 @@ function JepoardyController() {
         clearOneBuzzer={handleClearOneBuzzer}
       /> */}
       <UserControls
-        gamestate={gamestate}
+        gamestate={currentGamestate}
         sendState={sendState}
         buzzerQueue={buzzerQueue}
         clearBuzzer={handleClearBuzzer}
