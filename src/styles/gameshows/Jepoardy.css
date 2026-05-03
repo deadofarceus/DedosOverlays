@@ -172,6 +172,7 @@
 }
 
 .jp-VDOLinkStreamDiv {
+    position: relative;
     width: 400px;
     height: 225px;
 }
@@ -774,4 +775,37 @@
 .jp-joker-gamemaster .jp-joker-title,
 .jp-joker-gamemaster .jp-joker-subtitle {
     color: #4B86FF;
+}
+
+.buzzerUserInput {
+    width: 400px;
+    height: 50px;
+    font-size: 32px;
+    margin: 5px;
+}
+
+.passwordChanging {
+    color: #F4511E !important;
+}
+
+.passwordSaved {
+    color: #1E88E5;
+}
+
+.jp-BuzzeredDiv {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 400px;
+    height: 225px;
+}
+
+.jp-buzzered {
+    z-index: 1000;
+    background: radial-gradient(circle, #ff000000 0%, #ff000026 300%);
+}
+
+.jp-buzzered div {
+    z-index: 1000;
+    /* color: #00ff1e !important; */
 }

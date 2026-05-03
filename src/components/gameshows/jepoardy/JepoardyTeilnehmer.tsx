@@ -1,33 +1,36 @@
 import { useState, useEffect } from "react";
 import "../../../styles/gameshows/Jepoardy.css";
-import { ModEvent } from "../../../types/BackendEvents";
-import { JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
+import { JepoardyGame, JepoardyGameState, TESTGamestate } from "../../../types/gameshows/Jepoardy";
 import { buzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import JepoardyBoard from "./board/JepoardyBoard";
 import { Button, Form } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
-let ws: GameshowWebsocket<JepoardyGameState>;
+let ws: GameshowWebsocket<JepoardyGame>;
 const audio = new Audio("../../sounds/Buzzer.mp3");
 
 function JepoardyTeilnehmer() {
   document.body.className = "noOBS";
-  const [gamestate, setGamestate] = useState<JepoardyGameState>(TESTGamestate);
+  const [gamestate, setGamestate] = useState<JepoardyGame>({
+    currentState: 0,
+    states: [TESTGamestate],
+  });
   const [noYouClicked, setNoYouClicked] = useState<boolean>(false);
   const [buzzerQueue, setBuzzerQueue] = useState<string[]>([]);
   const { buzzerVolume, setBuzzerVolume } = useAudioSettings();
 
   const query = useQuery();
   const id = query.get("id");
-  const player = gamestate.players.find((p) => p.name === query.get("name"));
+  const currentGamestate = gamestate.states[gamestate.currentState];
+  const player = currentGamestate.players.find((p) => p.name === query.get("name"));
   if (!player || !id) {
     return <></>;
   }
 
   useEffect(() => {
     if (id && !ws) {
-      ws = new GameshowWebsocket<JepoardyGameState>(id, setGamestate, addBuzzer);
+      ws = new GameshowWebsocket<JepoardyGame>(id, setGamestate, addBuzzer);
     }
 
     // const fetchData = async () => {
@@ -48,9 +51,10 @@ function JepoardyTeilnehmer() {
   }, [buzzerVolume]);
 
   const sendState = (newState: JepoardyGameState) => {
-    const event = new ModEvent(id, "persistantdata", newState);
-    console.log(newState);
-    ws.sendEvent(event);
+    const newGame = { ...gamestate };
+    newGame.states[newGame.currentState + 1] = newState;
+    newGame.currentState++;
+    ws.sendData(newGame);
   };
 
   const addBuzzer = (buzzer: string) => {
@@ -69,13 +73,13 @@ function JepoardyTeilnehmer() {
 
   const currentPlayer =
     buzzerQueue.length === 0
-      ? gamestate.players[gamestate.currentPlayer]
-      : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
+      ? currentGamestate.players[currentGamestate.currentPlayer]
+      : currentGamestate.players.find((p) => p.name === buzzerQueue[0])!;
 
   const playerName = player.name;
 
-  const question = gamestate.currentQuestion;
-  const buzzerShowing = gamestate.state === "QUESTION" && !question.finished;
+  const question = currentGamestate.currentQuestion;
+  const buzzerShowing = currentGamestate.state === "QUESTION" && !question.finished;
 
   const buzzerPressable =
     !question.buzzedPlayers.map((p) => p.name).includes(playerName) &&
@@ -88,20 +92,20 @@ function JepoardyTeilnehmer() {
     player.yoinkJoker &&
     question.buzzedPlayers.length === 0 &&
     buzzerQueue.length === 0 &&
-    gamestate.state === "QUESTION";
+    currentGamestate.state === "QUESTION";
   const canUseNoYouJoker =
-    gamestate.players[gamestate.currentPlayer].name === playerName &&
+    currentGamestate.players[currentGamestate.currentPlayer].name === playerName &&
     player.noYouJoker &&
     question.buzzedPlayers.length === 0 &&
     buzzerQueue.length === 0 &&
-    gamestate.state === "QUESTION";
+    currentGamestate.state === "QUESTION";
   const canUseGamemasterJoker =
-    currentPlayer.name !== playerName && player.gmJoker === 1 && gamestate.state === "BOARD";
+    currentPlayer.name !== playerName && player.gmJoker === 1 && currentGamestate.state === "BOARD";
 
   const handleYoinkJoker = () => {
     if (!canUseYoinkJoker) return;
     const id = query.get("id")!;
-    const newGamestate = { ...gamestate };
+    const newGamestate = { ...currentGamestate };
     newGamestate.players.forEach((p) => {
       if (p.name === playerName) {
         p.yoinkJoker = false;
@@ -118,7 +122,7 @@ function JepoardyTeilnehmer() {
 
   const handleGamemasterJoker = () => {
     if (!canUseGamemasterJoker) return;
-    const newGamestate = { ...gamestate };
+    const newGamestate = { ...currentGamestate };
     newGamestate.players.forEach((p) => {
       if (p.name === playerName) {
         p.gmJoker = 0;
@@ -147,7 +151,7 @@ function JepoardyTeilnehmer() {
       return;
     }
     setNoYouClicked(false);
-    const newGamestate = { ...gamestate };
+    const newGamestate = { ...currentGamestate };
     newGamestate.players.forEach((p) => {
       if (p.name === playerName) {
         p.noYouJoker = false;
@@ -161,7 +165,7 @@ function JepoardyTeilnehmer() {
     <div className="jp-controller">
       <div style={{ height: "30px" }}></div>
       <JepoardyBoard
-        gamestate={gamestate}
+        gamestate={currentGamestate}
         sendState={sendState}
         buzzerQueue={buzzerQueue}
         clearBuzzer={() => {}}
@@ -176,7 +180,7 @@ function JepoardyTeilnehmer() {
       <h1 className="jp-ownPlayerName blackOutline">{playerName}</h1>
 
       <div className="centerR jp-playerPointsTNDiv">
-        {gamestate.players.map((player, index) => (
+        {currentGamestate.players.map((player, index) => (
           <div
             key={index}
             onClick={() => handleNameNoYou(player.name)}
