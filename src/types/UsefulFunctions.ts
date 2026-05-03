@@ -26,7 +26,15 @@ export function clearOneBuzzer(id: string, name: string) {
 }
 
 export function getVDONinjaLink(id: string, name: string, password: string): string {
-  return "https://vdo.ninja/?view=" + name + "&solo&room=" + id + "&password=" + password;
+  return (
+    "https://vdo.ninja/?view=" +
+    name +
+    "&solo&room=" +
+    id +
+    "&password=" +
+    password +
+    "&bitrate=3000&fps=30&codec=h264"
+  );
 }
 
 export function isOBSBrowser(): boolean {
