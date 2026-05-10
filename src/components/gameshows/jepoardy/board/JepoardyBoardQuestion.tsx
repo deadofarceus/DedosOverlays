@@ -35,6 +35,7 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     if (
       gamestate.currentQuestion.extra === "Windfury" &&
       questions[0].extra === "Windfury" &&
+      gamestate.currentQuestion.buzzedPlayers.length > 0 &&
       gamestate.currentQuestion.buzzedPlayers[0].name ===
         gamestate.players[gamestate.currentPlayer].name
     ) {

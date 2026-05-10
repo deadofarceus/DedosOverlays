@@ -389,7 +389,7 @@ function shuffle(array: any[]) {
 function calculateExtra(
   spin: number
 ): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
-  return "Taunt";
+  return "Windfury";
   if (spin < 30) {
     return "Gold";
   }
