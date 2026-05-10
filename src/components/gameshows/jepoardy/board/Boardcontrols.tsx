@@ -15,14 +15,7 @@ interface BoardControlsProps {
   clearBuzzer: () => void;
 }
 
-function BoardControls({
-  game,
-  gamestate,
-  sendState,
-  buzzerQueue,
-  clearBuzzer,
-  sendGame,
-}: BoardControlsProps) {
+function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: BoardControlsProps) {
   const query = useQuery();
   const id = query.get("id");
   if (!id) {
@@ -244,16 +237,16 @@ function BoardControls({
     sendState(newGamestate);
   };
 
-  const moveState = (delta: number) => {
-    const newGame = { ...game };
-    newGame.currentState += delta;
-    if (newGame.currentState < 0) {
-      newGame.currentState = 0;
-    } else if (newGame.currentState >= newGame.states.length) {
-      newGame.currentState = newGame.states.length - 1;
-    }
-    sendGame(newGame);
-  };
+  // const moveState = (delta: number) => {
+  //   const newGame = { ...game };
+  //   newGame.currentState += delta;
+  //   if (newGame.currentState < 0) {
+  //     newGame.currentState = 0;
+  //   } else if (newGame.currentState >= newGame.states.length) {
+  //     newGame.currentState = newGame.states.length - 1;
+  //   }
+  //   sendGame(newGame);
+  // };
 
   const handleRandomQuestion = () => {
     if (startStopSignal.startsWith("STARTRANDOM")) {
@@ -302,6 +295,8 @@ function BoardControls({
     randomQuestion = "Zur Frage Wechseln";
   }
 
+  let backToBoard = gamestate.currentQuestion.buzzedPlayers.length === 0 || question.finished;
+
   const currentPlayer =
     buzzerQueue.length === 0
       ? gamestate.players[gamestate.currentPlayer]
@@ -310,12 +305,12 @@ function BoardControls({
   return (
     <div className="jp-boardControls centerR">
       <div className="centerC">
-        <Button variant="danger" onClick={() => moveState(-1)}>
+        {/* <Button variant="danger" onClick={() => moveState(-1)}>
           AKTION ZURÜCK
         </Button>
         <Button variant="warning" onClick={() => moveState(1)}>
           AKTION VORWÄRTS
-        </Button>
+        </Button> */}
       </div>
       {gamestate.state === "QUESTION" && (
         <>
@@ -341,12 +336,14 @@ function BoardControls({
           <div className="centerC">
             {!question.finished && (
               <Button variant="danger" onClick={handleFinishQuestion}>
-                Keiner kann beantworten
+                Lösung Aufdecken
               </Button>
             )}{" "}
-            <Button variant="warning" onClick={handleBackToBoard}>
-              Zurück zum Board
-            </Button>{" "}
+            {backToBoard && (
+              <Button variant="warning" onClick={handleBackToBoard}>
+                Zurück zum Board
+              </Button>
+            )}
           </div>
           <div className="centerC">
             {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
@@ -392,6 +389,7 @@ function shuffle(array: any[]) {
 function calculateExtra(
   spin: number
 ): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
+  return "Taunt";
   if (spin < 30) {
     return "Gold";
   }

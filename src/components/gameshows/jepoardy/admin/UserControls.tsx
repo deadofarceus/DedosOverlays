@@ -4,6 +4,7 @@ import { useState } from "react";
 import PlayerControl from "./PlayerControl";
 
 function UserControls({ gamestate, sendState }: JepoardyGameProps) {
+  const [points, setPoints] = useState<number>(100);
   const [password, setPassword] = useState<string>("");
   const data = gamestate;
 
@@ -29,11 +30,22 @@ function UserControls({ gamestate, sendState }: JepoardyGameProps) {
           }}
         />
 
+        <Form.Group className="my-3 w-100" controlId="pointsInput">
+          <Form.Label>Punkte (Points)</Form.Label>
+          <Form.Control
+            type="number"
+            value={points}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPoints(Number(e.target.value))}
+            min={0}
+          />
+        </Form.Group>
+
         {data.players.map((player, index) => (
           <PlayerControl
             key={index}
             player={player}
             index={index}
+            points={points}
             gamestate={gamestate}
             sendState={sendState}
           />

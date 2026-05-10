@@ -7,10 +7,11 @@ interface PlayerControlProps {
   player: JepoardyPlayer;
   index: number;
   gamestate: JepoardyGameState;
+  points: number;
   sendState: (newState: JepoardyGameState) => void;
 }
 
-function PlayerControl({ player, index, gamestate, sendState }: PlayerControlProps) {
+function PlayerControl({ player, index, points, gamestate, sendState }: PlayerControlProps) {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   const handleNameChange = (index: number, name: string) => {
@@ -33,31 +34,33 @@ function PlayerControl({ player, index, gamestate, sendState }: PlayerControlPro
   };
 
   return (
-    <div className="centerR">
+    <div className="centerR jp-playerPointsControl">
       <div className="AIc-member">
         {player.name} {` {${player.points}}`}
       </div>
-      <>
-        <Button onClick={() => handlePoints(100)} variant="success" className="AIcPointbutton">
-          +100
-        </Button>
-        <Button onClick={() => handlePoints(-100)} variant="danger" className="AIcPointbutton">
-          -100
-        </Button>
-      </>
-
-      <Button
-        onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-        variant="secondary"
-        title="Settings"
-      >
-        ⚙️
-      </Button>
-      {isSettingsOpen && (
+      <div>
         <>
-          <VDOLink key={0} index={0} name={player.name} handleChange={handleNameChange} />
+          <Button onClick={() => handlePoints(points)} variant="success" className="AIcPointbutton">
+            {`+${points}`}
+          </Button>
+          <Button onClick={() => handlePoints(-points)} variant="danger" className="AIcPointbutton">
+            {`-${points}`}
+          </Button>
         </>
-      )}
+
+        <Button
+          onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+          variant="secondary"
+          title="Settings"
+        >
+          ⚙️
+        </Button>
+        {isSettingsOpen && (
+          <>
+            <VDOLink key={0} index={0} name={player.name} handleChange={handleNameChange} />
+          </>
+        )}
+      </div>
     </div>
   );
 }

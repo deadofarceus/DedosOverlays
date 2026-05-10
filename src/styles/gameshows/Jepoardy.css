@@ -100,6 +100,7 @@
 
 .jp-Taunted {
     cursor: not-allowed !important;
+    filter: grayscale(70%);
 }
 
 .jp-Taunted:Hover {
@@ -152,6 +153,7 @@
     position: absolute;
     overflow: hidden;
     background-color: #040b2d;
+    color: azure;
 }
 
 .jp-overlay .jp-board {
@@ -329,6 +331,7 @@
 
 .jp-question-text {
     font-size: 40px;
+    white-space: pre-line;
 }
 
 .jp-question-audio {
@@ -808,4 +811,9 @@
 .jp-buzzered div {
     z-index: 1000;
     /* color: #00ff1e !important; */
+}
+
+.jp-playerPointsControl {
+    justify-content: space-between !important;
+    width: 100%;
 }

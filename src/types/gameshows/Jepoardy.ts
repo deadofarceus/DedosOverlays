@@ -566,7 +566,18 @@ export const TESTGamestate: JepoardyGameState = {
     answertype: "TEXT",
     answer: "START",
     finished: true,
-    buzzedPlayers: [],
+    buzzedPlayers: [
+      {
+        name: "Krokoboss",
+        points: 0,
+        vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
+        turn: false,
+        buzzed: false,
+        yoinkJoker: true,
+        noYouJoker: true,
+        gmJoker: 1,
+      },
+    ],
   },
   boards: [
     {
@@ -734,6 +745,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "Shyvana_0.jpg",
                 finished: false,
                 buzzedPlayers: [],
+                info: "Augen",
               },
               {
                 id: 12,
@@ -1112,7 +1124,7 @@ export const TESTGamestate: JepoardyGameState = {
           questions: [
             [
               {
-                id: 1,
+                id: 20,
                 category: "Jhin",
                 points: 444,
                 type: "TEXT",
@@ -1128,7 +1140,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 2,
+                id: 21,
                 category: "Jhin",
                 points: 444,
                 type: "TEXT",
@@ -1143,10 +1155,10 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 2,
+                id: 22,
                 category: "Jhin",
                 points: 444,
-                type: "VIDEO",
+                type: "TEXT",
                 extra: "Active",
                 question: "Nenne 4 Yordle Champs",
                 answertype: "TEXT",
@@ -1159,7 +1171,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 3,
+                id: 23,
                 category: "Jhin",
                 points: 444,
                 type: "TEXT",
@@ -1174,7 +1186,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 4,
+                id: 24,
                 category: "Jhin",
                 points: 444,
                 type: "TEXT",
@@ -1195,7 +1207,7 @@ export const TESTGamestate: JepoardyGameState = {
           questions: [
             [
               {
-                id: 20,
+                id: 25,
                 category: "Imposter",
                 points: 100,
                 type: "TEXT",
@@ -1211,7 +1223,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 21,
+                id: 26,
                 category: "Imposter",
                 points: 200,
                 type: "TEXT",
@@ -1227,7 +1239,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 22,
+                id: 27,
                 category: "Imposter",
                 points: 300,
                 type: "TEXT",
@@ -1243,7 +1255,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 23,
+                id: 28,
                 category: "Imposter",
                 points: 400,
                 type: "TEXT",
@@ -1260,7 +1272,7 @@ export const TESTGamestate: JepoardyGameState = {
             ],
             [
               {
-                id: 24,
+                id: 29,
                 category: "Imposter",
                 points: 500,
                 type: "TEXT",

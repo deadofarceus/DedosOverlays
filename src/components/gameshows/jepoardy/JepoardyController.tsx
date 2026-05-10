@@ -47,16 +47,15 @@ function JepoardyController() {
 
   const sendState = (newState: JepoardyGameState) => {
     const newGame = { ...gamestate };
-    newGame.states[newGame.currentState + 1] = newState;
-    newGame.currentState++;
+    // newGame.states[newGame.currentState + 1] = newState;
+    // newGame.currentState++;
+    newGame.states[0] = newState;
     ws.sendData(newGame);
   };
 
   const sendGame = (newState: JepoardyGame) => {
     ws.sendData(newState);
   };
-
-  console.log(gamestate);
 
   const addBuzzer = (buzzer: string) => {
     setBuzzerQueue((prevQueue) => {
