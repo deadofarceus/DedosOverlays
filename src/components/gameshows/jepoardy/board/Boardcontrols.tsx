@@ -147,6 +147,23 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     }
     newGamestate.currentQuestion.buzzedPlayers.push(buzzedPlayer);
     buzzedPlayer.points += calculatePoints(question);
+
+    if (question.joker) {
+      switch (question.joker) {
+        case "Gamemaster":
+          buzzedPlayer.gmJoker = 1;
+          break;
+        case "NoYou":
+          buzzedPlayer.noYouJoker = true;
+          break;
+        case "Yoink":
+          buzzedPlayer.yoinkJoker = true;
+          break;
+        default:
+          break;
+      }
+    }
+
     newGamestate = finishSpecificQuestion(newGamestate, question.id);
     sendState(newGamestate);
   };
@@ -196,8 +213,6 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
         extra = calcExtra;
       }
 
-      console.log(spinDegree, calcExtra, extra, boardExtra);
-
       ws.sendData("DREHDASRAD_" + spinDegree);
 
       setTimeout(() => {
@@ -211,15 +226,14 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
             (cat) => cat.questions
           );
 
-          const top5 = [...allQuestionsArr].sort((a, b) => b[0].points - a[0].points).slice(0, 5);
+          // const top5 = [...allQuestionsArr].sort((a, b) => b[0].points - a[0].points).slice(0, 5);
 
-          const candidates = allQuestionsArr.filter((q) => !q[0].finished && !top5.includes(q));
+          const candidates = allQuestionsArr.filter((q) => !q[0].finished);
           shuffle(candidates)
             .slice(0, 5)
             .forEach((q) => {
               q.forEach((qdd: Question) => (qdd.extra = extra));
             });
-          console.log(candidates);
         }
         sendState(newGamestate);
       }, 8000); // TODO change
@@ -256,6 +270,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
         newGamestate.currentRandomQuestions[
           (randomInt - 1) % newGamestate.currentRandomQuestions.length
         ];
+      setStartStopSignal("WAITING");
       sendState(newGamestate);
     } else {
       const length = gamestate.currentRandomQuestions.length;
@@ -267,6 +282,8 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
 
   let frageAufdecken = question.state === "ACTIVE" ? "Frage verstecken" : "Frage aufdecken";
   if (question.type === "AUDIO" || question.type === "VIDEO") {
+    console.log(question);
+
     frageAufdecken = question.state === "ACTIVE" ? "Wiedergabe pausieren" : "Wiedergabe starten";
   }
 

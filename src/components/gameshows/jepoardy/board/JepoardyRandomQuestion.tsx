@@ -4,6 +4,15 @@ import { useQuery } from "../../../../types/UsefulFunctions";
 import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 
+const RANDOM_TICK_SOUND = "../../jepoardy/audio/tick1.mp3";
+const RANDOM_FINISH_SOUND = "../../jepoardy/audio/finish2.mp3";
+
+function playRandomizerStepSound(isLastTick: boolean) {
+  const src = isLastTick ? RANDOM_FINISH_SOUND : RANDOM_TICK_SOUND;
+  const audio = new Audio(src);
+  void audio.play().catch(() => {});
+}
+
 // Only Animation class no Logic
 function JepoardyRandomQuestion({ questions, gamestate, sendState }: JepoardyQuestionProps) {
   const query = useQuery();
@@ -50,6 +59,8 @@ function JepoardyRandomQuestion({ questions, gamestate, sendState }: JepoardyQue
 
     const advance = () => {
       if (cancelled) return;
+      const isLastTick = step > validTicks - 2;
+      playRandomizerStepSound(isLastTick);
       setTickActiveIndex(step % n);
       step += 1;
       if (step >= validTicks) return;

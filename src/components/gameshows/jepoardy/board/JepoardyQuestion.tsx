@@ -8,6 +8,8 @@ import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
   const showInfoInTitle = question.info !== undefined && question.info.length < 15;
 
+  console.log(question.joker);
+
   if (question.answertype === "TEXT") {
     return (
       <div className="jp-question">
@@ -20,6 +22,18 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
           <div className="jp-question-title">
             {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
           </div>
+
+          {question.joker && (
+            <div className={"jp-question-joker " + "jp-question-joker-" + question.joker}>
+              <img
+                className="jp-question-joker-img"
+                src={"../../../jepoardy/Icon_" + question.joker + ".png"}
+                alt=""
+              />
+              {question.joker.toUpperCase()}
+            </div>
+          )}
+
           {question.type === "AUDIO" && (
             <AudioQuestion question={question} sendState={sendState} gamestate={gamestate} />
           )}
@@ -49,6 +63,9 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
             <div className="jp-question-title">
               {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
             </div>
+
+            {question.joker && <div className="jp-question-joker">{question.joker}</div>}
+
             {question.finished && (
               <div
                 className={
@@ -74,6 +91,8 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
             <div className="jp-question-title">
               {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
             </div>
+
+            {question.joker && <div className="jp-question-joker">{question.joker}</div>}
 
             {question.type === "AUDIO" && (
               <AudioQuestion question={question} sendState={sendState} gamestate={gamestate} />

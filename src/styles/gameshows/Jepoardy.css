@@ -822,3 +822,27 @@
     text-align: center;
     color: orange;
 }
+
+.jp-question-joker {
+    filter: drop-shadow(2px 2px 3px #222);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+}
+
+.jp-question-joker-Gamemaster {
+    color: #4B86FF;
+}
+
+.jp-question-joker-Yoink {
+    color: #F4C542;
+}
+
+.jp-question-joker-NoYou {
+    color: #12C45A;
+}
+
+.jp-question-joker-img {
+    margin: 5px;
+}
