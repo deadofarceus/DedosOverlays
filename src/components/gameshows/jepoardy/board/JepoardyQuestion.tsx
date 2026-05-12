@@ -6,6 +6,8 @@ import ImageQuestion from "./question/ImageQuestion";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
+  const showInfoInTitle = question.info !== undefined && question.info.length < 15;
+
   if (question.answertype === "TEXT") {
     return (
       <div className="jp-question">
@@ -16,7 +18,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
             gamestate={gamestate}
           />
           <div className="jp-question-title">
-            {question.category + " " + (question.info ? " - " + question.info : "")}
+            {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
           </div>
           {question.type === "AUDIO" && (
             <AudioQuestion question={question} sendState={sendState} gamestate={gamestate} />
@@ -45,7 +47,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
               gamestate={gamestate}
             />
             <div className="jp-question-title">
-              {question.category + " " + (question.info ? " - " + question.info : "")}
+              {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
             </div>
             {question.finished && (
               <div
@@ -70,7 +72,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
               gamestate={gamestate}
             />
             <div className="jp-question-title">
-              {question.category + " " + (question.info ? " - " + question.info : "")}
+              {question.category + " " + (showInfoInTitle ? " - " + question.info : "")}
             </div>
 
             {question.type === "AUDIO" && (

@@ -348,6 +348,9 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
           <div className="centerC">
             {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
             <div className="jp-answer">{"Antwort: " + question.answer}</div>
+            {question.info !== undefined && (
+              <div className="jp-info">{"Extra Infos: " + question.info}</div>
+            )}
           </div>
         </>
       )}
@@ -389,7 +392,6 @@ function shuffle(array: any[]) {
 function calculateExtra(
   spin: number
 ): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
-  return "Windfury";
   if (spin < 30) {
     return "Gold";
   }

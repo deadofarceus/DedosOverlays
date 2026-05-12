@@ -1248,9 +1248,10 @@ export const TESTGamestate: JepoardyGameState = {
                 question: `Diese Champs 10 Skins oder mehr (Default nicht mitgezählt) (Stand:19.04.26): 
                   Malzahar, Nasus, Nidalee, Pyke, Lissandra`,
                 answertype: "TEXT",
-                answer: "Malzahar (13), Nasus (13), Nidalee (16), Pyke (12), Lissandra (9)",
+                answer: "Lissandra (9)",
                 finished: false,
                 buzzedPlayers: [],
+                info: "Malzahar (13), Nasus (13), Nidalee (16), Pyke (12), Lissandra (9)",
               },
             ],
             [
@@ -1264,10 +1265,10 @@ export const TESTGamestate: JepoardyGameState = {
                 question: `Diese Champs haben einen Legacy Valentinstag Skin:
                   Rakan, Yuumi, Nami, Annie, Sona`,
                 answertype: "TEXT",
-                answer:
-                  "Rakan (Sweetheart), Yuumi (Heartseeker), Nami (nein), Annie (Sweetheart), Sona (Sweetheart)",
+                answer: "Nami",
                 finished: false,
                 buzzedPlayers: [],
+                info: "Rakan (Sweetheart), Yuumi (Heartseeker), Nami (keinen), Annie (Sweetheart), Sona (Sweetheart)",
               },
             ],
             [
@@ -1281,10 +1282,10 @@ export const TESTGamestate: JepoardyGameState = {
                 question: `Diese Champs haben einen Attackspeed von mindestens 0,65 (Patch 26.01): 
                   Katarina, Maokai, Sejuani, Xerath, Lucian`,
                 answertype: "TEXT",
-                answer:
-                  "Katarina (0,658), Maokai (0,8), Sejuani (0,688), Xerath (0,658), Lucian (0,638)",
+                answer: "Lucian (0,638)",
                 finished: false,
                 buzzedPlayers: [],
+                info: "Katarina (0,658), Maokai (0,8), Sejuani (0,688), Xerath (0,658), Lucian (0,638)",
               },
             ],
           ],
