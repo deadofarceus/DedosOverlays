@@ -19,6 +19,10 @@ const JepoardyOverlay = lazy(() => import("../components/gameshows/jepoardy/Jepo
 const BuzzerController = lazy(() => import("../components/gameshows/buzzer/BuzzerController"));
 const BuzzerTeilnehmer = lazy(() => import("../components/gameshows/buzzer/BuzzerTeilnehmer"));
 
+const LMSController = lazy(() => import("../components/gameshows/lastmanstanding/LMSController"));
+const LMSTeilnehmer = lazy(() => import("../components/gameshows/lastmanstanding/LMSTeilnehmer"));
+const LMSOverlay = lazy(() => import("../components/gameshows/lastmanstanding/LMSOverlay"));
+
 export function gameshowRoutes() {
   return (
     <Route path="gameshows">
@@ -36,6 +40,11 @@ export function gameshowRoutes() {
         <Route path="admin" element={<JepoardyController />} />
         <Route path="teilnehmer" element={<JepoardyTeilnehmer />} />
         <Route path="overlay" element={<JepoardyOverlay />} />
+      </Route>
+      <Route path="lastmanstanding">
+        <Route path="admin" element={<LMSController />} />
+        <Route path="teilnehmer" element={<LMSTeilnehmer />} />
+        <Route path="overlay" element={<LMSOverlay />} />
       </Route>
       <Route path="buzzer">
         <Route path="admin" element={<BuzzerController />} />

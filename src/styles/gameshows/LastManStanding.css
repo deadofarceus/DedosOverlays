@@ -1,0 +1,281 @@
+.lsm-controller {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: azure;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lsm-boardAndControls {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.lms-boardcontrols {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 50px;
+    /* margin: 30px; */
+}
+
+.lms-boardcontrols div {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lms-boardcontrols button {
+    font-size: 30px;
+    width: 300px;
+}
+
+.lsm-playerPointsTNDiv {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2px;
+}
+
+.lsm-playerPointsTN div {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 32px;
+    color: #E6D8B9;
+    text-align: center;
+    margin: 5px;
+}
+
+.lsm-playerPointsTN {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: #b04040 5px solid;
+    border-radius: 10px;
+    background-color: #0F1D62;
+    transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.buzzerSoundSlider {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10;
+    max-width: 280;
+    width: 200px;
+}
+
+.lms-playerPointsControl {
+    justify-content: space-between !important;
+    width: 100%;
+    font-size: 32px;
+}
+
+.lms-playerPointsControl button {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.buzzerUserInput {
+    width: 400px;
+    height: 50px;
+    font-size: 32px;
+    margin: 5px;
+}
+
+.passwordChanging {
+    color: #F4511E !important;
+}
+
+.passwordSaved {
+    color: #1E88E5;
+}
+
+.lms-Pointbutton {
+    margin: 5px;
+}
+
+.lms-ichbindran {
+    border: #00ff1e 5px solid;
+    text-decoration: underline;
+}
+
+.lms-board {
+    width: 1280px;
+    height: 720px;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.lms-boardObjects {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lms-boardObject {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    border: red solid 4px;
+    margin: 10px;
+}
+
+.lms-boardObject div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lms-boardObjectHidden {
+    filter: grayscale(100%);
+}
+
+.lms-boardObjectAdmin {
+    cursor: pointer;
+}
+
+.lms-boardObjectAdmin:hover {
+    transform: scale(1.05);
+    transition:
+        box-shadow 0.25s cubic-bezier(.22, .68, .57, 1.11),
+        transform 0.25s cubic-bezier(.22, .68, .57, 1.11);
+}
+
+.lms-boardObjectRevealed {
+    cursor: auto !important;
+}
+
+.lms-boardObjectHiddenImg {
+    width: 100%;
+    height: 100%;
+}
+
+.lms-boardObjectImg {
+    width: 90%;
+    height: 90%;
+}
+
+.jp-overlay {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    overflow: hidden;
+    background-color: #040b2d;
+    color: azure;
+}
+
+.jp-overlay .lms-board {
+    position: absolute;
+    right: 75px;
+    top: 75px;
+    width: 1314px !important;
+    height: 608px !important;
+}
+
+.jp-VDOStreams {
+    position: absolute;
+    bottom: 117px;
+    width: 1771px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    left: 74px;
+}
+
+.jp-VDOLinkStreamDiv {
+    position: relative;
+    width: 400px;
+    height: 225px;
+}
+
+.jp-VDOLinkStream {
+    width: 400px;
+    height: 225px;
+}
+
+.jp-StreamAdmin {
+    position: absolute;
+    width: 480px;
+    height: 270px;
+    left: 30px;
+    top: 75px;
+}
+
+.jp-StreamAdmin iframe {
+    width: 480px;
+    height: 270px;
+}
+
+.jp-boardCutout {
+    position: absolute;
+    overflow: hidden;
+}
+
+.jp-playerPointsDiv {
+    position: absolute;
+    bottom: 60px;
+    width: 1771px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    left: 74px;
+}
+
+.jp-playerPoints {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jp-playerPoints div {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 32px;
+    color: #E6D8B9;
+    text-align: center;
+    margin: 5px;
+}
+
+.lms-userControls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+}
