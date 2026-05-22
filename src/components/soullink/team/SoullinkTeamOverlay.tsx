@@ -52,8 +52,14 @@ function SoullinkTeamOverlay() {
   return (
     <Container className="soullinkTeamOverlayContainer">
       <Col className="teamCol">
-        {trainers.map((t) => (
-          <Team key={t.name} team={t.team} routes={routes} settings={soullink.settings} />
+        {trainers.map((t, index) => (
+          <Team
+            key={t.name}
+            index={index}
+            team={t.team}
+            routes={routes}
+            settings={soullink.settings}
+          />
         ))}
       </Col>
     </Container>

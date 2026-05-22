@@ -4,9 +4,10 @@ interface TeamProps {
   team: Pokemon[];
   routes: Route[];
   settings: Settings;
+  index: number;
 }
 
-function Team({ team, routes, settings }: TeamProps) {
+function Team({ index, team, routes, settings }: TeamProps) {
   const isDisabled = (pokemon: Pokemon) =>
     routes.find((r) => r.name === pokemon.routeName)?.disabled ?? false;
 
@@ -26,9 +27,11 @@ function Team({ team, routes, settings }: TeamProps) {
     }
   };
 
+  const array = Array.from({ length: team.length }, (_, i) => i);
+
   return (
-    <div className={`w-100 teamRow`}>
-      {[0, 1, 2, 3, 4, 5].map((index) => (
+    <div className={`teamRow team-${index}`}>
+      {array.map((index) => (
         <div
           key={index}
           className={`soullinkImgDiv ${team[index] && isDisabled(team[index]) ? "link-dead" : ""}`}
