@@ -32,28 +32,41 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
         {currentBoard.objects.map((object, index) => (
           <div
             key={index}
-            className={
-              "lms-boardObject " + (admin && !object.revealed ? "lms-boardObjectAdmin" : "")
-            }
-            onClick={() => handleRevealOne(index)}
+            className={[
+              "lms-boardObject",
+              object.revealed && "lms-boardObject--revealed",
+              admin && !object.revealed && "lms-boardObjectAdmin",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() => (admin && !object.revealed ? handleRevealOne(index) : undefined)}
           >
             {(object.revealed || (admin && !object.revealed)) && (
-              <div className={!object.revealed ? "lms-boardObjectHidden" : ""}>
+              <div
+                className={[
+                  "lms-boardObjectContent",
+                  !object.revealed && "lms-boardObjectContent--preview",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
                 <img
                   className="lms-boardObjectImg"
                   // src={"../../lastmanstanding/objects/" + object.name + ".png"}
                   src="../../lastmanstanding/objects/hidden.png"
                   alt=""
                 />
-                <div>{object.name}</div>
+                <span className="lms-boardObjectLabel">{object.name}</span>
               </div>
             )}
             {!object.revealed && !admin && (
-              <img
-                className="lms-boardObjectHiddenImg"
-                src="../../lastmanstanding/objects/hidden.png"
-                alt=""
-              />
+              <div className="lms-boardObjectMystery">
+                <img
+                  className="lms-boardObjectHiddenImg"
+                  src="../../lastmanstanding/objects/hidden.png"
+                  alt=""
+                />
+              </div>
             )}
           </div>
         ))}

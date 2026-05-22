@@ -24,8 +24,10 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
 
   const getNextPlayer = (): number => {
     let nextPlayer = (gamestate.currentPlayer + 1) % gamestate.players.length;
-    while (gamestate.players[nextPlayer].lifes === 0) {
+    let times = 0;
+    while (gamestate.players[nextPlayer].lifes === 0 && times < gamestate.players.length) {
       nextPlayer = (nextPlayer + 1) % gamestate.players.length;
+      times++;
     }
     return nextPlayer;
   };

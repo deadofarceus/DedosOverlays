@@ -4,6 +4,7 @@ import { LMSGameState } from "../../../types/gameshows/LastManStanding";
 import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import { useQuery } from "../../../types/UsefulFunctions";
 import LMSBoard from "./LMSBoard";
+import LMSPlayerScoreboard from "./LMSPlayerScoreboard";
 import { Form } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
 import BoardControls from "./BoardControls";
@@ -53,22 +54,10 @@ function LMSController() {
         <LMSBoard gamestate={gamestate} sendState={sendState} />
       </div>
 
-      <div className="centerR lms-playerPointsTNDiv">
-        {gamestate.players.map((player, index) => (
-          <div
-            key={index}
-            className={
-              "lsm-playerPointsTN " + (player.name === currentPlayer.name ? "lms-ichbindran" : "")
-            }
-          >
-            <div>
-              <div>{player.name.toUpperCase()}</div>
-              <div>{player.points}</div>
-            </div>
-            <div>{player.lifes}</div>
-          </div>
-        ))}
-      </div>
+      <LMSPlayerScoreboard
+        players={gamestate.players}
+        currentPlayerName={currentPlayer.name}
+      />
       <UserControls gamestate={gamestate} sendState={sendState} />
       <div className="buzzerSoundSlider">
         <span aria-label="Sound" title="Sound">
