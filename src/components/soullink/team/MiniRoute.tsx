@@ -1,5 +1,5 @@
 import { Button, Container } from "react-bootstrap";
-import { Route, Pokemon, Settings } from "../../../types/Pokemon";
+import { Route, Pokemon, Settings, activeRoutePokemon, miniRoutePokemonClass } from "../../../types/Pokemon";
 import RouteRow from "./RouteRow";
 import { useState } from "react";
 
@@ -31,11 +31,11 @@ function MiniRoute({
   } else if (isInTeam) {
     containerClassName += " link-inTeam";
   }
-  if (!settings.playSoullink) {
+  if (settings.participants === 1) {
     containerClassName += " smallRouteCon";
   }
 
-  const pokemon = settings.playSoullink ? route.pokemon : [route.pokemon[0]];
+  const pokemon = activeRoutePokemon(route, settings.participants);
 
   return (
     <>
@@ -49,9 +49,7 @@ function MiniRoute({
           {pokemon.map((pkm, index) => (
             <div
               key={index}
-              className={`mini-pkm-img-div ${
-                index === 0 ? "firstTrainerPkmn" : "secondTrainerPkmn"
-              }`}
+              className={`mini-pkm-img-div ${miniRoutePokemonClass(index)}`}
             >
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pkm.id}.png`}

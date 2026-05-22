@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Pokemon, Route, Settings, Soullink } from "../../../types/Pokemon";
+import {
+  Pokemon,
+  Route,
+  Settings,
+  Soullink,
+  activeTrainers,
+  createDefaultTrainers,
+  DEFAULT_SOULLINK_SETTINGS,
+  ensureTrainers,
+  normalizeSettings,
+} from "../../../types/Pokemon";
 import { isOBSBrowser, useQuery } from "../../../types/UsefulFunctions";
 import { BroadcastWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { useNavigate } from "react-router-dom";
@@ -32,26 +42,13 @@ function SoullinkTeam() {
   const [soullink, setSoullink] = useState<Soullink>({
     id: id,
     routes: [],
-    trainers: [
-      {
-        name: "Ash",
-        team: [],
-      },
-      {
-        name: "Misty",
-        team: [],
-      },
-    ],
-    settings: {
-      imgType: "png",
-      showPokeballs: true,
-      showNicknames: false,
-      playSoullink: true,
-    },
+    trainers: createDefaultTrainers(),
+    settings: DEFAULT_SOULLINK_SETTINGS,
   });
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [filterWord, setFilterWord] = useState<string>("");
-  const trainers = soullink.trainers;
+  const trainers = activeTrainers(soullink.trainers, soullink.settings.participants);
+  const participantCount = soullink.settings.participants;
 
   useEffect(() => {
     if (id && !ws) {
@@ -86,14 +83,8 @@ function SoullinkTeam() {
       const res = await fetch(`https://${GLOBALADDRESS}/pokemon/soullink/${id}`);
       if (res.ok) {
         const data = await res.json();
-        if (!data.data.settings) {
-          data.data.settings = {
-            imgType: "png",
-            showPokeballs: true,
-            showNicknames: false,
-            playSoullink: true,
-          };
-        }
+        data.data.settings = normalizeSettings(data.data.settings);
+        data.data.trainers = ensureTrainers(data.data.trainers);
         setSoullink(data.data);
       } else {
         console.log(res.statusText);
@@ -124,7 +115,7 @@ function SoullinkTeam() {
         route.pokemon[index] = newPkm;
       }
       if (route.inTeam) {
-        for (let i = 0; i < newSL.trainers.length; i++) {
+        for (let i = 0; i < participantCount; i++) {
           const trainer = newSL.trainers[i];
           trainer.team.push(route.pokemon[i]);
         }
@@ -150,7 +141,7 @@ function SoullinkTeam() {
     const newSL = { ...soullink };
     newSL.routes.forEach((route) => {
       if (route.name === routeName) {
-        for (let i = 0; i < newSL.trainers.length; i++) {
+        for (let i = 0; i < participantCount; i++) {
           const trainer = newSL.trainers[i];
           if (route.inTeam) {
             trainer.team = trainer.team.filter((pkm) => pkm.routeName !== route.name);
@@ -188,7 +179,7 @@ function SoullinkTeam() {
     const newSL = { ...soullink };
     newSL.routes.forEach((r) => {
       if (r.name === route.name) {
-        for (let i = 0; i < newSL.trainers.length; i++) {
+        for (let i = 0; i < participantCount; i++) {
           const trainer = newSL.trainers[i];
           if (r.inTeam) {
             trainer.team = trainer.team.filter((pkm) => pkm.routeName !== r.name);
@@ -214,7 +205,19 @@ function SoullinkTeam() {
 
   const changeSettings = (settings: Settings) => {
     const newSL = { ...soullink };
+    const oldParticipants = newSL.settings.participants;
     newSL.settings = settings;
+    if (settings.participants > oldParticipants) {
+      newSL.routes.forEach((route) => {
+        while (route.pokemon.length < settings.participants) {
+          const index = route.pokemon.length;
+          const trainer = newSL.trainers[index];
+          route.pokemon.push(
+            new Pokemon("1", "Bulbasaur", "Bisasam", "Bisasam", route.name, trainer.name),
+          );
+        }
+      });
+    }
     sendData(newSL);
   };
 
@@ -226,8 +229,8 @@ function SoullinkTeam() {
         (p) =>
           p.name.toLowerCase().includes(filterWord) ||
           p.nickName.toLowerCase().includes(filterWord) ||
-          p.nameDE.toLowerCase().includes(filterWord)
-      )
+          p.nameDE.toLowerCase().includes(filterWord),
+      ),
   );
 
   return (

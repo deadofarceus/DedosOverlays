@@ -17,7 +17,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
   const filteredPokemon = allPokemons.filter(
     (p) =>
       p.name.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-      p.nameDE.toLowerCase().startsWith(searchTerm.toLowerCase())
+      p.nameDE.toLowerCase().startsWith(searchTerm.toLowerCase()),
   );
 
   const handleSelect = (selected: Pokemon) => {
@@ -27,7 +27,7 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
       selected.nameDE,
       pokemon.nickName,
       pokemon.routeName,
-      pokemon.trainerName
+      pokemon.trainerName,
     );
     setSearchTerm("");
     setShowSuggestions(false);
@@ -41,13 +41,22 @@ function PokemonCell({ index, pokemon, allPokemons, onChange }: PokemonCellProps
       pokemon.nameDE,
       nickname,
       pokemon.routeName,
-      pokemon.trainerName
+      pokemon.trainerName,
     );
     onChange(index, newPokemon);
   };
 
+  let divClassname = "pokemon-cell";
+  if (index === 0) {
+    divClassname += " firstTrainerPkmn";
+  } else if (index === 1) {
+    divClassname += " secondTrainerPkmn";
+  } else if (index === 2) {
+    divClassname += " thirdTrainerPkmn";
+  }
+
   return (
-    <div className="pokemon-cell">
+    <div className={divClassname}>
       <div className="text-center">
         <img src={pokemon.image} alt={pokemon.name} className="pokemon-image" />
         <input

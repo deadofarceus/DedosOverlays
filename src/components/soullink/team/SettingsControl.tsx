@@ -1,5 +1,5 @@
 import { Settings } from "../../../types/Pokemon";
-import { Col, Container } from "react-bootstrap";
+import { Col, Container, ButtonGroup, Button } from "react-bootstrap";
 import DedoSwitch from "../../util/DedoSwitch";
 
 interface SettingsControlProps {
@@ -19,12 +19,23 @@ function SettingsControl({ changeSettings, settings }: SettingsControlProps) {
   return (
     <Container>
       <Col className="centerC SLsettingsCOl">
-        <h2>Settings</h2>
-        <DedoSwitch
-          label={settings.playSoullink ? "play Singleplayer" : "play Soullink"}
-          checked={settings.playSoullink}
-          onChange={(checked) => handleChange("playSoullink", checked)}
-        />
+        <h1>
+          <u>Settings</u>
+        </h1>
+        <div className="mb-3 SLsettingsCOl-participants">
+          <ButtonGroup>
+            {([1, 2, 3] as const).map((count) => (
+              <Button
+                key={count}
+                variant={settings.participants === count ? "primary" : "outline-primary"}
+                onClick={() => handleChange("participants", count)}
+              >
+                {count}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <div className="mb-2">Participants</div>
+        </div>
         <DedoSwitch
           label={settings.imgType === "png" ? "Use GIF Animations" : "Use static PNG"}
           checked={settings.imgType === "gif"}

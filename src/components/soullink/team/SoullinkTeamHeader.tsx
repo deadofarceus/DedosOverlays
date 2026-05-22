@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row } from "react-bootstrap";
-import { Settings } from "../../../types/Pokemon";
+import { Settings, TRAINER_COLORS } from "../../../types/Pokemon";
 
 interface SoullinkTeamHeaderProps {
   initialTrainerNames: string[];
@@ -29,36 +29,21 @@ const SoullinkTeamHeader: React.FC<SoullinkTeamHeaderProps> = ({
 
   return (
     <Row className="centerR soullink-desc-heaader">
-      <input
-        type="text"
-        value={trainerNames[0]}
-        onChange={(e) => handleNameChange(0, e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            onTrainerNameChange(0, trainerNames[0]);
-          }
-        }}
-        className="blackOutline"
-        style={{
-          color: "#00e1ff",
-        }}
-      />
-      {settings.playSoullink && (
+      {Array.from({ length: settings.participants }, (_, index) => (
         <input
+          key={index}
           type="text"
-          value={trainerNames[1]}
-          onChange={(e) => handleNameChange(1, e.target.value)}
+          value={trainerNames[index] ?? ""}
+          onChange={(e) => handleNameChange(index, e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              onTrainerNameChange(1, trainerNames[1]);
+              onTrainerNameChange(index, trainerNames[index]);
             }
           }}
           className="blackOutline"
-          style={{
-            color: "#ffa600",
-          }}
+          style={{ color: TRAINER_COLORS[index] }}
         />
-      )}
+      ))}
     </Row>
   );
 };

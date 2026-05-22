@@ -46,7 +46,7 @@
 }
 
 .pokemon-cell {
-  width: 50%;
+  width: 250px;
   position: relative;
 }
 
@@ -102,7 +102,6 @@
 .miniRoute {
   background-color: #def08c;
   width: 120px;
-  height: 240px;
 
   border: #05675d 2px solid;
   border-radius: 30px;
@@ -143,11 +142,17 @@
 
 .firstTrainerPkmn {
   background-color: #00e1ff;
-  margin-bottom: 5px;
+  margin: 3px;
 }
 
 .secondTrainerPkmn {
   background-color: #ffa600;
+  margin: 3px;
+}
+
+.thirdTrainerPkmn {
+  background-color: #b84dff;
+  margin: 3px;
 }
 
 .mini-pkm-img {
@@ -418,4 +423,13 @@
 .route-Manager input {
   padding: 5px;
   border-radius: 4px;
+}
+
+.SLsettingsCOl-participants {
+  font-size: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }

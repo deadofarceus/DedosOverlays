@@ -1,5 +1,5 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Route, Pokemon, Settings } from "../../../types/Pokemon";
+import { Route, Pokemon, Settings, activeRoutePokemon } from "../../../types/Pokemon";
 import PokemonCell from "./PokemonCell";
 
 interface RouteRowProps {
@@ -30,7 +30,7 @@ function RouteRow({
     containerClassName += " link-inTeam";
   }
 
-  const pokemon = settings.playSoullink ? route.pokemon : [route.pokemon[0]];
+  const pokemon = activeRoutePokemon(route, settings.participants);
 
   return (
     <Container className={containerClassName}>

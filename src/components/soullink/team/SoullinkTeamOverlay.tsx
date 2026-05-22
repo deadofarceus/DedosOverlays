@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { Soullink } from "../../../types/Pokemon";
+import {
+  Soullink,
+  activeTrainers,
+  createDefaultTrainers,
+  DEFAULT_SOULLINK_SETTINGS,
+  ensureTrainers,
+  normalizeSettings,
+} from "../../../types/Pokemon";
 import { useQuery } from "../../../types/UsefulFunctions";
 import { BroadcastWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
 import { Col, Container } from "react-bootstrap";
@@ -16,25 +23,11 @@ function SoullinkTeamOverlay() {
   const [soullink, setSoullink] = useState<Soullink>({
     id: id,
     routes: [],
-    trainers: [
-      {
-        name: "Ash",
-        team: [],
-      },
-      {
-        name: "Misty",
-        team: [],
-      },
-    ],
-    settings: {
-      imgType: "png",
-      showPokeballs: true,
-      showNicknames: false,
-      playSoullink: true,
-    },
+    trainers: createDefaultTrainers(),
+    settings: DEFAULT_SOULLINK_SETTINGS,
   });
   const routes = soullink.routes;
-  const trainers = soullink.settings.playSoullink ? soullink.trainers : [soullink.trainers[0]];
+  const trainers = activeTrainers(soullink.trainers, soullink.settings.participants);
   useEffect(() => {
     if (id && !ws) {
       ws = new BroadcastWebsocket<Soullink>(id, setSoullink);
@@ -44,6 +37,8 @@ function SoullinkTeamOverlay() {
       const res = await fetch(`https://${GLOBALADDRESS}/pokemon/soullink/${id}`);
       if (res.ok) {
         const data = await res.json();
+        data.data.settings = normalizeSettings(data.data.settings);
+        data.data.trainers = ensureTrainers(data.data.trainers);
         setSoullink(data.data);
       } else {
         console.log(res.statusText);
