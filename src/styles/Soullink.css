@@ -272,9 +272,10 @@
 }
 
 .gifPkmnImg {
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 160px;
+  max-height: 160px;
 }
 
 .teamOverlayPkmnImg-Preview {
@@ -288,9 +289,10 @@
 }
 
 .gifPkmnImg-Preview {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+  min-width: 60px;
+  min-height: 60px;
+  max-width: 100px;
+  max-height: 100px;
 }
 
 .pkmnBallImg {
@@ -330,14 +332,67 @@
 .teamRow {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+.teamRow-background {
+  position: relative;
+  border: #2b3535 solid 4px;
+  border-radius: 30px;
+  margin: 5px;
+  /* padding: 10px; */
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 18px rgba(0, 0, 0, 0.18);
+  width: fit-content;
+}
+
+.teamRow-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(45deg,
+      #ffffff38 25%,
+      transparent 25%,
+      transparent 75%,
+      #ffffff38 75%),
+    linear-gradient(-45deg,
+      rgba(0, 0, 0, 0.18) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.18) 75%);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.teamRow-background>* {
+  position: relative;
+  z-index: 1;
+}
+
+.team-0 {
+  background-color: #00860b;
+}
+
+.team-1 {
+  background-color: #1f6eee;
+}
+
+.team-2 {
+  background-color: #50caab
 }
 
 .teamCol-Preview {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100px;
+  align-items: center;
+  width: 110px;
 }
 
 .deleteRouteButton {
@@ -350,7 +405,7 @@
 
 .teampreviewCon {
   position: fixed;
-  width: 260px;
+  width: 360px;
   height: 700px;
   right: 50px;
   top: 80px;

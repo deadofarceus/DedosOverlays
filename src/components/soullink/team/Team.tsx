@@ -30,7 +30,7 @@ function Team({ index, team, routes, settings }: TeamProps) {
   const array = Array.from({ length: team.length }, (_, i) => i);
 
   return (
-    <div className={`teamRow team-${index}`}>
+    <div className={`teamRow${settings.showBackground ? ` teamRow-background team-${index}` : ""}`}>
       {array.map((index) => (
         <div
           key={index}

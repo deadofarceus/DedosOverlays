@@ -4,9 +4,10 @@ interface TeamProps {
   team: Pokemon[];
   routes: Route[];
   settings: Settings;
+  index: number;
 }
 
-function TeamP({ team, routes, settings }: TeamProps) {
+function TeamP({ index, team, routes, settings }: TeamProps) {
   const isDisabled = (pokemon: Pokemon) =>
     routes.find((r) => r.name === pokemon.routeName)?.disabled ?? false;
 
@@ -27,7 +28,9 @@ function TeamP({ team, routes, settings }: TeamProps) {
   };
 
   return (
-    <div className={`h-100 teamCol-Preview`}>
+    <div
+      className={`h-100 teamCol-Preview ${settings.showBackground ? ` teamRow-background team-${index}` : ""}`}
+    >
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <div
           key={index}

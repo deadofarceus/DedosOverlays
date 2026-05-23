@@ -51,6 +51,11 @@ function SettingsControl({ changeSettings, settings }: SettingsControlProps) {
           checked={settings.showNicknames}
           onChange={(checked) => handleChange("showNicknames", checked)}
         />
+        <DedoSwitch
+          label="Show Background"
+          checked={settings.showBackground}
+          onChange={(checked) => handleChange("showBackground", checked)}
+        />
       </Col>
     </Container>
   );

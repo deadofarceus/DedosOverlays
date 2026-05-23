@@ -67,6 +67,7 @@ export interface Settings {
   imgType: "png" | "gif";
   showPokeballs: boolean;
   showNicknames: boolean;
+  showBackground: boolean;
   participants: 1 | 2 | 3;
 }
 
@@ -77,6 +78,7 @@ export const DEFAULT_SOULLINK_SETTINGS: Settings = {
   imgType: "png",
   showPokeballs: true,
   showNicknames: false,
+  showBackground: false,
   participants: 2,
 };
 
@@ -108,6 +110,7 @@ export function normalizeSettings(
     imgType: settings.imgType ?? DEFAULT_SOULLINK_SETTINGS.imgType,
     showPokeballs: settings.showPokeballs ?? DEFAULT_SOULLINK_SETTINGS.showPokeballs,
     showNicknames: settings.showNicknames ?? DEFAULT_SOULLINK_SETTINGS.showNicknames,
+    showBackground: settings.showBackground ?? DEFAULT_SOULLINK_SETTINGS.showBackground,
     participants,
   };
 }
