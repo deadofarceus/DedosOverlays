@@ -8,8 +8,6 @@ import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
   const showInfoInTitle = question.info !== undefined && question.info.length < 15;
 
-  console.log(question.joker);
-
   if (question.answertype === "TEXT") {
     return (
       <div className="jp-question">

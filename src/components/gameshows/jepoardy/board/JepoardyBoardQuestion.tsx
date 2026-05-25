@@ -16,14 +16,14 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
   }
 
   const category = gamestate.currentBoard.categories.find(
-    (cat) => questions[0].category === cat.name
+    (cat) => questions[0].category === cat.name,
   );
 
   const handleOnClick = () => {
     if (
       questions[0].extra !== "Taunt" &&
       gamestate.currentBoard.categories.some((cat) =>
-        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished)
+        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished),
       )
     ) {
       return;
@@ -68,7 +68,6 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
         p.gmJoker = 1;
       }
     });
-    console.log(newGamestate.players);
 
     sendState(newGamestate);
   };
@@ -83,7 +82,7 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
   if (
     (questions[0].extra !== "Taunt" &&
       gamestate.currentBoard.categories.some((cat) =>
-        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished)
+        cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished),
       )) ||
     category?.extra === "forced"
   ) {

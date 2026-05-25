@@ -125,7 +125,7 @@ export class AICombineWebsocket extends BaseWebSocket<AICombGameState> {
   constructor(
     id: string,
     callback: React.Dispatch<React.SetStateAction<AICombGameState>>,
-    addBuzzer: (buzzer: string) => void
+    addBuzzer: (buzzer: string) => void,
   ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
@@ -161,7 +161,7 @@ export class GameshowWebsocket<T> extends BaseWebSocket<T> {
   constructor(
     id: string,
     callback: React.Dispatch<React.SetStateAction<T>>,
-    addBuzzer: (buzzer: string) => void
+    addBuzzer: (buzzer: string) => void,
   ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
@@ -195,7 +195,7 @@ export class PokemonWebsocket extends BaseWebSocket<PokemonEvent> {
   constructor(
     id: string,
     token: string,
-    callback: React.Dispatch<React.SetStateAction<PokemonEvent>>
+    callback: React.Dispatch<React.SetStateAction<PokemonEvent>>,
   ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}&token=${token}`);
     this.id = id;
@@ -242,13 +242,13 @@ export class EloWebsocket extends BaseWebSocket<Account> {
     key: string,
     queuetype: string,
     region: string,
-    callback: React.Dispatch<React.SetStateAction<Account>>
+    callback: React.Dispatch<React.SetStateAction<Account>>,
   ) {
     super(
       callback,
       `${GLOBALWSADRESS}?name=${summonerName}&tag=${tag}&key=${key}&queueID=${
         QUEUETYPES.get(queuetype)!.queueId
-      }&region=${region}`
+      }&region=${region}`,
     );
     this.queueId = QUEUETYPES.get(queuetype)!.queueId;
   }
@@ -266,7 +266,7 @@ export class EloWebsocket extends BaseWebSocket<Account> {
     const entry = account.leagueEntrys.find((entry) => entry.queueId === this.queueId)!;
 
     entry.lastMatches = Array.from(
-      new Set(entry.lastMatches!.map((obj: Match) => JSON.stringify(obj)))
+      new Set(entry.lastMatches!.map((obj: Match) => JSON.stringify(obj))),
     ).map((str) => JSON.parse(str as string));
 
     while (entry.lastMatches.length > 5) {
@@ -324,7 +324,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
 
   constructor(
     id: string,
-    callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>> | undefined
+    callback: React.Dispatch<React.SetStateAction<FiveVFiveEvent>> | undefined,
   ) {
     super(callback!, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
@@ -334,7 +334,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
       new Team("Team 2", [], 0),
       "",
       "",
-      ""
+      "",
     );
   }
 
@@ -389,7 +389,7 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
     if (wonGames.findIndex((g) => g.gameName === game) !== -1) {
       wonGames = wonGames.splice(
         wonGames.findIndex((g) => g.gameName === game),
-        1
+        1,
       );
     }
   }

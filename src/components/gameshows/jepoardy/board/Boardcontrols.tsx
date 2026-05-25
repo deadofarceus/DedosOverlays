@@ -55,7 +55,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
 
   const finishSpecificQuestion = (
     gamestate: JepoardyGameState,
-    questionID: number
+    questionID: number,
   ): JepoardyGameState => {
     const newGamestate = { ...gamestate };
     newGamestate.currentQuestion.state = "ACTIVE";
@@ -109,6 +109,21 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (!buzzedPlayer) {
       buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
+      if (question.joker) {
+        switch (question.joker) {
+          case "Gamemaster":
+            buzzedPlayer.gmJoker = 1;
+            break;
+          case "NoYou":
+            buzzedPlayer.noYouJoker = true;
+            break;
+          case "Yoink":
+            buzzedPlayer.yoinkJoker = true;
+            break;
+          default:
+            break;
+        }
+      }
     } else {
       clearBuzzer();
     }
@@ -142,27 +157,26 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (!buzzedPlayer) {
       buzzedPlayer = newGamestate.players[newGamestate.currentPlayer];
+      if (question.joker) {
+        switch (question.joker) {
+          case "Gamemaster":
+            buzzedPlayer.gmJoker = 1;
+            break;
+          case "NoYou":
+            buzzedPlayer.noYouJoker = true;
+            break;
+          case "Yoink":
+            buzzedPlayer.yoinkJoker = true;
+            break;
+          default:
+            break;
+        }
+      }
     } else {
       clearBuzzer();
     }
     newGamestate.currentQuestion.buzzedPlayers.push(buzzedPlayer);
     buzzedPlayer.points += calculatePoints(question);
-
-    if (question.joker) {
-      switch (question.joker) {
-        case "Gamemaster":
-          buzzedPlayer.gmJoker = 1;
-          break;
-        case "NoYou":
-          buzzedPlayer.noYouJoker = true;
-          break;
-        case "Yoink":
-          buzzedPlayer.yoinkJoker = true;
-          break;
-        default:
-          break;
-      }
-    }
 
     newGamestate = finishSpecificQuestion(newGamestate, question.id);
     sendState(newGamestate);
@@ -223,7 +237,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
           newGamestate.currentBoard.extra = "default";
 
           const allQuestionsArr = newGamestate.currentBoard.categories.flatMap(
-            (cat) => cat.questions
+            (cat) => cat.questions,
           );
 
           // const top5 = [...allQuestionsArr].sort((a, b) => b[0].points - a[0].points).slice(0, 5);
@@ -407,7 +421,7 @@ function shuffle(array: any[]) {
 }
 
 function calculateExtra(
-  spin: number
+  spin: number,
 ): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
   if (spin < 30) {
     return "Gold";

@@ -52,8 +52,9 @@ function JepoardyTeilnehmer() {
 
   const sendState = (newState: JepoardyGameState) => {
     const newGame = { ...gamestate };
-    newGame.states[newGame.currentState + 1] = newState;
-    newGame.currentState++;
+    // newGame.states[newGame.currentState + 1] = newState;
+    // newGame.currentState++;
+    newGame.states[0] = newState;
     ws.sendData(newGame);
   };
 
@@ -85,7 +86,9 @@ function JepoardyTeilnehmer() {
     !question.buzzedPlayers.map((p) => p.name).includes(playerName) &&
     question.buzzedPlayers.length > 0 &&
     buzzerQueue.length === 0 &&
-    question.state === "ACTIVE";
+    ((question.type === "TEXT" && question.state === "ACTIVE") ||
+      question.type === "VIDEO" ||
+      question.type === "AUDIO");
 
   const canUseYoinkJoker =
     currentPlayer.name !== playerName &&
