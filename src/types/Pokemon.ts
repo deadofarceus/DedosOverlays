@@ -14,6 +14,7 @@ export interface Soullink {
   routes: Route[];
   trainers: Trainer[];
   settings: Settings;
+  runs: number;
 }
 
 export class Route {
@@ -26,7 +27,7 @@ export class Route {
     this.pokemon = [];
     trainer.forEach((t) => {
       this.pokemon.push(
-        new Pokemon("1", "Bulbasaur", "Bisasam", "-----------------", name, t.name)
+        new Pokemon("1", "Bulbasaur", "Bisasam", "-----------------", name, t.name),
       );
     });
   }
@@ -35,6 +36,7 @@ export class Route {
 export interface Trainer {
   name: string;
   team: Pokemon[];
+  deaths: number;
 }
 
 export class Pokemon {
@@ -51,7 +53,7 @@ export class Pokemon {
     nameDE: string,
     nickName: string,
     routeName: string,
-    trainerName: string
+    trainerName: string,
   ) {
     this.id = id;
     this.name = name;
@@ -83,19 +85,24 @@ export const DEFAULT_SOULLINK_SETTINGS: Settings = {
 };
 
 export function createDefaultTrainers(): Trainer[] {
-  return TRAINER_DEFAULT_NAMES.map((name) => ({ name, team: [] }));
+  // Ensure every trainer always has a deaths counter.
+  return TRAINER_DEFAULT_NAMES.map((name) => ({ name, team: [], deaths: 0 }));
 }
 
 export function ensureTrainers(trainers: Trainer[]): Trainer[] {
-  const result = [...trainers];
+  const result = trainers.map((t) => ({
+    ...t,
+    team: t.team ?? [],
+    deaths: t.deaths ?? 0,
+  }));
   while (result.length < 3) {
-    result.push({ name: TRAINER_DEFAULT_NAMES[result.length], team: [] });
+    result.push({ name: TRAINER_DEFAULT_NAMES[result.length], team: [], deaths: 0 });
   }
   return result;
 }
 
 export function normalizeSettings(
-  settings?: Partial<Settings> & { playSoullink?: boolean }
+  settings?: Partial<Settings> & { playSoullink?: boolean },
 ): Settings {
   if (!settings) {
     return { ...DEFAULT_SOULLINK_SETTINGS };
@@ -115,18 +122,25 @@ export function normalizeSettings(
   };
 }
 
-export function activeTrainers(trainers: Trainer[], participants: Settings["participants"]): Trainer[] {
+export function activeTrainers(
+  trainers: Trainer[],
+  participants: Settings["participants"],
+): Trainer[] {
   return trainers.slice(0, participants);
 }
 
 export function activeRoutePokemon(
   route: Route,
-  participants: Settings["participants"]
+  participants: Settings["participants"],
 ): Pokemon[] {
   return route.pokemon.slice(0, participants);
 }
 
-const MINI_ROUTE_PKMN_CLASSES = ["firstTrainerPkmn", "secondTrainerPkmn", "thirdTrainerPkmn"] as const;
+const MINI_ROUTE_PKMN_CLASSES = [
+  "firstTrainerPkmn",
+  "secondTrainerPkmn",
+  "thirdTrainerPkmn",
+] as const;
 
 export function miniRoutePokemonClass(index: number): string {
   return MINI_ROUTE_PKMN_CLASSES[index] ?? "thirdTrainerPkmn";

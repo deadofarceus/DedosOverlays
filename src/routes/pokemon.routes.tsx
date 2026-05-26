@@ -6,6 +6,9 @@ const SoullinkLogin = lazy(() => import("../components/soullink/SoullinkLogin"))
 const SoullinkOverlay = lazy(() => import("../components/soullink/SoullinkOverlay"));
 const SoullinkTeam = lazy(() => import("../components/soullink/team/SoullinkTeam"));
 const SoullinkTutorial = lazy(() => import("../components/soullink/team/SoullinkTutorial"));
+const SoullinkCompleteOverlay = lazy(
+  () => import("../components/soullink/overlay/SoullinkCompleteOverlay"),
+);
 
 export function pokemonRoutes() {
   return (
@@ -14,6 +17,7 @@ export function pokemonRoutes() {
         <Route index element={<Soullink />} />
         <Route path="login" element={<SoullinkLogin />} />
         <Route path="overlay" element={<SoullinkOverlay />} />
+        <Route path="completeoverlay" element={<SoullinkCompleteOverlay />} />
         <Route path="team">
           <Route index element={<SoullinkTeam />} />
           <Route path="tutorial" element={<SoullinkTutorial />} />

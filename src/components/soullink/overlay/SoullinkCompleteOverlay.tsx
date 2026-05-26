@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import {
   Soullink,
-  activeTrainers,
   createDefaultTrainers,
   DEFAULT_SOULLINK_SETTINGS,
-  ensureTrainers,
+  activeTrainers,
   normalizeSettings,
+  ensureTrainers,
 } from "../../../types/Pokemon";
 import { useQuery } from "../../../types/UsefulFunctions";
 import { BroadcastWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
-import { Col, Container } from "react-bootstrap";
-import Team from "./Team";
+import Team from "../team/Team";
+import "../../../styles/Soullink.css";
 
 let ws: BroadcastWebsocket<Soullink>;
 
-function SoullinkTeamOverlay() {
+function SoullinkCompleteOverlay() {
   const query = useQuery();
   const id = query.get("id");
   if (!id) {
@@ -48,23 +48,41 @@ function SoullinkTeamOverlay() {
 
     fetchData();
   }, []);
-  console.log(soullink);
+
+  let runs = soullink.runs;
+  if (
+    id ===
+    "asdfiufiafasaoufashofaposdashofhahifsaoifhoiasoifoiafoihaohihioaihosahiofahoiasoihahiosf"
+  ) {
+    runs += 39;
+  }
 
   return (
-    <Container className="soullinkTeamOverlayContainer">
-      <Col className="teamCol">
+    <div className="sco-container">
+      <div className="sco-runs blackOutline">{"Run:" + runs}</div>
+      <>
         {trainers.map((t, index) => (
-          <Team
-            key={t.name}
-            index={index}
-            team={t.team}
-            routes={routes}
-            settings={soullink.settings}
-          />
+          <div className={`sco-trainer${index + 1}`}>
+            <Team
+              key={t.name}
+              index={index}
+              team={t.team}
+              routes={routes}
+              settings={soullink.settings}
+            />
+          </div>
         ))}
-      </Col>
-    </Container>
+      </>
+      <>
+        {trainers.map((t, index) => (
+          <div className={`sco-deaths${index + 1} sco-death blackOutline`}>
+            <div>{t.deaths}</div>
+            <img className="sco-death-img" src="../../../pokemon/deathssoullink.png" alt="" />
+          </div>
+        ))}
+      </>
+    </div>
   );
 }
 
-export default SoullinkTeamOverlay;
+export default SoullinkCompleteOverlay;

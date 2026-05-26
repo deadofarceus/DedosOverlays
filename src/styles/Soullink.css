@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap');
+
 .SoullinkContainer {
   margin-top: 60px;
   min-width: 100% !important;
@@ -48,6 +50,8 @@
 .pokemon-cell {
   width: 250px;
   position: relative;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 .route-row-container {
@@ -57,7 +61,15 @@
   padding: 10px;
   font-family: "Courier New", Courier, monospace;
   margin-bottom: 10px;
-  width: 1000px;
+  width: 1400px;
+}
+
+.sl-route-pokemon-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
 }
 
 .link-dead {
@@ -187,7 +199,7 @@
 }
 
 .soullink-desc-heaader {
-  width: 600px;
+  width: 900px;
   justify-content: space-around;
   position: fixed;
   z-index: 1030;
@@ -206,12 +218,16 @@
 
 .soullink-desc-heaader input {
   color: azure;
-  width: 20%;
+  width: 200px;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
   border: none;
   background: transparent;
+}
+
+.soullink-desc-heaader div {
+  width: 220px;
 }
 
 .new-route-input {
@@ -487,4 +503,82 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.sco-container .teamRow {
+  scale: 0.49;
+}
+
+.sco-trainer1 {
+  position: absolute;
+  top: 422px;
+  left: -50px;
+}
+
+.sco-trainer2 {
+  position: absolute;
+  top: 422px;
+  left: 600px;
+}
+
+.sco-trainer3 {
+  position: absolute;
+  top: 422px;
+  left: 1250px;
+}
+
+.sco-death-img {
+  width: 60px;
+  height: 60px;
+  /* filter: drop-shadow(3px 3px 2px #222); */
+  /* background-color: #e8c957; */
+  /* border-radius: 20px; */
+  /* padding: 4px; */
+}
+
+.sco-death {
+  position: absolute;
+
+  top: 600px;
+
+  width: 150px;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(135deg, #74b173 0%, #b3e673 100%);
+  border: solid 4px #253d2c;
+  border-radius: 20px;
+  filter: drop-shadow(3px 3px 2px #222);
+  font-family: "Press Start 2P", system-ui;
+  font-size: 22px;
+  font-weight: 900;
+  /* color: #181a1a; */
+  color: azure;
+}
+
+.sco-deaths1 {
+  left: 500px;
+}
+
+.sco-deaths2 {
+  left: 870px;
+}
+
+.sco-deaths3 {
+  top: 640px;
+  left: 1750px;
+}
+
+.sco-runs {
+  position: absolute;
+  top: 580px;
+  left: 1580px;
+
+  filter: drop-shadow(3px 3px 2px #222);
+  font-family: "Press Start 2P", system-ui;
+  font-size: 44px;
+  font-weight: 900;
+  /* color: #181a1a; */
+  color: azure;
 }

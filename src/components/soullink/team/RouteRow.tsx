@@ -7,7 +7,7 @@ interface RouteRowProps {
   allPokemons: Pokemon[];
   settings: Settings;
   onToggleTeam: (routeName: string) => void;
-  onToggleDisabled: (routeName: string) => void;
+  onKillTrainer: (routeName: string, trainerIndex: number) => void;
   onPokemonChange: (index: number, newPokemon: Pokemon) => void;
   onDeleteRoute: (route: Route) => void;
 }
@@ -17,7 +17,7 @@ function RouteRow({
   allPokemons,
   settings,
   onToggleTeam,
-  onToggleDisabled,
+  onKillTrainer,
   onPokemonChange,
   onDeleteRoute,
 }: RouteRowProps) {
@@ -46,22 +46,29 @@ function RouteRow({
             >
               {isInTeam ? "Withdraw" : "Add to Team"}
             </Button>
-            <Button variant="danger" size="sm" onClick={() => onToggleDisabled(route.name)}>
-              {isDisabled ? "Link Alive" : "Link Dead"}
-            </Button>
           </div>
         </Col>
 
         {/* Pokemons */}
         <Row className="centerR w-75">
           {pokemon.map((pokemon, index) => (
-            <PokemonCell
-              key={index}
-              index={index}
-              pokemon={pokemon}
-              allPokemons={allPokemons}
-              onChange={(index, newPkmn) => onPokemonChange(index, newPkmn)}
-            />
+            <div key={index} className="sl-route-pokemon-div">
+              <PokemonCell
+                index={index}
+                pokemon={pokemon}
+                allPokemons={allPokemons}
+                onChange={(index, newPkmn) => onPokemonChange(index, newPkmn)}
+              />
+              <Button
+                variant="danger"
+                size="sm"
+                className="mt-2"
+                disabled={isDisabled}
+                onClick={() => onKillTrainer(route.name, index)}
+              >
+                Kill +1
+              </Button>
+            </div>
           ))}
         </Row>
         <Button

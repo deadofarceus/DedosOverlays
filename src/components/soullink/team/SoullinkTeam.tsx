@@ -44,6 +44,7 @@ function SoullinkTeam() {
     routes: [],
     trainers: createDefaultTrainers(),
     settings: DEFAULT_SOULLINK_SETTINGS,
+    runs: 0,
   });
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [filterWord, setFilterWord] = useState<string>("");
@@ -85,6 +86,9 @@ function SoullinkTeam() {
         const data = await res.json();
         data.data.settings = normalizeSettings(data.data.settings);
         data.data.trainers = ensureTrainers(data.data.trainers);
+        if (!data.data.runs) {
+          data.data.runs = 0;
+        }
         setSoullink(data.data);
       } else {
         console.log(res.statusText);
@@ -126,11 +130,17 @@ function SoullinkTeam() {
   };
 
   // Handler: Route aktiv/inaktiv
-  const toggleRouteDisabled = (routeName: string) => {
+  const killTrainerAndLink = (routeName: string, trainerIndex: number) => {
     const newSL = { ...soullink };
+    const trainer = newSL.trainers[trainerIndex];
+    if (trainer) {
+      trainer.deaths = (trainer.deaths ?? 0) + 1;
+    }
+
     newSL.routes.forEach((route) => {
       if (route.name === routeName) {
-        route.disabled = !route.disabled;
+        // "Whole link dies" -> always mark as disabled (never toggles back here).
+        route.disabled = true;
       }
     });
     sendData(newSL);
@@ -200,6 +210,7 @@ function SoullinkTeam() {
     newSL.trainers.forEach((trainer) => {
       trainer.team = [];
     });
+    newSL.runs++;
     sendData(newSL);
   };
 
@@ -236,6 +247,7 @@ function SoullinkTeam() {
   return (
     <Container className="soulLinkContainer">
       <SoullinkTeamHeader
+        state={soullink}
         initialTrainerNames={soullink.trainers.map((t) => t.name)}
         onTrainerNameChange={handleTrainerNameChange}
         settings={soullink.settings}
@@ -256,8 +268,8 @@ function SoullinkTeam() {
             allPokemons={allPokemons}
             settings={soullink.settings}
             onPokemonChange={handlePokemonChange}
-            onToggleDisabled={toggleRouteDisabled}
             onToggleTeam={toggleRouteInTeam}
+            onKillTrainer={killTrainerAndLink}
             onDeleteRoute={deleteRoute}
           />
         ))}

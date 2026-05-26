@@ -8,7 +8,7 @@ interface RouteRowProps {
   allPokemons: Pokemon[];
   settings: Settings;
   onToggleTeam: (routeName: string) => void;
-  onToggleDisabled: (routeName: string) => void;
+  onKillTrainer: (routeName: string, trainerIndex: number) => void;
   onPokemonChange: (index: number, newPokemon: Pokemon) => void;
   onDeleteRoute: (route: Route) => void;
 }
@@ -18,7 +18,7 @@ function MiniRoute({
   allPokemons,
   settings,
   onToggleTeam,
-  onToggleDisabled,
+  onKillTrainer,
   onPokemonChange,
   onDeleteRoute,
 }: RouteRowProps) {
@@ -80,8 +80,8 @@ function MiniRoute({
             allPokemons={allPokemons}
             settings={settings}
             onPokemonChange={onPokemonChange}
-            onToggleDisabled={onToggleDisabled}
             onToggleTeam={onToggleTeam}
+            onKillTrainer={onKillTrainer}
             onDeleteRoute={onDeleteRoute}
           />
         </div>
