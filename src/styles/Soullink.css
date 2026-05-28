@@ -369,19 +369,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-image:
-    linear-gradient(45deg,
-      #ffffff38 25%,
-      transparent 25%,
-      transparent 75%,
-      #ffffff38 75%),
-    linear-gradient(-45deg,
-      rgba(0, 0, 0, 0.18) 25%,
-      transparent 25%,
-      transparent 75%,
-      rgba(0, 0, 0, 0.18) 75%);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+
   pointer-events: none;
   z-index: 0;
 }
@@ -392,15 +380,18 @@
 }
 
 .team-0 {
-  background-color: #00860b;
+  background:
+    repeating-conic-gradient(#e3e3e3 0 25%, #59a45f 0 50%) 50% / 20px 20px;
 }
 
 .team-1 {
-  background-color: #1f6eee;
+  background:
+    repeating-conic-gradient(#e3e3e3 0 25%, #6997e1 0 50%) 50% / 20px 20px;
 }
 
 .team-2 {
-  background-color: #50caab
+  background:
+    repeating-conic-gradient(#e3e3e3 0 25%, #d17575 0 50%) 50% / 20px 20px;
 }
 
 .teamCol-Preview {
