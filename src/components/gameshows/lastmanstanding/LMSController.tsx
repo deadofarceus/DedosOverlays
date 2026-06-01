@@ -54,10 +54,7 @@ function LMSController() {
         <LMSBoard gamestate={gamestate} sendState={sendState} />
       </div>
 
-      <LMSPlayerScoreboard
-        players={gamestate.players}
-        currentPlayerName={currentPlayer.name}
-      />
+      <LMSPlayerScoreboard players={gamestate.players} currentPlayerName={currentPlayer.name} />
       <UserControls gamestate={gamestate} sendState={sendState} />
       <div className="buzzerSoundSlider">
         <span aria-label="Sound" title="Sound">

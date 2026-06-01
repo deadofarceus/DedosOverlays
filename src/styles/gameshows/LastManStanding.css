@@ -150,6 +150,24 @@
     filter: drop-shadow(0 2px 6px color-mix(in srgb, #ff3d6a 35%, transparent));
 }
 
+.lms-scoreboardHeart_overlay {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px color-mix(in srgb, #000000 75%, transparent));
+}
+
+.lms-scoreboardHearts_overlay {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+
 .buzzerSoundSlider {
     position: absolute;
     left: 16px;

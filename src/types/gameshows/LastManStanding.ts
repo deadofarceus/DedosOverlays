@@ -5,6 +5,18 @@ export interface LMSGameState {
   currentBoard: number;
   currentPlayer: number;
   password: string;
+  round: Round;
+}
+
+export interface Round {
+  participants: LMSPlayer[];
+  results: Result[];
+}
+
+export interface Result {
+  playerName: string;
+  rightAnswer: boolean;
+  lifes: number;
 }
 
 export interface LMSAdmin {
@@ -44,27 +56,56 @@ export const TESTGamestate: LMSGameState = {
       name: "Krokoboss",
       lifes: 3,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 0,
+      points: 10,
     },
     {
       name: "Kutcher",
       lifes: 2,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 0,
+      points: 20,
     },
     {
       name: "Broeki",
       lifes: 1,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 0,
+      points: 9,
     },
     {
       name: "TwoStone",
-      lifes: 0,
+      lifes: 1,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 0,
+      points: 2,
     },
   ],
+  round: {
+    participants: [
+      {
+        name: "Krokoboss",
+        lifes: 3,
+        vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
+        points: 0,
+      },
+      {
+        name: "Kutcher",
+        lifes: 2,
+        vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
+        points: 0,
+      },
+      {
+        name: "Broeki",
+        lifes: 1,
+        vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
+        points: 0,
+      },
+      {
+        name: "TwoStone",
+        lifes: 0,
+        vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
+        points: 0,
+      },
+    ],
+    results: [],
+  },
   boards: [
     {
       id: 0,
@@ -109,6 +150,53 @@ export const TESTGamestate: LMSGameState = {
         },
         {
           name: "Amumu",
+          revealed: false,
+        },
+      ],
+    },
+    {
+      id: 1,
+      title: "ZWEITES BOARD",
+      extra: "default",
+      objects: [
+        {
+          name: "Nasus2",
+          revealed: false,
+        },
+        {
+          name: "Shyvana2",
+          revealed: false,
+        },
+        {
+          name: "Viego2",
+          revealed: false,
+        },
+        {
+          name: "Zilean2",
+          revealed: false,
+        },
+        {
+          name: "Sona2",
+          revealed: false,
+        },
+        {
+          name: "Pyke2",
+          revealed: false,
+        },
+        {
+          name: "Taliyah2",
+          revealed: false,
+        },
+        {
+          name: "Quinn2",
+          revealed: false,
+        },
+        {
+          name: "Alistar2",
+          revealed: false,
+        },
+        {
+          name: "Amumu2",
           revealed: false,
         },
       ],

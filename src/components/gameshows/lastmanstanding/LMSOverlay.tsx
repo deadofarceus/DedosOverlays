@@ -6,6 +6,8 @@ import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import LMSBoard from "./LMSBoard";
 import VDOLinkStream from "../../util/VDOLinkStream";
 
+const HEART_SRC = "../../DDF/heart.png";
+
 let ws: GameshowWebsocket<LMSGameState>;
 
 function LMSOverlay() {
@@ -82,6 +84,20 @@ function LMSOverlay() {
             id={""}
           >
             <div>{player.name.toUpperCase()}</div>
+            {player.lifes <= 0 && (
+              <div
+                className="lms-scoreboardHearts lms-scoreboardHearts--empty"
+                aria-label="Keine Leben"
+              />
+            )}
+            {player.lifes > 0 && (
+              <div className="lms-scoreboardHearts_overlay" aria-label={`${player.lifes} Leben`}>
+                {Array.from({ length: player.lifes }, (_, i) => (
+                  <img key={i} className="lms-scoreboardHeart_overlay" src={HEART_SRC} alt="" />
+                ))}
+              </div>
+            )}
+
             <div>{player.points}</div>
           </div>
         ))}
