@@ -86,7 +86,7 @@ function JepoardyTeilnehmer() {
     !question.buzzedPlayers.map((p) => p.name).includes(playerName) &&
     question.buzzedPlayers.length > 0 &&
     buzzerQueue.length === 0 &&
-    ((question.type === "TEXT" && question.state === "ACTIVE") ||
+    (((question.type === "TEXT" || question.type === "IMAGE") && question.state === "ACTIVE") ||
       question.type === "VIDEO" ||
       question.type === "AUDIO");
 
@@ -95,15 +95,20 @@ function JepoardyTeilnehmer() {
     player.yoinkJoker &&
     question.buzzedPlayers.length === 0 &&
     buzzerQueue.length === 0 &&
-    currentGamestate.state === "QUESTION";
+    currentGamestate.state === "QUESTION" &&
+    currentGamestate.currentBoard.id === 1;
   const canUseNoYouJoker =
     currentGamestate.players[currentGamestate.currentPlayer].name === playerName &&
     player.noYouJoker &&
     question.buzzedPlayers.length === 0 &&
     buzzerQueue.length === 0 &&
-    currentGamestate.state === "QUESTION";
+    currentGamestate.state === "QUESTION" &&
+    currentGamestate.currentBoard.id === 1;
   const canUseGamemasterJoker =
-    currentPlayer.name !== playerName && player.gmJoker === 1 && currentGamestate.state === "BOARD";
+    currentPlayer.name !== playerName &&
+    player.gmJoker === 1 &&
+    currentGamestate.state === "BOARD" &&
+    currentGamestate.currentBoard.id === 1;
 
   const handleYoinkJoker = () => {
     if (!canUseYoinkJoker) return;

@@ -10,6 +10,7 @@ const RANDOM_FINISH_SOUND = "../../jepoardy/audio/finish2.mp3";
 function playRandomizerStepSound(isLastTick: boolean) {
   const src = isLastTick ? RANDOM_FINISH_SOUND : RANDOM_TICK_SOUND;
   const audio = new Audio(src);
+  audio.volume = 0.4;
   void audio.play().catch(() => {});
 }
 

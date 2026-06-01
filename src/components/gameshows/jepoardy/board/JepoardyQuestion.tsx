@@ -44,7 +44,14 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
           {question.type === "VIDEO" && (
             <VideoQuestion question={question} sendState={sendState} gamestate={gamestate} />
           )}
-          {question.finished && <div className="jp-question-answer">{question.answer}</div>}
+          {question.finished && (
+            <div
+              className="jp-question-answer"
+              style={question.id === 20 ? { fontSize: "36px" } : {}}
+            >
+              {question.answer}
+            </div>
+          )}
         </div>
       </div>
     );
