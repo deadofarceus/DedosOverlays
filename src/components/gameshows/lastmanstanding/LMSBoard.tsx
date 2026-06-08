@@ -28,6 +28,11 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
     const newGamestate = { ...gamestate };
     newGamestate.boards[newGamestate.currentBoard].objects[index].revealed = true;
 
+    if (newGamestate.players.filter((player) => player.lifes > 0).length < 2) {
+      sendState(newGamestate);
+      return;
+    }
+
     newGamestate.round.results.push({
       playerName: newGamestate.players[newGamestate.currentPlayer].name,
       rightAnswer: true,
