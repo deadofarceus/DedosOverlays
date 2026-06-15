@@ -281,8 +281,12 @@
     position: relative;
     z-index: 1;
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    /* grid-template-columns: repeat(5, minmax(0, 1fr)); */
     gap: 18px;
     padding: 20px 28px 28px;
     align-content: center;
@@ -385,20 +389,29 @@
 
 .lms-boardObjectLabel {
     flex-shrink: 0;
+    width: 100%;
     max-width: 100%;
-    padding: 6px 10px;
+    max-height: 38%;
+    padding: 2px;
     border-radius: 6px;
+    /* font-size: clamp(0.5rem, 1vw, 0.95rem); */
     font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    /* letter-spacing: 0.06em; */
     text-transform: uppercase;
     text-align: center;
+    text-wrap: wrap;
+
     color: var(--lms-cream);
     background: color-mix(in srgb, var(--lms-surface-deep) 75%, transparent);
     border: 1px solid color-mix(in srgb, var(--lms-gold) 30%, transparent);
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+}
+
+.lms-boardObjectLabel div {
+    white-space: wrap !important;
 }
 
 .lms-boardObject--revealed .lms-boardObjectLabel {

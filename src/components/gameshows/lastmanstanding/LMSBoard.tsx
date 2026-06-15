@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { LMSGameState } from "../../../types/gameshows/LastManStanding";
 import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import { useQuery } from "../../../types/UsefulFunctions";
+import { Textfit } from "react-textfit";
 
 interface LMSBoardProps {
   sendState: (newState: LMSGameState) => void;
@@ -39,11 +40,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
       lifes: newGamestate.players[newGamestate.currentPlayer].lifes,
     });
 
-    if (Math.random() > 0.5) {
-      soundWS.sendData("bling1.mp3");
-    } else {
-      soundWS.sendData("bling2.mp3");
-    }
+    soundWS.sendData("bling1.mp3");
 
     if (
       newGamestate.round.results.length >=
@@ -97,6 +94,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
         {currentBoard.objects.map((object, index) => (
           <div
             key={index}
+            style={{ flex: `0 0 ${currentBoard.size}px` }}
             className={[
               "lms-boardObject",
               object.revealed && "lms-boardObject--revealed",
@@ -121,7 +119,9 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
                   src="../../lastmanstanding/objects/hidden.png"
                   alt=""
                 />
-                <span className="lms-boardObjectLabel">{object.name}</span>
+                <Textfit mode="multi" max={16} min={6} className="lms-boardObjectLabel">
+                  {object.name}
+                </Textfit>
               </div>
             )}
             {!object.revealed && !admin && (
