@@ -150,9 +150,9 @@ function DDFController() {
 
   const handleGoBack = () => {
     const newPlayers = [...data.players];
-    newPlayers[lastPlayerIndex].answers.pop();
-    newPlayers[playerTurnIndex].yourTurn = false;
-    newPlayers[lastPlayerIndex].yourTurn = true;
+    newPlayers[playerTurnIndex].answers.pop();
+    const p = findNextTurn(newPlayers);
+    p.yourTurn = true;
 
     sendData({ ...data, players: newPlayers });
   };
@@ -179,11 +179,6 @@ function DDFController() {
   };
 
   const playerTurnIndex = data.players.findIndex((player) => player.yourTurn);
-  const lastPlayerIndex = data.players[
-    (playerTurnIndex + data.players.length - 1) % data.players.length
-  ].admin
-    ? (playerTurnIndex + data.players.length - 2) % data.players.length
-    : (playerTurnIndex + data.players.length - 1) % data.players.length;
   const finale = data.players.filter((player) => player.lifes > 0 && !player.admin).length === 2;
 
   return (
@@ -234,7 +229,7 @@ function DDFController() {
             </Button>
           </div>
           <Button className="ddf-controlButton" variant="primary" onClick={() => handleGoBack()}>
-            {"Antwort von " + data.players[lastPlayerIndex].name + " revidieren"}
+            {"Antwort von " + data.players[playerTurnIndex].name + " revidieren"}
           </Button>
           <Button className="ddf-controlButton" variant="warning" onClick={crownWinner}>
             Crown Winner
