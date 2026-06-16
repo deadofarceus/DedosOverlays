@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { LMSGameState } from "../../../types/gameshows/LastManStanding";
 import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import { useQuery } from "../../../types/UsefulFunctions";
-import { Textfit } from "react-textfit";
 
 interface LMSBoardProps {
   sendState: (newState: LMSGameState) => void;
@@ -119,9 +118,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
                   src="../../lastmanstanding/objects/hidden.png"
                   alt=""
                 />
-                <Textfit mode="multi" max={16} min={6} className="lms-boardObjectLabel">
-                  {object.name}
-                </Textfit>
+                <span className="lms-boardObjectLabel">{object.name}</span>
               </div>
             )}
             {!object.revealed && !admin && (
