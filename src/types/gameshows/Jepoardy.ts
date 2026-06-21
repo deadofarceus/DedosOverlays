@@ -151,6 +151,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "1700G",
               finished: false,
               buzzedPlayers: [],
+              info: "400 + (250) +  1200 = 1700",
             },
           ],
           [
@@ -166,6 +167,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "4500G",
               finished: false,
               buzzedPlayers: [],
+              info: "450 + 3100 + 875 + 75 = 4500",
             },
           ],
           [
@@ -181,6 +183,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "6850G",
               finished: false,
               buzzedPlayers: [],
+              info: "3000 + 1250 + 1200 + 1050 + 350 = 6850",
             },
           ],
           [
@@ -196,6 +199,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "5030G",
               finished: false,
               buzzedPlayers: [],
+              info: "400 + 900 + 600 + 850 + 2200 + (240) = 5030",
             },
           ],
           [
@@ -211,6 +215,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "2937G",
               finished: false,
               buzzedPlayers: [],
+              info: "1337 + 1100 + 150 + 350 = 2937",
             },
           ],
         ],
@@ -1322,6 +1327,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "1700G",
                 finished: false,
                 buzzedPlayers: [],
+                info: "400 + (250) +  1200 = 1700",
               },
             ],
             [
@@ -1337,6 +1343,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "4500G",
                 finished: false,
                 buzzedPlayers: [],
+                info: "450 + 3100 + 875 + 75 = 4500",
               },
             ],
             [
@@ -1352,6 +1359,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "6850G",
                 finished: false,
                 buzzedPlayers: [],
+                info: "3000 + 1250 + 1200 + 1050 + 350 = 6850",
               },
             ],
             [
@@ -1367,6 +1375,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "5030G",
                 finished: false,
                 buzzedPlayers: [],
+                info: "400 + 900 + 600 + 850 + 2200 + (240) = 5030",
               },
             ],
             [
@@ -1382,6 +1391,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "2937G",
                 finished: false,
                 buzzedPlayers: [],
+                info: "1337 + 1100 + 150 + 350 = 2937",
               },
             ],
           ],
