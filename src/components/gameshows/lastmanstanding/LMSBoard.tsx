@@ -41,6 +41,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
 
     soundWS.sendData("bling1.mp3");
 
+
     if (
       newGamestate.round.results.length >=
       newGamestate.players.filter((player) => player.lifes > 0).length
@@ -70,6 +71,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
           player.points += player.lifes;
         });
       }
+      newGamestate.round.results = [];
     }
 
     newGamestate.currentPlayer = getNextPlayer();

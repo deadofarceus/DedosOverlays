@@ -77,7 +77,7 @@ boards.push({
     {
       name: "Mordekaiser",
       revealed: false,
-      image: "Mordekaiser_6",
+      image: "Mordekaiser_13",
     },
     {
       name: "Katarina",
@@ -88,6 +88,11 @@ boards.push({
       name: "Irelia",
       revealed: false,
       image: "Irelia_16",
+    },
+    {
+      name: "Renekton",
+      revealed: false,
+      image: "Renekton_26",
     },
     {
       name: "Gangplank",
@@ -197,7 +202,7 @@ boards.push({
     {
       name: "Fiddlesticks",
       revealed: false,
-      image: "Fiddlesticks_0",
+      image: "FiddleSticks_0",
     },
     {
       name: "Annie",
@@ -276,7 +281,7 @@ boards.push({
   id: 2,
   title: "Skins, die man mit Gemstones kaufen konnte",
   extra: "default",
-  size: 137,
+  size: 136,
   objects: [
     { name: "Dragonwing Corki", revealed: false, image: "Corki_6" },
     { name: "Hextech Swain", revealed: false, image: "Swain_11" },
@@ -291,7 +296,7 @@ boards.push({
     { name: "Hextech Amumu", revealed: false, image: "Amumu_23" },
     { name: "Hextech Ziggs", revealed: false, image: "Ziggs_23" },
     { name: "Soulstealer Vayne", revealed: false, image: "Vayne_10" },
-    { name: "Warring Kingdoms Garen", revealed: false, image: "Garen_11" },
+    { name: "War. King. Garen", revealed: false, image: "Garen_11" },
     { name: "Hextech Poppy", revealed: false, image: "Poppy_15" },
     { name: "Nightbringer Ward", revealed: false, image: "NightbringerWard.png" },
     { name: "Hextech Alistar", revealed: false, image: "Alistar_19" },
@@ -299,7 +304,7 @@ boards.push({
     { name: "Lancer Zero Hecarim", revealed: false, image: "Hecarim_7" },
     { name: "Hextech Sejuani", revealed: false, image: "Sejuani_15" },
     { name: "Dark Star Cho'Gath", revealed: false, image: "Chogath_7" },
-    { name: "Warring Kingdoms Katarina", revealed: false, image: "Katarina_8" },
+    { name: "Warr. King. Katarina", revealed: false, image: "Katarina_8" },
     { name: "Hextech Kog'Maw", revealed: false, image: "KogMaw_10" },
     { name: "Neo Pax Sivir", revealed: false, image: "Sivir_9" },
     { name: "Hextech Renekton", revealed: false, image: "Renekton_17" },
@@ -380,25 +385,25 @@ export const TESTGamestate: LMSGameState = {
       name: "Krokoboss",
       lifes: 3,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 10,
+      points: 0,
     },
     {
       name: "Kutcher",
       lifes: 2,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 20,
+      points: 0,
     },
     {
       name: "Broeki",
       lifes: 1,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 9,
+      points: 0,
     },
     {
       name: "TwoStone",
       lifes: 1,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
-      points: 2,
+      points: 0,
     },
   ],
   round: {

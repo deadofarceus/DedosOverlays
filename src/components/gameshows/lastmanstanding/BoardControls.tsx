@@ -59,7 +59,14 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
   const handleWrongAnswer = () => {
     const newGamestate = { ...gamestate };
 
-    newGamestate.players[newGamestate.currentPlayer].lifes--;
+    if (newGamestate.round.participants.length === 1) {
+      return;
+    }
+
+    if(newGamestate.boards[gamestate.currentBoard].objects.every((object) => object.revealed)) {
+      return;
+    }
+
     newGamestate.round.results.push({
       playerName: newGamestate.players[newGamestate.currentPlayer].name,
       rightAnswer: false,
@@ -141,6 +148,14 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
     newGamestate.boards[newGamestate.currentBoard].objects.forEach((object) => {
       object.revealed = true;
     });
+
+    if (newGamestate.round.participants.length !== 1) {
+      newGamestate.players.forEach((player) => {
+        if (player.lifes > 0) {
+          player.points += 4 - newGamestate.round.participants.length;
+        }
+      });
+    }
     sendState(newGamestate);
   };
 
