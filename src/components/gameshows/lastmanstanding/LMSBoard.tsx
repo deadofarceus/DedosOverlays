@@ -114,8 +114,18 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
               >
                 <img
                   className="lms-boardObjectImg"
-                  // src={"../../lastmanstanding/objects/" + object.name + ".png"}
-                  src="../../lastmanstanding/objects/hidden.png"
+                  src={
+                    object.image
+                      ? object.image.includes("_")
+                        ? `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${object.image}.jpg`
+                        : !object.image.includes(".png")
+                          ? "https://ddragon.leagueoflegends.com/cdn/16.12.1/img/item/" +
+                            object.image +
+                            ".png"
+                          : "../../lastmanstanding/objects/" + object.image
+                      : "../../lastmanstanding/objects/hidden.png"
+                  }
+                  // src="../../lastmanstanding/objects/hidden.png"
                   alt=""
                 />
                 <span className="lms-boardObjectLabel">{object.name}</span>

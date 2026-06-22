@@ -381,9 +381,9 @@
 
 .lms-boardObjectImg {
     flex: 1;
-    width: 100%;
+    width: 72%;
     max-height: 72%;
-    object-fit: contain;
+    object-fit: cover;
     filter: drop-shadow(0 6px 14px color-mix(in srgb, #000 45%, transparent));
 }
 
