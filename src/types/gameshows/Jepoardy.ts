@@ -49,7 +49,14 @@ export interface Question {
   category: string;
   points: number;
   type: "AUDIO" | "IMAGE" | "TEXT" | "VIDEO";
-  extra: "Active" | "Taunt" | "Windfury" | "Gold" | "Inactive" | "Safezone" | "Corrupted";
+  extra:
+    | "Active"
+    | "Taunt"
+    | "Windfury"
+    | "Gold"
+    | "Inactive"
+    | "Safezone"
+    | "Corrupted";
   question: string;
   answertype: "VIDEO" | "TEXT" | "IMAGE";
   answer: string;
@@ -140,7 +147,7 @@ export const TESTGamestate: JepoardyGameState = {
         questions: [
           [
             {
-              id: 1,
+              id: 0,
               category: "Finanzamt kommt",
               points: 200,
               type: "IMAGE",
@@ -151,12 +158,12 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "1700G",
               finished: false,
               buzzedPlayers: [],
-              info: "400 + (250) +  1200 = 1700",
+              info: "400 + (2*50) +  1200 = 1700",
             },
           ],
           [
             {
-              id: 2,
+              id: 1,
               category: "Finanzamt kommt",
               points: 400,
               type: "IMAGE",
@@ -199,7 +206,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "5030G",
               finished: false,
               buzzedPlayers: [],
-              info: "400 + 900 + 600 + 850 + 2200 + (240) = 5030",
+              info: "400 + 900 + 600 + 850 + 2200 + (2*40) = 5030",
             },
           ],
           [
@@ -269,7 +276,7 @@ export const TESTGamestate: JepoardyGameState = {
               answer: "D",
               finished: false,
               buzzedPlayers: [],
-              info: "D: 151, F: 141",
+              info: "Flash auf D: 151, Flash auf F: 141",
             },
           ],
           [
@@ -296,12 +303,13 @@ export const TESTGamestate: JepoardyGameState = {
               type: "TEXT",
               state: "ACTIVE",
               extra: "Active",
-              question: "Was ist dein Lieblingsitem?",
+              question:
+                "Was ist dein Lieblingsitem? (was momentan im Shop zu finden ist)",
               answertype: "TEXT",
               answer: "Heartsteel, Rabadons Deathcap, Infinity Edge",
               finished: false,
               buzzedPlayers: [],
-              info: "(was momentan im Shop zu finden ist) Heartsteel: 26, Rabadons Deathcap: 26, Infinity Edge: 17, Blade of the Ruined King: 15, Shadowflame: 13, Unklar/Keins: 12",
+              info: "Heartsteel: 26, Rabadons Deathcap: 26, Infinity Edge: 17, Blade of the Ruined King: 15, Shadowflame: 13, Unklar/Keins: 12",
             },
           ],
         ],
@@ -318,7 +326,7 @@ export const TESTGamestate: JepoardyGameState = {
               type: "VIDEO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "Mango_Mordekaiser.mp4",
+              question: "BigSpin_Irelia.mp4",
               answertype: "TEXT",
               answer: "Irelia",
               finished: false,
@@ -333,7 +341,7 @@ export const TESTGamestate: JepoardyGameState = {
               type: "VIDEO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "BigSpin_Irelia.mp4",
+              question: "Mango_Mordekaiser.mp4",
               answertype: "TEXT",
               answer: "Mordekaiser",
               finished: false,
@@ -348,7 +356,7 @@ export const TESTGamestate: JepoardyGameState = {
               type: "VIDEO",
               state: "INVISIBLE",
               extra: "Active",
-              question: "BigSpin_Irelia.mp4",
+              question: "Mango_Mordekaiser.mp4",
               answertype: "TEXT",
               answer: "5",
               finished: false,
@@ -401,7 +409,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "twitch_zaheen_w_auf_r.png",
               answertype: "TEXT",
-              answer: "Zaheen W",
+              answer: "Twitch mit Zaheen W auf R",
               finished: false,
               buzzedPlayers: [],
             },
@@ -416,7 +424,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "rell__skarner_e.png",
               answertype: "TEXT",
-              answer: "Skarner E",
+              answer: "Rell mit Skarner E auf E",
               finished: false,
               buzzedPlayers: [],
             },
@@ -431,7 +439,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "kassadin__malz_w.png",
               answertype: "TEXT",
-              answer: "Malzahar E",
+              answer: "Kassadin mit Malzahar E auf E",
               finished: false,
               buzzedPlayers: [],
             },
@@ -446,7 +454,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "yasuo__janna_p.png",
               answertype: "TEXT",
-              answer: "Janna Passive",
+              answer: "Yasuo mit Janna Passive auf Passive",
               finished: false,
               buzzedPlayers: [],
             },
@@ -461,7 +469,7 @@ export const TESTGamestate: JepoardyGameState = {
               extra: "Active",
               question: "brand__leo_r.png",
               answertype: "TEXT",
-              answer: "Leona R",
+              answer: "Brand mit Leona R auf R",
               finished: false,
               buzzedPlayers: [],
             },
@@ -1205,10 +1213,12 @@ export const TESTGamestate: JepoardyGameState = {
                 points: 444,
                 type: "TEXT",
                 extra: "Active",
-                question: "Nenne 4 Champs, die im 'Still here' Musikvideo auftreten",
+                question:
+                  "Nenne 4 Champs, die im 'Still here' Musikvideo auftreten",
                 answertype: "TEXT",
                 state: "ACTIVE",
-                answer: "Tryndamere, Kindred, Yasuo, Morgana, Kayle, Aatrox, Ashe",
+                answer:
+                  "Tryndamere, Kindred, Yasuo, Morgana, Kayle, Aatrox, Ashe",
                 finished: false,
                 buzzedPlayers: [],
               },
@@ -1259,7 +1269,7 @@ export const TESTGamestate: JepoardyGameState = {
                 type: "TEXT",
                 state: "ACTIVE",
                 extra: "Active",
-                question: `Diese Champs 10 Skins oder mehr (Default nicht mitgezählt) (Stand:19.04.26): 
+                question: `Diese Champs haben 10 Skins oder mehr (Default nicht mitgezählt) (Stand:19.04.26): 
                   Malzahar, Nasus, Nidalee, Pyke, Lissandra`,
                 answertype: "TEXT",
                 answer: "Lissandra (9)",
@@ -1316,7 +1326,7 @@ export const TESTGamestate: JepoardyGameState = {
           questions: [
             [
               {
-                id: 1,
+                id: 0,
                 category: "Finanzamt kommt",
                 points: 200,
                 type: "IMAGE",
@@ -1327,12 +1337,12 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "1700G",
                 finished: false,
                 buzzedPlayers: [],
-                info: "400 + (250) +  1200 = 1700",
+                info: "400 + (2*50) +  1200 = 1700",
               },
             ],
             [
               {
-                id: 2,
+                id: 1,
                 category: "Finanzamt kommt",
                 points: 400,
                 type: "IMAGE",
@@ -1375,7 +1385,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "5030G",
                 finished: false,
                 buzzedPlayers: [],
-                info: "400 + 900 + 600 + 850 + 2200 + (240) = 5030",
+                info: "400 + 900 + 600 + 850 + 2200 + (2*40) = 5030",
               },
             ],
             [
@@ -1445,7 +1455,7 @@ export const TESTGamestate: JepoardyGameState = {
                 answer: "D",
                 finished: false,
                 buzzedPlayers: [],
-                info: "D: 151, F: 141",
+                info: "Flash auf D: 151, Flash auf F: 141",
               },
             ],
             [
@@ -1472,12 +1482,13 @@ export const TESTGamestate: JepoardyGameState = {
                 type: "TEXT",
                 state: "ACTIVE",
                 extra: "Active",
-                question: "Was ist dein Lieblingsitem?",
+                question:
+                  "Was ist dein Lieblingsitem? (was momentan im Shop zu finden ist)",
                 answertype: "TEXT",
                 answer: "Heartsteel, Rabadons Deathcap, Infinity Edge",
                 finished: false,
                 buzzedPlayers: [],
-                info: "(was momentan im Shop zu finden ist) Heartsteel: 26, Rabadons Deathcap: 26, Infinity Edge: 17, Blade of the Ruined King: 15, Shadowflame: 13, Unklar/Keins: 12",
+                info: "Heartsteel: 26, Rabadons Deathcap: 26, Infinity Edge: 17, Blade of the Ruined King: 15, Shadowflame: 13, Unklar/Keins: 12",
               },
             ],
           ],
@@ -1577,7 +1588,7 @@ export const TESTGamestate: JepoardyGameState = {
                 extra: "Active",
                 question: "twitch_zaheen_w_auf_r.png",
                 answertype: "TEXT",
-                answer: "Zaheen W",
+                answer: "Twitch mit Zaheen W auf R",
                 finished: false,
                 buzzedPlayers: [],
               },
@@ -1592,7 +1603,7 @@ export const TESTGamestate: JepoardyGameState = {
                 extra: "Active",
                 question: "rell__skarner_e.png",
                 answertype: "TEXT",
-                answer: "Skarner E",
+                answer: "Rell mit Skarner E auf E",
                 finished: false,
                 buzzedPlayers: [],
               },
@@ -1607,7 +1618,7 @@ export const TESTGamestate: JepoardyGameState = {
                 extra: "Active",
                 question: "kassadin__malz_w.png",
                 answertype: "TEXT",
-                answer: "Malzahar E",
+                answer: "Kassadin mit Malzahar E auf E",
                 finished: false,
                 buzzedPlayers: [],
               },
@@ -1622,7 +1633,7 @@ export const TESTGamestate: JepoardyGameState = {
                 extra: "Active",
                 question: "yasuo__janna_p.png",
                 answertype: "TEXT",
-                answer: "Janna Passive",
+                answer: "Yasuo mit Janna Passive auf Passive",
                 finished: false,
                 buzzedPlayers: [],
               },
@@ -1637,7 +1648,7 @@ export const TESTGamestate: JepoardyGameState = {
                 extra: "Active",
                 question: "brand__leo_r.png",
                 answertype: "TEXT",
-                answer: "Leona R",
+                answer: "Brand mit Leona R auf R",
                 finished: false,
                 buzzedPlayers: [],
               },
