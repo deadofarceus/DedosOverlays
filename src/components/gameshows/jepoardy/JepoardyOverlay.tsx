@@ -61,13 +61,19 @@ function JepoardyOverlay() {
     }
   });
 
-  console.log(links);
-  console.log(getVDONinjaLink(id!, currentGamestate.admin.name, currentGamestate.password));
+  // console.log(links);
+  // console.log(getVDONinjaLink(id!, currentGamestate.admin.name, currentGamestate.password));
 
   const currentPlayer =
     buzzerQueue.length === 0
       ? currentGamestate.players[currentGamestate.currentPlayer]
       : currentGamestate.players.find((p) => p.name === buzzerQueue[0])!;
+
+  const yoink = currentGamestate.players.filter((p) => p.yoinkJoker)[0];
+  const noYou = currentGamestate.players.filter((p) => p.noYouJoker)[0];
+  const gamemaster = currentGamestate.players.filter((p) => p.gmJoker !== -1)[0];
+
+  console.log(yoink, noYou, gamemaster);
 
   return (
     <div className="jp-overlay">
@@ -78,6 +84,45 @@ function JepoardyOverlay() {
         clearBuzzer={() => {}}
         clearOneBuzzer={() => {}}
       />
+      {currentGamestate.currentBoard.id === 1 && <div className="jp-joker-overlay-div">
+        <div className="jp-joker-grid">
+          <div className={"jp-joker-card jp-joker-yoink"} aria-disabled={!yoink} >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_Yoink.png" alt="" />
+              <div className="jp-joker-title">{"YOINK"}</div>
+              {yoink && <div className="jp-joker-owner">{yoink.name}</div>}
+            </div>
+            <div className="jp-joker-subtitle">KLAUE DIE FRAGE EINES MITSPIELERS</div>
+          </div>
+
+          <div
+            className={"jp-joker-card jp-joker-noyou"} aria-disabled={!noYou}
+          >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_NoYou.png" alt="" />
+
+              <div className="jp-joker-title">{"NO YOU"}</div>
+              {noYou && <div className="jp-joker-owner">{noYou.name}</div>} 
+            </div>
+            <div className="jp-joker-subtitle">EINE FRAGE WIRD WEITERGEGEBEN</div>
+          </div>
+
+          <div
+            className={
+              "jp-joker-card jp-joker-gamemaster"
+            }
+            aria-disabled={!gamemaster}
+          >
+            <div className="jp-joker-row">
+              <img className="jp-joker-icon" src="../../../jepoardy/Icon_Gamemaster.png" alt="" />
+              <div className="jp-joker-title">{"GAMEMASTER"}</div>
+              {gamemaster && <div className="jp-joker-owner">{gamemaster.name}</div>}
+            </div>
+            <div className="jp-joker-subtitle">WÄHLE DIE FRAGE FÜR EINEN MITSPIELER AUS</div>
+          </div>
+        </div>
+      </div>}
+      
       <div className="jp-VDOStreams">
         {links.map((vdolink, index) => (
           <div key={index} className={"jp-VDOLinkStreamDiv"} id={""}>

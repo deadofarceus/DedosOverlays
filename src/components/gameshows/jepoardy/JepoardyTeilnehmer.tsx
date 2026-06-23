@@ -208,10 +208,10 @@ function JepoardyTeilnehmer() {
         <div className="jp-joker-grid">
           <button
             type="button"
-            className="jp-joker-card jp-joker-yoink"
+            className={"jp-joker-card jp-joker-yoink" + (canUseYoinkJoker ? " jp-joker-active" : "")}
             onClick={handleYoinkJoker}
-            disabled={!canUseYoinkJoker}
-            aria-disabled={!canUseYoinkJoker}
+            disabled={!player.yoinkJoker}
+            aria-disabled={!player.yoinkJoker}
           >
             <div className="jp-joker-row">
               <img className="jp-joker-icon" src="../../../jepoardy/Icon_Yoink.png" alt="" />
@@ -222,10 +222,10 @@ function JepoardyTeilnehmer() {
 
           <button
             type="button"
-            className="jp-joker-card jp-joker-noyou"
+            className={"jp-joker-card jp-joker-noyou" + (canUseNoYouJoker ? " jp-joker-active" : "")}
             onClick={handleNoYouJoker}
-            disabled={!canUseNoYouJoker}
-            aria-disabled={!canUseNoYouJoker}
+            disabled={!player.noYouJoker}
+            aria-disabled={!player.noYouJoker}
           >
             <div className="jp-joker-row">
               <img className="jp-joker-icon" src="../../../jepoardy/Icon_NoYou.png" alt="" />
@@ -237,10 +237,12 @@ function JepoardyTeilnehmer() {
 
           <button
             type="button"
-            className="jp-joker-card jp-joker-gamemaster"
+            className={
+              "jp-joker-card jp-joker-gamemaster" + (canUseGamemasterJoker ? " jp-joker-active" : "")
+            }
             onClick={handleGamemasterJoker}
-            disabled={!canUseGamemasterJoker}
-            aria-disabled={!canUseGamemasterJoker}
+            disabled={player.gmJoker < 0}
+            aria-disabled={player.gmJoker < 0}
           >
             <div className="jp-joker-row">
               <img className="jp-joker-icon" src="../../../jepoardy/Icon_Gamemaster.png" alt="" />

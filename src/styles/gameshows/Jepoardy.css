@@ -689,6 +689,26 @@
     border-radius: 10px;
 }
 
+.jp-joker-active {
+    box-shadow: 0 0 12px 3px rgba(255, 215, 0, 0.6);
+    animation: pulse 2.5s ease-in-out infinite;
+    border-radius: 20px;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 12px 3px rgba(255, 215, 0, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 18px 5px rgba(255, 215, 0, 0.85);
+    }
+
+    100% {
+        box-shadow: 0 0 12px 3px rgba(255, 215, 0, 0.6);
+    }
+}
+
 .jp-joker-grid {
     width: 100%;
     height: 100%;
@@ -779,6 +799,32 @@
 .jp-joker-gamemaster .jp-joker-title,
 .jp-joker-gamemaster .jp-joker-subtitle {
     color: #4B86FF;
+}
+
+.jp-joker-overlay-div {
+    position: absolute;
+    z-index: 10;
+    left: 80px;
+    top: 392px;
+    width: 390px;
+    height: 300px;
+    font-family: "Inter";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.jp-joker-owner {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.jp-joker-card[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.45;
+    filter: grayscale(0.1) brightness(0.85);
 }
 
 .buzzerUserInput {

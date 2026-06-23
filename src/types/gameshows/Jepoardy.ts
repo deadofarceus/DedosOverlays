@@ -112,7 +112,7 @@ export const TESTGamestate: JepoardyGameState = {
       turn: false,
       buzzed: false,
       yoinkJoker: false,
-      noYouJoker: false,
+      noYouJoker: true,
       gmJoker: -1,
     },
     {
@@ -123,7 +123,7 @@ export const TESTGamestate: JepoardyGameState = {
       buzzed: false,
       yoinkJoker: false,
       noYouJoker: false,
-      gmJoker: -1,
+      gmJoker: 1,
     },
     {
       name: "TwoStone",
