@@ -67,6 +67,8 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
       return;
     }
 
+    newGamestate.players[newGamestate.currentPlayer].lifes--;
+
     newGamestate.round.results.push({
       playerName: newGamestate.players[newGamestate.currentPlayer].name,
       rightAnswer: false,
