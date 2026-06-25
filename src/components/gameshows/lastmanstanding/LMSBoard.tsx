@@ -119,7 +119,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
                   src={
                     object.image
                       ? object.image.includes("_")
-                        ? `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${object.image}.jpg`
+                        ? `https://raw.communitydragon.org/latest/game/assets/characters/${object.image}`
                         : !object.image.includes(".png")
                           ? "https://ddragon.leagueoflegends.com/cdn/16.12.1/img/item/" +
                             object.image +
