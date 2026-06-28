@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "../../../../types/UsefulFunctions";
 
 let ws: BroadcastWebsocket<string>;
+let timerWs: BroadcastWebsocket<string>;
 
 interface BoardControlsProps {
   gamestate: JepoardyGameState;
@@ -30,6 +31,9 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
   useEffect(() => {
     if (!ws) {
       ws = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
+    }
+    if (!timerWs) {
+      timerWs = new BroadcastWebsocket<string>(id + "_TIMER");
     }
   }, []);
 
@@ -294,6 +298,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     }
   };
 
+  const handleTimer = (length: number) => {
+    timerWs.sendData("START_" + length);
+  };
+
   let frageAufdecken = question.state === "ACTIVE" ? "Frage verstecken" : "Frage aufdecken";
   if (question.type === "AUDIO" || question.type === "VIDEO") {
     console.log(question);
@@ -408,6 +416,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
           {drehDasRad}
         </Button>
       )}
+
+      <Button variant="secondary" onClick={() => handleTimer(10000)}>
+        10s Timer
+      </Button>
     </div>
   );
 }

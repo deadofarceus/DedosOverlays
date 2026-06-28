@@ -4,6 +4,7 @@ import AudioQuestion from "./question/AudioQuestion";
 import VideoQuestion from "./question/VideoQuestion";
 import ImageQuestion from "./question/ImageQuestion";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
+import BoardTimer from "../timer/BoardTimer";
 
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
   const showInfoInTitle = question.info !== undefined && question.info.length < 15;
@@ -52,6 +53,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
               {question.answer}
             </div>
           )}
+          {!question.finished && <BoardTimer />}
         </div>
       </div>
     );
@@ -81,6 +83,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
                 <img src={`/jepoardy/images/${encodeURIComponent(question.answer)}`} alt="" />
               </div>
             )}
+            {!question.finished && <BoardTimer />}
           </div>
         </div>
       );
@@ -121,6 +124,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
                 <img src={`/jepoardy/images/${encodeURIComponent(question.question)}`} alt="" />
               </div>
             )}
+            {!question.finished && <BoardTimer />}
           </div>
         </div>
       );
