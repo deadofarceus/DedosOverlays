@@ -73,8 +73,6 @@ function JepoardyOverlay() {
   const noYou = currentGamestate.players.filter((p) => p.noYouJoker)[0];
   const gamemaster = currentGamestate.players.filter((p) => p.gmJoker !== -1)[0];
 
-  console.log(yoink, noYou, gamemaster);
-
   return (
     <div className="jp-overlay">
       <JepoardyBoard
@@ -122,6 +120,13 @@ function JepoardyOverlay() {
           </div>
         </div>
       </div>}
+
+      <div className="jp-overlay-ichbindran-container">
+        {currentGamestate.players.map((player, index) => (
+          <div key={index} className={ "jp-overlay-ichbindran" + (currentPlayer.name === player.name ? " jp-overlay-ichbindran--active" : "")}>
+          </div>
+        ))}
+      </div>
       
       <div className="jp-VDOStreams">
         {links.map((vdolink, index) => (

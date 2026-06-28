@@ -185,6 +185,47 @@
     height: 225px;
 }
 
+.jp-overlay-ichbindran-container {
+    position: absolute;
+    bottom: 117px;
+    width: 1793px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    left: 63px;
+    z-index: 1000;
+}
+
+.jp-overlay-ichbindran {
+    width: 423px;
+    height: 236px;
+    position: relative;
+    border-radius: 20px;
+    /* border-image: linear-gradient(to bottom, #00FE61a1 0%, #00fe6100 100%) 1;
+    border-width: 11px 11px 0 11px;
+    border-style: solid;
+    border-radius: 20px; */
+
+}
+
+.jp-overlay-ichbindran--active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 11px; /* entspricht deiner border-width */
+  background: linear-gradient(to bottom, #00FE61a1 0%, #00FE61a1 70%, #00000000 95%, #00000000 100%);
+  
+  /* Nur oben/links/rechts sichtbar, unten ausblenden: */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 .jp-StreamAdmin {
     position: absolute;
     width: 480px;
