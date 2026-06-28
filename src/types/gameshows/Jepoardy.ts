@@ -1201,7 +1201,7 @@ export const TESTGamestate: JepoardyGameState = {
                 question: "Nenne die 4 neusten Champs",
                 answertype: "TEXT",
                 state: "ACTIVE",
-                answer: "Zaahen, Yunara, Mel, Ambessa",
+                answer: "Zaahen, Yunara, Locke, Ambessa",
                 finished: false,
                 buzzedPlayers: [],
               },

@@ -47,6 +47,12 @@ function JepoardyTeilnehmer() {
   }, []);
 
   useEffect(() => {
+    if (currentGamestate.state === "QUESTION") {
+      setBuzzerQueue([]);
+    }
+  }, [currentGamestate.state]);
+
+  useEffect(() => {
     audio.volume = Math.min(1, Math.max(0, buzzerVolume / 100));
   }, [buzzerVolume]);
 
