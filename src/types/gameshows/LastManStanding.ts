@@ -75,6 +75,21 @@ boards.push({
       image: "jinx/hud/jinx_circle_20.png",
     },
     {
+      name: "Quinn",
+      revealed: false,
+      image: "quinn/hud/quinn_circle_24.skins_quinn_skin24.png",
+    },
+    {
+      name: "Sivir",
+      revealed: false,
+      image: "sivir/hud/sivir_circle_72.skins_sivir_skin72.png",
+    },
+    {
+      name: "Pyke",
+      revealed: false,
+      image: "pyke/hud/pyke_circle_16.png",
+    },
+    {
       name: "Mordekaiser",
       revealed: false,
       image: "mordekaiser/hud/mordekaiser_circle_13.png",
@@ -286,7 +301,7 @@ boards.push({
     {
       name: "Dragonwing Corki",
       revealed: false,
-      image: "corki/hud/corki_circle_5.png",
+      image: "corki/hud/corki_circle_6.png",
     },
     {
       name: "Hextech Swain",
@@ -322,7 +337,7 @@ boards.push({
     {
       name: "Hextech Jarvan IV",
       revealed: false,
-      image: "jarvaniv/hud/jarvaniv_circle_8.png",
+      image: "jarvaniv/hud/jarvaniv_circle_9.png",
     },
     {
       name: "Guqin Sona",
@@ -347,12 +362,12 @@ boards.push({
     {
       name: "War. King. Garen",
       revealed: false,
-      image: "garen/hud/garen_circle_10.png",
+      image: "garen/hud/garen_circle_11.png",
     },
     {
       name: "Hextech Poppy",
       revealed: false,
-      image: "poppy/hud/poppy_circle_14.png",
+      image: "poppy/hud/poppy_circle_15.png",
     },
     {
       name: "Nightbringer Ward",
