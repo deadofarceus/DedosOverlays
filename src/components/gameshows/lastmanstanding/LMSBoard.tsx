@@ -39,8 +39,19 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
       lifes: newGamestate.players[newGamestate.currentPlayer].lifes,
     });
 
-    soundWS.sendData("bling1.mp3");
+    soundWS.sendData("bling.wav");
 
+    if (newGamestate.boards[newGamestate.currentBoard].objects.every((object) => object.revealed)) {
+      if (newGamestate.round.participants.length !== 1) {
+      newGamestate.players.forEach((player) => {
+        if (player.lifes > 0) {
+          player.points += 4 - newGamestate.round.participants.length;
+        }
+      });
+    }
+    sendState(newGamestate);
+    return;
+    }
 
     if (
       newGamestate.round.results.length >=
