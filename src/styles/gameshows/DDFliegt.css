@@ -221,3 +221,18 @@
   right: -30px;
   top: -50px;
 }
+
+.ddf-controller-question-name {
+  font-size: 60px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  border: #ffffff 2px solid;
+  border-radius: 10px;
+  background-color: #ffffff;
+  filter: drop-shadow(2px 2px 2px #222);
+  text-align: center;
+  color: black;
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

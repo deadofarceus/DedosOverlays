@@ -200,10 +200,11 @@ function DDFController() {
         ))}
       </div>
       <div className="ddf-controller-question-container">
-        <div className="ddf-controller-question blackOutline">
-          {"Frage geht an: " + data.players[playerTurnIndex].name}
-          <br />
-          Hier könnte Frage stehen
+        <div className="ddf-controller-question ">
+          {"Frage geht an: "}
+          <div className="ddf-controller-question-name">
+            {data.players[playerTurnIndex].name}
+          </div>
         </div>
         <div className="centerC">
           <div className="centerR">
