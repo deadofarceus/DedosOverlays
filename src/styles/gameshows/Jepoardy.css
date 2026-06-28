@@ -215,7 +215,7 @@
   inset: 0;
   border-radius: 20px;
   padding: 11px; /* entspricht deiner border-width */
-  background: linear-gradient(to bottom, #00FE61a1 0%, #00FE61a1 70%, #00000000 95%, #00000000 100%);
+  background: linear-gradient(to bottom, #ff541bda 0%, #ff541b8b 70%, #00000000 95%, #00000000 100%);
   
   /* Nur oben/links/rechts sichtbar, unten ausblenden: */
   -webkit-mask:
