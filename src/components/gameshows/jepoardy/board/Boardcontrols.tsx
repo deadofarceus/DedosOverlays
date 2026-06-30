@@ -313,7 +313,6 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
 
   let allQuestions = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).flat();
 
-  const finishedQuestionsCount = allQuestions.filter((q) => q.finished).length;
   const alreadySpinned =
     allQuestions.filter((q) => !(q.extra === "Active" || q.extra === "Inactive")).length > 0 ||
     gamestate.currentBoard.extra === "forced";
@@ -321,7 +320,6 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
   const radDrehAble =
     gamestate.state === "BOARD" &&
     gamestate.currentBoard.id === 1 &&
-    finishedQuestionsCount >= 4 &&
     !alreadySpinned;
 
   let drehDasRad = "Lass das RAD erscheinen";
