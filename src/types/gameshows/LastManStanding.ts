@@ -606,7 +606,7 @@ boards.push({
   size: 136,
   objects: [
     {
-      name: "Prestige Broken Covenant",
+      name: "P. Broken Covenant",
       revealed: false,
       image: "missfortune/hud/missfortune_circle_41.png",
     },
@@ -691,7 +691,7 @@ boards.push({
       image: "missfortune/hud/missfortune_circle_9.png",
     },
     {
-      name: "Prestige Bewitching",
+      name: "P. Bewitching",
       revealed: false,
       image: "missfortune/hud/missfortune_circle_20.png",
     },
