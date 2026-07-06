@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { LMSGameState } from "../../../types/gameshows/LastManStanding";
 import { BroadcastWebsocket } from "../../../types/WebsocketTypes";
 import { useQuery } from "../../../types/UsefulFunctions";
+import BoardTimer from "./BoardTimer";
 
 interface LMSBoardProps {
   sendState: (newState: LMSGameState) => void;
@@ -101,6 +102,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
 
   return (
     <div className="lms-board">
+      <BoardTimer />
       <h1 className="lms-boardTitle">{currentBoard.title}</h1>
       <div className="lms-boardObjects">
         {currentBoard.objects.map((object, index) => (
@@ -141,7 +143,7 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
                   // src="../../lastmanstanding/objects/hidden.png"
                   alt=""
                 />
-                <span className="lms-boardObjectLabel">{object.name}</span>
+                <span className="lms-boardObjectLabel" style={{ fontSize: getFontSize(object.name) }}>{object.name}</span>
               </div>
             )}
             {!object.revealed && !admin && (
@@ -158,6 +160,12 @@ function LMSBoard({ gamestate, sendState }: LMSBoardProps) {
       </div>
     </div>
   );
+}
+
+function getFontSize(text: string): number {
+  const min = 11;
+  const max = 16;
+  return Math.min(Math.max(120 / text.length, min), max);
 }
 
 export default LMSBoard;

@@ -12,6 +12,8 @@ interface BoardControlProps {
 
 let soundWS: BroadcastWebsocket<string>;
 
+let timerWS: BroadcastWebsocket<string>;
+
 function BoardControls({ gamestate, sendState }: BoardControlProps) {
   const currentPlayer = gamestate.players[gamestate.currentPlayer];
   const { buzzerVolume } = useAudioSettings();
@@ -27,6 +29,7 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
   useEffect(() => {
     if (id && !soundWS) {
       soundWS = new BroadcastWebsocket<string>(id + "_soundeffect", setSoundeffect);
+      timerWS = new BroadcastWebsocket<string>(id + "_TIMER");
     }
   }, []);
 
@@ -93,10 +96,11 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
           }
         });
       } else {
+        const numOfPlayersAlive = newGamestate.players.filter((player) => player.lifes > 0).length;
         playersDroppedToZero.forEach((playerName) => {
           newGamestate.players.forEach((player) => {
             if (player.name === playerName) {
-              player.points += 4 - newGamestate.round.participants.length;
+              player.points += 3 - numOfPlayersAlive;
             }
           });
         });
@@ -136,6 +140,7 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
     newGamestate.players.forEach((player) => {
       player.lifes = 3;
     });
+    newGamestate.round.participants = Array.from(newGamestate.players);
     sendState(newGamestate);
   };
 
@@ -161,6 +166,10 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
     sendState(newGamestate);
   };
 
+  const handleTimer = (length: number) => {
+    timerWS.sendData("START_" + length);
+  };
+
   return (
     <div className="centerR lms-boardcontrols">
       <div>
@@ -180,6 +189,9 @@ function BoardControls({ gamestate, sendState }: BoardControlProps) {
         </Button>
         <Button onClick={handlePrevBoard} variant="warning">
           Board Zurück
+        </Button>
+        <Button onClick={() => handleTimer(10000)} variant="secondary">
+          10s Timer
         </Button>
       </div>
     </div>

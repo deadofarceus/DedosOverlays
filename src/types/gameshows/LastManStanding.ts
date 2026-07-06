@@ -52,7 +52,7 @@ boards.push({
   id: 0,
   title: "Project Skins",
   extra: "default",
-  size: 137,
+  size: 119,
   objects: [
     {
       name: "Fiora",
@@ -75,6 +75,11 @@ boards.push({
       image: "jinx/hud/jinx_circle_20.png",
     },
     {
+      name: "Zed Prestige",
+      revealed: false,
+      image: "zed/hud/zed_circle_30.png",
+    },
+    {
       name: "Quinn",
       revealed: false,
       image: "quinn/hud/quinn_circle_24.skins_quinn_skin24.png",
@@ -83,6 +88,11 @@ boards.push({
       name: "Sivir",
       revealed: false,
       image: "sivir/hud/sivir_circle_72.skins_sivir_skin72.png",
+    },
+    {
+      name: "Sylas Prestige",
+      revealed: false,
+      image: "sylas/hud/sylas_circle_14.png",
     },
     {
       name: "Pyke",
@@ -135,6 +145,11 @@ boards.push({
       image: "sylas/hud/sylas_circle_13.png",
     },
     {
+      name: "Irelia Prestige",
+      revealed: false,
+      image: "irelia/hud/irelia_circle_17.png",
+    },
+    {
       name: "Yasuo",
       revealed: false,
       image: "yasuo/hud/yasuo_circle_2.png",
@@ -143,6 +158,11 @@ boards.push({
       name: "Lucian",
       revealed: false,
       image: "lucian/hud/lucian_circle_6.png",
+    },
+    {
+      name: "Irelia P. 2022",
+      revealed: false,
+      image: "irelia/hud/irelia_circle_17.png",
     },
     {
       name: "Jhin",
@@ -188,6 +208,11 @@ boards.push({
       name: "Senna",
       revealed: false,
       image: "senna/hud/senna_circle_16.png",
+    },
+    {
+      name: "Command Line Yi",
+      revealed: false,
+      image: "masteryi/hud/masteryi_circle_116.skins_masteryi_skin116.png",
     },
     {
       name: "Vayne",
@@ -292,146 +317,255 @@ boards.push({
   ],
 });
 
+// boards.push({
+//   id: 2,
+//   title: "Skins, die man mit Gemstones kaufen konnte",
+//   extra: "default",
+//   size: 136,
+//   objects: [
+//     {
+//       name: "Dragonwing Corki",
+//       revealed: false,
+//       image: "corki/hud/corki_circle_6.png",
+//     },
+//     {
+//       name: "Hextech Swain",
+//       revealed: false,
+//       image: "swain/hud/swain_circle_11.png",
+//     },
+//     {
+//       name: "Hextech Rammus",
+//       revealed: false,
+//       image: "rammus/hud/rammus_circle_16.png",
+//     },
+//     { name: "Dawnbringer Ward", revealed: false, image: "DawnbringerWard.png" },
+//     {
+//       name: "Hextech Nocturne",
+//       revealed: false,
+//       image: "nocturne/hud/nocturne_circle_16.png",
+//     },
+//     {
+//       name: "Hextech Annie",
+//       revealed: false,
+//       image: "annie/hud/annie_circle_10.png",
+//     },
+//     {
+//       name: "Lunar Wraith Caitlyn",
+//       revealed: false,
+//       image: "caitlyn/hud/caitlyn_circle_10.png",
+//     },
+//     {
+//       name: "Hextech Kassadin",
+//       revealed: false,
+//       image: "kassadin/hud/kassadin_circle_14.png",
+//     },
+//     {
+//       name: "Hextech Jarvan IV",
+//       revealed: false,
+//       image: "jarvaniv/hud/jarvaniv_circle_9.png",
+//     },
+//     {
+//       name: "Guqin Sona",
+//       revealed: false,
+//       image: "sona/hud/sona_circle_3.png",
+//     },
+//     {
+//       name: "Hextech Amumu",
+//       revealed: false,
+//       image: "amumu/hud/amumu_circle_23.png",
+//     },
+//     {
+//       name: "Hextech Ziggs",
+//       revealed: false,
+//       image: "ziggs/hud/ziggs_circle_23.png",
+//     },
+//     {
+//       name: "Soulstealer Vayne",
+//       revealed: false,
+//       image: "vayne/hud/vayne_circle_10.png",
+//     },
+//     {
+//       name: "War. King. Garen",
+//       revealed: false,
+//       image: "garen/hud/garen_circle_11.png",
+//     },
+//     {
+//       name: "Hextech Poppy",
+//       revealed: false,
+//       image: "poppy/hud/poppy_circle_15.png",
+//     },
+//     {
+//       name: "Nightbringer Ward",
+//       revealed: false,
+//       image: "NightbringerWard.png",
+//     },
+//     {
+//       name: "Hextech Alistar",
+//       revealed: false,
+//       image: "alistar/hud/alistar_circle_19.png",
+//     },
+//     {
+//       name: "Dragonblade Riven",
+//       revealed: false,
+//       image: "riven/hud/riven_circle_5.png",
+//     },
+//     {
+//       name: "Lancer Zero Hecarim",
+//       revealed: false,
+//       image: "hecarim/hud/hecarim_circle_7.png",
+//     },
+//     {
+//       name: "Hextech Sejuani",
+//       revealed: false,
+//       image: "sejuani/hud/sejuani_circle_15.png",
+//     },
+//     {
+//       name: "Dark Star Cho'Gath",
+//       revealed: false,
+//       image: "chogath/hud/chogath_circle_7.png",
+//     },
+//     {
+//       name: "Warr. King. Katarina",
+//       revealed: false,
+//       image: "katarina/hud/katarina_circle_8.png",
+//     },
+//     {
+//       name: "Hextech Kog'Maw",
+//       revealed: false,
+//       image: "kogmaw/hud/kogmaw_circle_10.png",
+//     },
+//     {
+//       name: "Neo Pax Sivir",
+//       revealed: false,
+//       image: "sivir/hud/sivir_circle_9.png",
+//     },
+//     {
+//       name: "Hextech Renekton",
+//       revealed: false,
+//       image: "renekton/hud/renekton_circle_17.png",
+//     },
+//     {
+//       name: "Hextech Tristana",
+//       revealed: false,
+//       image: "tristana/hud/tristana_circle_40.png",
+//     },
+//     { name: "Hextech Ward", revealed: false, image: "HextechWard.png" },
+//     {
+//       name: "Dreadnova Darius",
+//       revealed: false,
+//       image: "darius/hud/darius_circle_14.png",
+//     },
+//     {
+//       name: "Hextech Malzahar",
+//       revealed: false,
+//       image: "malzahar/hud/malzahar_circle_7.png",
+//     },
+//   ],
+// });
+
 boards.push({
   id: 2,
-  title: "Skins, die man mit Gemstones kaufen konnte",
+  title: "Hextech Skins",
   extra: "default",
-  size: 136,
+  size: 156,
   objects: [
     {
-      name: "Dragonwing Corki",
-      revealed: false,
-      image: "corki/hud/corki_circle_6.png",
-    },
-    {
-      name: "Hextech Swain",
+      name: "Swain",
       revealed: false,
       image: "swain/hud/swain_circle_11.png",
     },
     {
-      name: "Hextech Rammus",
+      name: "Rammus",
       revealed: false,
       image: "rammus/hud/rammus_circle_16.png",
     },
-    { name: "Dawnbringer Ward", revealed: false, image: "DawnbringerWard.png" },
     {
-      name: "Hextech Nocturne",
+      name: "Sion",
+      revealed: false,
+      image: "sion/hud/sion_circle_1.png",
+    },
+    {
+      name: "Nocturne",
       revealed: false,
       image: "nocturne/hud/nocturne_circle_16.png",
     },
     {
-      name: "Hextech Annie",
+      name: "Annie",
       revealed: false,
       image: "annie/hud/annie_circle_10.png",
     },
     {
-      name: "Lunar Wraith Caitlyn",
+      name: "Singed",
       revealed: false,
-      image: "caitlyn/hud/caitlyn_circle_10.png",
+      image: "singed/hud/singed_circle_2.png",
     },
     {
-      name: "Hextech Kassadin",
+      name: "Kassadin",
       revealed: false,
       image: "kassadin/hud/kassadin_circle_14.png",
     },
     {
-      name: "Hextech Jarvan IV",
+      name: "Jarvan IV",
       revealed: false,
       image: "jarvaniv/hud/jarvaniv_circle_9.png",
     },
     {
-      name: "Guqin Sona",
-      revealed: false,
-      image: "sona/hud/sona_circle_3.png",
-    },
-    {
-      name: "Hextech Amumu",
+      name: "Amumu",
       revealed: false,
       image: "amumu/hud/amumu_circle_23.png",
     },
     {
-      name: "Hextech Ziggs",
+      name: "Janna",
+      revealed: false,
+      image: "janna/hud/janna_circle_2.png",
+    },
+    {
+      name: "Ziggs",
       revealed: false,
       image: "ziggs/hud/ziggs_circle_23.png",
     },
     {
-      name: "Soulstealer Vayne",
+      name: "Anivia",
       revealed: false,
-      image: "vayne/hud/vayne_circle_10.png",
+      image: "anivia/hud/anivia_circle_4.png",
     },
     {
-      name: "War. King. Garen",
-      revealed: false,
-      image: "garen/hud/garen_circle_11.png",
-    },
-    {
-      name: "Hextech Poppy",
+      name: "Poppy",
       revealed: false,
       image: "poppy/hud/poppy_circle_15.png",
     },
     {
-      name: "Nightbringer Ward",
-      revealed: false,
-      image: "NightbringerWard.png",
-    },
-    {
-      name: "Hextech Alistar",
+      name: "Alistar",
       revealed: false,
       image: "alistar/hud/alistar_circle_19.png",
     },
     {
-      name: "Dragonblade Riven",
-      revealed: false,
-      image: "riven/hud/riven_circle_5.png",
-    },
-    {
-      name: "Lancer Zero Hecarim",
-      revealed: false,
-      image: "hecarim/hud/hecarim_circle_7.png",
-    },
-    {
-      name: "Hextech Sejuani",
+      name: "Sejuani",
       revealed: false,
       image: "sejuani/hud/sejuani_circle_15.png",
     },
     {
-      name: "Dark Star Cho'Gath",
-      revealed: false,
-      image: "chogath/hud/chogath_circle_7.png",
-    },
-    {
-      name: "Warr. King. Katarina",
-      revealed: false,
-      image: "katarina/hud/katarina_circle_8.png",
-    },
-    {
-      name: "Hextech Kog'Maw",
+      name: "Kog'Maw",
       revealed: false,
       image: "kogmaw/hud/kogmaw_circle_10.png",
     },
     {
-      name: "Neo Pax Sivir",
-      revealed: false,
-      image: "sivir/hud/sivir_circle_9.png",
-    },
-    {
-      name: "Hextech Renekton",
+      name: "Renekton",
       revealed: false,
       image: "renekton/hud/renekton_circle_17.png",
     },
     {
-      name: "Hextech Tristana",
+      name: "Galio",
+      revealed: false,
+      image: "galio/hud/galio_circle_2.png",
+    },
+    {
+      name: "Tristana",
       revealed: false,
       image: "tristana/hud/tristana_circle_40.png",
     },
-    { name: "Hextech Ward", revealed: false, image: "HextechWard.png" },
     {
-      name: "Dreadnova Darius",
-      revealed: false,
-      image: "darius/hud/darius_circle_14.png",
-    },
-    {
-      name: "Hextech Malzahar",
+      name: "Malzahar",
       revealed: false,
       image: "malzahar/hud/malzahar_circle_7.png",
     },
@@ -567,7 +701,7 @@ boards.push({
       image: "missfortune/hud/missfortune_circle_7.png",
     },
     {
-      name: "Prtg. Bew. (2022)",
+      name: "P. Bew. (2022)",
       revealed: false,
       image: "missfortune/hud/missfortune_circle_20.png",
     },
