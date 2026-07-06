@@ -1,7 +1,7 @@
-import { JepoardyGameState } from '../../../types/gameshows/Jepoardy';
-import { board0 } from './board0';
-import { board1 } from './board1';
-import { makeQuestion } from './builders';
+import { JepoardyGameState } from "../../../types/gameshows/Jepoardy";
+import { board0 } from "./board0";
+import { board1 } from "./board1";
+import { makeQuestion } from "./builders";
 
 export const TESTGamestate: JepoardyGameState = {
   password: "test",
@@ -17,7 +17,7 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
-      yoinkJoker: false,
+      yoinkJoker: true,
       noYouJoker: false,
       gmJoker: -1,
     },
