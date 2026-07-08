@@ -3,8 +3,6 @@ import { BroadcastWebsocket } from "../../../../types/WebsocketTypes";
 import { useQuery } from "../../../../types/UsefulFunctions";
 import { useState } from "react";
 
-let timerWs: BroadcastWebsocket<string>;
-
 function BoardTimer() {
   const [time, setTime] = useState<string>("");
   const [percent, setPercent] = useState<number>(0);
@@ -13,10 +11,19 @@ function BoardTimer() {
   const query = useQuery();
   const id = query.get("id");
 
+  const wsRef = useRef<BroadcastWebsocket<string> | null>(null);
+
   useEffect(() => {
-    if (id && !timerWs) {
-      timerWs = new BroadcastWebsocket<string>(id + "_TIMER", setTime);
+    if (id && !wsRef.current) {
+      wsRef.current = new BroadcastWebsocket<string>(id + "_TIMER", setTime);
     }
+
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.ws.close(3500);
+        wsRef.current = null;
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -24,8 +31,6 @@ function BoardTimer() {
     const timeLeft = parseInt(time.split("_")[1]);
 
     if (intervalRef.current) clearInterval(intervalRef.current);
-
-    console.log(time);
     
 
     if (command === "START" && timeLeft > 0) {

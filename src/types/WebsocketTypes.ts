@@ -20,7 +20,10 @@ export abstract class BaseWebSocket<T> {
   //   pingInterval!: NodeJS.Timeout;
   wsAddress: string;
 
-  constructor(callback: React.Dispatch<React.SetStateAction<T>>, wsAddress: string) {
+  constructor(
+    callback: React.Dispatch<React.SetStateAction<T>>,
+    wsAddress: string,
+  ) {
     this.callback = callback;
     this.wsAddress = wsAddress;
     this.ws = new WebSocket(this.wsAddress);
@@ -67,6 +70,8 @@ export abstract class BaseWebSocket<T> {
   };
 
   handleClose = (ev: CloseEvent) => {
+    if (ev.code === 1005) return;
+
     if (ev.code !== 3500) {
       console.log("WebSocket connection closed. Attempting to reconnect...");
       //   clearInterval(this.pingInterval);
@@ -263,7 +268,9 @@ export class EloWebsocket extends BaseWebSocket<Account> {
     const account = data.data.accounts[0] as Account;
     // log with current time in hh:mm:ss format
 
-    const entry = account.leagueEntrys.find((entry) => entry.queueId === this.queueId)!;
+    const entry = account.leagueEntrys.find(
+      (entry) => entry.queueId === this.queueId,
+    )!;
 
     entry.lastMatches = Array.from(
       new Set(entry.lastMatches!.map((obj: Match) => JSON.stringify(obj))),
@@ -296,7 +303,11 @@ export class DeathCounterWebsocket extends BaseWebSocket<Player> {
   id: string;
   mod: boolean;
 
-  constructor(id: string, callback: React.Dispatch<React.SetStateAction<Player>>, mod: boolean) {
+  constructor(
+    id: string,
+    callback: React.Dispatch<React.SetStateAction<Player>>,
+    mod: boolean,
+  ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
     this.callback = callback;
@@ -403,7 +414,10 @@ export class FiveVFiveWebsocket extends BaseWebSocket<FiveVFiveEvent> {
 export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
   id: string;
 
-  constructor(id: string, callback: React.Dispatch<React.SetStateAction<AbisZAccount>>) {
+  constructor(
+    id: string,
+    callback: React.Dispatch<React.SetStateAction<AbisZAccount>>,
+  ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
   }
@@ -424,7 +438,10 @@ export class AbisZWebsocket extends BaseWebSocket<AbisZAccount> {
 export class PCTurnierWebsocket extends BaseWebSocket<PCEvent> {
   id: string;
 
-  constructor(id: string, callback: React.Dispatch<React.SetStateAction<PCEvent>>) {
+  constructor(
+    id: string,
+    callback: React.Dispatch<React.SetStateAction<PCEvent>>,
+  ) {
     super(callback, `${GLOBALWSADRESS}?id=${id}`);
     this.id = id;
   }

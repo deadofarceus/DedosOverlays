@@ -24,7 +24,10 @@ function AudioQuestion({ question }: JepoardySingleQuestionProps) {
     wsRef.current = new BroadcastWebsocket<string>(id + "_STARTSTOP", setStartStopSignal);
 
     return () => {
-      wsRef.current = null;
+      if (wsRef.current) {
+        wsRef.current.ws.close(3500);
+        wsRef.current = null;
+      }
     };
   }, [id]);
 
