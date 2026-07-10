@@ -17,7 +17,7 @@ export const TESTGamestate: JepoardyGameState = {
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,
       buzzed: false,
-      yoinkJoker: true,
+      yoinkJoker: false,
       noYouJoker: false,
       gmJoker: -1,
     },
@@ -28,7 +28,7 @@ export const TESTGamestate: JepoardyGameState = {
       turn: false,
       buzzed: false,
       yoinkJoker: false,
-      noYouJoker: true,
+      noYouJoker: false,
       gmJoker: -1,
     },
     {
@@ -39,7 +39,7 @@ export const TESTGamestate: JepoardyGameState = {
       buzzed: false,
       yoinkJoker: false,
       noYouJoker: false,
-      gmJoker: 1,
+      gmJoker: -1,
     },
     {
       name: "TwoStone",
