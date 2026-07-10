@@ -125,6 +125,7 @@ function JepoardyTeilnehmer() {
         p.yoinkJoker = false;
       }
     });
+    newGamestate.currentQuestion.usedJokers = "Yoink";
     sendState(newGamestate);
     buzzer(id, playerName);
   };
@@ -171,6 +172,7 @@ function JepoardyTeilnehmer() {
         p.noYouJoker = false;
       }
     });
+    newGamestate.currentQuestion.usedJokers = "NoYou";
     sendState(newGamestate);
     buzzer(id, name);
   };

@@ -65,6 +65,7 @@ export interface Question {
   buzzedPlayers: JepoardyPlayer[];
   info?: string;
   joker?: string;
+  usedJokers?: string;
 }
 
 export interface JepoardyGameProps {
@@ -87,5 +88,5 @@ export interface JepoardySingleQuestionProps {
   gamestate: JepoardyGameState;
 }
 
-import { TESTGamestate } from '../../data/gameshows/jepoardy/initialState';
+import { TESTGamestate } from "../../data/gameshows/jepoardy/initialState";
 export { TESTGamestate };
