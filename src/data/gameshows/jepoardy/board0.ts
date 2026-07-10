@@ -1,5 +1,5 @@
 import { Board } from "../../../types/gameshows/Jepoardy";
-import { makeQuestion, audioQ, textQ } from "./builders";
+import { makeQuestion, audioQ, textQ, textAndImageQ } from "./builders";
 
 // Helper for "Guess the Champ" subquestions
 const guessChampQ = (id: number, name: string, part: string, info: string) =>
@@ -219,10 +219,11 @@ export const board0: Board = {
       extra: "default",
       questions: [
         [
-          textQ(
+          textAndImageQ(
             25,
             "Diese Champs nutzen Mana als Ressource: \n                  Aatrox, Ahri, Alistar, Amumu, Anivia",
             "Aatrox (Manaless)",
+            "brand__leo_r.png",
             100,
             { category: "Imposter" },
           ),

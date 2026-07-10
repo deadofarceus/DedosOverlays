@@ -48,7 +48,7 @@ export interface Question {
   id: number;
   category: string;
   points: number;
-  type: "AUDIO" | "IMAGE" | "TEXT" | "VIDEO";
+  type: "AUDIO" | "IMAGE" | "TEXT" | "VIDEO" | "TEXTANDIMAGE";
   extra:
     | "Active"
     | "Taunt"

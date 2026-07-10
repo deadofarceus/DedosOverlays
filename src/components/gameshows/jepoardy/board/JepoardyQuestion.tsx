@@ -5,6 +5,7 @@ import VideoQuestion from "./question/VideoQuestion";
 import ImageQuestion from "./question/ImageQuestion";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 import BoardTimer from "../timer/BoardTimer";
+import TextAndImage from "./question/TextAndImage";
 
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
   const showInfoInTitle = question.info !== undefined && question.info.length < 15;
@@ -44,6 +45,9 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
           )}
           {question.type === "VIDEO" && (
             <VideoQuestion question={question} sendState={sendState} gamestate={gamestate} />
+          )}
+          {question.type === "TEXTANDIMAGE" && (
+            <TextAndImage question={question} sendState={sendState} gamestate={gamestate} />
           )}
           {question.finished && (
             <div
@@ -113,6 +117,9 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
             )}
             {question.type === "VIDEO" && (
               <VideoQuestion question={question} sendState={sendState} gamestate={gamestate} />
+            )}
+            {question.type === "TEXTANDIMAGE" && (
+              <TextAndImage question={question} sendState={sendState} gamestate={gamestate} />
             )}
             {question.finished && (
               <div
