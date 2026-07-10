@@ -80,7 +80,7 @@ export abstract class BaseWebSocket<T> {
   };
 
   handleError = (error: Event) => {
-    console.error("WebSocket error occurred:", error);
+    console.error("WebSocket error occurred:", this.wsAddress, error);
   };
 
   //   setupPing() {

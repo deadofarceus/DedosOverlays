@@ -101,7 +101,11 @@ export const board0: Board = {
             "Dieser Champ durchquert die Welt, weil er einen Freund finden will, aber ein Fluch macht es ihm unmöglich",
             "Amumu",
             100,
-            { category: "One Sentence Lore" },
+            {
+              category: "One Sentence Lore",
+              answertype: "IMAGE",
+              answer: "Amumu_0.jpg",
+            },
           ),
         ],
         [
@@ -110,7 +114,11 @@ export const board0: Board = {
             "Dieser Champ war eigentlich nur ein Fabelwesen, das Kindern Angst machen sollte, doch wurde real",
             "Fiddlesticks",
             200,
-            { category: "One Sentence Lore" },
+            {
+              category: "One Sentence Lore",
+              answertype: "IMAGE",
+              answer: "FiddleSticks_0.jpg",
+            },
           ),
         ],
         [
@@ -119,7 +127,11 @@ export const board0: Board = {
             "Der gesuchte Champ ist laut Lore mit folgenden Champs verknüpft: Ornn, Udyr, Anivia, Volibear",
             "Aurora",
             300,
-            { category: "One Sentence Lore" },
+            {
+              category: "One Sentence Lore",
+              answertype: "IMAGE",
+              answer: "Aurora_0.jpg",
+            },
           ),
         ],
         [
@@ -128,7 +140,11 @@ export const board0: Board = {
             "Dieser Champ sollte eine politische Ehe eingehen, weigerte sich und brachte anschließend den eigenen Vater um",
             "Fiora",
             400,
-            { category: "One Sentence Lore" },
+            {
+              category: "One Sentence Lore",
+              answertype: "IMAGE",
+              answer: "Fiora_0.jpg",
+            },
           ),
         ],
         [
@@ -137,7 +153,12 @@ export const board0: Board = {
             "Dieser Champ entdeckte die eigenen Fähigkeiten durch Wut und aus dem Wunsch heraus nie wieder kontrolliert zu werden",
             "Syndra",
             500,
-            { category: "One Sentence Lore", joker: "NoYou" },
+            {
+              category: "One Sentence Lore",
+              joker: "NoYou",
+              answertype: "IMAGE",
+              answer: "Syndra_0.jpg",
+            },
           ),
         ],
       ],
