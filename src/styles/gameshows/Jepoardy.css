@@ -374,6 +374,7 @@
 .jp-question-text {
     font-size: 40px;
     white-space: pre-line;
+    width: 85%;
 }
 
 .jp-question-audio {
@@ -956,8 +957,4 @@
   background: linear-gradient(90deg, #7F77DD, #1D9E75, #EF9F27);
   background-size: 200% 100%;
   transition: width 50ms linear;
-}
-
-.jp-question-extra-img {
-    
 }
