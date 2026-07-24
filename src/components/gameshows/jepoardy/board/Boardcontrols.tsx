@@ -265,7 +265,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     const newGamestate = { ...gamestate };
     newGamestate.state = "BOARD";
     newGamestate.boards[newGamestate.currentBoard.id] = newGamestate.currentBoard;
-    newGamestate.currentBoard = newGamestate.boards[newGamestate.currentBoard.id === 0 ? 1 : 0];
+    const otherBoard = newGamestate.boards.find((b) => b.id !== newGamestate.currentBoard.id);
+    if (otherBoard) {
+      newGamestate.currentBoard = otherBoard;
+    }
     sendState(newGamestate);
   };
 
