@@ -68,7 +68,11 @@ export const classic0: Board = {
             "Wie hieß Luden's Echo, wenn es von Ornn geupgraded wurde?",
             "Luden's Pulse",
             500,
-            { category: "Items" },
+            {
+              category: "Items",
+              answertype: "IMAGE",
+              answer: "Ludens_Pulse.jpg",
+            },
           ),
         ],
       ],
@@ -191,7 +195,7 @@ export const classic0: Board = {
             {
               category: "Pls nerf",
               answertype: "IMAGE",
-              answer: "Fiora.png",
+              answer: "FioraClassic.jpg",
             },
           ),
         ],

@@ -1,5 +1,5 @@
 import { Board } from "../../../types/gameshows/Jepoardy";
-import { textQ, makeQuestion } from "./builders";
+import { textQ } from "./builders";
 
 export const classic1: Board = {
   id: 1,
@@ -15,7 +15,11 @@ export const classic1: Board = {
             "Richtig oder Falsch: Im OG Teaser Trailer ist der aller erste Champ, der uns gezeigt wird, Annie?",
             "Richtig",
             200,
-            { category: "Absolute Cinema" },
+            {
+              category: "Absolute Cinema",
+              answertype: "IMAGE",
+              answer: "Annie.png",
+            },
           ),
         ],
         [
@@ -27,7 +31,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
-              answer: "FiddleSticks.png",
+              answer: "Fiddlesticks_Classic.png",
             },
           ),
         ],
@@ -37,7 +41,11 @@ export const classic1: Board = {
             "Am 08.10.2013 wurde das erste offizielle Musikvideo von Riot veröffentlicht. Wie heißt dieses?",
             "Get Jinxed",
             600,
-            { category: "Absolute Cinema" },
+            {
+              category: "Absolute Cinema",
+              answertype: "IMAGE",
+              answer: "Get_Jinxed.png",
+            },
           ),
         ],
         [
@@ -49,7 +57,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
-              answer: "Leona.png",
+              answer: "LeonaClassic.png",
             },
           ),
         ],
@@ -62,6 +70,8 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               info: "09.09.2015 PROJEKT: OVERDRIVE. Vorher hat zwar DJ Sona einen Skin Trailer bekommen, ist aber keine Skinline.",
+              answertype: "IMAGE",
+              answer: "ProjectSkins.png",
             },
           ),
         ],
@@ -134,7 +144,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
-              answer: "SilverRyze.png",
+              answer: "YoungRyzeUndSilverKayle.jpg",
             },
           ),
         ],
@@ -156,7 +166,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
-              answer: "JudgementKayle.png",
+              answer: "Judgement_Kayle.jpg",
             },
           ),
         ],
@@ -168,8 +178,6 @@ export const classic1: Board = {
             800,
             {
               category: "Iconic Skins",
-              answertype: "IMAGE",
-              answer: "RiotSquadSinged.png",
             },
           ),
         ],
@@ -182,121 +190,141 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
-              answer: "PrestigeKDAKaisa.png",
+              answer: "KDA_Kaisa_Prestige_Edition.jpg",
             },
           ),
         ],
       ],
     },
     {
-      name: "Wie war das noch?",
+      name: "AI explains",
       extra: "default",
       questions: [
         [
-          makeQuestion({
-            id: 70,
-            category: "Wie war das noch?",
-            points: 200,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            70,
+            "Das war der, der nach einem Kill den Champion oder sogar den Drake als Pet mitgenommen hat.",
+            "Mordekaiser",
+            200,
+            {
+              category: "AI explains",
+              answertype: "IMAGE",
+              answer: "MordekaiserClassic.jpg",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 71,
-            category: "Wie war das noch?",
-            points: 400,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            71,
+            "Das war die, die ihre Ulti einfach als vier fliegende Klingen verschossen hat.",
+            "Irelia",
+            400,
+            {
+              category: "AI explains",
+              answertype: "IMAGE",
+              answer: "IreliaClassic.jpg",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 72,
-            category: "Wie war das noch?",
-            points: 600,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            72,
+            "Das war der, der dich markiert hat, seine Raketen plötzlich um Wände geflogen sind und dann einfach den Platz mit dir getauscht hat.",
+            "Urgot",
+            600,
+            {
+              category: "AI explains",
+              answertype: "IMAGE",
+              answer: "UrgotClassic.jpg",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 73,
-            category: "Wie war das noch?",
-            points: 800,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            73,
+            "Das war der, der zwischen Schaden und Heilung umgeschaltet hat und nach dem Tod einfach wieder aufgestanden ist.",
+            "Aatrox",
+            800,
+            {
+              category: "AI explains",
+              answertype: "IMAGE",
+              answer: "AatroxClassic.jpg",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 74,
-            category: "Wie war das noch?",
-            points: 1000,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            74,
+            "Das war der, der dich angesprungen und gefühlt eine Ewigkeit lang festgehalten hat.",
+            "Warwick",
+            1000,
+            {
+              category: "AI explains",
+              answertype: "IMAGE",
+              answer: "WarwickClassic.jpg",
+            },
+          ),
         ],
       ],
     },
     {
-      name: "Rate mal",
+      name: "Impostor",
       extra: "default",
       questions: [
         [
-          makeQuestion({
-            id: 75,
-            category: "Rate mal",
-            points: 200,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            75,
+            "Champs, die einen eigenen Login Screen hatten:\n      Yunara!, Jhin, Thresh, Galio, Urgot",
+            "Yunara",
+            200,
+            { category: "Impostor" },
+          ),
         ],
         [
-          makeQuestion({
-            id: 76,
-            category: "Rate mal",
-            points: 400,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            76,
+            "Champs, die beim Release dabei waren (19.10.2010):\n      Ryze, Sion, Tristana, Lux!, Kayle",
+            "Lux",
+            400,
+            {
+              category: "Impostor",
+              info: "19.10.2010",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 77,
-            category: "Rate mal",
-            points: 600,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            77,
+            "Champs, die zu den ersten Star Guardians gehören:\n      Janna, Jinx, Lulu, Poppy, Soraka!",
+            "Soraka",
+            600,
+            { category: "Impostor" },
+          ),
         ],
         [
-          makeQuestion({
-            id: 78,
-            category: "Rate mal",
-            points: 800,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            78,
+            "Champs, die in Worlds 2016 mindestens 20 mal picked oder banned waren:\n      Cassiopeia (22), Braum! (16), Sivir (20), Elise (29), Kennen (22)",
+            "Braum",
+            800,
+            {
+              category: "Impostor",
+              info: "Cassiopeia (22), Braum (16), Sivir (20), Elise (29), Kennen (22)",
+            },
+          ),
         ],
         [
-          makeQuestion({
-            id: 79,
-            category: "Rate mal",
-            points: 1000,
-            type: "TEXT",
-            question: "TBD",
-            answer: "TBD",
-          }),
+          textQ(
+            79,
+            "Champs, die beim legendären Zed vs Zed Game gespielt wurden:\n      Fiddlesticks, Evelynn, Vi, Shen, Morgana!",
+            "Morgana",
+            1000,
+            {
+              category: "Impostor",
+              answertype: "IMAGE",
+              answer: "FakerWhatWasThat.png",
+            },
+          ),
         ],
       ],
     },
