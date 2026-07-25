@@ -1,5 +1,5 @@
 import { Board } from "../../../types/gameshows/Jepoardy";
-import { makeQuestion, textQ } from "./builders";
+import { makeQuestion, textQ, videoQ } from "./builders";
 
 // Helper for "Splash Art" subquestions (old splash arts guessed by body part)
 const splashArtQ = (id: number, name: string, part: string, info: string) =>
@@ -233,59 +233,54 @@ export const classic0: Board = {
       ],
     },
     {
-      name: "Quotes",
+      name: "Zitate",
       extra: "default",
       questions: [
         [
-          textQ(
+          videoQ(
             50,
-            "Look at the Cleanse, Look at the Moves! …",
-            "FAKER! What was that!?",
+            "StillTheMain.mp4",
+            "STILL THE MAAAAAAAAAAAAIIIIINNNNN",
             100,
-            { category: "Quotes" },
-          ),
-        ],
-        [
-          textQ(
-            51,
-            "He's still alive, he's still surviving …",
-            "He stays alive!",
-            200,
             {
-              category: "Quotes",
-              info: "OMG vs RYL World Championship Quarterfinals",
+              category: "Zitate",
+              answertype: "VIDEO",
+              answer: "StillTheMainComplete.mp4",
+              info: "STILL THE MAAAAAAAAAAAAIIIIINNNNN 28.05.2015",
             },
           ),
         ],
         [
-          textQ(52, "GUMA! Can he steal it? No way! …", "WTF!", 300, {
-            category: "Quotes",
-            info: "Gumas Baronsteal",
+          videoQ(51, "KeinWbisLevel4.mp4", "KEIN W BIS LEVEL 4!", 200, {
+            category: "Zitate",
+            answertype: "VIDEO",
+            answer: "KeinWbisLevel4Complete.mp4",
+            info: "Sie skillt kein W bis Level 4! MAN! 06.02.2018",
           }),
         ],
         [
-          textQ(
-            53,
-            "CLG take the Inhibitor, they are gonna take the Nexus, and …",
-            "they are gonna take a trip to Worlds!",
-            400,
-            {
-              category: "Quotes",
-              info: "CLG vs TSM 2015 LCS Summer Finals",
-            },
-          ),
+          videoQ(52, "Darius.mp4", "besser als Schaden", 300, {
+            category: "Zitate",
+            answertype: "VIDEO",
+            answer: "DariusComplete.mp4",
+            info: "Damage ist auf jeden Fall besser als Schaden auf Darius! 09.07.2014",
+          }),
         ],
         [
-          textQ(
-            54,
-            "2v5 is possible, I mean you're not gonna stop the baron, might get a teamfight, he's gonna shoot …",
-            "You're kidding me!",
-            500,
-            {
-              category: "Quotes",
-              info: "EG vs TL Baronsteal mit Jinx in Spring Finals",
-            },
-          ),
+          videoQ(53, "Uli.mp4", "Uli was ist denn da los", 400, {
+            category: "Zitate",
+            answertype: "VIDEO",
+            answer: "UliComplete.mp4",
+            info: "Uli was ist denn da los? 23.01.2018",
+          }),
+        ],
+        [
+          videoQ(54, "Mitfahrgelegenheit.mp4", "Kutcher.de", 500, {
+            category: "Zitate",
+            answertype: "VIDEO",
+            answer: "MitfahrgelegenheitComplete.mp4",
+            info: "'Kutcher.de' für schnelle Mitfahrgelegenheiten durch ganz Deutschland 02.04.2016",
+          }),
         ],
       ],
     },

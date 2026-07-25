@@ -6,6 +6,7 @@ import ImageQuestion from "./question/ImageQuestion";
 import JepoardyBoardQuestion from "./JepoardyBoardQuestion";
 import BoardTimer from "../timer/BoardTimer";
 import TextAndImage from "./question/TextAndImage";
+import VideoAnswer from "./question/VideoAnswer";
 
 function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQuestionProps) {
   const showInfoInTitle = question.info !== undefined && question.info.length < 15;
@@ -77,16 +78,15 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
 
             {question.joker && <div className="jp-question-joker">{question.joker}</div>}
 
-            {question.finished && (
-              <div
-                className={
-                  "jp-question-image " +
-                  (question.state === "INVISIBLE" ? "jp-question-INVISIBLE" : "")
-                }
-              >
+            {question.finished && question.answertype === "IMAGE" && (
+              <div className="jp-question-image">
                 <img src={`/jepoardy/images/${encodeURIComponent(question.answer)}`} alt="" />
               </div>
             )}
+            {question.finished && question.answertype === "VIDEO" && (
+              <VideoAnswer question={question} sendState={sendState} gamestate={gamestate} />
+            )}
+
             {!question.finished && <BoardTimer />}
           </div>
         </div>
@@ -120,16 +120,6 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
             )}
             {question.type === "TEXTANDIMAGE" && (
               <TextAndImage question={question} sendState={sendState} gamestate={gamestate} />
-            )}
-            {question.finished && (
-              <div
-                className={
-                  "jp-question-image " +
-                  (question.state === "INVISIBLE" ? "jp-question-INVISIBLE" : "")
-                }
-              >
-                <img src={`/jepoardy/images/${encodeURIComponent(question.question)}`} alt="" />
-              </div>
             )}
             {!question.finished && <BoardTimer />}
           </div>
