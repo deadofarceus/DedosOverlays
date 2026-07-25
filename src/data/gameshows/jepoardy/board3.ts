@@ -18,6 +18,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
+              alternateAnswer: "Annie",
               answer: "Annie.png",
             },
           ),
@@ -31,6 +32,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
+              alternateAnswer: "Fiddlesticks",
               answer: "Fiddlesticks_Classic.png",
             },
           ),
@@ -44,6 +46,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
+              alternateAnswer: "Get Jinxed",
               answer: "Get_Jinxed.png",
             },
           ),
@@ -57,6 +60,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
+              alternateAnswer: "Leona",
               answer: "LeonaClassic.png",
             },
           ),
@@ -71,6 +75,7 @@ export const classic1: Board = {
               category: "Absolute Cinema",
               info: "09.09.2015 PROJEKT: OVERDRIVE. Vorher hat zwar DJ Sona einen Skin Trailer bekommen, ist aber keine Skinline.",
               answertype: "IMAGE",
+              alternateAnswer: "PROJECT",
               answer: "ProjectSkins.png",
             },
           ),
@@ -144,6 +149,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
+              alternateAnswer: "Silver Kayle und Young Ryze",
               answer: "YoungRyzeUndSilverKayle.jpg",
             },
           ),
@@ -166,6 +172,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
+              alternateAnswer: "Judgement Kayle",
               answer: "Judgement_Kayle.jpg",
             },
           ),
@@ -190,6 +197,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
+              alternateAnswer: "Prestige K/DA Kai'Sa",
               answer: "KDA_Kaisa_Prestige_Edition.jpg",
             },
           ),
@@ -209,6 +217,7 @@ export const classic1: Board = {
             {
               category: "AI explains",
               answertype: "IMAGE",
+              alternateAnswer: "Mordekaiser",
               answer: "MordekaiserClassic.jpg",
             },
           ),
@@ -222,6 +231,7 @@ export const classic1: Board = {
             {
               category: "AI explains",
               answertype: "IMAGE",
+              alternateAnswer: "Irelia",
               answer: "IreliaClassic.jpg",
             },
           ),
@@ -235,6 +245,7 @@ export const classic1: Board = {
             {
               category: "AI explains",
               answertype: "IMAGE",
+              alternateAnswer: "Urgot",
               answer: "UrgotClassic.jpg",
             },
           ),
@@ -248,6 +259,7 @@ export const classic1: Board = {
             {
               category: "AI explains",
               answertype: "IMAGE",
+              alternateAnswer: "Aatrox",
               answer: "AatroxClassic.jpg",
             },
           ),
@@ -261,6 +273,7 @@ export const classic1: Board = {
             {
               category: "AI explains",
               answertype: "IMAGE",
+              alternateAnswer: "Warwick",
               answer: "WarwickClassic.jpg",
             },
           ),
@@ -274,7 +287,7 @@ export const classic1: Board = {
         [
           textQ(
             75,
-            "Champs, die einen eigenen Login Screen hatten:\n      Yunara!, Jhin, Thresh, Galio, Urgot",
+            "Champs, die einen eigenen Login Screen hatten:\n      Yunara, Jhin, Thresh, Galio, Urgot",
             "Yunara",
             200,
             { category: "Impostor" },
@@ -283,7 +296,7 @@ export const classic1: Board = {
         [
           textQ(
             76,
-            "Champs, die beim Release dabei waren (19.10.2010):\n      Ryze, Sion, Tristana, Lux!, Kayle",
+            "Champs, die beim Release dabei waren (19.10.2010):\n      Ryze, Sion, Tristana, Lux, Kayle",
             "Lux",
             400,
             {
@@ -295,7 +308,7 @@ export const classic1: Board = {
         [
           textQ(
             77,
-            "Champs, die zu den ersten Star Guardians gehören:\n      Janna, Jinx, Lulu, Poppy, Soraka!",
+            "Champs, die zu den ersten Star Guardians gehören:\n      Janna, Jinx, Lulu, Poppy, Soraka",
             "Soraka",
             600,
             { category: "Impostor" },
@@ -304,7 +317,7 @@ export const classic1: Board = {
         [
           textQ(
             78,
-            "Champs, die in Worlds 2016 mindestens 20 mal picked oder banned waren:\n      Cassiopeia (22), Braum! (16), Sivir (20), Elise (29), Kennen (22)",
+            "Champs, die in Worlds 2016 mindestens 20 mal picked oder banned waren:\n      Cassiopeia, Braum, Sivir, Elise, Kennen",
             "Braum",
             800,
             {
@@ -316,12 +329,13 @@ export const classic1: Board = {
         [
           textQ(
             79,
-            "Champs, die beim legendären Zed vs Zed Game gespielt wurden:\n      Fiddlesticks, Evelynn, Vi, Shen, Morgana!",
+            "Champs, die beim legendären Zed vs Zed Game gespielt wurden:\n      Fiddlesticks, Evelynn, Vi, Shen, Morgana",
             "Morgana",
             1000,
             {
               category: "Impostor",
               answertype: "IMAGE",
+              alternateAnswer: "Morgana",
               answer: "FakerWhatWasThat.png",
             },
           ),

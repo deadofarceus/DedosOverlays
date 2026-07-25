@@ -1,4 +1,5 @@
 import { JepoardyGameState } from "../../../types/gameshows/Jepoardy";
+import { board0 } from "./board0";
 import { classic0 } from "./board2";
 import { classic1 } from "./board3";
 import { makeQuestion } from "./builders";
@@ -89,6 +90,6 @@ export const TESTGamestate: JepoardyGameState = {
       },
     ],
   },
-  boards: [classic0, classic1],
+  boards: [board0, classic1],
   buzzerQueue: [],
 };

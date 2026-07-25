@@ -342,6 +342,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
       ? gamestate.players[gamestate.currentPlayer]
       : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
 
+  const answer = question.alternateAnswer
+    ? question.alternateAnswer
+    : question.answer;
+
   return (
     <div className="jp-boardControls centerR">
       <div className="centerC">
@@ -387,7 +391,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
           </div>
           <div className="centerC">
             {question.type === "TEXT" && <div>{"Frage: " + question.question}</div>}
-            <div className="jp-answer">{"Antwort: " + question.answer}</div>
+            <div className="jp-answer">{"Antwort: " + answer}</div>
             {question.info !== undefined && (
               <div className="jp-info">{"Extra Infos: " + question.info}</div>
             )}

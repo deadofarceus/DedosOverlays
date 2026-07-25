@@ -2,15 +2,22 @@ import { Board } from "../../../types/gameshows/Jepoardy";
 import { makeQuestion, textQ, videoQ } from "./builders";
 
 // Helper for "Splash Art" subquestions (old splash arts guessed by body part)
-const splashArtQ = (id: number, name: string, part: string, info: string) =>
+const splashArtQ = (
+  id: number,
+  points: number,
+  name: string,
+  part: string,
+  info: string,
+) =>
   makeQuestion({
     id,
     category: "Splash Art",
-    points: 300,
+    points,
     type: "IMAGE",
     question: `${name}${part.toLowerCase()}.jpg`,
     answertype: "IMAGE",
     answer: `${name}.jpg`,
+    alternateAnswer: name,
     info,
   });
 
@@ -40,6 +47,7 @@ export const classic0: Board = {
             {
               category: "Items",
               answertype: "IMAGE",
+              alternateAnswer: "Sightstone",
               answer: "Sightstone.jpg",
             },
           ),
@@ -59,7 +67,7 @@ export const classic0: Board = {
             "Welchen Effekt hat 'Sword of the Occult' zusätzlich gegeben, wenn es voll gestacked war?",
             "20% Bonus Attack Speed",
             400,
-            { category: "Items" },
+            { category: "Items", joker: "Yoink" },
           ),
         ],
         [
@@ -71,6 +79,7 @@ export const classic0: Board = {
             {
               category: "Items",
               answertype: "IMAGE",
+              alternateAnswer: "Luden's Pulse",
               answer: "Ludens_Pulse.jpg",
             },
           ),
@@ -82,39 +91,39 @@ export const classic0: Board = {
       extra: "default",
       questions: [
         [
-          splashArtQ(35, "Morgana", "Augen", "Augen"),
-          splashArtQ(35, "Morgana", "Brust", "Brust"),
-          splashArtQ(35, "Morgana", "Hand", "Hand"),
-          splashArtQ(35, "Morgana", "Hufte", "Hüften"),
-          splashArtQ(35, "Morgana", "Lippen", "Lippen"),
+          splashArtQ(35, 100, "Morgana", "Augen", "Augen"),
+          splashArtQ(35, 100, "Morgana", "Brust", "Brust"),
+          splashArtQ(35, 100, "Morgana", "Hand", "Hand"),
+          splashArtQ(35, 100, "Morgana", "Hufte", "Hüften"),
+          splashArtQ(35, 100, "Morgana", "Lippen", "Lippen"),
         ],
         [
-          splashArtQ(36, "Lux", "Augen", "Augen"),
-          splashArtQ(36, "Lux", "Brust", "Brust"),
-          splashArtQ(36, "Lux", "Hand", "Hand"),
-          splashArtQ(36, "Lux", "Hufte", "Hüften"),
-          splashArtQ(36, "Lux", "Lippen", "Lippen"),
+          splashArtQ(36, 200, "Lux", "Augen", "Augen"),
+          splashArtQ(36, 200, "Lux", "Brust", "Brust"),
+          splashArtQ(36, 200, "Lux", "Hand", "Hand"),
+          splashArtQ(36, 200, "Lux", "Hufte", "Hüften"),
+          splashArtQ(36, 200, "Lux", "Lippen", "Lippen"),
         ],
         [
-          splashArtQ(37, "Ryze", "Augen", "Augen"),
-          splashArtQ(37, "Ryze", "Brust", "Brust"),
-          splashArtQ(37, "Ryze", "Hand", "Hand"),
-          splashArtQ(37, "Ryze", "Hufte", "Hüften"),
-          splashArtQ(37, "Ryze", "Lippen", "Lippen"),
+          splashArtQ(37, 300, "Ryze", "Augen", "Augen"),
+          splashArtQ(37, 300, "Ryze", "Brust", "Brust"),
+          splashArtQ(37, 300, "Ryze", "Hand", "Hand"),
+          splashArtQ(37, 300, "Ryze", "Hufte", "Hüften"),
+          splashArtQ(37, 300, "Ryze", "Lippen", "Lippen"),
         ],
         [
-          splashArtQ(38, "Poppy", "Augen", "Augen"),
-          splashArtQ(38, "Poppy", "Brust", "Brust"),
-          splashArtQ(38, "Poppy", "Hand", "Hand"),
-          splashArtQ(38, "Poppy", "Hufte", "Hüften"),
-          splashArtQ(38, "Poppy", "Lippen", "Lippen"),
+          splashArtQ(38, 400, "Poppy", "Augen", "Augen"),
+          splashArtQ(38, 400, "Poppy", "Brust", "Brust"),
+          splashArtQ(38, 400, "Poppy", "Hand", "Hand"),
+          splashArtQ(38, 400, "Poppy", "Hufte", "Hüften"),
+          splashArtQ(38, 400, "Poppy", "Lippen", "Lippen"),
         ],
         [
-          splashArtQ(39, "TwistedFate", "Augen", "Augen"),
-          splashArtQ(39, "TwistedFate", "Brust", "Brust"),
-          splashArtQ(39, "TwistedFate", "Hand", "Hand"),
-          splashArtQ(39, "TwistedFate", "Hufte", "Hüften"),
-          splashArtQ(39, "TwistedFate", "Lippen", "Lippen"),
+          splashArtQ(39, 500, "TwistedFate", "Augen", "Augen"),
+          splashArtQ(39, 500, "TwistedFate", "Brust", "Brust"),
+          splashArtQ(39, 500, "TwistedFate", "Hand", "Hand"),
+          splashArtQ(39, 500, "TwistedFate", "Hufte", "Hüften"),
+          splashArtQ(39, 500, "TwistedFate", "Lippen", "Lippen"),
         ],
       ],
     },
@@ -149,7 +158,9 @@ export const classic0: Board = {
             {
               category: "Gamemode",
               answertype: "IMAGE",
-              answer: "Kayn.png",
+              alternateAnswer: "Kayn",
+              answer: "BossKayn.jpg",
+              joker: "NoYou",
             },
           ),
         ],
@@ -180,7 +191,7 @@ export const classic0: Board = {
         [
           textQ(
             45,
-            "Was konnte Sorakas W zu ihrem Release machen?",
+            "Was konnte Sorakas E zu ihrem Release machen?",
             "Mana restoren",
             100,
             { category: "Pls nerf" },
@@ -195,6 +206,7 @@ export const classic0: Board = {
             {
               category: "Pls nerf",
               answertype: "IMAGE",
+              alternateAnswer: "Fiora",
               answer: "FioraClassic.jpg",
             },
           ),
@@ -227,6 +239,8 @@ export const classic0: Board = {
               category: "Pls nerf",
               answertype: "IMAGE",
               answer: "Ryze.jpg",
+              alternateAnswer: "Ryze",
+              joker: "Gamemaster",
             },
           ),
         ],
@@ -246,7 +260,8 @@ export const classic0: Board = {
               category: "Zitate",
               answertype: "VIDEO",
               answer: "StillTheMainComplete.mp4",
-              info: "STILL THE MAAAAAAAAAAAAIIIIINNNNN 28.05.2015",
+              alternateAnswer: "STILL THE MAAAAAAAAAAAAIIIIINNNNN",
+              info: "28.05.2015",
             },
           ),
         ],
@@ -255,23 +270,33 @@ export const classic0: Board = {
             category: "Zitate",
             answertype: "VIDEO",
             answer: "KeinWbisLevel4Complete.mp4",
-            info: "Sie skillt kein W bis Level 4! MAN! 06.02.2018",
+            alternateAnswer: "KEIN W BIS LEVEL 4! MAN!",
+            info: "06.02.2018",
           }),
         ],
         [
-          videoQ(52, "Darius.mp4", "besser als Schaden", 300, {
-            category: "Zitate",
-            answertype: "VIDEO",
-            answer: "DariusComplete.mp4",
-            info: "Damage ist auf jeden Fall besser als Schaden auf Darius! 09.07.2014",
-          }),
+          videoQ(
+            52,
+            "Darius.mp4",
+            "Damage ist auf jeden fall besser als Schaden auf Darius!",
+            300,
+            {
+              category: "Zitate",
+              answertype: "VIDEO",
+              answer: "DariusComplete.mp4",
+              alternateAnswer:
+                "Damage ist auf jeden fall besser als Schaden auf Darius!",
+              info: "09.07.2014",
+            },
+          ),
         ],
         [
           videoQ(53, "Uli.mp4", "Uli was ist denn da los", 400, {
             category: "Zitate",
             answertype: "VIDEO",
             answer: "UliComplete.mp4",
-            info: "Uli was ist denn da los? 23.01.2018",
+            alternateAnswer: "ULI, was ist denn da los?",
+            info: "23.01.2018",
           }),
         ],
         [
@@ -279,7 +304,9 @@ export const classic0: Board = {
             category: "Zitate",
             answertype: "VIDEO",
             answer: "MitfahrgelegenheitComplete.mp4",
-            info: "'Kutcher.de' für schnelle Mitfahrgelegenheiten durch ganz Deutschland 02.04.2016",
+            alternateAnswer:
+              "'Kutcher.de' für schnelle Mitfahrgelegenheiten durch ganz Deutschland ",
+            info: "02.04.2016",
           }),
         ],
       ],

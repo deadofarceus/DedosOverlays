@@ -60,6 +60,7 @@ export interface Question {
   question: string;
   answertype: "VIDEO" | "TEXT" | "IMAGE";
   answer: string;
+  alternateAnswer?: string;
   state: "PAUSED" | "INVISIBLE" | "ACTIVE";
   finished: boolean;
   buzzedPlayers: JepoardyPlayer[];
