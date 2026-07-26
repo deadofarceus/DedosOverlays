@@ -192,7 +192,7 @@ export const classic0: Board = {
           textQ(
             45,
             "Nenne einen effekt sorakas erster E",
-            "Auf Verbündete Mana restoren, auf Gegnern Silence",
+            "Bei Verbündeten Mana restoren, auf Gegnern Silence",
             100,
             { category: "Pls nerf" },
           ),
