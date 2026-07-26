@@ -100,6 +100,14 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
               <VideoAnswer question={question} sendState={sendState} gamestate={gamestate} />
             )}
 
+            {question.alternateAnswer && (
+              <div
+                className="jp-question-answer jp-question-alternate-answer"
+              >
+                {question.alternateAnswer}
+              </div>
+            )}
+
             {!question.finished && <BoardTimer />}
           </div>
         </div>

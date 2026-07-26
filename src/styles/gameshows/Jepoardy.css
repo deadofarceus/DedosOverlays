@@ -958,3 +958,9 @@
   background-size: 200% 100%;
   transition: width 50ms linear;
 }
+
+.jp-question-alternate-answer {
+    position: absolute;
+    bottom: 15px;
+    filter: drop-shadow(3px 3px 3px #000000);
+}

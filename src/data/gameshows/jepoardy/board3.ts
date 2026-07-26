@@ -143,7 +143,7 @@ export const classic1: Board = {
         [
           textQ(
             65,
-            "Welche beiden Skins hat man bekommen, wenn man eine physische Version des Spiels gekauft hat?",
+            "Nenne einen der beiden Skins, die man erhalten hat, wenn man eine physische Version des Spiels gekauft hat",
             "Silver Kayle und Young Ryze",
             200,
             {
