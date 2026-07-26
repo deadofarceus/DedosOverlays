@@ -115,11 +115,6 @@ function JepoardyController() {
         buzzerQueue={buzzerQueue}
         clearBuzzer={handleClearBuzzer}
       />
-      {/* <BuzzerQueue
-        clearBuzzer={handleClearBuzzer}
-        buzzerQueue={buzzerQueue}
-        clearOneBuzzer={handleClearOneBuzzer}
-      /> */}
       <UserControls
         gamestate={currentGamestate}
         sendState={sendState}

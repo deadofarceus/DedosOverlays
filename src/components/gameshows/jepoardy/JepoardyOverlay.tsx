@@ -61,7 +61,7 @@ function JepoardyOverlay() {
     }
   });
 
-  // console.log(links);
+  // console.log(currentGamestate.password, links);
   // console.log(getVDONinjaLink(id!, currentGamestate.admin.name, currentGamestate.password));
 
   const currentPlayer =

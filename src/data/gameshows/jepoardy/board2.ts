@@ -191,8 +191,8 @@ export const classic0: Board = {
         [
           textQ(
             45,
-            "Was konnte Sorakas E zu ihrem Release machen?",
-            "Mana restoren",
+            "Nenne einen effekt sorakas erster E",
+            "Auf Verbündete Mana restoren, auf Gegnern Silence",
             100,
             { category: "Pls nerf" },
           ),

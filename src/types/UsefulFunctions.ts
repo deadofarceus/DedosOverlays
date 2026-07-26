@@ -14,18 +14,28 @@ export function buzzer(id: string, name: string) {
 }
 
 export function clearBuzzer(id: string) {
-  fetch("https://cacedray.ddns.net:8443/buzzerclear/" + id + "?name=CLEARBUZZERQUEUE")
+  fetch(
+    "https://cacedray.ddns.net:8443/buzzerclear/" +
+      id +
+      "?name=CLEARBUZZERQUEUE",
+  )
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
 
 export function clearOneBuzzer(id: string, name: string) {
-  fetch("https://cacedray.ddns.net:8443/buzzerclear/" + id + "?name=CLEAR_" + name)
+  fetch(
+    "https://cacedray.ddns.net:8443/buzzerclear/" + id + "?name=CLEAR_" + name,
+  )
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
 
-export function getVDONinjaLink(id: string, name: string, password: string): string {
+export function getVDONinjaLink(
+  id: string,
+  name: string,
+  password: string,
+): string {
   return (
     "https://vdo.ninja/?view=" +
     name +

@@ -4,8 +4,9 @@ import { JepoardyGame, JepoardyGameState, TESTGamestate } from "../../../types/g
 import { buzzer, useQuery } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket } from "../../../types/WebsocketTypes";
 import JepoardyBoard from "./board/JepoardyBoard";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
+import DedoCopy from "../../util/DedoCopy";
 
 let ws: GameshowWebsocket<JepoardyGame>;
 const audio = new Audio("../../sounds/Buzzer.mp3");
@@ -187,12 +188,6 @@ function JepoardyTeilnehmer() {
         clearBuzzer={() => {}}
         clearOneBuzzer={() => {}}
       />
-      {/* <BuzzerQueue
-        buzzerQueue={buzzerQueue}
-        clearBuzzer={handleClearBuzzer}
-        clearOneBuzzer={handleClearOneBuzzer}
-      /> */}
-
       <h1 className="jp-ownPlayerName blackOutline">{playerName}</h1>
 
       <div className="centerR jp-playerPointsTNDiv">
@@ -261,8 +256,8 @@ function JepoardyTeilnehmer() {
         </div>
       </div>
 
-      {buzzerShowing && (
-        <div className="centerC" style={{ width: "70%" }}>
+        <div className="centerC w-50" style={{height: "200px"}}>
+          {buzzerShowing && (
           <Button
             variant="danger"
             className={
@@ -272,8 +267,23 @@ function JepoardyTeilnehmer() {
           >
             BUZZER
           </Button>
+          )}
         </div>
-      )}
+
+      <div className="centerC w-50">
+          <div>DEIN VDO Ninja Camera Link:</div>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              value={`https://vdo.ninja/?room=${id}&hash=c4db&q&push=${playerName}`}
+              readOnly
+              aria-describedby="basic-addon2"
+              className="link"
+            />
+
+            <DedoCopy textToCopy={`https://vdo.ninja/?room=${id}&hash=c4db&q&push=${playerName}`} />
+          </InputGroup>
+        </div>
 
       <div className="buzzerSoundSlider">
         {/** das auch bei controller ALLE SOUNDS mit der selben Lautstärke */}
