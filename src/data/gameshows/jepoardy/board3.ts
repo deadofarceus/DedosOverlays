@@ -296,12 +296,12 @@ export const classic1: Board = {
         [
           textQ(
             76,
-            "Champs, die beim Release dabei waren (19.10.2010):\n      Ryze, Sion, Tristana, Lux, Kayle",
+            "Champs, die beim Release dabei waren:\n      Ryze, Sion, Tristana, Lux, Kayle",
             "Lux",
             400,
             {
               category: "Impostor",
-              info: "19.10.2010",
+              info: "Release:19.10.2010",
             },
           ),
         ],
