@@ -205,6 +205,19 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
     if (question.extra !== "Windfury") {
       newGamestate.currentPlayer = (newGamestate.currentPlayer + 1) % newGamestate.players.length;
     }
+
+        const numOfFinishedQuestions = newGamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished).length;
+    console.log(numOfFinishedQuestions);
+    
+    if (numOfFinishedQuestions === 23 && newGamestate.currentBoard.id === 1) {
+      const confirmed = confirm("Achtung nur noch 2 Fragen sind übrig also kann nun jeder buzzern");
+      if (confirmed) {
+        console.log("Super du hast es gelesen");
+      } else {
+        console.log("Schade");
+      }
+    }
+
     sendState(newGamestate);
   };
 
@@ -337,10 +350,17 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
 
   let backToBoard = gamestate.currentQuestion.buzzedPlayers.length === 0 || question.finished;
 
-  const currentPlayer =
+  let currentPlayer =
     buzzerQueue.length === 0
-      ? gamestate.players[gamestate.currentPlayer]
-      : gamestate.players.find((p) => p.name === buzzerQueue[0])!;
+      ? gamestate.players[gamestate.currentPlayer].name
+      : gamestate.players.find((p) => p.name === buzzerQueue[0])!.name;
+
+  const finishedQuestions = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
+  console.log(finishedQuestions.length, gamestate.currentBoard.id === 1);
+  
+  if (finishedQuestions.length > 23 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
+    currentPlayer = "Warte auf Buzzer";
+  }
 
   const answer = question.alternateAnswer
     ? question.alternateAnswer
@@ -370,10 +390,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
             (buzzerQueue.length > 0 || question.buzzedPlayers.length === 0) && (
               <div className="centerC">
                 <Button variant="danger" onClick={handleFalscheAntwort}>
-                  Falsche Antwort von {currentPlayer.name}
+                  Falsche Antwort von {currentPlayer}
                 </Button>{" "}
                 <Button variant="success" onClick={handleRichtigeAntwort}>
-                  Richtige Antwort von {currentPlayer.name}
+                  Richtige Antwort von {currentPlayer}
                 </Button>{" "}
               </div>
             )}

@@ -100,7 +100,7 @@ function JepoardyQuestion({ question, gamestate, sendState }: JepoardySingleQues
               <VideoAnswer question={question} sendState={sendState} gamestate={gamestate} />
             )}
 
-            {question.alternateAnswer && (
+            {question.alternateAnswer && question.answertype === "IMAGE" && (
               <div
                 className="jp-question-answer jp-question-alternate-answer"
               >

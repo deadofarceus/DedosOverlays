@@ -87,11 +87,14 @@ function JepoardyTeilnehmer() {
   const playerName = player.name;
 
   const question = currentGamestate.currentQuestion;
+
+  const finishedQuestions = currentGamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
+
   const buzzerShowing = currentGamestate.state === "QUESTION" && !question.finished;
 
   const buzzerPressable =
     !question.buzzedPlayers.map((p) => p.name).includes(playerName) &&
-    question.buzzedPlayers.length > 0 &&
+    (question.buzzedPlayers.length > 0 || (finishedQuestions.length > 23 && currentGamestate.currentBoard.id === 1)) &&
     buzzerQueue.length === 0 &&
     (((question.type === "TEXT" || question.type === "IMAGE") && question.state === "ACTIVE") ||
       question.type === "VIDEO" ||
