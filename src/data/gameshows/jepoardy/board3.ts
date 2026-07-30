@@ -149,7 +149,7 @@ export const classic1: Board = {
             {
               category: "Iconic Skins",
               answertype: "IMAGE",
-              alternateAnswer: "Silver Kayle und Young Ryze",
+              alternateAnswer: "Young Ryze und Silver Kayle",
               answer: "YoungRyzeUndSilverKayle.jpg",
             },
           ),
