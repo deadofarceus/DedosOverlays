@@ -358,7 +358,7 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
   const finishedQuestions = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
   console.log(finishedQuestions.length, gamestate.currentBoard.id === 1);
   
-  if (finishedQuestions.length > 23 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
+  if (finishedQuestions.length > 22 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
     currentPlayer = "Warte auf Buzzer";
   }
 

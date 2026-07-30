@@ -94,7 +94,7 @@ function JepoardyTeilnehmer() {
 
   const buzzerPressable =
     !question.buzzedPlayers.map((p) => p.name).includes(playerName) &&
-    (question.buzzedPlayers.length > 0 || (finishedQuestions.length > 23 && currentGamestate.currentBoard.id === 1)) &&
+    (question.buzzedPlayers.length > 0 || (finishedQuestions.length > 22 && currentGamestate.currentBoard.id === 1)) &&
     buzzerQueue.length === 0 &&
     (((question.type === "TEXT" || question.type === "IMAGE") && question.state === "ACTIVE") ||
       question.type === "VIDEO" ||
