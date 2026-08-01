@@ -1,5 +1,5 @@
 import { Board } from "../../../types/gameshows/Jepoardy";
-import { textQ } from "./builders";
+import { imageQ, textQ } from "./builders";
 
 export const classic1: Board = {
   id: 1,
@@ -227,76 +227,78 @@ export const classic1: Board = {
       ],
     },
     {
-      name: "AI explains",
+      name: "Hermits Gehilfe",
       extra: "default",
       questions: [
         [
-          textQ(
+          imageQ(
             70,
-            "Das war der, der nach einem Kill den Champion oder sogar den Drake als Pet mitgenommen hat.",
-            "Mordekaiser",
+            "rabadons_ohne_build.png",
+            "Needlessly Large Rod und Blasting Wand",
             200,
             {
-              category: "AI explains",
+              category: "Hermits Gehilfe",
+              extraQuestion: "Welche beiden Items sind im Rabadon's Buildpath?",
               answertype: "IMAGE",
-              alternateAnswer: "Mordekaiser",
-              answer: "MordekaiserClassic.jpg",
+              answer: "rabaganz.png",
+              alternateAnswer: "Needlessly Large Rod und Blasting Wand",
             },
           ),
         ],
         [
-          textQ(
+          imageQ(
             71,
-            "Das war die, die ihre Ulti einfach als vier fliegende Klingen verschossen hat.",
-            "Irelia",
+            "innervating_locket_ohne_stats.png",
+            "Leben und Mana",
             400,
             {
-              category: "AI explains",
+              category: "Hermits Gehilfe",
+              extraQuestion: "Welche beiden Stats gibt Innervating Locket?",
               answertype: "IMAGE",
-              alternateAnswer: "Irelia",
-              answer: "IreliaClassic.jpg",
+              answer: "locketganz.png",
+              alternateAnswer: "Leben und Mana",
             },
           ),
         ],
         [
-          textQ(
-            72,
-            "Das war der, der dich markiert hat, seine Raketen plötzlich um Wände geflogen sind und dann einfach den Platz mit dir getauscht hat.",
-            "Urgot",
-            600,
-            {
-              category: "AI explains",
-              answertype: "IMAGE",
-              alternateAnswer: "Urgot",
-              answer: "UrgotClassic.jpg",
-            },
-          ),
+          imageQ(72, "frozen_mallet_ohne_preis.png", "3300 Gold", 600, {
+            category: "Hermits Gehilfe",
+            answertype: "IMAGE",
+            extraQuestion: "Wie viel kostet Frozen Mallet?",
+            answer: "malletganz.png",
+            alternateAnswer: "3300 Gold",
+          }),
         ],
         [
-          textQ(
+          imageQ(
             73,
-            "Das war der, der zwischen Schaden und Heilung umgeschaltet hat und nach dem Tod einfach wieder aufgestanden ist.",
-            "Aatrox",
+            "twin_shadows_ohne_build.png",
+            "Lucky Pick und Null-Magic Mantle",
             800,
             {
-              category: "AI explains",
+              category: "Hermits Gehilfe",
               answertype: "IMAGE",
-              alternateAnswer: "Aatrox",
-              answer: "AatroxClassic.jpg",
+              extraQuestion:
+                "Welche beiden Items sind im Twin Shadows Buildpath?",
+              alternateAnswer: "Lucky Pick und Null-Magic Mantle",
+              answer: "twinganz.png",
             },
           ),
         ],
         [
-          textQ(
+          imageQ(
             74,
-            "Das war der, der dich angesprungen und gefühlt eine Ewigkeit lang festgehalten hat.",
-            "Warwick",
+            "GA_ohne_Beschreibung_bzw_Build.png",
+            "Chain Vest, Negatron Cloak und Armor, Magic Resist",
             1000,
             {
-              category: "AI explains",
+              category: "Hermits Gehilfe",
               answertype: "IMAGE",
-              alternateAnswer: "Warwick",
-              answer: "WarwickClassic.jpg",
+              extraQuestion:
+                "Welche Items waren im Guardian Angel Buildpath enthalten und welche Stats hat es entsprechend gegeben?",
+              alternateAnswer:
+                "Chain West, Negatron Cloak und Armor, Magic Resist",
+              answer: "gaganz.png",
             },
           ),
         ],
