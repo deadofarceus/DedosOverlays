@@ -8,6 +8,7 @@ function ImageQuestion({ question }: JepoardySingleQuestionProps) {
       className={"jp-question-image " + (invis ? "jp-question-INVISIBLE" : "")}
       data-question-state={question.state}
     >
+      {question.extraQuestion && <div className="jp-question-text">{question.extraQuestion}</div>}
       <img
         src={`/jepoardy/images/${encodeURIComponent(question.question)}`}
         alt=""

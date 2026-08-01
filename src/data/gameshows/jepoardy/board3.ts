@@ -83,54 +83,76 @@ export const classic1: Board = {
       ],
     },
     {
-      name: "Jahresrückblick",
+      name: "Videos von Damals",
       extra: "default",
       questions: [
         [
           textQ(
             60,
-            "Die Summoner's Rift Map hat 2012 ein grafisches und technisches Update erhalten. Wann wurde sie komplett neu gemacht?",
-            "2014",
+            "Wer hat ein Video gepostet mit dem Titel 'Sleep is for the weak', indem dann 10 Minuten geschlafen wurde?",
+            "Sola",
             200,
-            { category: "Jahresrückblick" },
+            {
+              category: "Videos von Damals",
+              answertype: "IMAGE",
+              alternateAnswer: "Sola",
+              answer: "SleepingSola.png",
+            },
           ),
         ],
         [
-          textQ(61, "Wann wurden Vision Wards removed?", "2016", 400, {
-            category: "Jahresrückblick",
-            info: "Umgangssprachlich: Pink Wards",
-          }),
+          textQ(
+            61,
+            "In Broekis Video 'BRAUCHE EIN TASCHENRECHNER' hat er vor 6 Jahren welchen Champ gespielt?",
+            "Vel'Koz",
+            400,
+            {
+              category: "Videos von Damals",
+              answertype: "IMAGE",
+              alternateAnswer: "Vel'Koz",
+              answer: "Taschenrechner.png",
+            },
+          ),
         ],
         [
           textQ(
             62,
-            "In welchem Jahr wurde Pulsefire Ezreal veröffentlicht?",
-            "2012",
+            "Wer hat ein Video mit dem Titel 'Habe ich einen guten Farm? So findest du eine mögliche Antwort!' bereits vor 14 Jahren veröffentlicht??",
+            "Maxim",
             600,
-            { category: "Jahresrückblick" },
+            {
+              category: "Videos von Damals",
+              answertype: "IMAGE",
+              alternateAnswer: "Maxim",
+              answer: "MaximFarm.png",
+            },
           ),
         ],
         [
           textQ(
             63,
-            "In welchem Jahr gab es den Gamemode 'Hunt of the Blood Moon'?",
-            "2017",
+            " Welcher YouTuber hat in seinem ältesten Video Lee Sin gespielt mit dem Namen 'Hodenkrebs587'?",
+            "Autophil",
             800,
             {
-              category: "Jahresrückblick",
-              info: "Es gab ihn sogar zwei mal in dem Jahr.",
+              category: "Videos von Damals",
+              answertype: "IMAGE",
+              alternateAnswer: "Autophil",
+              answer: "PhilLeeSin.png",
             },
           ),
         ],
         [
           textQ(
             64,
-            "In welchem Jahr wurde Viktor veröffentlicht?",
-            "2011",
+            "Wer postete vor 10 Jahren 'How to report #1 | Lasst das Salz auf der Straße'?",
+            "Johnny",
             1000,
             {
-              category: "Jahresrückblick",
-              info: "29.12.2011",
+              category: "Videos von Damals",
+              answertype: "IMAGE",
+              alternateAnswer: "Johnny",
+              answer: "ReportJohnny.png",
             },
           ),
         ],

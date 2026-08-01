@@ -67,6 +67,7 @@ export interface Question {
   info?: string;
   joker?: string;
   usedJokers?: string;
+  extraQuestion?: string;
 }
 
 export interface JepoardyGameProps {

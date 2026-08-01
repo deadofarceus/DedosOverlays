@@ -1,5 +1,5 @@
 import { Board } from "../../../types/gameshows/Jepoardy";
-import { makeQuestion, textQ, videoQ } from "./builders";
+import { imageQ, makeQuestion, textQ, videoQ } from "./builders";
 
 // Helper for "Splash Art" subquestions (old splash arts guessed by body part)
 const splashArtQ = (
@@ -67,22 +67,24 @@ export const classic0: Board = {
             "Welchen Effekt hat 'Sword of the Occult' zusätzlich gegeben, wenn es voll gestacked war?",
             "20% Bonus Attack Speed",
             400,
-            { category: "Items", joker: "Yoink" },
+            {
+              category: "Items",
+              joker: "Yoink",
+              answertype: "IMAGE",
+              answer: "Sword_of_the_Occult_item.jpg",
+              alternateAnswer: "20% Bonus Attack Speed",
+            },
           ),
         ],
         [
-          textQ(
-            34,
-            "Wie hieß Luden's Echo, wenn es von Ornn geupgraded wurde?",
-            "Luden's Pulse",
-            500,
-            {
-              category: "Items",
-              answertype: "IMAGE",
-              alternateAnswer: "Luden's Pulse",
-              answer: "Ludens_Pulse.jpg",
-            },
-          ),
+          imageQ(34, "Ludens_Tempest_item.jpg", "Luden's Pulse", 500, {
+            category: "Items",
+            extraQuestion:
+              "Wie hieß Luden's Echo, wenn es von Ornn geupgraded wurde?",
+            answertype: "IMAGE",
+            alternateAnswer: "Luden's Pulse",
+            answer: "Ludens_Pulse.jpg",
+          }),
         ],
       ],
     },
@@ -179,7 +181,12 @@ export const classic0: Board = {
             "Wie lange dauerte der Recall in Dominion?",
             "4,5 Sekunden",
             500,
-            { category: "Gamemode" },
+            {
+              category: "Gamemode",
+              answertype: "IMAGE",
+              alternateAnswer: "4,5 Sekunden",
+              answer: "Dominion.jpg",
+            },
           ),
         ],
       ],
@@ -194,7 +201,13 @@ export const classic0: Board = {
             "Nenne einen Effekt von Sorakas erster E.",
             "Bei Verbündeten Mana restoren, auf Gegnern Silence",
             100,
-            { category: "Pls nerf" },
+            {
+              category: "Pls nerf",
+              answertype: "IMAGE",
+              answer: "Soraka_E.jpg",
+              alternateAnswer:
+                "Bei Verbündeten Mana restoren, auf Gegnern Silence",
+            },
           ),
         ],
         [
@@ -226,7 +239,13 @@ export const classic0: Board = {
             "Was war Jannas erste Passive?",
             "Alle Allies bekommen 3% Movement Speed solange Janna lebt",
             400,
-            { category: "Pls nerf" },
+            {
+              category: "Pls nerf",
+              answertype: "IMAGE",
+              alternateAnswer:
+                "Alle Allies bekommen 3% Movement Speed solange Janna lebt",
+              answer: "Janna_Tailwind_old.jpg",
+            },
           ),
         ],
         [
@@ -266,13 +285,19 @@ export const classic0: Board = {
           ),
         ],
         [
-          videoQ(51, "KeinWbisLevel4.mp4", "KEIN W BIS LEVEL 4!", 200, {
-            category: "Zitate",
-            answertype: "VIDEO",
-            answer: "KeinWbisLevel4Complete.mp4",
-            alternateAnswer: "KEIN W BIS LEVEL 4! MAN!",
-            info: "06.02.2018",
-          }),
+          videoQ(
+            51,
+            "KeinWbisLevel4.mp4",
+            "SIE SKILLT KEIN W BIS LEVEL 4! MAN!",
+            200,
+            {
+              category: "Zitate",
+              answertype: "VIDEO",
+              answer: "KeinWbisLevel4Complete.mp4",
+              alternateAnswer: "SIE SKILLT KEIN W BIS LEVEL 4! MAN!",
+              info: "06.02.2018",
+            },
+          ),
         ],
         [
           videoQ(
@@ -301,11 +326,11 @@ export const classic0: Board = {
           }),
         ],
         [
-          videoQ(53, "Mori.mp4", "Ohne Hose am PC", 500, {
+          videoQ(53, "Mori.mp4", "Spiele mit Noobs und Feedern", 500, {
             category: "Zitate",
             answertype: "VIDEO",
             answer: "MoriComplete.mp4",
-            alternateAnswer: "Ohne Hose am PC",
+            alternateAnswer: "Spiele mit Noobs und Feedern",
             info: "30.10.2016",
           }),
         ],
