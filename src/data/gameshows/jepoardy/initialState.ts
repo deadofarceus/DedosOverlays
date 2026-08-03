@@ -9,7 +9,7 @@ export const TESTGamestate: JepoardyGameState = {
     name: "Autophil",
     vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
   },
-  currentPlayer: 1,
+  currentPlayer: 0,
   players: [
     {
       name: "Broeki",
