@@ -117,7 +117,7 @@ export const classic1: Board = {
         [
           textQ(
             62,
-            "Wer hat ein Video mit dem Titel 'Habe ich einen guten Farm? So findest du eine mögliche Antwort!' bereits vor 14 Jahren veröffentlicht??",
+            "Wer hat ein Video mit dem Titel 'Habe ich einen guten Farm? So findest du eine mögliche Antwort!' bereits vor 14 Jahren veröffentlicht?",
             "Maxim",
             600,
             {
@@ -177,12 +177,18 @@ export const classic1: Board = {
           ),
         ],
         [
-          textQ(
+          imageQ(
             66,
-            "Wieso wurde Rusty Blitzcrank removed?",
+            "Rusty_Blitzcrank.jpg",
             "Sah dem Standart Skin zu ähnlich",
             400,
-            { category: "Iconic Skins" },
+            {
+              category: "Iconic Skins",
+              answertype: "IMAGE",
+              alternateAnswer: "Sah dem Standart Skin zu ähnlich",
+              answer: "Rusty_Blitzcrank.jpg",
+              extraQuestion: "Wieso wurde Rusty Blitzcrank removed?",
+            },
           ),
         ],
         [
@@ -200,15 +206,14 @@ export const classic1: Board = {
           ),
         ],
         [
-          textQ(
-            68,
-            "Wo konnte man den 'Riot Squad Singed' Skin erhalten?",
-            "Gamescom 2010",
-            800,
-            {
-              category: "Iconic Skins",
-            },
-          ),
+          imageQ(68, "Singed_old.jpg", "Gamescom 2010", 800, {
+            category: "Iconic Skins",
+            answertype: "IMAGE",
+            alternateAnswer: "Gamescom 2010",
+            answer: "Singed_old.jpg",
+            extraQuestion:
+              "Wo konnte man den 'Riot Squad Singed' Skin erhalten?",
+          }),
         ],
         [
           textQ(
@@ -231,34 +236,22 @@ export const classic1: Board = {
       extra: "default",
       questions: [
         [
-          imageQ(
-            70,
-            "rabadons_ohne_build.png",
-            "Needlessly Large Rod und Blasting Wand",
-            200,
-            {
-              category: "Hermits Gehilfe",
-              extraQuestion: "Welche beiden Items sind im Rabadon's Buildpath?",
-              answertype: "IMAGE",
-              answer: "rabaganz.png",
-              alternateAnswer: "Needlessly Large Rod und Blasting Wand",
-            },
-          ),
+          imageQ(70, "rabadons_frage.png", "Rabadon's Deathcap", 200, {
+            category: "Hermits Gehilfe",
+            extraQuestion: "Welches baut man aus diesen Items?",
+            answertype: "IMAGE",
+            answer: "rabaganz.png",
+            alternateAnswer: "Rabadon's Deathcap",
+          }),
         ],
         [
-          imageQ(
-            71,
-            "innervating_locket_ohne_stats.png",
-            "Leben und Mana",
-            400,
-            {
-              category: "Hermits Gehilfe",
-              extraQuestion: "Welche beiden Stats gibt Innervating Locket?",
-              answertype: "IMAGE",
-              answer: "locketganz.png",
-              alternateAnswer: "Leben und Mana",
-            },
-          ),
+          imageQ(71, "innervating_locket.png", "Leben und Mana", 400, {
+            category: "Hermits Gehilfe",
+            extraQuestion: "Welche beiden Stats gibt Innervating Locket?",
+            answertype: "IMAGE",
+            answer: "locketganz.png",
+            alternateAnswer: "Leben und Mana",
+          }),
         ],
         [
           imageQ(72, "frozen_mallet_ohne_preis.png", "3300 Gold", 600, {
@@ -270,37 +263,22 @@ export const classic1: Board = {
           }),
         ],
         [
-          imageQ(
-            73,
-            "twin_shadows_ohne_build.png",
-            "Lucky Pick und Null-Magic Mantle",
-            800,
-            {
-              category: "Hermits Gehilfe",
-              answertype: "IMAGE",
-              extraQuestion:
-                "Welche beiden Items sind im Twin Shadows Buildpath?",
-              alternateAnswer: "Lucky Pick und Null-Magic Mantle",
-              answer: "twinganz.png",
-            },
-          ),
+          imageQ(73, "twin_shadows_frage.png", "Twin Shadows", 800, {
+            category: "Hermits Gehilfe",
+            answertype: "IMAGE",
+            extraQuestion: "Was baut man aus diesen Items?",
+            alternateAnswer: "Twin Shadows",
+            answer: "twinganz.png",
+          }),
         ],
         [
-          imageQ(
-            74,
-            "GA_ohne_Beschreibung_bzw_Build.png",
-            "Chain Vest, Negatron Cloak und Armor, Magic Resist",
-            1000,
-            {
-              category: "Hermits Gehilfe",
-              answertype: "IMAGE",
-              extraQuestion:
-                "Welche Items waren im Guardian Angel Buildpath enthalten und welche Stats hat es entsprechend gegeben?",
-              alternateAnswer:
-                "Chain West, Negatron Cloak und Armor, Magic Resist",
-              answer: "gaganz.png",
-            },
-          ),
+          imageQ(74, "ga_frage.png", "Guardian Angel", 1000, {
+            category: "Hermits Gehilfe",
+            answertype: "IMAGE",
+            extraQuestion: "Was baut man aus diesen Items?",
+            alternateAnswer: "Guardian Angel",
+            answer: "gaganz.png",
+          }),
         ],
       ],
     },

@@ -42,7 +42,7 @@ export const TESTGamestate: JepoardyGameState = {
       gmJoker: -1,
     },
     {
-      name: "Johnny",
+      name: "Vlesk",
       points: 0,
       vdoNinjaLink: "https://vdo.ninja/?view=HqEPyCb",
       turn: false,

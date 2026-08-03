@@ -53,18 +53,22 @@ export const classic0: Board = {
           ),
         ],
         [
-          textQ(
+          imageQ(
             32,
-            "Wie viel Mana hat man von der Mana Potion bekommen?",
+            "Mana_Potion_item_old.jpg",
             "100 Mana (über 15 Sekunden)",
             300,
-            { category: "Items" },
+            {
+              category: "Items",
+              extraQuestion:
+                "Wie viel Mana hat man von der Mana Potion bekommen?",
+            },
           ),
         ],
         [
-          textQ(
+          imageQ(
             33,
-            "Welchen Effekt hat 'Sword of the Occult' zusätzlich gegeben, wenn es voll gestacked war?",
+            "Sword_of_the_Occult_item.jpg",
             "20% Bonus Attack Speed",
             400,
             {
@@ -73,6 +77,8 @@ export const classic0: Board = {
               answertype: "IMAGE",
               answer: "Sword_of_the_Occult_item.jpg",
               alternateAnswer: "20% Bonus Attack Speed",
+              extraQuestion:
+                "Welchen Effekt hat 'Sword of the Occult' zusätzlich gegeben, wenn es voll gestacked war?",
             },
           ),
         ],
@@ -134,60 +140,54 @@ export const classic0: Board = {
       extra: "default",
       questions: [
         [
-          textQ(
-            40,
-            "Wie viele Spieler konnten maximal gemeinsam den 'Swarm' Mode spielen?",
-            "4",
-            100,
-            { category: "Gamemode" },
-          ),
+          imageQ(40, "Swarm.jpg", "4", 100, {
+            category: "Gamemode",
+            answertype: "IMAGE",
+            alternateAnswer: "4",
+            answer: "Swarm.jpg",
+            extraQuestion:
+              "Wie viele Spieler konnten maximal gemeinsam den 'Swarm' Mode spielen?",
+          }),
         ],
         [
-          textQ(
-            41,
-            "Wie viele Punkte brauchte man im Gamemode 'Ascension', um zu gewinnen?",
-            "200",
-            200,
-            { category: "Gamemode" },
-          ),
+          imageQ(41, "Ascension.jpg", "200", 200, {
+            category: "Gamemode",
+            answertype: "IMAGE",
+            alternateAnswer: "200",
+            answer: "Ascension.jpg",
+            extraQuestion:
+              "Wie viele Punkte brauchte man im Gamemode 'Ascension', um zu gewinnen?",
+          }),
         ],
         [
-          textQ(
-            42,
-            "Wer war der Boss im Gamemode 'Odyssey: Extraction'?",
-            "Kayn",
-            300,
-            {
-              category: "Gamemode",
-              answertype: "IMAGE",
-              alternateAnswer: "Kayn",
-              answer: "BossKayn.jpg",
-              joker: "NoYou",
-            },
-          ),
+          imageQ(42, "Odyssey.jpg", "Kayn", 300, {
+            category: "Gamemode",
+            answertype: "IMAGE",
+            alternateAnswer: "Kayn",
+            answer: "BossKayn.jpg",
+            joker: "NoYou",
+            extraQuestion:
+              "Wer war der Boss im Gamemode 'Odyssey: Extraction'?",
+          }),
         ],
         [
-          textQ(
-            43,
-            "Wie hieß der Gamemode, in dem man nur Star Guardians spielen konnte?",
-            "Invasion",
-            400,
-            { category: "Gamemode" },
-          ),
+          imageQ(43, "StarGuardian.jpg", "Invasion", 400, {
+            category: "Gamemode",
+            answertype: "IMAGE",
+            alternateAnswer: "Invasion",
+            answer: "StarGuardian.jpg",
+            extraQuestion:
+              "Wie hieß der Gamemode, in dem man nur Star Guardians spielen konnte?",
+          }),
         ],
         [
-          textQ(
-            44,
-            "Wie lange dauerte der Recall in Dominion?",
-            "4,5 Sekunden",
-            500,
-            {
-              category: "Gamemode",
-              answertype: "IMAGE",
-              alternateAnswer: "4,5 Sekunden",
-              answer: "Dominion.jpg",
-            },
-          ),
+          imageQ(44, "Dominion.jpg", "4,5 Sekunden", 500, {
+            category: "Gamemode",
+            answertype: "IMAGE",
+            extraQuestion: "Wie lange dauerte der Recall in Dominion?",
+            alternateAnswer: "4,5 Sekunden",
+            answer: "Dominion.jpg",
+          }),
         ],
       ],
     },
@@ -196,17 +196,18 @@ export const classic0: Board = {
       extra: "default",
       questions: [
         [
-          textQ(
+          imageQ(
             45,
-            "Nenne einen Effekt von Sorakas erster E.",
+            "Soraka_E.jpg",
             "Bei Verbündeten Mana restoren, auf Gegnern Silence",
             100,
             {
               category: "Pls nerf",
               answertype: "IMAGE",
-              answer: "Soraka_E.jpg",
               alternateAnswer:
                 "Bei Verbündeten Mana restoren, auf Gegnern Silence",
+              answer: "Soraka_E.jpg",
+              extraQuestion: "Nenne einen Effekt von Sorakas erster E.",
             },
           ),
         ],
@@ -225,13 +226,14 @@ export const classic0: Board = {
           ),
         ],
         [
-          textQ(
-            47,
-            "Wie lang ging Kayles Aktive ihrer Ability 'Righteous Fury' (E) zu Release?",
-            "10 Sekunden",
-            300,
-            { category: "Pls nerf" },
-          ),
+          imageQ(47, "Kayle_Righteous_Fury_old.jpg", "10 Sekunden", 300, {
+            category: "Pls nerf",
+            answertype: "IMAGE",
+            alternateAnswer: "10 Sekunden",
+            answer: "Kayle_Righteous_Fury_old.jpg",
+            extraQuestion:
+              "Wie lang ging Kayles Aktive ihrer Ability 'Righteous Fury' (E) zu Release?",
+          }),
         ],
         [
           textQ(
