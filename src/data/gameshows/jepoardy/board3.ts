@@ -130,29 +130,29 @@ export const classic1: Board = {
         ],
         [
           textQ(
-            63,
-            " Welcher YouTuber hat in seinem ältesten Video Lee Sin gespielt mit dem Namen 'Hodenkrebs587'?",
-            "Autophil",
+            64,
+            "Welcher YouTuber hat als ältestes gelistetes Video 'Die Eloschule #1 - Riven Q' ?",
+            "Vlesk",
             800,
             {
               category: "Videos von Damals",
               answertype: "IMAGE",
-              alternateAnswer: "Autophil",
-              answer: "PhilLeeSin.png",
+              alternateAnswer: "Vlesk",
+              answer: "Vlesk_Schule.png",
             },
           ),
         ],
         [
           textQ(
-            64,
-            "Wer postete vor 10 Jahren 'How to report #1 | Lasst das Salz auf der Straße'?",
-            "Johnny",
+            63,
+            " Welcher YouTuber hat in seinem ältesten Video Lee Sin gespielt mit dem Namen 'Hodenkrebs587'?",
+            "Autophil",
             1000,
             {
               category: "Videos von Damals",
               answertype: "IMAGE",
-              alternateAnswer: "Johnny",
-              answer: "ReportJohnny.png",
+              alternateAnswer: "Autophil",
+              answer: "PhilLeeSin.png",
             },
           ),
         ],
@@ -319,12 +319,12 @@ export const classic1: Board = {
         [
           textQ(
             78,
-            "Champs, die in Worlds 2016 mindestens 20 mal picked oder banned waren:\n      Cassiopeia, Braum, Sivir, Elise, Kennen",
-            "Braum",
+            "Diese Champs hatten mindestens 2 Reworks:\n      Evelynn, Mordekaiser, Gangplank, Skarner, Ryze",
+            "Gangplank",
             800,
             {
               category: "Impostor",
-              info: "Cassiopeia (22), Braum (16), Sivir (20), Elise (29), Kennen (22)",
+              info: "Evelynn (2), Mordekaiser (2), Gangplank (1), Skarner (3), Ryze (3)",
             },
           ),
         ],

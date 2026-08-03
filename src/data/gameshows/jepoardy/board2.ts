@@ -30,12 +30,19 @@ export const classic0: Board = {
       extra: "default",
       questions: [
         [
-          textQ(
+          imageQ(
             30,
-            "Was war der aktive Effekt des Zz'Rot Portals?",
+            "ZzRot_Portal.png",
             "Void Gate (120 Sek), aus dem Voidspawn kommt (alle 4 Sek)",
             100,
-            { category: "Items" },
+            {
+              category: "Items",
+              extraQuestion: "Was war der aktive Effekt des Zz'Rot Portals?",
+              answertype: "IMAGE",
+              alternateAnswer:
+                "Void Gate (120 Sek), aus dem Voidspawn kommt (alle 4 Sek)",
+              answer: "ZzRot_Portal.png",
+            },
           ),
         ],
         [
@@ -99,18 +106,18 @@ export const classic0: Board = {
       extra: "default",
       questions: [
         [
-          splashArtQ(35, 100, "Morgana", "Augen", "Augen"),
-          splashArtQ(35, 100, "Morgana", "Brust", "Brust"),
-          splashArtQ(35, 100, "Morgana", "Hand", "Hand"),
-          splashArtQ(35, 100, "Morgana", "Hufte", "Hüften"),
-          splashArtQ(35, 100, "Morgana", "Lippen", "Lippen"),
+          splashArtQ(35, 100, "Aatrox", "Augen", "Augen"),
+          splashArtQ(35, 100, "Aatrox", "Brust", "Brust"),
+          splashArtQ(35, 100, "Aatrox", "Hand", "Hand"),
+          splashArtQ(35, 100, "Aatrox", "Hufte", "Hüften"),
+          splashArtQ(35, 100, "Aatrox", "Lippen", "Lippen"),
         ],
         [
-          splashArtQ(36, 200, "Lux", "Augen", "Augen"),
-          splashArtQ(36, 200, "Lux", "Brust", "Brust"),
-          splashArtQ(36, 200, "Lux", "Hand", "Hand"),
-          splashArtQ(36, 200, "Lux", "Hufte", "Hüften"),
-          splashArtQ(36, 200, "Lux", "Lippen", "Lippen"),
+          splashArtQ(36, 200, "Varus", "Augen", "Augen"),
+          splashArtQ(36, 200, "Varus", "Brust", "Brust"),
+          splashArtQ(36, 200, "Varus", "Hand", "Hand"),
+          splashArtQ(36, 200, "Varus", "Hufte", "Hüften"),
+          splashArtQ(36, 200, "Varus", "Lippen", "Lippen"),
         ],
         [
           splashArtQ(37, 300, "Ryze", "Augen", "Augen"),
@@ -160,15 +167,19 @@ export const classic0: Board = {
           }),
         ],
         [
-          imageQ(42, "Odyssey.jpg", "Kayn", 300, {
-            category: "Gamemode",
-            answertype: "IMAGE",
-            alternateAnswer: "Kayn",
-            answer: "BossKayn.jpg",
-            joker: "NoYou",
-            extraQuestion:
-              "Wer war der Boss im Gamemode 'Odyssey: Extraction'?",
-          }),
+          textQ(
+            42,
+            "Wer war der Boss im Gamemode 'Odyssey: Extraction'?",
+            "Kayn",
+            300,
+            {
+              category: "Gamemode",
+              answertype: "IMAGE",
+              alternateAnswer: "Kayn",
+              answer: "BossKayn.jpg",
+              joker: "NoYou",
+            },
+          ),
         ],
         [
           imageQ(43, "StarGuardian.jpg", "Invasion", 400, {
@@ -236,14 +247,15 @@ export const classic0: Board = {
           }),
         ],
         [
-          textQ(
+          imageQ(
             48,
-            "Was war Jannas erste Passive?",
+            "Janna_Tailwind_old.jpg",
             "Alle Allies bekommen 3% Movement Speed solange Janna lebt",
             400,
             {
               category: "Pls nerf",
               answertype: "IMAGE",
+              extraQuestion: "Was war Jannas erste Passive?",
               alternateAnswer:
                 "Alle Allies bekommen 3% Movement Speed solange Janna lebt",
               answer: "Janna_Tailwind_old.jpg",
