@@ -85,8 +85,6 @@ function JepoardyController() {
       ? currentGamestate.players[currentGamestate.currentPlayer]
       : currentGamestate.players.find((p) => p.name === buzzerQueue[0])!;
 
-  console.log(gamestate.states[gamestate.currentState].currentQuestion.buzzedPlayers);
-
   return (
     <div className="jp-controller">
       <JepoardyBoard
