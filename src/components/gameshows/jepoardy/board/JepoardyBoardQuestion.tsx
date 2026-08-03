@@ -29,7 +29,12 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
       return;
     }
 
-    if (category?.extra === "forced") {
+    const allRemainingInSameCategory = gamestate.currentBoard.categories
+      .flatMap((cat) => cat.questions)
+      .filter((q) => !q[0].finished)
+      .every((q) => q[0].category === questions[0].category);
+
+    if (category?.extra === "forced" && !allRemainingInSameCategory) {
       return;
     }
     if (

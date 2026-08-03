@@ -468,25 +468,25 @@ function calculateExtra(
   spin: number,
 ): "Windfury" | "Taunt" | "Gold" | "Safezone" | "Corrupted" | "forced" {
   if (spin < 30) {
-    return "Gold";
+    return "forced";
   }
   if (spin < 90) {
-    return "Taunt";
+    return "forced";
   }
   if (spin < 150) {
     return "forced";
   }
   if (spin < 210) {
-    return "Corrupted";
+    return "forced";
   }
   if (spin < 270) {
-    return "Safezone";
+    return "forced";
   }
   if (spin < 330) {
-    return "Windfury";
+    return "forced";
   }
   if (spin < 360) {
-    return "Gold";
+    return "forced";
   }
   return "forced";
 }
