@@ -10,6 +10,8 @@ import { Button, Form } from "react-bootstrap";
 import { useAudioSettings } from "../../../context/AudioSettingsContext";
 
 let ws: GameshowWebsocket<JepoardyGame>;
+// Kept at module level so the browser doesn't GC the Image objects before loading finishes
+const _preloadedImages: HTMLImageElement[] = [];
 
 function JepoardyController() {
   document.body.className = "noOBS";
@@ -181,6 +183,7 @@ function JepoardyController() {
     imageFiles.forEach((file) => {
       const img = new Image();
       img.src = `/jepoardy/images/${file}`;
+      _preloadedImages.push(img); // prevent GC from cancelling the download
     });
 
     // Preload all videos from public/jepoardy/video
