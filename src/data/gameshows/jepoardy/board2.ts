@@ -67,6 +67,9 @@ export const classic0: Board = {
             300,
             {
               category: "Items",
+              answertype: "IMAGE",
+              answer: "Mana_Potion_item_old.jpg",
+              alternateAnswer: "100 Mana (über 15 Sekunden)",
               extraQuestion:
                 "Wie viel Mana hat man von der Mana Potion bekommen?",
             },

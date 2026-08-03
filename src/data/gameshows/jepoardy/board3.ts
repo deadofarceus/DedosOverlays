@@ -238,7 +238,8 @@ export const classic1: Board = {
         [
           imageQ(70, "rabadons_frage.png", "Rabadon's Deathcap", 200, {
             category: "Hermits Gehilfe",
-            extraQuestion: "Welches baut man aus diesen Items?",
+            extraQuestion:
+              "Welches Item setzt sich aus den folgenden Items zusammen?",
             answertype: "IMAGE",
             answer: "rabaganz.png",
             alternateAnswer: "Rabadon's Deathcap",
@@ -266,7 +267,8 @@ export const classic1: Board = {
           imageQ(73, "twin_shadows_frage.png", "Twin Shadows", 800, {
             category: "Hermits Gehilfe",
             answertype: "IMAGE",
-            extraQuestion: "Was baut man aus diesen Items?",
+            extraQuestion:
+              "Welches Item setzt sich aus den folgenden Items zusammen?",
             alternateAnswer: "Twin Shadows",
             answer: "twinganz.png",
           }),
@@ -275,7 +277,8 @@ export const classic1: Board = {
           imageQ(74, "ga_frage.png", "Guardian Angel", 1000, {
             category: "Hermits Gehilfe",
             answertype: "IMAGE",
-            extraQuestion: "Was baut man aus diesen Items?",
+            extraQuestion:
+              "Welches Item setzt sich aus den folgenden Items zusammen?",
             alternateAnswer: "Guardian Angel",
             answer: "gaganz.png",
           }),
@@ -287,60 +290,59 @@ export const classic1: Board = {
       extra: "default",
       questions: [
         [
-          textQ(
-            75,
-            "Champs, die einen eigenen Login Screen hatten:\n      Yunara, Jhin, Thresh, Galio, Urgot",
-            "Yunara",
-            200,
-            { category: "Impostor" },
-          ),
+          imageQ(75, "Yunara Jhin Thresh Galio Urgot", "Yunara", 200, {
+            category: "Impostor",
+            answertype: "IMAGE",
+            alternateAnswer: "Yunara",
+            answer: "Yunara.png",
+            extraQuestion: "Champs, die einen eigenen Login Screen hatten:",
+          }),
         ],
         [
-          textQ(
-            76,
-            "Champs, die beim Release dabei waren:\n      Ryze, Sion, Tristana, Lux, Kayle",
-            "Lux",
-            400,
-            {
-              category: "Impostor",
-              info: "Release:19.10.2010",
-            },
-          ),
+          imageQ(76, "Ryze Sion Tristana Lux Kayle", "Lux", 400, {
+            category: "Impostor",
+            info: "Release:19.10.2010",
+            extraQuestion: "Champs, die beim Release dabei waren:",
+            answertype: "IMAGE",
+            answer: "LuxImp.png",
+            alternateAnswer: "Lux",
+          }),
         ],
         [
-          textQ(
-            77,
-            "Champs, die zu den ersten Star Guardians gehören:\n      Janna, Jinx, Lulu, Poppy, Soraka",
-            "Soraka",
-            600,
-            { category: "Impostor" },
-          ),
+          imageQ(77, "Janna Jinx Lulu Poppy Soraka", "Soraka", 600, {
+            category: "Impostor",
+            info: "Release:20.12.2010",
+            extraQuestion: "Champs, die zu den ersten Star Guardians gehören:",
+            answertype: "IMAGE",
+            answer: "SorakaImp.png",
+            alternateAnswer: "Soraka",
+          }),
         ],
         [
-          textQ(
+          imageQ(
             78,
-            "Diese Champs hatten mindestens 2 Reworks:\n      Evelynn, Mordekaiser, Gangplank, Skarner, Ryze",
+            "Evelynn Mordekaiser Gangplank Skarner Ryze",
             "Gangplank",
             800,
             {
               category: "Impostor",
               info: "Evelynn (2), Mordekaiser (2), Gangplank (1), Skarner (3), Ryze (3)",
+              answertype: "IMAGE",
+              answer: "GangplankImp.png",
+              extraQuestion: "Champs, die mindestens 2 Reworks hatten:",
+              alternateAnswer: "Gangplank",
             },
           ),
         ],
         [
-          textQ(
-            79,
-            "Champs, die beim legendären Zed vs Zed Game gespielt wurden:\n      Fiddlesticks, Evelynn, Vi, Shen, Morgana",
-            "Morgana",
-            1000,
-            {
-              category: "Impostor",
-              answertype: "IMAGE",
-              alternateAnswer: "Morgana",
-              answer: "FakerWhatWasThat.png",
-            },
-          ),
+          imageQ(79, "Fiddlesticks Evelynn Vi Shen Morgana", "Morgana", 1000, {
+            category: "Impostor",
+            answertype: "IMAGE",
+            alternateAnswer: "Morgana",
+            answer: "MorganaImp.png",
+            extraQuestion:
+              "Champs, die beim legendären Zed vs Zed Game gespielt wurden:",
+          }),
         ],
       ],
     },
