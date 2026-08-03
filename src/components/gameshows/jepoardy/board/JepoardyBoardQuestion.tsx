@@ -84,12 +84,17 @@ function JepoardyBoardQuestion({ questions, gamestate, sendState }: JepoardyBoar
     classname += "jp-" + questions[0].extra;
   }
 
+  const allRemainingInSameCategory = gamestate.currentBoard.categories
+    .flatMap((cat) => cat.questions)
+    .filter((q) => !q[0].finished)
+    .every((q) => q[0].category === questions[0].category);
+
   if (
     (questions[0].extra !== "Taunt" &&
       gamestate.currentBoard.categories.some((cat) =>
         cat.questions.some((q) => q[0].extra === "Taunt" && !q[0].finished),
       )) ||
-    category?.extra === "forced"
+    (category?.extra === "forced" && !allRemainingInSameCategory)
   ) {
     classname += " jp-Taunted";
   }
