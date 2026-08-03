@@ -56,7 +56,7 @@ export const classic0: Board = {
               answertype: "IMAGE",
               alternateAnswer: "Sightstone",
               answer: "Sightstone.jpg",
-              info: "Strenggenommen sind es 900 Gold die man zum upgraden benötigt",
+              info: "Streng genommen sind es 900 Gold die man zum Upgraden benötigt",
             },
           ),
         ],
@@ -71,8 +71,7 @@ export const classic0: Board = {
               answertype: "IMAGE",
               answer: "Mana_Potion_item_old.jpg",
               alternateAnswer: "100 Mana (über 15 Sekunden)",
-              extraQuestion:
-                "Wie viel Mana hat man von der Mana Potion bekommen?",
+              extraQuestion: "Wie viel Mana regeneriert die Mana Potion?",
             },
           ),
         ],
@@ -263,6 +262,7 @@ export const classic0: Board = {
               alternateAnswer:
                 "Alle Allies bekommen 3% Movement Speed solange Janna lebt",
               answer: "Janna_Tailwind_old.jpg",
+              info: "Die Passive war global",
             },
           ),
         ],

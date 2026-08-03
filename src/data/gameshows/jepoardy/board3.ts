@@ -18,7 +18,7 @@ export const classic1: Board = {
             {
               category: "Absolute Cinema",
               answertype: "IMAGE",
-              alternateAnswer: "Annie",
+              alternateAnswer: "Ja",
               answer: "Annie.png",
             },
           ),
@@ -54,7 +54,7 @@ export const classic1: Board = {
         [
           textQ(
             58,
-            "Im Cinematic 'A New Dawn' sehen wir wie 2 Teams mit jeweils 5 Champions gegeneinander kämpfen. Welcher geht dabei zuerst down?",
+            "Im Cinematic 'A New Dawn' sehen wir wie 2 Teams mit jeweils 5 Champions gegeneinander kämpfen. Wer wird von Darius geultet?",
             "Leona",
             800,
             {

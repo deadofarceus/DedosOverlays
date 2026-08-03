@@ -109,6 +109,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
   };
 
   const handleFalscheAntwort = () => {
+    const finishedQuestionsww = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
+    if(finishedQuestionsww.length > 22 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
+      return;
+    }
     const newGamestate = { ...gamestate };
     let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (!buzzedPlayer) {
@@ -157,6 +161,10 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
   };
 
   const handleRichtigeAntwort = () => {
+    const finishedQuestionsw = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
+    if(finishedQuestionsw.length > 22 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
+      return;
+    }
     let newGamestate = { ...gamestate };
     let buzzedPlayer = newGamestate.players.find((p) => p.name == buzzerQueue[0]);
     if (!buzzedPlayer) {
@@ -356,7 +364,6 @@ function BoardControls({ gamestate, sendState, buzzerQueue, clearBuzzer }: Board
       : gamestate.players.find((p) => p.name === buzzerQueue[0])!.name;
 
   const finishedQuestions = gamestate.currentBoard.categories.flatMap((cat) => cat.questions).filter((q) => q[0].finished);
-  console.log(finishedQuestions.length, gamestate.currentBoard.id === 1);
   
   if (finishedQuestions.length > 22 && gamestate.currentBoard.id === 1 && buzzerQueue.length === 0) {
     currentPlayer = "Warte auf Buzzer";
