@@ -152,7 +152,7 @@
     height: 1080px;
     position: absolute;
     overflow: hidden;
-    background-color: #040b2d;
+    /* background-color: #040b2d; */
     color: azure;
 }
 

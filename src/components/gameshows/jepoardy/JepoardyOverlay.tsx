@@ -3,7 +3,6 @@ import "../../../styles/gameshows/Jepoardy.css";
 import { JepoardyGame, TESTGamestate } from "../../../types/gameshows/Jepoardy";
 import { useQuery, getVDONinjaLink } from "../../../types/UsefulFunctions";
 import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes";
-import VDOLinkStream from "../../util/VDOLinkStream";
 import JepoardyBoard from "./board/JepoardyBoard";
 
 let ws: GameshowWebsocket<JepoardyGame>;
@@ -128,7 +127,7 @@ function JepoardyOverlay() {
         ))}
       </div>
       
-      <div className="jp-VDOStreams">
+      {/* <div className="jp-VDOStreams">
         {links.map((vdolink, index) => (
           <div key={index} className={"jp-VDOLinkStreamDiv"} id={""}>
             <VDOLinkStream link={vdolink.link} className={"jp-VDOLinkStream"} id={""} />
@@ -146,7 +145,7 @@ function JepoardyOverlay() {
           className=""
           id=""
         />
-      </div>
+      </div> */}
       <img className="jp-boardCutout" src="../../jepoardy/board_cutout.png" alt="" />
       <div className="jp-playerPointsDiv">
         {currentGamestate.players.map((player, index) => (
