@@ -56,6 +56,7 @@ export const classic0: Board = {
               answertype: "IMAGE",
               alternateAnswer: "Sightstone",
               answer: "Sightstone.jpg",
+              info: "Strenggenommen sind es 900 Gold die man zum upgraden benötigt",
             },
           ),
         ],
