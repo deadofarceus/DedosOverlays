@@ -9,6 +9,7 @@ import { useAudioSettings } from "../../../context/AudioSettingsContext";
 import DedoCopy from "../../util/DedoCopy";
 
 let ws: GameshowWebsocket<JepoardyGame>;
+const _preloadedImages: HTMLImageElement[] = [];
 const audio = new Audio("../../sounds/Buzzer.mp3");
 
 function JepoardyTeilnehmer() {
@@ -184,6 +185,7 @@ function JepoardyTeilnehmer() {
     imageFiles.forEach((file) => {
       const img = new Image();
       img.src = `/jepoardy/images/${file}`;
+      _preloadedImages.push(img); // prevent GC from cancelling the download
     });
 
     // Preload all videos from public/jepoardy/video

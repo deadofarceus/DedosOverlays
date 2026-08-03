@@ -6,6 +6,7 @@ import { GameshowWebsocket, GLOBALADDRESS } from "../../../types/WebsocketTypes"
 import JepoardyBoard from "./board/JepoardyBoard";
 
 let ws: GameshowWebsocket<JepoardyGame>;
+const _preloadedImages: HTMLImageElement[] = [];
 
 function JepoardyOverlay() {
   const [gamestate, setGamestate] = useState<JepoardyGame>({
@@ -174,6 +175,7 @@ function JepoardyOverlay() {
     imageFiles.forEach((file) => {
       const img = new Image();
       img.src = `/jepoardy/images/${file}`;
+      _preloadedImages.push(img); // prevent GC from cancelling the download
     });
 
     // Preload all videos from public/jepoardy/video
