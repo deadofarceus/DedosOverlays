@@ -239,7 +239,7 @@ export const classic1: Board = {
           imageQ(70, "rabadons_frage.png", "Rabadon's Deathcap", 200, {
             category: "Hermits Gehilfe",
             extraQuestion:
-              "Welches Item setzt sich aus den folgenden Items zusammen?",
+              "Welches Legendary Item setzt sich aus den folgenden Epics zusammen?",
             answertype: "IMAGE",
             answer: "rabaganz.png",
             alternateAnswer: "Rabadon's Deathcap",
@@ -268,7 +268,7 @@ export const classic1: Board = {
             category: "Hermits Gehilfe",
             answertype: "IMAGE",
             extraQuestion:
-              "Welches Item setzt sich aus den folgenden Items zusammen?",
+              "Welches Legendary Item setzt sich aus den folgenden Epics zusammen?",
             alternateAnswer: "Twin Shadows",
             answer: "twinganz.png",
           }),
@@ -278,7 +278,7 @@ export const classic1: Board = {
             category: "Hermits Gehilfe",
             answertype: "IMAGE",
             extraQuestion:
-              "Welches Item setzt sich aus den folgenden Items zusammen?",
+              "Welches Legendary Item setzt sich aus den folgenden Epics zusammen?",
             alternateAnswer: "Guardian Angel",
             answer: "gaganz.png",
           }),
