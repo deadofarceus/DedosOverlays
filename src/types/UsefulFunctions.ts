@@ -8,19 +8,19 @@ export function useQuery() {
 }
 
 export function buzzer(id: string, name: string) {
-  fetch("https://109.192.68.108:8443/buzzer/" + id + "?name=" + name)
+  fetch("https://dedo2.ccdray.com:8443/buzzer/" + id + "?name=" + name)
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
 
 export function clearBuzzer(id: string) {
-  fetch("https://109.192.68.108:8443/buzzerclear/" + id + "?name=CLEARBUZZERQUEUE")
+  fetch("https://dedo2.ccdray.com:8443/buzzerclear/" + id + "?name=CLEARBUZZERQUEUE")
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
 
 export function clearOneBuzzer(id: string, name: string) {
-  fetch("https://109.192.68.108:8443/buzzerclear/" + id + "?name=CLEAR_" + name)
+  fetch("https://dedo2.ccdray.com:8443/buzzerclear/" + id + "?name=CLEAR_" + name)
     .then((res) => res.json())
     .then((data) => console.log(data));
 }
