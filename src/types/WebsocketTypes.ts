@@ -6,7 +6,7 @@ import { PCEvent } from "./oldOrUnused/PCTurnierTypes";
 import { PokemonEvent } from "./Pokemon";
 import { AICombGameState } from "./gameshows/AICombine";
 
-export const GLOBALADDRESS = "dedo2.ccdray.com";
+export const GLOBALADDRESS = "dedo.ccdray.com";
 // export const GLOBALADDRESS = "localhost:8443";
 // const GLOBALWSADRESS = "wss://modserver-dedo.glitch.me";
 // const GLOBALWSADRESS = "wss://dedosserver.deno.dev";
